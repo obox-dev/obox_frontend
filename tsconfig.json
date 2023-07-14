@@ -4,7 +4,8 @@
     "paths": {
       "@app/*": ["./app/src/*"],
       "@admin/*": ["./admin/src/*"],
-      "@shared/*": ["./shared/src/*"]
+      "@shared/*": ["./shared/src/*"],
+      "@libs/*": ["./node_modules/*"]
     },
     "target": "ES2020",
     "useDefineForClassFields": true,

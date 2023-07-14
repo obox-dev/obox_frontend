@@ -14,13 +14,14 @@
     "install:admin": "cd admin && npm install",
     "install:shared": "cd shared && npm install",
     "install": "npm run install:app && npm run install:admin && npm run install:shared"
-
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@rollup/plugin-alias": "5.0.0",
     "bootstrap": "5.3.0",
+    "i18next": "^23.2.11",
+    "react-i18next": "^13.0.2",
     "sass": "1.63.5"
   },
   "devDependencies": {
