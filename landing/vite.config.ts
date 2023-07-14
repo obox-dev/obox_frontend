@@ -3,7 +3,7 @@ import config from '../vite.config';
 export default {
     ...config,
     build: {
-      outDir: '../build/admin',
+      outDir: '../build/public_html',
       emptyOutDir: true,
     },
 }

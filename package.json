@@ -7,7 +7,7 @@
     "app": "cd app && npm run dev",
     "admin": "cd admin && npm run dev",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -rf build && cd admin && npm i && npm run build && cd ../app && npm i && npm run build && cd .. && npm run build-storybook",
+    "build": "rm -rf build && cd admin && npm i && npm run build && cd ../app && npm i && npm run build && cd ../landing && npm run build && cd .. && npm run build-storybook",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build --output-dir build/storybook",
     "install:app": "cd app && npm install",

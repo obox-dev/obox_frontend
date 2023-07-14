@@ -1,0 +1,11 @@
+{
+  "name": "obox_landing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "vite build --config vite.config.ts"
+  },
+  "author": "",
+  "license": "ISC"
+}
