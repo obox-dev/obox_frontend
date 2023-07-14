@@ -12,6 +12,7 @@ export default defineConfig({
       '@app': path.resolve(__dirname, 'app/src'),
       '@admin': path.resolve(__dirname, 'admin/src'),
       '@shared': path.resolve(__dirname, 'shared/src'),
+      '@libs': path.resolve(__dirname, 'node_modules'),
     },
   },
 });
