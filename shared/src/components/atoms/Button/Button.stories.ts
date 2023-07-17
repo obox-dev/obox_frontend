@@ -5,7 +5,7 @@ import { ButtonVariants } from "./types";
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta: Meta<typeof Button> = {
-  title: "Example/Button",
+  title: "Story system/Button",
   component: Button,
   tags: ["autodocs"],
   argTypes: {

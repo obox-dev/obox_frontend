@@ -8,7 +8,8 @@ export enum InputVariants {
 
 export interface IInput {
   name: string;
-  placeholder: string;
+  placeholder?: string;
   onChange: () => void;
   type: InputVariants;
+  value?: string;
 }
