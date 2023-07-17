@@ -1,4 +1,8 @@
 {
   "adminTitle": "OBOX АДМІН",
-  "appTitle": "OBOX КЛІЄНТ"
+  "appTitle": "OBOX КЛІЄНТ",
+  "languages": {
+    "en": "АНГЛ",
+    "ua": "УКР"
+  }
 }

@@ -1,4 +1,8 @@
 {
   "adminTitle": "OBOX ADMIN",
-  "appTitle": "OBOX APP"
+  "appTitle": "OBOX APP",
+  "languages": {
+    "en": "EN",
+    "ua": "UA"
+  }
 }

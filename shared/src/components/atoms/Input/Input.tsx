@@ -1,7 +1,7 @@
 import { IInput, InputVariants } from "./types";
 
-export const Input = (props: IInput) => {
-  const { name, placeholder, onChange, type } = props;
+export const Input = (props: IInput<HTMLInputElement>) => {
+  const { name, placeholder, onChange, type, value, checked } = props;
   const getClass = (type: InputVariants):string => {
     const classes: Partial<{ [key in InputVariants]: string }> = {
       [InputVariants.CHECKBOX]: 'form-check-input',
@@ -11,8 +11,14 @@ export const Input = (props: IInput) => {
   }
 
   return (
-    <div className="input-group flex-nowrap">
-  <input name={name} type={type} onChange={onChange} className={getClass(type)} placeholder={placeholder}></input>
-</div>
+    <input
+      value={value}
+      name={name}
+      type={type}
+      onChange={onChange}
+      className={getClass(type)}
+      placeholder={placeholder}
+      checked={checked}
+    />
   )
 }
