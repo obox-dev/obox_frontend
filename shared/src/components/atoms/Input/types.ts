@@ -1,3 +1,5 @@
+import { ChangeEvent } from "react";
+
 export enum InputVariants {
   TEXT = "text",
   PASSWORD = "password",
@@ -6,10 +8,11 @@ export enum InputVariants {
   CHECKBOX = "checkbox",
 }
 
-export interface IInput {
+export interface IInput<T> {
   name: string;
   placeholder?: string;
-  onChange: () => void;
+  onChange: (event: ChangeEvent<T>) => void;
   type: InputVariants;
   value?: string;
+  checked?: boolean;
 }

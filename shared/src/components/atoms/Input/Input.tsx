@@ -1,7 +1,7 @@
 import { IInput, InputVariants } from "./types";
 
-export const Input = (props: IInput) => {
-  const { name, placeholder, onChange, type, value } = props;
+export const Input = (props: IInput<HTMLInputElement>) => {
+  const { name, placeholder, onChange, type, value, checked } = props;
   const getClass = (type: InputVariants):string => {
     const classes: Partial<{ [key in InputVariants]: string }> = {
       [InputVariants.CHECKBOX]: 'form-check-input',
@@ -18,6 +18,7 @@ export const Input = (props: IInput) => {
       onChange={onChange}
       className={getClass(type)}
       placeholder={placeholder}
+      checked={checked}
     />
   )
 }

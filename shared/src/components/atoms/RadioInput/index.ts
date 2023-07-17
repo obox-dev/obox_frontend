@@ -1,1 +1,1 @@
-export { InputLabel } from "./RadioInput";
+export { RadioInput } from "./RadioInput";
