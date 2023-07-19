@@ -12,6 +12,6 @@ export enum ButtonVariants {
 
 export interface IButton {
   text: string;
-  onClick: () => void;
+  onClick?: () => void;
   variant: ButtonVariants;
 }

@@ -5,8 +5,6 @@ const meta: Meta<typeof LanguageSwitcher> = {
   title: "Story system/LanguageSwitcher",
   component: LanguageSwitcher,
   tags: ["autodocs"],
-  argTypes: {
-  },
 };
 
 export default meta;
