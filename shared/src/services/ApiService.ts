@@ -51,24 +51,19 @@ class API {
 
   private static handleRequestError(error: AxiosError): void {
     if (error.response) {
-      // The request was made and the server responded with a status code
       console.error(
         "Response Error",
         error.response.status,
         error.response.data
       );
     } else if (error.request) {
-      // The request was made but no response was received
       console.error("Request Error", error.request);
     } else {
-      // Something happened in setting up the request that triggered an error
       console.error("Error", error.message);
     }
   }
 }
 
 API.base_url = Config.baseUrl;
-
-console.log(API.base_url);
 
 export { API };
