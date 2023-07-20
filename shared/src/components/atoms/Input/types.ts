@@ -15,4 +15,5 @@ export interface IInput<T> {
   type: InputVariants;
   value?: string;
   checked?: boolean;
+  isDisabled: boolean;
 }
