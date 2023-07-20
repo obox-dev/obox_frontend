@@ -1,10 +1,10 @@
-import { useForm, SubmitHandler } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { Button, ButtonVariants } from "../Button";
 import { IForm } from './types';
 
 
 export const Form = (props: IForm) => {
-  const { onSubmit, children, submitButtonText } = props;
+  const { onSubmit, children, submitButtonText, buttonDisabled } = props;
   const {
     register,
     handleSubmit,
@@ -17,7 +17,7 @@ export const Form = (props: IForm) => {
     <>
     {children && <form onSubmit={onSubmit}>
       { children }
-      <Button text={submitButtonText} variant={ButtonVariants.PRIMARY} />
+      <Button text={submitButtonText} variant={ButtonVariants.PRIMARY} isDisabled={buttonDisabled} />
       </form>
     }
     </>

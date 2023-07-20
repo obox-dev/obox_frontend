@@ -14,5 +14,5 @@ export interface IButton {
   text: string;
   onClick?: () => void;
   variant: ButtonVariants;
-  isDisabled: boolean;
+  isDisabled?: boolean;
 }
