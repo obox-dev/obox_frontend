@@ -8,11 +8,7 @@ export const Button = (props: IButton) => {
     isDisabled,
   } = props;
   return (
-<<<<<<< Updated upstream
-    <button type="button" onClick={onClick} className={["btn", `btn-${variant}`].join(" ")}>
-=======
     <button onClick={onClick} className={["btn", `btn-${variant}`].join(" ")} disabled={isDisabled}>
->>>>>>> Stashed changes
       {text}
     </button>
   );

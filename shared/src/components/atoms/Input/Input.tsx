@@ -15,7 +15,7 @@ export const Input = (props: IInput<HTMLInputElement>) => {
       [InputVariants.CHECKBOX]: 'form-check-input',
       [InputVariants.RADIO]: 'form-check-input',
     }
-    return classes[type] || "form-control";
+    return classes[type] || "form-control mb-2";
   }
 
   return (

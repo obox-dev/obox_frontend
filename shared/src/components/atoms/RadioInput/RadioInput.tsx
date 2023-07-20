@@ -13,11 +13,6 @@ export const RadioInput = (props: IRadioInput) => {
   } = props;
 
   return (
-<<<<<<< Updated upstream
-    <div className="form-check">
-      <Input value={value} name={name} checked={checked} onChange={onChange} type={InputVariants.RADIO} />
-      <InputLabel className="form-check-label" forInput={name} text={label}></InputLabel>
-=======
     <div className="form-check mb-2">
       <Input
         value={value}
@@ -32,7 +27,6 @@ export const RadioInput = (props: IRadioInput) => {
         forInput={name}
         text={label}
       />
->>>>>>> Stashed changes
     </div>
   )
 }

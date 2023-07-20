@@ -1,6 +1,6 @@
+import i18n from "i18next";
 import { useState } from 'react';
 import { RadioInput } from "@shared/components/atoms/RadioInput";
-import i18n from "i18next";
 import { useTranslation } from '@libs/react-i18next';
 
 const DEFAULT_LANGUAGE = 'ua';
