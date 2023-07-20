@@ -58,3 +58,37 @@ export const Forms: Story = {
     </Form>
   ),
 };
+
+export const DisabledForms: Story = {
+  render: (args) => (
+    <Form  {...args} buttonDisabled={true}>
+      <InputLabel text="Enter your data" />
+      <Input
+        name="test"
+        type={InputVariants.TEXT}
+        onChange={() => {
+          console.log(123);
+        }}
+        isDisabled
+      />
+      <RadioInput
+        name="test"
+        label="1"
+        value="text"
+        onChange={() => {
+          console.log(123);
+        }}
+        isDisabled
+      />
+        <RadioInput
+        name="test"
+        label="2"
+        value="text"
+        onChange={() => {
+          console.log(123);
+        }}
+        isDisabled
+      />
+    </Form>
+  ),
+};
