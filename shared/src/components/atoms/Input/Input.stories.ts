@@ -6,8 +6,6 @@ const meta: Meta<typeof Input> = {
   title: "Story system/Input",
   component: Input,
   tags: ["autodocs"],
-  argTypes: {
-  },
 };
 
 export default meta;

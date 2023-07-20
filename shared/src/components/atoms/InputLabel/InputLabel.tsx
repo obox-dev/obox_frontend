@@ -1,7 +1,12 @@
 import { IInputLabel } from "./types";
 
 export const InputLabel = (props: IInputLabel) => {
-  const { text, forInput, children, className } = props;
+  const {
+    text,
+    forInput,
+    children,
+    className
+  } = props;
 
   return (
     <label className={[className, "input-label"].join(" ")} htmlFor={forInput}>

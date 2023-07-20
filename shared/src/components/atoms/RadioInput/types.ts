@@ -4,5 +4,5 @@ type IInputWithoutTypePlaceholder = Omit<IInput<HTMLInputElement>, "placeholder"
 
 export interface IRadioInput extends IInputWithoutTypePlaceholder {
   label: string;
-  value: string
+  value: string;
 }
