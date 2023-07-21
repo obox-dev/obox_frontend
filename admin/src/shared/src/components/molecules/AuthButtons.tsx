@@ -1,10 +1,11 @@
-import { Button } from 'react-bootstrap';
+import LoginButton from '../atoms/LoginButton'; // Import the LoginButton component
+import SignUpButton from '../atoms/SignUpButton';
 
 const AuthButtons = () => {
   return (
     <div className="auth-buttons">
-      <Button variant="dark text-light border-light" className="me-3">Log In</Button>
-      <Button variant="warning">Sign Up</Button>
+      <LoginButton />
+      <SignUpButton />
     </div>
   );
 };

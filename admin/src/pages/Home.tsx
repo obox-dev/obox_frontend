@@ -1,8 +1,11 @@
+import { Container } from 'react-bootstrap';
+
 const Home = () => {
   return (
-    <div className="text-center py-5">
+    <Container className="text-center py-5">
       <h1>Welcome to the OBOX</h1>
-    </div>
+      <h2 className="text-secondary">app is under construction</h2>
+    </Container>
   );
 };
 

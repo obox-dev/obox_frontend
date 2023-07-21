@@ -14,14 +14,14 @@ const LanguageSwitcher = () => {
   return (
     <div className="language-switcher">
       <Dropdown>
-        <Dropdown.Toggle variant="dark" id="language-dropdown" className='me-3'>
+        <Dropdown.Toggle variant="dark" id="language-dropdown" className='m-3'>
           {selectedLanguage === 'EN' ? (
             <img src={BritishFlagIcon} alt="British Flag" style={{ width: '50px', height: '20px' }} />
           ) : (
             <img src={UkrainianFlagIcon} alt="Ukrainian Flag" style={{ width: '50px', height: '20px' }} />
           )}
         </Dropdown.Toggle>
-        <Dropdown.Menu>
+        <Dropdown.Menu variant="dark">
           <Dropdown.Item onClick={() => handleLanguageChange('EN')}>
             <img src={BritishFlagIcon} alt="British Flag" style={{ width: '50px', height: '20px', marginRight: '5px' }} />
             EN
