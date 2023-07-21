@@ -4,7 +4,7 @@ import { IForm } from './types';
 
 
 export const Form = (props: IForm) => {
-  const { onSubmit, children, submitButtonText, buttonDisabled } = props;
+  const { onSubmit, children, submitButtonText, isDisabled } = props;
   const {
     register,
     handleSubmit,
@@ -16,8 +16,10 @@ export const Form = (props: IForm) => {
   return (
     <>
     {children && <form onSubmit={onSubmit}>
-      { children }
-      <Button text={submitButtonText} variant={ButtonVariants.PRIMARY} isDisabled={buttonDisabled} />
+      <fieldset disabled={isDisabled}>
+        { children }
+      </fieldset>
+      <Button text={submitButtonText} variant={ButtonVariants.PRIMARY} isDisabled={isDisabled} />
       </form>
     }
     </>
