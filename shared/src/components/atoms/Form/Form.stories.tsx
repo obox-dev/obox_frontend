@@ -21,6 +21,7 @@ const meta: Meta<typeof Form> = {
     onSubmit: (e: any) => {
       e.preventDefault();
     },
+    isDisabled: false,
   },
   decorators: [withActions as any]
 };
@@ -61,7 +62,7 @@ export const Forms: Story = {
 
 export const DisabledForms: Story = {
   render: (args) => (
-    <Form  {...args} buttonDisabled={true}>
+    <Form  {...args} isDisabled>
       <InputLabel text="Enter your data" />
       <Input
         name="test"
