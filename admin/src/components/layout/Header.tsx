@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Nav, Container, Row, Col } from 'react-bootstrap';
+import { Navbar, Nav, Container} from 'react-bootstrap';
 import Logo from '@admin/shared/src/components/atoms/Logo';
 import Navigation from '@admin/shared/src/components/molecules/Navigation';
 import LanguageSwitcher from '@admin/shared/src/components/molecules/LanguageSwitcher';
