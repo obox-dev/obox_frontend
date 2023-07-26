@@ -21,6 +21,7 @@ const meta: Meta<typeof Form> = {
     onSubmit: (e: any) => {
       e.preventDefault();
     },
+    isDisabled: false,
   },
   decorators: [withActions as any]
 };
@@ -54,6 +55,40 @@ export const Forms: Story = {
         onChange={() => {
           console.log(123);
         }}
+      />
+    </Form>
+  ),
+};
+
+export const DisabledForms: Story = {
+  render: (args) => (
+    <Form  {...args} isDisabled>
+      <InputLabel text="Enter your data" />
+      <Input
+        name="test"
+        type={InputVariants.TEXT}
+        onChange={() => {
+          console.log(123);
+        }}
+        isDisabled
+      />
+      <RadioInput
+        name="test"
+        label="1"
+        value="text"
+        onChange={() => {
+          console.log(123);
+        }}
+        isDisabled
+      />
+        <RadioInput
+        name="test"
+        label="2"
+        value="text"
+        onChange={() => {
+          console.log(123);
+        }}
+        isDisabled
       />
     </Form>
   ),
