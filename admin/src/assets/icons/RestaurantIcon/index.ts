@@ -1,0 +1,1 @@
+export { RestaurantIcon } from "./RestaurantIcon";

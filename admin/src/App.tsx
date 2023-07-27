@@ -1,14 +1,12 @@
-import { useTranslation } from '@libs/react-i18next';
+import { BrowserRouter as Router } from "react-router-dom";
+import { MainLayout } from "./layout/MainLayout/MainLayout";
 
-function App() {
-  const { t } = useTranslation();
-
+const App = () => {
   return (
-    <>
-      
-      <h1>{t('common:adminTitle')}</h1>
-    </>
+    <Router>
+      <MainLayout />
+    </Router>
   );
-}
+};
 
 export default App;
