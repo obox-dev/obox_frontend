@@ -11,7 +11,7 @@ export const resources = {
 i18n
   .use(initReactI18next)
   .init({
-    ns: ["common"],
+    ns: ["common", "home"],
     fallbackLng: "ua",
     interpolation: {
       escapeValue: false,
