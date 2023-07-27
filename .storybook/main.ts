@@ -10,6 +10,7 @@ const config = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     '@storybook/addon-actions',
+    'storybook-addon-react-router-v6',
   ],
   framework: {
     name: '@storybook/react-vite',

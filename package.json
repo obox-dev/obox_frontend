@@ -29,6 +29,7 @@
     "react-router-dom": "^6.14.2",
     "runtime": "^0.14.1",
     "sass": "1.63.5",
+    "storybook-addon-react-router-v6": "^1.0.2",
     "yup": "1.2.0"
   },
   "devDependencies": {

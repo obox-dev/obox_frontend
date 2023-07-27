@@ -1,18 +1,13 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import MainLayout from './pages/MainLayout';
-import Home from '../src/pages/Home';
-import Restaurants from '../src/pages/Restaurants';
-import Menu from '../src/pages/Menu';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { MainLayout } from "./layout/MainLayout/MainLayout";
+import Home from "./pages/Home/Home";
+import Restaurants from "./pages/Restaurants/Restaurants";
+import { Menu } from "./pages/Menu/Menu";
 
 const App = () => {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<MainLayout />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/restaurants" element={<Restaurants />} />
-        <Route path="/menu" element={<Menu />} />
-      </Routes>
+      <MainLayout />
     </Router>
   );
 };

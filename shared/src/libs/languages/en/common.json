@@ -5,5 +5,11 @@
     "en": "EN",
     "ua": "UA"
   },
-  "submit": "Submit"
+  "submit": "Submit",
+  "login": "Log In",
+  "signin": "Sign In",
+  "logout": "Log Out",
+  "restaurants": "Restaurants",
+  "menu": "Menu",
+  "poweredby": "Powered by"
 }
