@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { withRouter } from 'storybook-addon-react-router-v6';
+import { MemoryRouter } from "react-router";
 import { Header } from "./Header";
 
 const meta: Meta<typeof Header> = {
   title: "Story system/Layout/Header",
-  decorators: [withRouter],
+  decorators: [(Story) => (<MemoryRouter><Story/></MemoryRouter>)],
   component: Header,
   tags: ["autodocs"],
 };
