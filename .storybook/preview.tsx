@@ -1,7 +1,5 @@
 import i18n from './i18n';
 import '../shared/src/styles/style.scss';
-import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
 
 /** @type { import('@storybook/react').Preview } */
 const preview = {
@@ -22,7 +20,6 @@ const preview = {
       },
     },
   },
-  decorators: [(Story) => (<MemoryRouter><Story/></MemoryRouter>)],
 };
 
 export default preview;
