@@ -1,39 +1,28 @@
-import React, { useState, useCallback } from "react";
+import React from "react";
+import Modal from "react-bootstrap/Modal";
 import { Button } from "@shared/components/atoms/Button";
+
 import { ButtonVariants } from "@shared/components/atoms/Button";
-import { DialogPropTypes } from "@shared/providers/DialogProvider/types";
-import WithDialog from "@shared/providers/DialogProvider/WithDialog";
-import {DialogProvider} from "@shared/providers/DialogProvider/DialogProvider";
+import { DialogPropTypes } from "./types";
 
-const Dialog: React.FC<DialogPropTypes> = ({ openDialog, closeDialog }) => {
-  const handleButtonClick = () => {
-    const component = <DialogProvider>
-      <p></p>
-    </DialogProvider>;
-    openDialog({
-      component,
-      title: "My Dialog Title",
-      okCallback: handleDialogOkClick,
-      cancelCallback: handleDialogCancelClick,
-      width: "lg",
-      okText: "OK",
-      cancelText: "Cancel"
-    });
-  };
-
-  const handleDialogOkClick = useCallback(() => {
-    console.log("Dialog Ok button clicked!");
-  }, []);
-
-  const handleDialogCancelClick = useCallback(() => {
-    closeDialog();
-  }, [closeDialog]);
-
+export const Dialog: React.FC<DialogPropTypes> = (props: DialogPropTypes) => {
+  const {
+    title,
+    size,
+    okCallback,
+    cancelCallback,
+    okText,
+    cancelText,
+    children
+  } = props;
   return (
-    <div>
-      <Button variant={ButtonVariants.PRIMARY} text={"open"} onClick={handleButtonClick}></Button>
-    </div>
+    <Modal show size={size} onHide={cancelCallback}>
+      {title && <Modal.Header closeButton>{title}</Modal.Header>}
+      {children && <Modal.Body>{children}</Modal.Body>}
+      <Modal.Footer>
+        <Button text={cancelText} variant={ButtonVariants.SECONDARY} onClick={cancelCallback} />
+        <Button text={okText} variant={ButtonVariants.PRIMARY} onClick={okCallback} />
+      </Modal.Footer>
+    </Modal>
   );
 };
-
-export default WithDialog(Dialog);

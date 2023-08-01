@@ -1,19 +1,9 @@
-import { Context, createContext } from "react";
-import { DialogWidthType, DialogPropTypes } from "./types";
+import {
+  createContext,
+} from 'react';
 
-const dialogContext: Context<DialogPropTypes> = createContext({
-  openDialog: (args: {
-    component: React.ReactNode;
-    title: string;
-    okCallback: () => void;
-    cancelCallback: () => void;
-    width: DialogWidthType;
-    okText: string;
-    cancelText: string;
-  }) => {
-    console.log(args);
-  },
-  closeDialog: () => {}
-});
+import { DialogProviderInterface } from './types';
 
-export default dialogContext;
+export const DialogContext = createContext<DialogProviderInterface>(
+  {} as DialogProviderInterface,
+);

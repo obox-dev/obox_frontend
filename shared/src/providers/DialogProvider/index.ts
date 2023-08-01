@@ -1,3 +1,1 @@
-export {DialogProvider} from "./DialogProvider";
-
-
+export { DialogProvider } from "./DialogProvider";
