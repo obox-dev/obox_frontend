@@ -1,4 +1,4 @@
-import i18n from "i18next";
+import i18n from "@libs/i18next";
 import { useState } from 'react';
 import { RadioInput } from "@shared/components/atoms/RadioInput";
 import { useTranslation } from '@libs/react-i18next';
