@@ -25,30 +25,11 @@ const openMenuDialog = () => openDialog(({ closeDialog }) => (
   </Dialog>
 ));
 
-const openOtherDialog = () => openDialog(({ closeDialog }) => (
-  <Dialog
-    okCallback={() => {
-      console.log('another OK pressed');
-      closeDialog();
-    }}
-    cancelCallback={() => {
-      console.log('another Cancel pressed');
-      closeDialog();
-    }}
-    title="My another dialog"
-    size="lg"
-    okText="OK OK"
-    cancelText="Cancel Cancel"
-  >
-    <span>My dialog body</span>
-  </Dialog>
-));
   return (
     <div>
       <h1>Menu</h1>
       <p>Menu items go here.</p>
       <Button onClick={openMenuDialog} text="Open menu dialog" variant={ButtonVariants.PRIMARY}/>
-      <Button onClick={openOtherDialog} text="Open another menu dialog" variant={ButtonVariants.DANGER}/>
     </div>
   );
 };
