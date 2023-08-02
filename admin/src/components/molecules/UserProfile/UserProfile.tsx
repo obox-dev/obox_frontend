@@ -1,8 +1,9 @@
 import { UserProfileIcon } from "@admin/assets/icons/UserProfileIcon";
 import { Button, ButtonVariants } from "@shared/components/atoms/Button";
-import { t } from "i18next";
+import { useTranslation } from '@libs/react-i18next';
 
 const UserProfile = () => {
+  const { t } = useTranslation();
   return (
     <div className="user-profile d-flex align-items-center gap-2">
       <UserProfileIcon />

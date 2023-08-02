@@ -8,7 +8,7 @@ import { Menu } from '../../pages/Menu/Menu';
 
 export const MainLayout: React.FC = () => {
   const currentYear = new Date().getFullYear();
-  const userIsAuthenticated = false; // Replace this with your authentication logic
+  const userIsAuthenticated = true; // Replace this with your authentication logic
 
   return (
     <div className="main-layout">
