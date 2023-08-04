@@ -4,11 +4,11 @@ import { Header } from '../../components/organisms/Header';
 import { Footer } from '../../components/organisms/Footer';
 import Home from '../../pages/Home/Home';
 import Restaurants from '../../pages/Restaurants/Restaurants';
-import { Menu } from '../../pages/Menu/Menu';
+import Menu from '../../pages/Menu/Menu';
 
 export const MainLayout: React.FC = () => {
   const currentYear = new Date().getFullYear();
-  const userIsAuthenticated = false; // Replace this with your authentication logic
+  const userIsAuthenticated = true; // Replace this with your authentication logic
 
   return (
     <div className="main-layout">

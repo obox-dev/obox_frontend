@@ -15,4 +15,5 @@ export interface IButton {
   onClick?: () => void;
   variant: ButtonVariants;
   isDisabled?: boolean;
+  type?: 'button' | 'submit' | 'reset'; // Add the type property here
 }
