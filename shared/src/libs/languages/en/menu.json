@@ -3,5 +3,6 @@
     "description": "Menu items go here.",
     "create": "Create menu",
     "add": "Add menu",
-    "name": "Name"
+    "name": "Name",
+    "cancel": "Cancel"
 }

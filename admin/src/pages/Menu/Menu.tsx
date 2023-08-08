@@ -1,18 +1,23 @@
-import { useState } from 'react';
-import { Form, Container, Row, Col } from 'react-bootstrap';
-import { Button, ButtonVariants } from '@shared/components/atoms/Button';
+import React, { useState } from 'react';
+import { Container, Modal } from 'react-bootstrap';
 import { useTranslation } from '@libs/react-i18next';
+import { menuAPI } from '@shared/services/index'; 
+import { Button, ButtonVariants } from '@shared/components/atoms/Button';
+import { CustomForm } from '@shared/components/atoms/Form'; // Import the renamed CustomForm component
 
 const Menu = () => {
   const { t } = useTranslation();
   const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState('');
-  const [restaurantId] = useState('8d72b09b-7d44-4275-afcd-cb17613c4f05');
-  const [lenguageCode] = useState('en')
   const [errors, setErrors] = useState<{ name?: string }>({});
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleClose = () => {
+    setShowForm(false);
+    setName('');
+  };
+
+  const handleSubmit = async () => {
+    // Handle submit logic here
     const newErrors: { name?: string } = {};
 
     if (name.trim() === '') {
@@ -31,26 +36,18 @@ const Menu = () => {
     try {
       const menuCreateRequest = {
         name: name,
-        restaurant_id: restaurantId,
-        language_code: lenguageCode,
+        restaurant_id: '8d72b09b-7d44-4275-afcd-cb17613c4f05',
+        language_code: 'en',
       };
-      
-      const response = await fetch('https://api.obox.com.ua/menus/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(menuCreateRequest),
-      });
-       
-      if (!response.ok) {
-        // Handle error responses from the API if needed
+
+      const response = await menuAPI.createMenu('post', '/menus/', menuCreateRequest);
+
+      if (!response) {
         throw new Error('Failed to create menu.');
       }
 
-      // Menu created successfully, reset the form and show success message if needed
-      setName('');
-      setShowForm(false);
+      // Menu created successfully, close the form
+      handleClose();
       // Add logic to show success message if required
     } catch (error) {
       // Handle any errors that occurred during the API request
@@ -61,53 +58,51 @@ const Menu = () => {
   return (
     <Container>
       <div className="d-flex justify-content-between align-items-center mb-3">
-        <h1>{t('menuCreate:title')}</h1>
+        <h1>{t('menu:title')}</h1>
         {!showForm && (
           <Button
-            text={t('menuCreate:add')}
+            text={t('menu:add')}
             variant={ButtonVariants.SUCCESS}
             onClick={() => setShowForm(true)}
           />
         )}
       </div>
-      <p>{t('menuCreate:description')}</p>
+      <p>{t('menu:description')}</p>
 
-      {showForm && (
-        <Form onSubmit={handleSubmit}>
-          <Form.Group as={Row} controlId="formMenuName">
-            <Form.Label column sm={2}>
-              Name
-            </Form.Label>
-            <Col sm={10}>
-              <Form.Control
+      <Modal show={showForm} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>{t('menu:add')}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <CustomForm
+            onSubmit={handleSubmit}
+            submitButtonText={t('menu:create')}
+            isDisabled={false} // Adjust this based on your logic
+          >
+            <div>
+              <label htmlFor="formMenuName">{t('menu:name')}</label>
+              <input
                 type="text"
-                placeholder="Enter menu name"
+                id="formMenuName"
+                placeholder={t('menu:enterName')}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                isInvalid={!!errors.name}
+                className={errors.name ? 'is-invalid' : ''}
               />
-              <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
-            </Col>
-          </Form.Group>
-          <Form.Group as={Row} controlId="formRestaurantId" style={{ display: 'none' }}>
-            <Col sm={{ span: 10, offset: 2 }}>
-              <Form.Control type="hidden" value={restaurantId} />
-            </Col>
-          </Form.Group>
-          {/* Add the hidden field for language_code */}
-          <Form.Group as={Row} controlId="formLanguageCode" style={{ display: 'none' }}>
-            <Col sm={{ span: 10, offset: 2 }}>
-              <Form.Control type="hidden" value={lenguageCode} />
-            </Col>
-          </Form.Group>
+              {errors.name && <div className="invalid-feedback">{errors.name}</div>}
+            </div>
+          </CustomForm>
+        </Modal.Body>
+        <Modal.Footer>
           <Button
-            text={t('menuCreate:create')}
-            variant={ButtonVariants.PRIMARY}
-            type="submit"
+            text={t('menu:cancel')}
+            variant={ButtonVariants.SECONDARY}
+            onClick={handleClose}
           />
-        </Form>
-      )}
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 };
+
 export default Menu;
