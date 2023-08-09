@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { Nav } from "react-bootstrap";
 import { useTranslation } from "@libs/react-i18next";
 import { RestaurantIcon, MenuIcon } from "@admin/assets/icons";
+import "./Navigation.scss"
 
 const Navigation = () => {
   const { t } = useTranslation();
