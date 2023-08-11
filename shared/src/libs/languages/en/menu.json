@@ -4,5 +4,6 @@
     "create": "Create menu",
     "add": "Add menu",
     "name": "Name",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "enterName": "Enter menu name here"
 }

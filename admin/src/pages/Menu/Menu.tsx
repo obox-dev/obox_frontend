@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Container, Modal } from 'react-bootstrap';
+import { Container, Form } from 'react-bootstrap';
 import { useTranslation } from '@libs/react-i18next';
-import { menuAPI } from '@shared/services/index'; 
+import { menuAPI } from '@shared/services/index';
 import { Button, ButtonVariants } from '@shared/components/atoms/Button';
-import { CustomForm } from '@shared/components/atoms/Form'; // Import the renamed CustomForm component
+import { Dialog } from '@shared/components/molecules/Dialog/Dialog';
 
 const Menu = () => {
   const { t } = useTranslation();
@@ -17,7 +17,6 @@ const Menu = () => {
   };
 
   const handleSubmit = async () => {
-    // Handle submit logic here
     const newErrors: { name?: string } = {};
 
     if (name.trim() === '') {
@@ -46,11 +45,8 @@ const Menu = () => {
         throw new Error('Failed to create menu.');
       }
 
-      // Menu created successfully, close the form
       handleClose();
-      // Add logic to show success message if required
     } catch (error) {
-      // Handle any errors that occurred during the API request
       console.error(error);
     }
   };
@@ -59,48 +55,40 @@ const Menu = () => {
     <Container>
       <div className="d-flex justify-content-between align-items-center mb-3">
         <h1>{t('menu:title')}</h1>
-        {!showForm && (
-          <Button
-            text={t('menu:add')}
-            variant={ButtonVariants.SUCCESS}
-            onClick={() => setShowForm(true)}
-          />
-        )}
+        <Button
+          text={t('menu:add')}
+          variant={ButtonVariants.SUCCESS}
+          onClick={() => setShowForm(true)}
+        />
       </div>
       <p>{t('menu:description')}</p>
 
-      <Modal show={showForm} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>{t('menu:add')}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <CustomForm
-            onSubmit={handleSubmit}
-            submitButtonText={t('menu:create')}
-            isDisabled={false} // Adjust this based on your logic
-          >
-            <div>
-              <label htmlFor="formMenuName">{t('menu:name')}</label>
-              <input
-                type="text"
-                id="formMenuName"
-                placeholder={t('menu:enterName')}
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className={errors.name ? 'is-invalid' : ''}
-              />
-              {errors.name && <div className="invalid-feedback">{errors.name}</div>}
-            </div>
-          </CustomForm>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            text={t('menu:cancel')}
-            variant={ButtonVariants.SECONDARY}
-            onClick={handleClose}
-          />
-        </Modal.Footer>
-      </Modal>
+      <Dialog
+        title={t('menu:add')}
+        okCallback={() => {
+          handleSubmit();
+          setShowForm(false);
+        }}
+        cancelCallback={handleClose}
+        okText={t('menu:create')}
+        cancelText={t('menu:cancel')}
+        size="lg"
+      >
+        {/* Form inside the Dialog */}
+        <Form onSubmit={handleSubmit}>
+          <Form.Group controlId="formMenuName">
+            <Form.Label>{t('menu:name')}</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder={t('menu:enterName')}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              isInvalid={!!errors.name}
+            />
+            <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
+          </Form.Group>
+        </Form>
+      </Dialog>
     </Container>
   );
 };
