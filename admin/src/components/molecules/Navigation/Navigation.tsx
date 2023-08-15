@@ -23,7 +23,7 @@ const Navigation = () => {
   return (
     <Nav>
       {links.map(({ to, text, icon }) => (
-        <Nav.Item>
+        <Nav.Item key={to}>
           <NavLink
             to={to}
             className={({ isActive }) =>

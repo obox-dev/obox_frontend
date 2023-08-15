@@ -1,27 +1,32 @@
-import { useForm } from "react-hook-form"
-import { Button, ButtonVariants } from "../Button";
+import React, { forwardRef, useImperativeHandle } from 'react';
 import { IForm } from './types';
 
+export const Form = forwardRef((props: IForm, ref) => {
+  const { onSubmit, children, isDisabled } = props;
 
-export const Form = (props: IForm) => {
-  const { onSubmit, children, submitButtonText, isDisabled } = props;
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm({
+  const formRef = React.createRef<HTMLFormElement>();
 
-  })
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    onSubmit(event);
+  };
+
+  useImperativeHandle(ref, () => ({
+    submit: () => {
+      if (formRef.current) {
+        formRef.current.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+      }
+    },
+  }));
+
   return (
     <>
-    {children && <form onSubmit={onSubmit}>
+    {children && <form ref={formRef} onSubmit={handleSubmit}>
       <fieldset disabled={isDisabled}>
         { children }
       </fieldset>
-      <Button text={submitButtonText} variant={ButtonVariants.PRIMARY} isDisabled={isDisabled} />
       </form>
     }
     </>
   );
-};
+});
