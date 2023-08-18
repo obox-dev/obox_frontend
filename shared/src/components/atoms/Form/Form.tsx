@@ -1,27 +1,42 @@
-import { useForm } from "react-hook-form"
-import { Button, ButtonVariants } from "../Button";
+import React, { forwardRef, useImperativeHandle } from 'react';
 import { IForm } from './types';
 
 
-export const Form = (props: IForm) => {
-  const { onSubmit, children, submitButtonText, isDisabled } = props;
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm({
+const FormInner = <T, >(props: IForm<T>, ref: React.ForwardedRef<T>) => {
+  const { onSubmit, children, isDisabled } = props;
 
-  })
+  const formRef = React.createRef<HTMLFormElement>();
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.target as any);
+    const data = Object.fromEntries([...formData.entries()]) as unknown as T;
+    onSubmit(data);
+  };
+
+  useImperativeHandle(ref, () => ({
+    submit: () => {
+      if (formRef.current) {
+        formRef.current.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+      }
+    },
+  }) as unknown as T);
+
   return (
     <>
-    {children && <form onSubmit={onSubmit}>
+    {children && <form ref={formRef} onSubmit={handleSubmit}>
       <fieldset disabled={isDisabled}>
         { children }
       </fieldset>
-      <Button text={submitButtonText} variant={ButtonVariants.PRIMARY} isDisabled={isDisabled} />
       </form>
     }
     </>
   );
 };
+
+
+export const Form = forwardRef(FormInner) as <T>(
+  props: IForm<T> & {
+    ref?: React.ForwardedRef<T>,
+  },
+) => ReturnType<typeof FormInner>;

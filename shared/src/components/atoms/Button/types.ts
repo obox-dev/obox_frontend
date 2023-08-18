@@ -9,7 +9,6 @@ export enum ButtonVariants {
   DARK = "dark",
   LINK = "link",
 }
-
 export interface IButton {
   text: string;
   onClick?: () => void;

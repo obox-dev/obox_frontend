@@ -8,13 +8,13 @@ import { Config } from "@shared/config";
 class API {
   static base_url: string;
 
-  static async request<T>(
+  private static async request<T, K>(
     method: string,
     path: string,
-    data?: any,
+    data?: T,
     params?: any,
     headers?: any
-  ): Promise<T> {
+  ): Promise<K> {
     const url = API.base_url + path;
     const config: AxiosRequestConfig = {
       method,
@@ -25,7 +25,7 @@ class API {
     };
 
     try {
-      const response: AxiosResponse<T> = await axios(config);
+      const response: AxiosResponse<K> = await axios(config);
       return response.data;
     } catch (error) {
       API.handleRequestError(error as AxiosError);
@@ -33,20 +33,20 @@ class API {
     }
   }
 
-  static async get<T>(path: string, params?: any, headers?: any): Promise<T> {
-    return API.request<T>("get", path, undefined, params, headers);
+  static async get<T, K>(path: string, params?: any, headers?: any): Promise<K> {
+    return API.request<T, K>("get", path, undefined, params, headers);
   }
 
-  static async post<T>(path: string, data?: any, headers?: any): Promise<T> {
-    return API.request<T>("post", path, data, undefined, headers);
+  static async post<T, K>(path: string, data?: T, headers?: any): Promise<K> {
+    return API.request<T, K>("post", path, data, undefined, headers);
   }
 
-  static async put<T>(path: string, data?: any, headers?: any): Promise<T> {
-    return API.request<T>("put", path, data, undefined, headers);
+  static async patch<T, K>(path: string, data?: T, headers?: any): Promise<K> {
+    return API.request<T, K>("patch", path, data, undefined, headers);
   }
 
-  static async delete<T>(path: string, headers?: any): Promise<T> {
-    return API.request<T>("delete", path, undefined, undefined, headers);
+  static async delete<T, K>(path: string, headers?: any): Promise<K> {
+    return API.request<T, K>("delete", path, undefined, undefined, headers);
   }
 
   private static handleRequestError(error: AxiosError): void {
