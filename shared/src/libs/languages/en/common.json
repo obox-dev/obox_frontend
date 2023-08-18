@@ -11,5 +11,11 @@
   "logout": "Log Out",
   "restaurants": "Restaurants",
   "menu": "Menu",
-  "poweredby": "Powered by"
+  "poweredby": "Powered by",
+  "buttons": {
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "edit": "Edit",
+    "delete": "Delete"
+  }
 }

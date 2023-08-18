@@ -1,4 +1,16 @@
 {
   "categories": "Categories",
-  "addcategory": "Add Category"
+  "addcategory": "Add Category",
+  "createCategoryForm": {
+    "title": "Enter your category name",
+    "placeholder": "Enter your category name"
+  },
+  "updateCategoryForm": {
+    "title": "Enter new name for the category",
+    "placeholder": "Enter new name for the category"
+  },
+  "deleteCategoryForm": {
+    "title": "Are you sure you want to delete this category?",
+    "message": "Confirming the deletion of category:"
+  }
 }

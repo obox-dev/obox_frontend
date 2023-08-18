@@ -1,4 +1,16 @@
 {
   "categories": "Категорії",
-  "addcategory": "Додати категорію"
+  "addcategory": "Додати категорію",
+  "createCategoryForm": {
+    "title": "Введіть імʼя категорії",
+    "placeholder": "Введіть імʼя категорії"
+  },
+  "updateCategoryForm": {
+    "title": "Введіть нове імʼя для категорії",
+    "placeholder": "Введіть нове імʼя для категорії"
+  },
+  "deleteCategoryForm": {
+    "title": "Ви впевнені, що хочете видилити категорію?",
+    "message": "Підтвердіть видалення категорії:"
+  }
 }

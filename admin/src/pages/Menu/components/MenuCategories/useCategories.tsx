@@ -2,6 +2,7 @@ import { Dialog } from "@shared/components/molecules/Dialog";
 import { useDialog } from "@shared/providers/DialogProvider/useDialog";
 import { Form, FormRef } from "@shared/components/atoms/Form";
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useTranslation } from '@libs/react-i18next';
 import { Input, InputVariants } from "@shared/components/atoms/Input";
 import {
   MenuService,
@@ -15,6 +16,7 @@ import {
 import { ButtonVariants } from "@shared/components/atoms/Button";
 
 export const useCategories = () => {
+  const { t } = useTranslation(["common", "menu"]);
   const { openDialog } = useDialog();
   const [categoriesList, setCategoriesList] = useState<
     GetCategoriesByMenuIdResponseItem[]
@@ -74,10 +76,10 @@ export const useCategories = () => {
           cancelCallback={() => {
             closeDialog();
           }}
-          title="Enter your category name"
+          title={t("menu:updateCategoryForm.title")}
           size="lg"
-          okText="OK"
-          cancelText="Cancel"
+          okText={t("common:buttons:confirm")}
+          cancelText={t("common:buttons:cancel")}
         >
           <Form
             ref={formRef as React.ForwardedRef<Category>}
@@ -89,7 +91,7 @@ export const useCategories = () => {
               value={category.category_id}
             />
             <Input
-              placeholder="Enter your category name"
+              placeholder={t("menu:updateCategoryForm.placeholder")}
               type={InputVariants.TEXT}
               name="name"
               value={val}
@@ -104,12 +106,12 @@ export const useCategories = () => {
 
   const menuCategoriesActions = [
     {
-      label: "Edit",
+      label: t("common:buttons:edit"),
       callback: (category: GetCategoriesByMenuIdResponseItem) =>
         openCategoryEditDialog(category),
     },
     {
-      label: "Delete",
+      label: t("common:buttons:delete"),
       callback: (category: GetCategoriesByMenuIdResponseItem) =>
         openCategoryDeleteDialog(category),
     },
@@ -133,10 +135,10 @@ export const useCategories = () => {
           cancelCallback={() => {
             closeDialog();
           }}
-          title="Enter your category name"
+          title={t("menu:createCategoryForm.title")}
           size="lg"
-          okText="OK"
-          cancelText="Cancel"
+          okText={t("common:buttons:confirm")}
+          cancelText={t("common:buttons:cancel")}
         >
           <Form
             ref={formRef as React.ForwardedRef<Category>}
@@ -148,7 +150,7 @@ export const useCategories = () => {
               value={HARDCODED_MENU_ID}
             />
             <Input
-              placeholder="Enter your category name"
+              placeholder={t("menu:createCategoryForm.placeholder")}
               type={InputVariants.TEXT}
               name="name"
             />
@@ -168,13 +170,13 @@ export const useCategories = () => {
           cancelCallback={() => {
             closeDialog();
           }}
-          title="Are you sure you want to delete this category?"
+          title={t("menu:deleteCategoryForm.title")}
           size="lg"
-          okText="OK"
-          cancelText="Cancel"
+          okText={t("common:buttons:confirm")}
+          cancelText={t("common:buttons:cancel")}
           okButtonVariant={ButtonVariants.DANGER}
         >
-          <p>Confirming the deletion of category: {category.name}</p>
+          <p>{t("menu:deleteCategoryForm.message")} {category.name}</p>
         </Dialog>
       );
     });
