@@ -41,8 +41,8 @@ class API {
     return API.request<T, K>("post", path, data, undefined, headers);
   }
 
-  static async put<T, K>(path: string, data?: T, headers?: any): Promise<K> {
-    return API.request<T, K>("put", path, data, undefined, headers);
+  static async patch<T, K>(path: string, data?: T, headers?: any): Promise<K> {
+    return API.request<T, K>("patch", path, data, undefined, headers);
   }
 
   static async delete<T, K>(path: string, headers?: any): Promise<K> {
