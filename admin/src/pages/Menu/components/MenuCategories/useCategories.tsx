@@ -33,7 +33,6 @@ export const useCategories = () => {
   };
 
   const onCreateSubmit = useCallback(async (data: CreateCategoryRequest) => {
-    console.log(data);
     const category: CreateCategoryResponse = await CategoriesService.create(
       data
     );
