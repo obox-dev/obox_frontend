@@ -1,6 +1,7 @@
 export { API } from "./ApiService";
 export { CategoriesService } from "./CategoriesService";
 export { MenuService } from "./MenuService";
+export { RestaurantsService } from "./RestaurantsService";
 
 export type {
   Category,
@@ -8,4 +9,4 @@ export type {
   CreateCategoryResponse,
   UpdateCategoryRequest,
 } from "./CategoriesService";
-export type { GetCategoriesByMenuIdResponseItem } from "./MenuService";
+export type { Menu } from "./RestaurantsService";

@@ -13,5 +13,5 @@ export interface IAction<T> {
 
 export interface IActionMenu<T> {
   actions: IAction<T>[];
-  category: T;
+  entity: T;
 }
