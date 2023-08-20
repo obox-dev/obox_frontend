@@ -1,5 +1,5 @@
-import { ActionMenu } from "@shared/components/atoms/ActionMenu";
 import { NavLink } from "react-router-dom";
+import { ActionMenu } from "@shared/components/atoms/ActionMenu";
 import { Menu } from "@shared/services";
 import { IAction } from "@shared/components/atoms/ActionMenu";
 

@@ -1,10 +1,10 @@
-import { Sidebar } from "@admin/layout/Sidebar/Sidebar";
-import { Button, ButtonVariants } from "@shared/components/atoms/Button";
-import { useTranslation } from '@libs/react-i18next';
-import { useCategories } from "../MenuCategories/useCategories";
-import { MenuCategoryList } from "../MenuCategories/MenuCategoryList";
 import { useParams } from "react-router";
 import { useEffect } from "react";
+import { useTranslation } from '@libs/react-i18next';
+import { Button, ButtonVariants } from "@shared/components/atoms/Button";
+import { Sidebar } from "@admin/layout/Sidebar/Sidebar";
+import { useCategories } from "../MenuCategories/useCategories";
+import { MenuCategoryList } from "../MenuCategories/MenuCategoryList";
 
 export const Menu = () => {
   const { id } = useParams();

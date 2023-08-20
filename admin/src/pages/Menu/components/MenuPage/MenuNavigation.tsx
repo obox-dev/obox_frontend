@@ -1,7 +1,7 @@
 import { Button, ButtonVariants } from "@shared/components/atoms/Button";
 import { Menu } from '@shared/services'
-import { MenuNavigationItem } from "./MenuINavigationItem";
 import { IAction } from "@shared/components/atoms/ActionMenu";
+import { MenuNavigationItem } from "./MenuINavigationItem";
 
 interface MenuNavigationProps {
   items: Menu[],
