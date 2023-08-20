@@ -6,6 +6,7 @@ import { Form, FormRef } from "@shared/components/atoms/Form";
 import { Menu, RestaurantsService } from "@shared/services";
 import { Input, InputVariants } from "@shared/components/atoms/Input";
 import { CreateMenuRequest, MenuService, UpdateMenuRequest } from "@shared/services/MenuService";
+import { ButtonVariants } from "@shared/components/atoms/Button";
 import { IAction } from "@shared/components/atoms/ActionMenu";
 
 interface UseMenuProps {
@@ -52,7 +53,7 @@ export const useMenu = (props: UseMenuProps) => {
           cancelCallback={() => {
             closeDialog();
           }}
-          title="Enter your form name"
+          title="Create Menu"
           size="lg"
           okText="OK"
           cancelText="Cancel"
@@ -81,9 +82,7 @@ export const useMenu = (props: UseMenuProps) => {
       );
   });
 
-  const onEditSubmit = async ({ menu_id, name, language_code }: Menu) => {
-    console.log('MENU ID', menu_id);
-
+  const onEditSubmit = async ({ menu_id, name }: Menu) => {
     const id = menu_id;
     const request: UpdateMenuRequest = {
       name,
@@ -107,7 +106,7 @@ export const useMenu = (props: UseMenuProps) => {
           cancelCallback={() => {
             closeDialog();
           }}
-          title="Enter your form name"
+          title="Edit Menu"
           size="lg"
           okText="OK"
           cancelText="Cancel"
@@ -135,17 +134,48 @@ export const useMenu = (props: UseMenuProps) => {
       );
   });
 
+  const onDeleteSubmit = async ({ menu_id }: Menu) => {
+    try {
+      await MenuService.delete(menu_id);
+      await loadMenus();
+    } catch (error) {
+      console.error("Error deleting category:", error);
+    }
+  };
+
+  const openMenuDeleteDialog = (menu: Menu) =>
+  openDialog(({ closeDialog }) => {
+    return (
+      <Dialog
+        okCallback={() => {
+          onDeleteSubmit(menu);
+          closeDialog();
+        }}
+        cancelCallback={() => {
+          closeDialog();
+        }}
+        title="Delete Menu"
+        size="lg"
+        okText="OK"
+        cancelText="Cancel"
+        okButtonVariant={ButtonVariants.DANGER}
+      >
+        <p>Are you sure you want to delete this menu: <strong>{menu.name}</strong>?</p>
+      </Dialog>
+    );
+  });
+
   const menuActions: IAction<Menu>[] = [
     {
       label: "Edit",
       callback: (menu: Menu) =>
       openMenuEditDialog(menu),
     },
-    // {
-    //   label: "Delete",
-    //   callback: (menu: Menu) =>
-    //     openCategoryDeleteDialog(menu),
-    // },
+    {
+      label: "Delete",
+      callback: (menu: Menu) =>
+        openMenuDeleteDialog(menu),
+    },
   ];
 
   return {

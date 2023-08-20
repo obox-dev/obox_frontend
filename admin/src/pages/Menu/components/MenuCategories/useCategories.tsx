@@ -73,7 +73,7 @@ export const useCategories = (menuId: string) => {
           cancelCallback={() => {
             closeDialog();
           }}
-          title="Enter your category name"
+          title="Edit Category"
           size="lg"
           okText="OK"
           cancelText="Cancel"
@@ -128,7 +128,7 @@ export const useCategories = (menuId: string) => {
           cancelCallback={() => {
             closeDialog();
           }}
-          title="Enter your category name"
+          title="Create Category"
           size="lg"
           okText="OK"
           cancelText="Cancel"
@@ -163,13 +163,13 @@ export const useCategories = (menuId: string) => {
         cancelCallback={() => {
           closeDialog();
         }}
-        title="Are you sure you want to delete this category?"
+        title="Delete Category"
         size="lg"
         okText="OK"
         cancelText="Cancel"
         okButtonVariant={ButtonVariants.DANGER}
       >
-        <p>Confirming the deletion of category: {category.name}</p>
+        <p>Are you sure you want to delete this category: <strong>{category.name}</strong>?</p>
       </Dialog>
     );
   });
