@@ -14,6 +14,7 @@ import {
   Category,
 } from "@shared/services";
 import { ButtonVariants } from "@shared/components/atoms/Button";
+import { categorySchema } from "./categoryValidation";
 
 export const useCategories = () => {
   const { t } = useTranslation(["common", "menu"]);
@@ -35,10 +36,18 @@ export const useCategories = () => {
   };
 
   const onCreateSubmit = useCallback(async (data: CreateCategoryRequest) => {
-    const category: CreateCategoryResponse = await CategoriesService.create(
-      data
-    );
-    await loadCategories();
+    try {
+      const validationResult = await categorySchema.validate(data, { abortEarly: false });
+      console.log(validationResult);
+
+      const category: CreateCategoryResponse = await CategoriesService.create(data);
+      await loadCategories();
+    } catch (error) {
+      console.log(error);
+
+      // Handle validation errors
+      console.error("Validation error:", error);
+    }
   }, []);
 
   const onEditSubmit = async ({ category_id, name }: Category) => {
