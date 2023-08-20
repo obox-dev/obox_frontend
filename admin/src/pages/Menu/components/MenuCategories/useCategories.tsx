@@ -1,76 +1,61 @@
 import { Dialog } from "@shared/components/molecules/Dialog";
 import { useDialog } from "@shared/providers/DialogProvider/useDialog";
 import { Form, FormRef } from "@shared/components/atoms/Form";
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import { useTranslation } from '@libs/react-i18next';
 import { Input, InputVariants } from "@shared/components/atoms/Input";
 import {
   MenuService,
   CategoriesService,
   CreateCategoryRequest,
-  CreateCategoryResponse,
   UpdateCategoryRequest,
-  GetCategoriesByMenuIdResponseItem,
   Category,
 } from "@shared/services";
 import { ButtonVariants } from "@shared/components/atoms/Button";
+import { IAction } from "@shared/components/atoms/ActionMenu";
 import { categorySchema } from "./categoryValidation";
 
-export const useCategories = () => {
+export const useCategories = (menuId: string) => {
   const { t } = useTranslation(["common", "menu"]);
   const { openDialog } = useDialog();
-  const [categoriesList, setCategoriesList] = useState<
-    GetCategoriesByMenuIdResponseItem[]
-  >([]);
-  const HARDCODED_MENU_ID = "0ef77fa3-9507-4926-b095-37b6eec3459b";
+  const [categoriesList, setCategoriesList] = useState<Category[]>([]);
 
-  const loadCategories = async () => {
+  const loadCategories = async (id: string) => {
     try {
-      const categories = await MenuService.getCategoriesByMenuId(
-        HARDCODED_MENU_ID
-      );
+      const categories = await MenuService.getCategoriesByMenuId(id);
       setCategoriesList(categories);
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
   };
 
-  const onCreateSubmit = useCallback(async (data: CreateCategoryRequest) => {
-    try {
-      const validationResult = await categorySchema.validate(data, { abortEarly: false });
-      console.log(validationResult);
-
-      const category: CreateCategoryResponse = await CategoriesService.create(data);
-      await loadCategories();
-    } catch (error) {
-      console.log(error);
-
-      // Handle validation errors
-      console.error("Validation error:", error);
-    }
-  }, []);
+  const onCreateSubmit = useCallback(
+    async (data: CreateCategoryRequest) => {
+      await CategoriesService.create(data);
+      await loadCategories(menuId);
+    },
+    [menuId]
+  );
 
   const onEditSubmit = async ({ category_id, name }: Category) => {
     const id = category_id;
     const request: UpdateCategoryRequest = {
       name,
     };
-    const category = await CategoriesService.patch(id, request);
-    await loadCategories();
+    await CategoriesService.update(id, request);
+    await loadCategories(menuId);
   };
 
   const onDeleteSubmit = async ({ category_id }: Category) => {
     try {
       await CategoriesService.delete(category_id);
-      await loadCategories();
+      await loadCategories(menuId);
     } catch (error) {
       console.error("Error deleting category:", error);
     }
   };
 
-  const openCategoryEditDialog = (
-    category: GetCategoriesByMenuIdResponseItem
-  ) =>
+  const openCategoryEditDialog = (category: Category) =>
     openDialog(({ closeDialog }) => {
       const formRef = useRef<FormRef | null>(null);
       const [val, setVal] = useState(category.name);
@@ -113,22 +98,18 @@ export const useCategories = () => {
       );
     });
 
-  const menuCategoriesActions = [
+  const menuCategoriesActions: IAction<Category>[] = [
     {
       label: t("common:buttons:edit"),
-      callback: (category: GetCategoriesByMenuIdResponseItem) =>
+      callback: (category: Category) =>
         openCategoryEditDialog(category),
     },
     {
       label: t("common:buttons:delete"),
-      callback: (category: GetCategoriesByMenuIdResponseItem) =>
+      callback: (category: Category) =>
         openCategoryDeleteDialog(category),
     },
   ];
-
-  useEffect(() => {
-    loadCategories();
-  }, []);
 
   const openCategoryCreateDialog = () =>
     openDialog(({ closeDialog }) => {
@@ -153,11 +134,7 @@ export const useCategories = () => {
             ref={formRef as React.ForwardedRef<Category>}
             onSubmit={onCreateSubmit}
           >
-            <Input
-              type={InputVariants.HIDDEN}
-              name="menu_id"
-              value={HARDCODED_MENU_ID}
-            />
+            <Input type={InputVariants.HIDDEN} name="menu_id" value={menuId} />
             <Input
               placeholder={t("menu:createCategoryForm.placeholder")}
               type={InputVariants.TEXT}
@@ -168,7 +145,7 @@ export const useCategories = () => {
       );
     });
 
-    const openCategoryDeleteDialog = (category: GetCategoriesByMenuIdResponseItem) =>
+  const openCategoryDeleteDialog = (category: Category) =>
     openDialog(({ closeDialog }) => {
       return (
         <Dialog
@@ -185,15 +162,15 @@ export const useCategories = () => {
           cancelText={t("common:buttons:cancel")}
           okButtonVariant={ButtonVariants.DANGER}
         >
-          <p>{t("menu:deleteCategoryForm.message")} {category.name}</p>
+          <p>{t("menu:deleteCategoryForm.message")} <strong>{category.name}</strong></p>
         </Dialog>
       );
     });
-
 
   return {
     openCategoryCreateDialog,
     categoriesList,
     menuCategoriesActions,
+    loadCategories,
   };
 };

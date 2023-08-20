@@ -1,0 +1,31 @@
+.menu {
+  &__navigation {
+    &-list {
+      min-height: 50px;
+      gap: 15px;
+      list-style-type: none;
+    }
+
+    &-item {
+      gap: 5px;
+      white-space: nowrap;
+
+      .dropdown-toggle {
+        width: 15px;
+        height: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      &-link {
+        color: #fff;
+        text-decoration: none;
+
+        &.active {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

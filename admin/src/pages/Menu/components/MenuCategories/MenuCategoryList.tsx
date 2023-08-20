@@ -1,19 +1,19 @@
-import { GetCategoriesByMenuIdResponseItem } from "@shared/services";
+import { Category } from "@shared/services";
 import { MenuCategoryItem } from "./MenuCategoryItem";
 import { IAction } from "@shared/components/atoms/ActionMenu"
 
 
 export interface MenuCategoryListProps {
-  categoryItems: GetCategoriesByMenuIdResponseItem[]
-  actions: IAction<GetCategoriesByMenuIdResponseItem>[];
+  categoryItems: Category[]
+  actions: IAction<Category>[];
 }
 
 export const MenuCategoryList = (props: MenuCategoryListProps) => {
   const { categoryItems, actions } = props;
 
   return (
-    <ul className="menu-category-list">
-      {categoryItems.map((item: GetCategoriesByMenuIdResponseItem) => {
+    <ul className="menu-category-list p-0">
+      {categoryItems.map((item: Category) => {
         return (<MenuCategoryItem actions={actions} key={item.category_id} categoryItem={item}/>)
       })}
     </ul>
