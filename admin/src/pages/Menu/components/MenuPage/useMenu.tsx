@@ -5,7 +5,11 @@ import { useDialog } from "@shared/providers/DialogProvider/useDialog";
 import { Form, FormRef } from "@shared/components/atoms/Form";
 import { Menu, RestaurantsService } from "@shared/services";
 import { Input, InputVariants } from "@shared/components/atoms/Input";
-import { CreateMenuRequest, MenuService, UpdateMenuRequest } from "@shared/services/MenuService";
+import {
+  CreateMenuRequest,
+  MenuService,
+  UpdateMenuRequest,
+} from "@shared/services/MenuService";
 import { ButtonVariants } from "@shared/components/atoms/Button";
 import { IAction } from "@shared/components/atoms/ActionMenu";
 
@@ -13,7 +17,7 @@ interface UseMenuProps {
   restaurant_id: string;
 }
 
-const DEFAULT_LANGUAGE_CODE = 'en';
+const DEFAULT_LANGUAGE_CODE = "en";
 
 export const useMenu = (props: UseMenuProps) => {
   const { restaurant_id } = props;
@@ -24,7 +28,9 @@ export const useMenu = (props: UseMenuProps) => {
 
   const loadMenus = async () => {
     try {
-      const menus = await RestaurantsService.getMenusByRestaurantId(restaurant_id);
+      const menus = await RestaurantsService.getMenusByRestaurantId(
+        restaurant_id
+      );
       setMenuList(menus);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -32,12 +38,10 @@ export const useMenu = (props: UseMenuProps) => {
   };
 
   const onCreateSubmit = async (data: CreateMenuRequest) => {
-    const { menu_id } = await MenuService.create(
-      data
-    );
+    const { menu_id } = await MenuService.create(data);
     await loadMenus();
     navigate(`/menu/${menu_id}`);
-  }
+  };
 
   const openMenuCreateDialog = () =>
     openDialog(({ closeDialog }) => {
@@ -80,7 +84,7 @@ export const useMenu = (props: UseMenuProps) => {
           </Form>
         </Dialog>
       );
-  });
+    });
 
   const onEditSubmit = async ({ menu_id, name }: Menu) => {
     const id = menu_id;
@@ -132,7 +136,7 @@ export const useMenu = (props: UseMenuProps) => {
           </Form>
         </Dialog>
       );
-  });
+    });
 
   const onDeleteSubmit = async ({ menu_id }: Menu) => {
     try {
@@ -144,37 +148,38 @@ export const useMenu = (props: UseMenuProps) => {
   };
 
   const openMenuDeleteDialog = (menu: Menu) =>
-  openDialog(({ closeDialog }) => {
-    return (
-      <Dialog
-        okCallback={() => {
-          onDeleteSubmit(menu);
-          closeDialog();
-        }}
-        cancelCallback={() => {
-          closeDialog();
-        }}
-        title="Delete Menu"
-        size="lg"
-        okText="OK"
-        cancelText="Cancel"
-        okButtonVariant={ButtonVariants.DANGER}
-      >
-        <p>Are you sure you want to delete this menu: <strong>{menu.name}</strong>?</p>
-      </Dialog>
-    );
-  });
+    openDialog(({ closeDialog }) => {
+      return (
+        <Dialog
+          okCallback={() => {
+            onDeleteSubmit(menu);
+            closeDialog();
+          }}
+          cancelCallback={() => {
+            closeDialog();
+          }}
+          title="Delete Menu"
+          size="lg"
+          okText="OK"
+          cancelText="Cancel"
+          okButtonVariant={ButtonVariants.DANGER}
+        >
+          <p>
+            Are you sure you want to delete this menu:{" "}
+            <strong>{menu.name}</strong>?
+          </p>
+        </Dialog>
+      );
+    });
 
   const menuActions: IAction<Menu>[] = [
     {
       label: "Edit",
-      callback: (menu: Menu) =>
-      openMenuEditDialog(menu),
+      callback: (menu: Menu) => openMenuEditDialog(menu),
     },
     {
       label: "Delete",
-      callback: (menu: Menu) =>
-        openMenuDeleteDialog(menu),
+      callback: (menu: Menu) => openMenuDeleteDialog(menu),
     },
   ];
 
@@ -185,4 +190,4 @@ export const useMenu = (props: UseMenuProps) => {
     loadMenus,
     menuActions,
   };
-}
+};

@@ -7,7 +7,6 @@ import {
   MenuService,
   CategoriesService,
   CreateCategoryRequest,
-  CreateCategoryResponse,
   UpdateCategoryRequest,
   Category,
 } from "@shared/services";
@@ -16,27 +15,24 @@ import { IAction } from "@shared/components/atoms/ActionMenu";
 
 export const useCategories = (menuId: string) => {
   const { openDialog } = useDialog();
-  const [categoriesList, setCategoriesList] = useState<
-    Category[]
-  >([]);
+  const [categoriesList, setCategoriesList] = useState<Category[]>([]);
 
   const loadCategories = async (id: string) => {
     try {
-      const categories = await MenuService.getCategoriesByMenuId(
-        id
-      );
+      const categories = await MenuService.getCategoriesByMenuId(id);
       setCategoriesList(categories);
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
   };
 
-  const onCreateSubmit = useCallback(async (data: CreateCategoryRequest) => {
-    await CategoriesService.create(
-      data
-    );
-    await loadCategories(menuId);
-  }, [menuId]);
+  const onCreateSubmit = useCallback(
+    async (data: CreateCategoryRequest) => {
+      await CategoriesService.create(data);
+      await loadCategories(menuId);
+    },
+    [menuId]
+  );
 
   const onEditSubmit = async ({ category_id, name }: Category) => {
     const id = category_id;
@@ -56,9 +52,7 @@ export const useCategories = (menuId: string) => {
     }
   };
 
-  const openCategoryEditDialog = (
-    category: Category
-  ) =>
+  const openCategoryEditDialog = (category: Category) =>
     openDialog(({ closeDialog }) => {
       const formRef = useRef<FormRef | null>(null);
       const [val, setVal] = useState(category.name);
@@ -104,13 +98,11 @@ export const useCategories = (menuId: string) => {
   const menuCategoriesActions: IAction<Category>[] = [
     {
       label: "Edit",
-      callback: (category: Category) =>
-        openCategoryEditDialog(category),
+      callback: (category: Category) => openCategoryEditDialog(category),
     },
     {
       label: "Delete",
-      callback: (category: Category) =>
-        openCategoryDeleteDialog(category),
+      callback: (category: Category) => openCategoryDeleteDialog(category),
     },
   ];
 
@@ -137,11 +129,7 @@ export const useCategories = (menuId: string) => {
             ref={formRef as React.ForwardedRef<Category>}
             onSubmit={onCreateSubmit}
           >
-            <Input
-              type={InputVariants.HIDDEN}
-              name="menu_id"
-              value={menuId}
-            />
+            <Input type={InputVariants.HIDDEN} name="menu_id" value={menuId} />
             <Input
               placeholder="Enter your category name"
               type={InputVariants.TEXT}
@@ -150,30 +138,32 @@ export const useCategories = (menuId: string) => {
           </Form>
         </Dialog>
       );
-  });
+    });
 
   const openCategoryDeleteDialog = (category: Category) =>
-  openDialog(({ closeDialog }) => {
-    return (
-      <Dialog
-        okCallback={() => {
-          onDeleteSubmit(category);
-          closeDialog();
-        }}
-        cancelCallback={() => {
-          closeDialog();
-        }}
-        title="Delete Category"
-        size="lg"
-        okText="OK"
-        cancelText="Cancel"
-        okButtonVariant={ButtonVariants.DANGER}
-      >
-        <p>Are you sure you want to delete this category: <strong>{category.name}</strong>?</p>
-      </Dialog>
-    );
-  });
-
+    openDialog(({ closeDialog }) => {
+      return (
+        <Dialog
+          okCallback={() => {
+            onDeleteSubmit(category);
+            closeDialog();
+          }}
+          cancelCallback={() => {
+            closeDialog();
+          }}
+          title="Delete Category"
+          size="lg"
+          okText="OK"
+          cancelText="Cancel"
+          okButtonVariant={ButtonVariants.DANGER}
+        >
+          <p>
+            Are you sure you want to delete this category:{" "}
+            <strong>{category.name}</strong>?
+          </p>
+        </Dialog>
+      );
+    });
 
   return {
     openCategoryCreateDialog,
