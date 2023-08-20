@@ -7,6 +7,17 @@
     }
 
     &-item {
+      gap: 5px;
+      white-space: nowrap;
+
+      .dropdown-toggle {
+        width: 15px;
+        height: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
       &-link {
         color: #fff;
         text-decoration: none;

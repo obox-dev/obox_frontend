@@ -12,7 +12,7 @@ export const MenuCategoryList = (props: MenuCategoryListProps) => {
   const { categoryItems, actions } = props;
 
   return (
-    <ul className="menu-category-list">
+    <ul className="menu-category-list p-0">
       {categoryItems.map((item: Category) => {
         return (<MenuCategoryItem actions={actions} key={item.category_id} categoryItem={item}/>)
       })}

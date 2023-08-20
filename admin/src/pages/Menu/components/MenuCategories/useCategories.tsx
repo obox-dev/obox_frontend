@@ -12,6 +12,7 @@ import {
   Category,
 } from "@shared/services";
 import { ButtonVariants } from "@shared/components/atoms/Button";
+import { IAction } from "@shared/components/atoms/ActionMenu";
 
 export const useCategories = (menuId: string) => {
   const { openDialog } = useDialog();
@@ -42,7 +43,7 @@ export const useCategories = (menuId: string) => {
     const request: UpdateCategoryRequest = {
       name,
     };
-    await CategoriesService.patch(id, request);
+    await CategoriesService.update(id, request);
     await loadCategories(menuId);
   };
 
@@ -100,7 +101,7 @@ export const useCategories = (menuId: string) => {
       );
     });
 
-  const menuCategoriesActions = [
+  const menuCategoriesActions: IAction<Category>[] = [
     {
       label: "Edit",
       callback: (category: Category) =>

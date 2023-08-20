@@ -10,9 +10,9 @@ export const MenuCategoryItem = (props: MenuCategoryItem) => {
   const { categoryItem, actions } = props;
 
   return (
-  <li className="d-flex justify-content-between my-2">
+  <li className="d-flex justify-content-between align-items-center my-2">
     {categoryItem.name}
-    <ActionMenu category={categoryItem} actions={actions}/>
+    <ActionMenu entity={categoryItem} actions={actions}/>
   </li>
   );
 };

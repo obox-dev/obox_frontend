@@ -28,7 +28,7 @@ export const Menu = () => {
     >
         <MenuCategoryList actions={menuCategoriesActions} categoryItems={categoriesList}/>
     </Sidebar>
-    <div className="menu__dishes">
+    <div className="menu__dishes flex-grow-1 p-2">
       {id}
     </div>
     </div>

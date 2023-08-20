@@ -15,7 +15,7 @@ const HARDCODED_RESTAURANT_ID = "cce45739-fcb7-428d-991f-bdbe976d71e6";
 
 export const MenuPage = () => {
   const id = HARDCODED_RESTAURANT_ID;
-  const { openMenuCreateDialog, loadMenus, menuList } = useMenu({
+  const { openMenuCreateDialog, loadMenus, menuList, menuActions  } = useMenu({
     restaurant_id: id,
   });
 
@@ -31,7 +31,7 @@ export const MenuPage = () => {
       {/* <h1>Menu</h1>
       <p>Menu items go here.</p>
       <Button onClick={openMenuDialog} text="Open menu dialog" variant={ButtonVariants.PRIMARY}/> */}
-      <MenuNavigation items={menuList} addMenu={openMenuCreateDialog} />
+      <MenuNavigation items={menuList} addMenu={openMenuCreateDialog} actions={menuActions} />
       {id && <Menu />}
     </div>
   );
