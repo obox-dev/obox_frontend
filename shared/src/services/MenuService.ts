@@ -1,13 +1,17 @@
 import { API } from "./ApiService";
-
-export interface GetCategoriesByMenuIdResponseItem {
-  category_id: string,
-  name: string,
-  menu_id: string
+import { Category } from "./CategoriesService";
+export interface CreateMenuRequest {
+  name: string;
+}
+export interface CreateMenuResponse {
+  menu_id: string;
 }
 
 export class MenuService {
-  static async getCategoriesByMenuId(menuId: string) {
-    return API.get<null, GetCategoriesByMenuIdResponseItem[]>(`/menus/${menuId}/categories/`);
+  static async create(params: CreateMenuRequest): Promise<CreateMenuResponse> {
+    return API.post<CreateMenuRequest, CreateMenuResponse>(`/menus/`, params);
+  }
+  static async getCategoriesByMenuId(menuId: string): Promise<Category[]> {
+    return API.get<null, Category[]>(`/menus/${menuId}/categories/`);
   }
 }

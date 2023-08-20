@@ -1,0 +1,20 @@
+.menu {
+  &__navigation {
+    &-list {
+      min-height: 50px;
+      gap: 15px;
+      list-style-type: none;
+    }
+
+    &-item {
+      &-link {
+        color: #fff;
+        text-decoration: none;
+
+        &.active {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

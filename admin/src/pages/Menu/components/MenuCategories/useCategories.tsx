@@ -1,7 +1,7 @@
 import { Dialog } from "@shared/components/molecules/Dialog";
 import { useDialog } from "@shared/providers/DialogProvider/useDialog";
 import { Form, FormRef } from "@shared/components/atoms/Form";
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import { Input, InputVariants } from "@shared/components/atoms/Input";
 import {
   MenuService,
@@ -9,22 +9,20 @@ import {
   CreateCategoryRequest,
   CreateCategoryResponse,
   UpdateCategoryRequest,
-  GetCategoriesByMenuIdResponseItem,
   Category,
 } from "@shared/services";
 import { ButtonVariants } from "@shared/components/atoms/Button";
 
-export const useCategories = () => {
+export const useCategories = (menuId: string) => {
   const { openDialog } = useDialog();
   const [categoriesList, setCategoriesList] = useState<
-    GetCategoriesByMenuIdResponseItem[]
+    Category[]
   >([]);
-  const HARDCODED_MENU_ID = "0ef77fa3-9507-4926-b095-37b6eec3459b";
 
-  const loadCategories = async () => {
+  const loadCategories = async (id: string) => {
     try {
       const categories = await MenuService.getCategoriesByMenuId(
-        HARDCODED_MENU_ID
+        id
       );
       setCategoriesList(categories);
     } catch (error) {
@@ -33,32 +31,32 @@ export const useCategories = () => {
   };
 
   const onCreateSubmit = useCallback(async (data: CreateCategoryRequest) => {
-    const category: CreateCategoryResponse = await CategoriesService.create(
+    await CategoriesService.create(
       data
     );
-    await loadCategories();
-  }, []);
+    await loadCategories(menuId);
+  }, [menuId]);
 
   const onEditSubmit = async ({ category_id, name }: Category) => {
     const id = category_id;
     const request: UpdateCategoryRequest = {
       name,
     };
-    const category = await CategoriesService.patch(id, request);
-    await loadCategories();
+    await CategoriesService.patch(id, request);
+    await loadCategories(menuId);
   };
 
   const onDeleteSubmit = async ({ category_id }: Category) => {
     try {
       await CategoriesService.delete(category_id);
-      await loadCategories();
+      await loadCategories(menuId);
     } catch (error) {
       console.error("Error deleting category:", error);
     }
   };
 
   const openCategoryEditDialog = (
-    category: GetCategoriesByMenuIdResponseItem
+    category: Category
   ) =>
     openDialog(({ closeDialog }) => {
       const formRef = useRef<FormRef | null>(null);
@@ -105,19 +103,15 @@ export const useCategories = () => {
   const menuCategoriesActions = [
     {
       label: "Edit",
-      callback: (category: GetCategoriesByMenuIdResponseItem) =>
+      callback: (category: Category) =>
         openCategoryEditDialog(category),
     },
     {
       label: "Delete",
-      callback: (category: GetCategoriesByMenuIdResponseItem) =>
+      callback: (category: Category) =>
         openCategoryDeleteDialog(category),
     },
   ];
-
-  useEffect(() => {
-    loadCategories();
-  }, []);
 
   const openCategoryCreateDialog = () =>
     openDialog(({ closeDialog }) => {
@@ -145,7 +139,7 @@ export const useCategories = () => {
             <Input
               type={InputVariants.HIDDEN}
               name="menu_id"
-              value={HARDCODED_MENU_ID}
+              value={menuId}
             />
             <Input
               placeholder="Enter your category name"
@@ -155,34 +149,35 @@ export const useCategories = () => {
           </Form>
         </Dialog>
       );
-    });
+  });
 
-    const openCategoryDeleteDialog = (category: GetCategoriesByMenuIdResponseItem) =>
-    openDialog(({ closeDialog }) => {
-      return (
-        <Dialog
-          okCallback={() => {
-            onDeleteSubmit(category);
-            closeDialog();
-          }}
-          cancelCallback={() => {
-            closeDialog();
-          }}
-          title="Are you sure you want to delete this category?"
-          size="lg"
-          okText="OK"
-          cancelText="Cancel"
-          okButtonVariant={ButtonVariants.DANGER}
-        >
-          <p>Confirming the deletion of category: {category.name}</p>
-        </Dialog>
-      );
-    });
+  const openCategoryDeleteDialog = (category: Category) =>
+  openDialog(({ closeDialog }) => {
+    return (
+      <Dialog
+        okCallback={() => {
+          onDeleteSubmit(category);
+          closeDialog();
+        }}
+        cancelCallback={() => {
+          closeDialog();
+        }}
+        title="Are you sure you want to delete this category?"
+        size="lg"
+        okText="OK"
+        cancelText="Cancel"
+        okButtonVariant={ButtonVariants.DANGER}
+      >
+        <p>Confirming the deletion of category: {category.name}</p>
+      </Dialog>
+    );
+  });
 
 
   return {
     openCategoryCreateDialog,
     categoriesList,
     menuCategoriesActions,
+    loadCategories,
   };
 };

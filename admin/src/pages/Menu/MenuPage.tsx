@@ -1,38 +1,38 @@
+import { useParams } from "react-router";
 import { Button, ButtonVariants } from "@shared/components/atoms/Button";
 import { Dialog } from "@shared/components/molecules/Dialog/Dialog";
 import { useDialog } from "@shared/providers/DialogProvider/useDialog";
+import { MenuNavigation } from "./components/MenuPage/MenuNavigation";
+import { Menu } from "./components/MenuPage/Menu";
+import './Menu.scss';
+import { useEffect, useState } from "react";
+import { Menu as IMenu, RestaurantsService } from "@shared/services";
+import { useMenu } from "./components/MenuPage/useMenu";
 
-import { Menu } from "./Menu";
+const HARDCODED_RESTAURANT_ID = "cce45739-fcb7-428d-991f-bdbe976d71e6";
+
+// RestaurantsService
 
 export const MenuPage = () => {
+  const id = HARDCODED_RESTAURANT_ID;
+  const { openMenuCreateDialog, loadMenus, menuList } = useMenu({
+    restaurant_id: id,
+  });
 
-const { openDialog } = useDialog();
+  useEffect(() => {
+    if (id) {
+      loadMenus();
+    }
+  }, [id]);
 
-const openMenuDialog = () => openDialog(({ closeDialog }) => (
-  <Dialog
-    okCallback={() => {
-      console.log('OK pressed');
-      closeDialog();
-    }}
-    cancelCallback={() => {
-      console.log('Cancel pressed');
-      closeDialog();
-    }}
-    title="My dialog"
-    size="sm"
-    okText="OK"
-    cancelText="Cancel"
-  >
-    <span>My dialog body</span>
-  </Dialog>
-));
 
   return (
     <div>
       {/* <h1>Menu</h1>
       <p>Menu items go here.</p>
       <Button onClick={openMenuDialog} text="Open menu dialog" variant={ButtonVariants.PRIMARY}/> */}
-      <Menu/>
+      <MenuNavigation items={menuList} addMenu={openMenuCreateDialog} />
+      {id && <Menu />}
     </div>
   );
 };

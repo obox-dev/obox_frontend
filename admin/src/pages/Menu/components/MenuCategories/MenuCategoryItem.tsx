@@ -1,9 +1,9 @@
-import { GetCategoriesByMenuIdResponseItem } from "@shared/services";
+import { Category } from "@shared/services";
 import { ActionMenu, IAction } from "@shared/components/atoms/ActionMenu"
 
 export interface MenuCategoryItem {
-  categoryItem: GetCategoriesByMenuIdResponseItem;
-  actions: IAction<GetCategoriesByMenuIdResponseItem>[];
+  categoryItem: Category;
+  actions: IAction<Category>[];
 }
 
 export const MenuCategoryItem = (props: MenuCategoryItem) => {

@@ -18,6 +18,7 @@ export const MainLayout: React.FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/restaurants" element={<Restaurants />} />
           <Route path="/menu" element={<MenuPage />} />
+          <Route path="/menu/:id" element={<MenuPage/>} />
         </Routes>
       </main>
       <Footer currentYear={currentYear} />
