@@ -9,6 +9,7 @@ export const Input = (props: IInput<HTMLInputElement>) => {
     value,
     checked,
     isDisabled,
+    isValid,
   } = props;
   const getClass = (type: InputVariants):string => {
     const classes: Partial<{ [key in InputVariants]: string }> = {
@@ -28,6 +29,7 @@ export const Input = (props: IInput<HTMLInputElement>) => {
       placeholder={placeholder}
       checked={checked}
       disabled={isDisabled}
+      isValid={isValid}
     />
   )
 }
