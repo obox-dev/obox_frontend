@@ -1,6 +1,7 @@
 {
   "categories": "Categories",
   "addcategory": "Add Category",
+  "addmenu": "Add Menu",
   "createCategoryForm": {
     "title": "Enter your category name",
     "placeholder": "Enter your category name"
@@ -12,5 +13,17 @@
   "deleteCategoryForm": {
     "title": "Are you sure you want to delete this category?",
     "message": "Confirming the deletion of category:"
+  },
+  "createMenuForm": {
+    "title": "Enter your menu name",
+    "placeholder": "Enter your menu name"
+  },
+  "updateMenuForm": {
+    "title": "Enter new name for the menu",
+    "placeholder": "Enter new name for the menu"
+  },
+  "deleteMenuForm": {
+    "title": "Are you sure you want to delete this menu?",
+    "message": "Confirming the deletion of menu:"
   }
 }

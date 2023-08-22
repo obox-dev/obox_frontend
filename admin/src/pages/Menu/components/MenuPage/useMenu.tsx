@@ -12,6 +12,7 @@ import {
 } from "@shared/services/MenuService";
 import { ButtonVariants } from "@shared/components/atoms/Button";
 import { IAction } from "@shared/components/atoms/ActionMenu";
+import { useTranslation } from '@libs/react-i18next';
 
 interface UseMenuProps {
   restaurant_id: string;
@@ -20,6 +21,7 @@ interface UseMenuProps {
 const DEFAULT_LANGUAGE_CODE = "en";
 
 export const useMenu = (props: UseMenuProps) => {
+  const { t } = useTranslation();
   const { restaurant_id } = props;
   const [menuList, setMenuList] = useState<Menu[]>([]);
 
@@ -57,10 +59,10 @@ export const useMenu = (props: UseMenuProps) => {
           cancelCallback={() => {
             closeDialog();
           }}
-          title="Create Menu"
+          title={t("menu:createMenuForm.title")}
           size="lg"
-          okText="OK"
-          cancelText="Cancel"
+          okText={t("common:buttons:confirm")}
+          cancelText={t("common:buttons:cancel")}
         >
           <Form
             ref={formRef as React.ForwardedRef<Menu>}
@@ -77,7 +79,7 @@ export const useMenu = (props: UseMenuProps) => {
               value={DEFAULT_LANGUAGE_CODE}
             />
             <Input
-              placeholder="Enter menu name"
+              placeholder={t("menu:createMenuForm.placeholder")}
               type={InputVariants.TEXT}
               name="name"
             />
@@ -110,10 +112,10 @@ export const useMenu = (props: UseMenuProps) => {
           cancelCallback={() => {
             closeDialog();
           }}
-          title="Edit Menu"
+          title={t("menu:updateMenuForm.title")}
           size="lg"
-          okText="OK"
-          cancelText="Cancel"
+          okText={t("common:buttons:confirm")}
+          cancelText={t("common:buttons:cancel")}
         >
           <Form
             ref={formRef as React.ForwardedRef<Menu>}
@@ -125,7 +127,7 @@ export const useMenu = (props: UseMenuProps) => {
               value={menu.menu_id}
             />
             <Input
-              placeholder="Enter menu name"
+              placeholder={t("menu:updateMenuForm.placeholder")}
               type={InputVariants.TEXT}
               name="name"
               value={menuName}
@@ -158,14 +160,14 @@ export const useMenu = (props: UseMenuProps) => {
           cancelCallback={() => {
             closeDialog();
           }}
-          title="Delete Menu"
+          title={t("menu:deleteMenuForm.title")}
           size="lg"
-          okText="OK"
-          cancelText="Cancel"
+          okText={t("common:buttons:confirm")}
+          cancelText={t("common:buttons:cancel")}
           okButtonVariant={ButtonVariants.DANGER}
         >
           <p>
-            Are you sure you want to delete this menu:{" "}
+          {t("menu:deleteMenuForm.message")} {" "}
             <strong>{menu.name}</strong>?
           </p>
         </Dialog>
@@ -174,11 +176,11 @@ export const useMenu = (props: UseMenuProps) => {
 
   const menuActions: IAction<Menu>[] = [
     {
-      label: "Edit",
+      label: t("common:buttons:edit"),
       callback: (menu: Menu) => openMenuEditDialog(menu),
     },
     {
-      label: "Delete",
+      label: t("common:buttons:delete"),
       callback: (menu: Menu) => openMenuDeleteDialog(menu),
     },
   ];

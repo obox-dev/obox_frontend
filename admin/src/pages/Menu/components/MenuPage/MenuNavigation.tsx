@@ -2,6 +2,7 @@ import { Button, ButtonVariants } from "@shared/components/atoms/Button";
 import { Menu } from '@shared/services'
 import { IAction } from "@shared/components/atoms/ActionMenu";
 import { MenuNavigationItem } from "./MenuINavigationItem";
+import { useTranslation } from '@libs/react-i18next';
 
 interface MenuNavigationProps {
   items: Menu[],
@@ -11,6 +12,7 @@ interface MenuNavigationProps {
 
 
 export const MenuNavigation = (props: MenuNavigationProps) => {
+  const { t } = useTranslation();
   const { items, actions, addMenu } = props;
 
   return (
@@ -25,7 +27,7 @@ export const MenuNavigation = (props: MenuNavigationProps) => {
           })
         }
         {
-          <Button variant={ButtonVariants.SECONDARY} text="Add menu" onClick={addMenu} />
+          <Button variant={ButtonVariants.SECONDARY} text={`+ ${t("menu:addmenu")}`} onClick={addMenu} />
         }
       </ul>
     </div>
