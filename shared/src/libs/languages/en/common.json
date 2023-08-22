@@ -12,6 +12,12 @@
   "restaurants": "Restaurants",
   "menu": "Menu",
   "poweredby": "Powered by",
+  "buttons": {
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
   "notFoundTitle": "Whoops!",
   "notFoundMessage": "Our chef is still working on this page. We suggest you try others.",
   "prevPageButton": "Return to the previous page",

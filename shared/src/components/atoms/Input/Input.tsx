@@ -10,6 +10,7 @@ export const Input = (props: IInput<HTMLInputElement>) => {
     checked,
     isDisabled,
   } = props;
+
   const getClass = (type: InputVariants):string => {
     const classes: Partial<{ [key in InputVariants]: string }> = {
       [InputVariants.CHECKBOX]: 'form-check-input',
