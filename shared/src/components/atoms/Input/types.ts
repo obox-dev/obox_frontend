@@ -17,6 +17,4 @@ export interface IInput<T> {
   value?: string;
   checked?: boolean;
   isDisabled?: boolean;
-  onBlure?: (event: ChangeEvent<T>) => void;
-  isValid: boolean;
 }

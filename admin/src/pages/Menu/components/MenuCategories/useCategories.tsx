@@ -13,7 +13,6 @@ import {
 } from "@shared/services";
 import { ButtonVariants } from "@shared/components/atoms/Button";
 import { IAction } from "@shared/components/atoms/ActionMenu";
-import { categorySchema } from "./categoryValidation";
 
 export const useCategories = (menuId: string) => {
   const { t } = useTranslation(["common", "menu"]);
@@ -118,10 +117,8 @@ export const useCategories = (menuId: string) => {
         <Dialog
           okCallback={() => {
             if (formRef.current) {
-              if (validate) {
               formRef.current.submit();
               closeDialog();
-              }
             }
           }}
           cancelCallback={() => {
@@ -133,9 +130,8 @@ export const useCategories = (menuId: string) => {
           cancelText={t("common:buttons:cancel")}
         >
           <Form
-            ref={formRef as React.ForwardedRef<Partial<Category>>}
+            ref={formRef as React.ForwardedRef<Category>}
             onSubmit={onCreateSubmit}
-            validationSchema={categorySchema}
           >
             <Input type={InputVariants.HIDDEN} name="menu_id" value={menuId} />
             <Input
