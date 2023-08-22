@@ -2,6 +2,8 @@
   "categories": "Categories",
   "addcategory": "Add Category",
   "addmenu": "Add Menu",
+  "adddish": "Add Dish",
+  "dishes": "Dishes",
   "createCategoryForm": {
     "title": "Enter your category name",
     "placeholder": "Enter your category name"
