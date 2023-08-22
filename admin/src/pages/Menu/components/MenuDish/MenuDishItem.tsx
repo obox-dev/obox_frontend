@@ -1,6 +1,5 @@
 import { Category } from "@shared/services";
 import { ActionMenu, IAction } from "@shared/components/atoms/ActionMenu"
-import { NavLink } from "react-router-dom";
 
 export interface MenuCategoryItem {
   categoryItem: Category;
@@ -12,7 +11,7 @@ export const MenuCategoryItem = (props: MenuCategoryItem) => {
 
   return (
   <li className="d-flex justify-content-between align-items-center my-2">
-    <NavLink to={`/menu/${categoryItem.menu_id}/category/${categoryItem.category_id}`}>{categoryItem.name}</NavLink>
+    {categoryItem.name}
     <ActionMenu entity={categoryItem} actions={actions}/>
   </li>
   );

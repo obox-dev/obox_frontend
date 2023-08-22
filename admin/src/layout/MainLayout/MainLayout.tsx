@@ -6,6 +6,7 @@ import Home from '../../pages/Home/Home';
 import Restaurants from '../../pages/Restaurants/Restaurants';
 import { MenuPage } from '../../pages/Menu/MenuPage';
 import NotFound from '../../pages/Page_404/NotFound';
+import { MenuDishPage } from '../../pages/Menu/components/MenuDish/MenuDishPage';
 
 export const MainLayout: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -19,9 +20,10 @@ export const MainLayout: React.FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/restaurants" element={<Restaurants />} />
           <Route path="/menu" element={<MenuPage />} />
-          <Route path="/menu/:id" element={<MenuPage/>} />
+          <Route path="/menu/:menuId" element={<MenuPage/>} />
+          <Route path="/menu/:menuId/category/:categoryId" element={<MenuPage/>} />
+          <Route path="/menu/:menuId/category/:categoryId/create-dish" element={<MenuDishPage/>} />
           <Route path="*" element={<NotFound />} />
-
         </Routes>
       </main>
       <Footer currentYear={currentYear} />

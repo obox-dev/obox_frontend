@@ -2,6 +2,8 @@
   "categories": "Категорії",
   "addcategory": "Додати категорію",
   "addmenu": "Додати меню",
+  "adddish": "Додати страву",
+  "dishes": "Страви",
   "createCategoryForm": {
     "title": "Введіть назву категорії",
     "placeholder": "Введіть назву категорії"

@@ -1,4 +1,5 @@
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useTranslation } from '@libs/react-i18next';
 import { Button, ButtonVariants } from "@shared/components/atoms/Button";
@@ -7,15 +8,15 @@ import { useCategories } from "../MenuCategories/useCategories";
 import { MenuCategoryList } from "../MenuCategories/MenuCategoryList";
 
 export const Menu = () => {
-  const { id } = useParams();
+  const { menuId, categoryId } = useParams();
   const { t } = useTranslation();
-  const { openCategoryCreateDialog, loadCategories, categoriesList, menuCategoriesActions } = useCategories(id!);
+  const { openCategoryCreateDialog, loadCategories, categoriesList, menuCategoriesActions } = useCategories(menuId!);
 
   useEffect(() => {
-    if (id) {
-      loadCategories(id);
+    if (menuId) {
+      loadCategories(menuId);
     }
-  }, [id]);
+  }, [menuId]);
   return (
     <div className="menu__page d-flex">
     <Sidebar
@@ -28,9 +29,14 @@ export const Menu = () => {
     >
         <MenuCategoryList actions={menuCategoriesActions} categoryItems={categoriesList}/>
     </Sidebar>
-    <div className="menu__dishes flex-grow-1 p-2">
-      {id}
-    </div>
+    {categoryId && (
+      <div className="menu__dishes flex-grow-1 p-2">
+          <div className="d-flex justify-content-between align-items-center">
+            <h4>{t("menu:dishes")}</h4>
+            <Link to={`/menu/${menuId}/category/${categoryId}/create-dish`}><Button variant={ButtonVariants.SECONDARY} text={`+ ${t("menu:adddish")}`}></Button></Link>
+          </div>
+      </div>
+    )}
     </div>
 
   )
