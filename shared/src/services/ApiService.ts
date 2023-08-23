@@ -28,8 +28,7 @@ class API {
       const response: AxiosResponse<K> = await axios(config);
       return response.data;
     } catch (error) {
-      API.handleRequestError(error as AxiosError);
-      throw error;
+      throw API.handleRequestError<T>(error as AxiosError<T>);
     }
   }
 
@@ -49,17 +48,20 @@ class API {
     return API.request<T, K>("delete", path, undefined, undefined, headers);
   }
 
-  private static handleRequestError(error: AxiosError): void {
+  private static handleRequestError<T>(error: AxiosError<T>): AxiosError<T, any> {
     if (error.response) {
       console.error(
         "Response Error",
         error.response.status,
         error.response.data
       );
+      return error;
     } else if (error.request) {
       console.error("Request Error", error.request);
+      return error;
     } else {
       console.error("Error", error.message);
+      return error;
     }
   }
 }

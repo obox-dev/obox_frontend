@@ -1,39 +1,73 @@
-import React, { createRef, forwardRef, useImperativeHandle } from 'react';
-import { IForm } from './types';
+import * as yup from "yup";
+import { Ref, useImperativeHandle, forwardRef } from "react";
+import {
+  useForm,
+  FormProvider,
+  FieldValues,
+  DefaultValues,
+  Path,
+} from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { FormRef } from "./types";
+import { AxiosError } from "axios";
 
-const FormInner = <T, >(props: IForm<T>, ref: React.ForwardedRef<T>) => {
-  const { onSubmit, children, isDisabled } = props;
+interface FormProps<T extends FieldValues> {
+  defaultValues: DefaultValues<T>;
+  validationSchema: yup.ObjectSchema<T>;
+  onSubmit: (data: T) => void;
+  children: JSX.Element;
+}
 
-  const formRef = createRef<HTMLFormElement>();
+const FormInner = <T extends FieldValues>(
+  props: FormProps<T>,
+  ref: Ref<FormRef>
+) => {
+  const { defaultValues, validationSchema, onSubmit, children } = props;
+  const methods = useForm<T>({
+    defaultValues,
+    mode: "onBlur",
+    resolver: yupResolver(validationSchema),
+  });
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.target as any);
-    const data = Object.fromEntries([...formData.entries()]) as unknown as T;
+  const setTypedErrors = (errors: Partial<T>) => {
+    for (const key in errors) {
+      if (errors.hasOwnProperty(key)) {
+        const element = errors[key as keyof typeof errors];
+        methods.setError(key as unknown as Path<T>, {
+          type: "response",
+          message: element as string,
+        });
+      }
+    }
+  };
 
-    onSubmit(data);
+  const internalSubmit = async (data: T) => {
+    try {
+      await onSubmit(data);
+    } catch (e) {
+      const error = e as AxiosError<T>;
+
+      const errors =
+        error &&
+        error.response &&
+        error.response.data &&
+        error.response.data.fields;
+
+      if (Object.keys(errors).length) {
+        setTypedErrors(errors);
+      }
+    }
   };
 
   useImperativeHandle(ref, () => ({
-    submit: async () => {
-      if (formRef.current) {
-        formRef.current.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
-      }
-    },
-  }) as unknown as T);
+    submit: () => methods.handleSubmit(internalSubmit)(),
+  }));
 
-  // Pass errors as a context or directly as a prop to children
   return (
-    <form ref={formRef} onSubmit={handleSubmit}>
-      <fieldset disabled={isDisabled}>
-        {children}
-      </fieldset>
-    </form>
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit(internalSubmit)}>{children}</form>
+    </FormProvider>
   );
 };
 
-export const Form = forwardRef(FormInner) as <T>(
-  props: IForm<T> & {
-    ref?: React.ForwardedRef<T>,
-  },
-) => ReturnType<typeof FormInner>;
+export const Form = forwardRef(FormInner);

@@ -23,7 +23,7 @@ const meta: Meta<typeof Form> = {
     },
     isDisabled: false,
   },
-  decorators: [withActions as any]
+  decorators: [withActions as any],
 };
 
 export default meta;
@@ -31,65 +31,69 @@ type Story = StoryObj<typeof meta>;
 
 export const Forms: Story = {
   render: (args) => (
-    <Form  {...args}>
-      <InputLabel text="Enter your data" />
-      <Input
-        name="test"
-        type={InputVariants.TEXT}
-        onChange={() => {
-          console.log(123);
-        }}
-      />
-      <RadioInput
-        name="test"
-        label="1"
-        value="text"
-        onChange={() => {
-          console.log(123);
-        }}
-      />
+    <Form {...args}>
+      <>
+        <InputLabel text="Enter your data" />
+        <Input
+          name="test"
+          type={InputVariants.TEXT}
+          onChange={() => {
+            console.log(123);
+          }}
+        />
         <RadioInput
-        name="test"
-        label="2"
-        value="text"
-        onChange={() => {
-          console.log(123);
-        }}
-      />
+          name="test"
+          label="1"
+          value="text"
+          onChange={() => {
+            console.log(123);
+          }}
+        />
+        <RadioInput
+          name="test"
+          label="2"
+          value="text"
+          onChange={() => {
+            console.log(123);
+          }}
+        />
+      </>
     </Form>
   ),
 };
 
 export const DisabledForms: Story = {
   render: (args) => (
-    <Form  {...args} isDisabled>
-      <InputLabel text="Enter your data" />
-      <Input
-        name="test"
-        type={InputVariants.TEXT}
-        onChange={() => {
-          console.log(123);
-        }}
-        isDisabled
-      />
-      <RadioInput
-        name="test"
-        label="1"
-        value="text"
-        onChange={() => {
-          console.log(123);
-        }}
-        isDisabled
-      />
+    <Form {...args} isDisabled>
+      <>
+        <InputLabel text="Enter your data" />
+        <Input
+          name="test"
+          type={InputVariants.TEXT}
+          onChange={() => {
+            console.log(123);
+          }}
+          isDisabled
+        />
         <RadioInput
-        name="test"
-        label="2"
-        value="text"
-        onChange={() => {
-          console.log(123);
-        }}
-        isDisabled
-      />
+          name="test"
+          label="1"
+          value="text"
+          onChange={() => {
+            console.log(123);
+          }}
+          isDisabled
+        />
+        <RadioInput
+          name="test"
+          label="2"
+          value="text"
+          onChange={() => {
+            console.log(123);
+          }}
+          isDisabled
+        />
+      </>
     </Form>
   ),
 };

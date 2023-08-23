@@ -7,8 +7,13 @@ import { Sidebar } from "@admin/layout/Sidebar/Sidebar";
 import { useCategories } from "../MenuCategories/useCategories";
 import { MenuCategoryList } from "../MenuCategories/MenuCategoryList";
 
-export const Menu = () => {
-  const { menuId, categoryId } = useParams();
+interface MenuProps {
+  menuId: string;
+}
+
+export const Menu = (props: MenuProps) => {
+  const { menuId } = props;
+  const { categoryId } = useParams();
   const { t } = useTranslation();
   const { openCategoryCreateDialog, loadCategories, categoriesList, menuCategoriesActions } = useCategories(menuId!);
 

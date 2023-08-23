@@ -2,6 +2,8 @@ import { API } from "./ApiService";
 import { Category } from "./CategoriesService";
 export interface CreateMenuRequest {
   name: string;
+  language_code: string;
+  restaurant_id: string;
 }
 export interface CreateMenuResponse {
   menu_id: string;

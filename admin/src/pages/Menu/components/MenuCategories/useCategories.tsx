@@ -1,9 +1,11 @@
+import * as yup from 'yup';
 import { Dialog } from "@shared/components/molecules/Dialog";
 import { useDialog } from "@shared/providers/DialogProvider/useDialog";
 import { Form, FormRef } from "@shared/components/atoms/Form";
-import React, { useState, useRef, useCallback } from "react";
+import { useState, useRef } from "react";
 import { useTranslation } from '@libs/react-i18next';
-import { Input, InputVariants } from "@shared/components/atoms/Input";
+import { InputVariants } from "@shared/components/atoms/Input";
+import { FormInput } from "@shared/components/atoms/FormInput";
 import {
   MenuService,
   CategoriesService,
@@ -28,21 +30,29 @@ export const useCategories = (menuId: string) => {
     }
   };
 
-  const onCreateSubmit = useCallback(
-    async (data: CreateCategoryRequest) => {
-      await CategoriesService.create(data);
+  const onCreateSubmit = async (data: CreateCategoryRequest, afterSubmit: () => void) => {
+    try {
+      const response = await CategoriesService.create(data);
       await loadCategories(menuId);
-    },
-    [menuId]
-  );
+      // Navigate to category page here
+      afterSubmit();
+    } catch (error) {
+      throw error;
+    }
+  };
 
-  const onEditSubmit = async ({ category_id, name }: Category) => {
-    const id = category_id;
-    const request: UpdateCategoryRequest = {
-      name,
-    };
-    await CategoriesService.update(id, request);
-    await loadCategories(menuId);
+  const onEditSubmit = async ({ category_id, name }: Category, afterSubmit: () => void) => {
+    try {
+      const id = category_id;
+      const request: UpdateCategoryRequest = {
+        name,
+      };
+      await CategoriesService.update(id, request);
+      await loadCategories(menuId);
+      afterSubmit();
+    } catch (error) {
+      throw error;
+    }
   };
 
   const onDeleteSubmit = async ({ category_id }: Category) => {
@@ -57,7 +67,15 @@ export const useCategories = (menuId: string) => {
   const openCategoryEditDialog = (category: Category) =>
     openDialog(({ closeDialog }) => {
       const formRef = useRef<FormRef | null>(null);
-      const [val, setVal] = useState(category.name);
+
+      const defaultValues: Category = {
+        ...category,
+      };
+
+      const validationSchema = new yup.ObjectSchema({
+        name: yup.string().required('Name field is required'),
+      });
+
       return (
         <Dialog
           okCallback={() => {
@@ -75,23 +93,24 @@ export const useCategories = (menuId: string) => {
           cancelText={t("common:buttons:cancel")}
         >
           <Form
-            ref={formRef as React.ForwardedRef<Category>}
-            onSubmit={onEditSubmit}
+            ref={formRef}
+            defaultValues={defaultValues}
+            validationSchema={validationSchema}
+            onSubmit={async (data) => {
+              await onEditSubmit(data as Category, closeDialog);
+            }}
           >
-            <Input
-              type={InputVariants.HIDDEN}
-              name="category_id"
-              value={category.category_id}
-            />
-            <Input
-              placeholder={t("menu:updateCategoryForm.placeholder")}
-              type={InputVariants.TEXT}
-              name="name"
-              value={val}
-              onChange={(e) => {
-                setVal(e.target.value);
-              }}
-            />
+            <>
+              <FormInput
+                type={InputVariants.HIDDEN}
+                name="category_id"
+              />
+              <FormInput
+                placeholder={t("menu:updateCategoryForm.placeholder")}
+                type={InputVariants.TEXT}
+                name="name"
+              />
+            </>
           </Form>
         </Dialog>
       );
@@ -113,12 +132,20 @@ export const useCategories = (menuId: string) => {
   const openCategoryCreateDialog = () =>
     openDialog(({ closeDialog }) => {
       const formRef = useRef<FormRef | null>(null);
+      const defaultValues: CreateCategoryRequest = {
+        menu_id: menuId,
+        name: '',
+      };
+
+      const validationSchema = new yup.ObjectSchema({
+        name: yup.string().required('Name field is required'),
+      });
+
       return (
         <Dialog
           okCallback={() => {
             if (formRef.current) {
               formRef.current.submit();
-              closeDialog();
             }
           }}
           cancelCallback={() => {
@@ -130,15 +157,21 @@ export const useCategories = (menuId: string) => {
           cancelText={t("common:buttons:cancel")}
         >
           <Form
-            ref={formRef as React.ForwardedRef<Category>}
-            onSubmit={onCreateSubmit}
+            ref={formRef}
+            validationSchema={validationSchema}
+            defaultValues={defaultValues}
+            onSubmit={async (data) => {
+              await onCreateSubmit(data as CreateCategoryRequest, closeDialog);
+            }}
           >
-            <Input type={InputVariants.HIDDEN} name="menu_id" value={menuId} />
-            <Input
-              placeholder={t("menu:createCategoryForm.placeholder")}
-              type={InputVariants.TEXT}
-              name="name"
-            />
+            <>
+              <FormInput type={InputVariants.HIDDEN} name="menu_id" value={menuId} />
+              <FormInput
+                placeholder={t("menu:createCategoryForm.placeholder")}
+                type={InputVariants.TEXT}
+                name="name"
+              />
+            </>
           </Form>
         </Dialog>
       );
