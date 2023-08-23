@@ -81,7 +81,6 @@ export const useCategories = (menuId: string) => {
           okCallback={() => {
             if (formRef.current) {
               formRef.current.submit();
-              closeDialog();
             }
           }}
           cancelCallback={() => {
