@@ -1,18 +1,19 @@
-import { Category } from "@shared/services";
+import { Dish } from "@shared/services/DishService";
 import { ActionMenu, IAction } from "@shared/components/atoms/ActionMenu"
-
-export interface MenuCategoryItem {
-  categoryItem: Category;
-  actions: IAction<Category>[];
+export interface MenuDishItem {
+  dishItem: Dish;
+  actions: IAction<Dish>[];
 }
 
-export const MenuCategoryItem = (props: MenuCategoryItem) => {
-  const { categoryItem, actions } = props;
+const DISH_ID = "12e98cf4-6302-4d06-acdd-937879ae4a8f"
+
+export const MenuDishItem = (props: MenuDishItem) => {
+  const { dishItem, actions } = props;
 
   return (
   <li className="d-flex justify-content-between align-items-center my-2">
-    {categoryItem.name}
-    <ActionMenu entity={categoryItem} actions={actions}/>
+    {dishItem.name}
+    <ActionMenu entity={dishItem} actions={actions}/>
   </li>
   );
 };
