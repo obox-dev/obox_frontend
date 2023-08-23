@@ -1,4 +1,5 @@
 import { API } from "./ApiService";
+import { Dish } from "./DishService";
 
 export interface Category {
   menu_id: string;
@@ -27,6 +28,9 @@ export class CategoriesService {
   }
   static async delete(id: string) {
     return API.delete<void, void>(`/categories/${id}`);
+  }
+  static async getDishesByCategoryId(categoryId: string): Promise<Dish[]> {
+    return API.get<null, Dish[]>(`/categories/${categoryId}/dishes`);
   }
 }
 

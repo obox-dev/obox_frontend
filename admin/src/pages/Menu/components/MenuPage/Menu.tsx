@@ -6,6 +6,8 @@ import { Button, ButtonVariants } from "@shared/components/atoms/Button";
 import { Sidebar } from "@admin/layout/Sidebar/Sidebar";
 import { useCategories } from "../MenuCategories/useCategories";
 import { MenuCategoryList } from "../MenuCategories/MenuCategoryList";
+import { MenuDishList } from "../MenuDish/MenuDishList";
+import { useDish } from "../MenuDish/useDish";
 
 interface MenuProps {
   menuId: string;
@@ -16,12 +18,22 @@ export const Menu = (props: MenuProps) => {
   const { categoryId } = useParams();
   const { t } = useTranslation();
   const { openCategoryCreateDialog, loadCategories, categoriesList, menuCategoriesActions } = useCategories(menuId!);
+  const { loadDishes, dishList, menuDishesActions } = useDish(categoryId!);
 
   useEffect(() => {
     if (menuId) {
       loadCategories(menuId);
     }
   }, [menuId]);
+
+  useEffect(() => {
+    if (categoryId) {
+      loadDishes(categoryId);
+    }
+  }, [categoryId]);
+
+  console.log(dishList);
+
   return (
     <div className="menu__page d-flex">
     <Sidebar
@@ -40,6 +52,7 @@ export const Menu = (props: MenuProps) => {
             <h4>{t("menu:dishes")}</h4>
             <Link to={`/menu/${menuId}/category/${categoryId}/create-dish`}><Button variant={ButtonVariants.SECONDARY} text={`+ ${t("menu:adddish")}`}></Button></Link>
           </div>
+          <MenuDishList dishItems={dishList} actions={menuDishesActions}/>
       </div>
     )}
     </div>

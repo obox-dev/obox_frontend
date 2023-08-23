@@ -1,6 +1,7 @@
 export { API } from "./ApiService";
 export { CategoriesService } from "./CategoriesService";
 export { MenuService } from "./MenuService";
+export { DishesService } from "./DishService";
 export { RestaurantsService } from "./RestaurantsService";
 
 export type {
