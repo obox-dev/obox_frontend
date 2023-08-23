@@ -7,6 +7,16 @@ import { InputVariants } from "@shared/components/atoms/Input";
 import { InputLabel } from '@shared/components/atoms/InputLabel/InputLabel';
 import './DishForm.scss';
 import { FormInput } from '@shared/components/atoms/FormInput';
+import * as yup from 'yup';
+
+// Define the validation schema outside the component
+const validationSchema = yup.object().shape({
+    category_id: yup.string().required('Category is required'),
+    name: yup.string().required('Name is required'),
+    description: yup.string().required('Description is required'),
+    price: yup.number().required('Price is required'),
+    state: yup.string().required('State is required'),
+});
 
 const DishForm: React.FC = () => {
     const { t } = useTranslation();
@@ -34,8 +44,7 @@ const DishForm: React.FC = () => {
                                     state: "ENABLED",
                                     image: ""
                                 }}
-                                // validationSchema={/* your yup schema */}
-                                
+                                validationSchema={validationSchema} // Use the defined validation schema here
                                 onSubmit={handleFormSubmit}
                             >
                                 <div className="form-columns">
