@@ -1,5 +1,4 @@
 import { useNavigate, useParams } from "react-router";
-import { useDish } from "./useDish";
 import { Form } from "@shared/components/atoms/Form";
 import { useTranslation } from "@libs/react-i18next";
 import { Button } from "@shared/components/atoms/Button/Button";
@@ -11,7 +10,7 @@ import { InputVariants } from "@shared/components/atoms/Input";
 import { InputLabel } from "@shared/components/atoms/InputLabel/InputLabel";
 import "./DishForm.scss";
 import { FormInput } from "@shared/components/atoms/FormInput";
-import { CreateDishRequest, Dish } from "@shared/services/DishService";
+import { Dish } from "@shared/services/DishService";
 import { ObjectSchema } from "yup";
 
 interface DishFormProps {
@@ -105,7 +104,7 @@ export const DishForm = (props: DishFormProps) => {
                       </div>
                       <div className="form-group">
                         <InputLabel text={t("dishForm:image")} />
-                        <input type="file" className="form-control-file" />
+                        <input type="file" disabled className="form-control-file" />
                       </div>
                     </div>
                   </div>

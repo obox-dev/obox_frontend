@@ -11,6 +11,7 @@
   "logout": "Log Out",
   "restaurants": "Restaurants",
   "menu": "Menu",
+  "name": "Name",
   "poweredby": "Powered by",
   "buttons": {
     "cancel": "Cancel",
@@ -21,5 +22,9 @@
   "notFoundTitle": "Whoops!",
   "notFoundMessage": "Our chef is still working on this page. We suggest you try others.",
   "prevPageButton": "Return to the previous page",
-  "homeButton": "Home"
+  "homeButton": "Home",
+  "validation": {
+    "isRequired": "{{field}} is required",
+    "isNumber": "{{field}} is required"
+  }
 }

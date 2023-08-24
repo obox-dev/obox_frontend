@@ -73,7 +73,7 @@ export const useCategories = (menuId: string) => {
       };
 
       const validationSchema = new yup.ObjectSchema({
-        name: yup.string().required('Name field is required'),
+        name: yup.string().required(t('common:validation:isRequired', { field: t('common:name') })),
       });
 
       return (
@@ -137,7 +137,7 @@ export const useCategories = (menuId: string) => {
       };
 
       const validationSchema = new yup.ObjectSchema({
-        name: yup.string().required('Name field is required'),
+        name: yup.string().required(t('common:validation:isRequired', { field: t('common:name') })),
       });
 
       return (

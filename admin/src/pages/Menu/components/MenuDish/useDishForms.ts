@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import { useTranslation } from '@libs/react-i18next';
 import {
   CreateDishRequest,
   Dish,
@@ -7,18 +8,19 @@ import {
 } from "@shared/services/DishService";
 
 type CreateExcludeKeys = 'price' | 'weight' | 'calories';
-type ExcludedAsOptionalString = Record<CreateExcludeKeys, string | undefined>;
+type ExcludedAsOptionalString = Record<CreateExcludeKeys, string | null>;
 type CreateDishDefaultValues = Omit<CreateDishRequest, CreateExcludeKeys> & ExcludedAsOptionalString;
 
 export const useDishForms = (categoryId: string) => {
+  const { t } = useTranslation();
 
   const createDishDefaultValues: CreateDishDefaultValues = {
     category_id: categoryId,
     name: "",
     description: "",
-    price: undefined,
-    weight: undefined,
-    calories: undefined,
+    price: null,
+    weight: null,
+    calories: null,
     allergens: "",
     tags: "",
     state: DishState.ENABLED,
@@ -27,11 +29,12 @@ export const useDishForms = (categoryId: string) => {
 
 
   const createDishValidationSchema = yup.object().shape({
-    name: yup.string().required("Name is required"),
+    name: yup.string().required(t('common:validation:isRequired', { field: t('dishForm:name') })),
     description: yup.string(),
-    price: yup.number().required("Price is required").typeError('Price must be a number'),
-    weight: yup.mixed().nullableNumber('Weight must be a number'),
-    calories: yup.mixed().nullableNumber('Weight must be a number'),
+    price: yup.mixed().required(t('common:validation:isRequired', { field: t('dishForm:price') }))
+      .typeError(t('common:validation:isNumber', { field: t('dishForm:price') })),
+    weight: yup.mixed().nullableNumber(t('common:validation:isNumber', { field: t('dishForm:weight') })),
+    calories: yup.mixed().nullableNumber(t('common:validation:isNumber', { field: t('dishForm:calories') })),
     state: yup.string(),
   }) as yup.ObjectSchema<Partial<Dish>>;
 

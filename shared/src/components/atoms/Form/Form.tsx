@@ -11,6 +11,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { FormRef } from "./types";
 import { AxiosError } from "axios";
 import { useEffect } from "react";
+import { useTranslation } from "@libs/react-i18next";
 
 interface FormProps<T extends FieldValues> {
   defaultValues: DefaultValues<T>;
@@ -19,10 +20,14 @@ interface FormProps<T extends FieldValues> {
   children: JSX.Element;
 }
 
+
+
+
 const FormInner = <T extends FieldValues>(
   props: FormProps<T>,
   ref: Ref<FormRef>
 ) => {
+  const { t } = useTranslation();
   const { defaultValues, validationSchema, onSubmit, children } = props;
   const methods = useForm<T>({
     defaultValues,
@@ -68,6 +73,10 @@ const FormInner = <T extends FieldValues>(
       }
     }
   }, [defaultValues])
+
+  useEffect(() => {
+    methods.clearErrors();
+  }, [t])
 
   useImperativeHandle(ref, () => ({
     submit: () => methods.handleSubmit(internalSubmit)(),

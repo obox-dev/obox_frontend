@@ -3,15 +3,14 @@ import {
   UpdateDishRequest,
   DishesService,
 } from "@shared/services/DishService";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { DishForm } from "./MenuDishForm";
 import { useDish } from "./useDish";
 import { useDishForms } from "./useDishForms";
 
 export const MenuDishPage = () => {
-  const [defaultValues, setDefaultValues] = useState<
+    const [defaultValues, setDefaultValues] = useState<
     CreateDishRequest | UpdateDishRequest
   >({});
   const { menuId, categoryId, dishId } = useParams();
