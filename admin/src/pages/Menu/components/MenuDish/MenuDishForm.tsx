@@ -51,21 +51,21 @@ export const DishForm = (props: DishFormProps) => {
                       <FormInput type={InputVariants.HIDDEN} name="status" />
                       <div className="form-group">
                         <InputLabel text={t("dishForm:name")} forInput="name" />
-                        <FormInput type={InputVariants.TEXT} name="name" />
+                        <FormInput type={InputVariants.TEXT} name="name" placeholder={t("dishForm:namePlaceholder")}/>
                       </div>
                       <div className="form-group">
                         <InputLabel
                           text={t("dishForm:price")}
                           forInput="price"
                         />
-                        <FormInput type={InputVariants.NUMBER} name="price" />
+                        <FormInput type={InputVariants.NUMBER} name="price" placeholder={t("dishForm:pricePlaceholder")}/>
                       </div>
                       <div className="form-group">
                         <InputLabel
                           text={t("dishForm:weight")}
                           forInput="weight"
                         />
-                        <FormInput type={InputVariants.NUMBER} name="weight" />
+                        <FormInput type={InputVariants.NUMBER} name="weight" placeholder={t("dishForm:weightPlaceholder")} />
                       </div>
                       <div className="form-group">
                         <InputLabel
@@ -75,6 +75,7 @@ export const DishForm = (props: DishFormProps) => {
                         <FormInput
                           type={InputVariants.NUMBER}
                           name="calories"
+                          placeholder={t("dishForm:caloriesPlaceholder")}
                         />
                       </div>
                       {/* <div className="form-group">
@@ -98,6 +99,7 @@ export const DishForm = (props: DishFormProps) => {
                         <textarea
                           id="description"
                           name="description"
+                          placeholder={t("dishForm:descriptionPlaceholder")}
                           className="form-control"
                         />
                       </div>
