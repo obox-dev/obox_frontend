@@ -23,6 +23,7 @@ export const MainLayout: React.FC = () => {
           <Route path="/menu/:menuId" element={<MenuPage/>} />
           <Route path="/menu/:menuId/category/:categoryId" element={<MenuPage/>} />
           <Route path="/menu/:menuId/category/:categoryId/create-dish" element={<MenuDishPage/>} />
+          <Route path="/menu/:menuId/category/:categoryId/dish/:dishId" element={<MenuDishPage/>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

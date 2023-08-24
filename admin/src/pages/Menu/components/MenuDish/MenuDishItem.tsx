@@ -5,8 +5,6 @@ export interface MenuDishItem {
   actions: IAction<Dish>[];
 }
 
-const DISH_ID = "12e98cf4-6302-4d06-acdd-937879ae4a8f"
-
 export const MenuDishItem = (props: MenuDishItem) => {
   const { dishItem, actions } = props;
 

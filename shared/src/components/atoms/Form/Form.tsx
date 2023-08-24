@@ -10,6 +10,7 @@ import {
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormRef } from "./types";
 import { AxiosError } from "axios";
+import { useEffect } from "react";
 
 interface FormProps<T extends FieldValues> {
   defaultValues: DefaultValues<T>;
@@ -58,6 +59,12 @@ const FormInner = <T extends FieldValues>(
       }
     }
   };
+
+  useEffect(() => {
+    for (const key in defaultValues) {
+      methods.setValue(key as unknown as Path<T>, defaultValues[key]);
+    }
+  }, [defaultValues])
 
   useImperativeHandle(ref, () => ({
     submit: () => methods.handleSubmit(internalSubmit)(),

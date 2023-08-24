@@ -9,41 +9,33 @@ export enum DishState {
 export interface Dish {
   dish_id: string;
   category_id: string;
-  associated_id: string;
   name: string;
-  description: string;
-  price: 0;
-  weight: 0;
-  calories: 0;
-  allergens: string;
-  tags: string;
-  image_url: string;
-  state: DishState;
+  price: number;
+  description?: string;
+  associated_id?: string;
+  weight?: number;
+  calories?: number;
+  allergens?: string;
+  tags?: string;
+  image?: string;
+  state?: DishState;
 }
 
-export interface CreateDishRequest {
-  category_id: string;
-  associated_id: string;
-  name: string;
-  description: string;
-  price: 0;
-  weight: 0;
-  calories: 0;
-  allergens: string;
-  tags: string;
-  image_url: string;
+export interface CreateDishRequest extends Omit<Dish, 'dish_id'> {
+
 }
 
 export interface UpdateDishRequest {
-  associated_id: string;
-  name: string;
-  description: string;
-  price: 0;
-  weight: 0;
-  calories: 0;
-  allergens: string;
-  tags: string;
-  image_url: string;
+  name?: string;
+  price?: number;
+  description?: string;
+  associated_id?: string;
+  weight?: number;
+  calories?: number;
+  allergens?: string;
+  tags?: string;
+  image?: string;
+  state?: DishState;
 }
 
 export interface CreateDishResponse {
@@ -59,5 +51,8 @@ export class DishesService {
   }
   static async delete(id: string) {
     return API.delete<void, void>(`/dishes/${id}`);
+  }
+  static async getDishById(id: string): Promise<Dish> {
+    return API.get<null, Dish>(`/dishes/${id}`);
   }
 }

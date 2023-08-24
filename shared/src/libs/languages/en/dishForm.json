@@ -8,7 +8,10 @@
     "price": "Price",
     "image": "Image",
     "createButton": "Create",
+    "backButton": "Back",
     "status": "Status",
     "active": "Active",
-    "unactive": "Unactive"
+    "unactive": "Unactive",
+    "weight": "Weight",
+    "calories": "Calories"
   }

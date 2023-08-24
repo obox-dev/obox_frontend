@@ -32,8 +32,6 @@ export const Menu = (props: MenuProps) => {
     }
   }, [categoryId]);
 
-  console.log(dishList);
-
   return (
     <div className="menu__page d-flex">
     <Sidebar
