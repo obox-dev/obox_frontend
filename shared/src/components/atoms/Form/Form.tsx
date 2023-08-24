@@ -26,9 +26,9 @@ const FormInner = <T extends FieldValues>(
   const { defaultValues, validationSchema, onSubmit, children } = props;
   const methods = useForm<T>({
     defaultValues,
-    mode: "onBlur",
+    mode: 'all',
     resolver: yupResolver(validationSchema),
-  });
+  })
 
   const setTypedErrors = (errors: Partial<T>) => {
     for (const key in errors) {
@@ -44,6 +44,7 @@ const FormInner = <T extends FieldValues>(
 
   const internalSubmit = async (data: T) => {
     try {
+      methods.clearErrors();
       await onSubmit(data);
     } catch (e) {
       const error = e as AxiosError<T>;
@@ -62,7 +63,9 @@ const FormInner = <T extends FieldValues>(
 
   useEffect(() => {
     for (const key in defaultValues) {
-      methods.setValue(key as unknown as Path<T>, defaultValues[key]);
+      if (defaultValues[key]) {
+        methods.setValue(key as unknown as Path<T>, defaultValues[key]);
+      }
     }
   }, [defaultValues])
 

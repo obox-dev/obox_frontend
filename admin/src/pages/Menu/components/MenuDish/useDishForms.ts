@@ -6,7 +6,9 @@ import {
   UpdateDishRequest,
 } from "@shared/services/DishService";
 
-type CreateDishDefaultValues = Omit<CreateDishRequest, 'price'> & { price?: string };
+type CreateExcludeKeys = 'price' | 'weight' | 'calories';
+type ExcludedAsOptionalString = Record<CreateExcludeKeys, string | undefined>;
+type CreateDishDefaultValues = Omit<CreateDishRequest, CreateExcludeKeys> & ExcludedAsOptionalString;
 
 export const useDishForms = (categoryId: string) => {
 
@@ -28,8 +30,8 @@ export const useDishForms = (categoryId: string) => {
     name: yup.string().required("Name is required"),
     description: yup.string(),
     price: yup.number().required("Price is required").typeError('Price must be a number'),
-    weight: yup.number().notRequired().nullable().typeError('Weight must be a number'),
-    calories: yup.number().notRequired().nullable().typeError('Calories must be a number'),
+    weight: yup.mixed().nullableNumber('Weight must be a number'),
+    calories: yup.mixed().nullableNumber('Weight must be a number'),
     state: yup.string(),
   }) as yup.ObjectSchema<Partial<Dish>>;
 
@@ -45,6 +47,7 @@ export const useDishForms = (categoryId: string) => {
 
   return {
     getDefaultValues,
-    createDishValidationSchema
+    createDishValidationSchema,
+    createDishDefaultValues
   }
 }
