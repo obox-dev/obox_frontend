@@ -8,18 +8,20 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { DishForm } from "./MenuDishForm";
 import { useDish } from "./useDish";
+import { useDishForms } from "./useDishForms";
 
 export const MenuDishPage = () => {
   const [defaultValues, setDefaultValues] = useState<
     CreateDishRequest | UpdateDishRequest
   >({});
   const { menuId, categoryId, dishId } = useParams();
-  const {
-    createDishValidationSchema,
-    onCreateSubmit,
-    getDefaultValues,
-    onEditSubmit,
-  } = useDish(categoryId!);
+  const { onCreateSubmit, onEditSubmit } = useDish(
+    categoryId!
+  );
+
+  const { createDishValidationSchema, getDefaultValues } = useDishForms(
+    categoryId!
+  );
 
   const navigate = useNavigate();
   const navigateToCategory = () => {
@@ -33,6 +35,8 @@ export const MenuDishPage = () => {
     };
     if (dishId) {
       loadDish(dishId);
+    } else {
+      setDefaultValues(getDefaultValues());
     }
   }, [dishId]);
 

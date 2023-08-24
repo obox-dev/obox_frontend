@@ -21,9 +21,7 @@ export interface Dish {
   state?: DishState;
 }
 
-export interface CreateDishRequest extends Omit<Dish, 'dish_id'> {
-
-}
+export interface CreateDishRequest extends Omit<Dish, 'dish_id'> {}
 
 export interface UpdateDishRequest {
   name?: string;
