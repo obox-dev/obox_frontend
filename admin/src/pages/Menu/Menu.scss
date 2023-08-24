@@ -36,7 +36,7 @@
   &__categories {
     &-list {
       &-item {
-        a {
+        > a {
           display: block;
           width: calc(100% - 45px);
           overflow: hidden;
