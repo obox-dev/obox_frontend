@@ -1,0 +1,14 @@
+{
+    "category": "Category",
+    "name": "Name",
+    "description": "Description",
+    "allergens": "Allergens",
+    "inactive": "Inactive",
+    "tags": "Tags",
+    "price": "Price",
+    "image": "Image",
+    "createButton": "Create",
+    "status": "Status",
+    "active": "Active",
+    "unactive": "Unactive"
+  }

@@ -51,7 +51,7 @@ const DishForm: React.FC = () => {
                                     {/* Left Column */}
                                     <div className="left-column">
                                         <div className="form-group">
-                                            <InputLabel text={t('dishForm:Category')} forInput="category_id" />
+                                            <InputLabel text={t('dishForm:category')} forInput="category_id" />
                                             <FormInput type={InputVariants.TEXT} name="category_id" />
                                         </div>
                                         <div className="form-group">
@@ -59,22 +59,22 @@ const DishForm: React.FC = () => {
                                             <FormInput type={InputVariants.TEXT} name="name" />
                                         </div>
                                         <div className="form-group">
-                                            <InputLabel text={t('dishForm:Description')} forInput="description" />
+                                            <InputLabel text={t('dishForm:description')} forInput="description" />
                                             <textarea id="description" name="description" className="form-control" />
                                         </div>
                                         <div className="form-group">
-                                            <InputLabel text={t('dishForm:Allergens')} forInput="allergens" />
+                                            <InputLabel text={t('dishForm:allergens')} forInput="allergens" />
                                             <textarea id="allergens" name="allergens" className="form-control" />
                                         </div>
                                         <div className="form-group d-inline">
-                                            <InputLabel text={t('dishForm:Status')} />
-                                            <FormInput type={InputVariants.RADIO} name="status" value="ENABLED" />{t('dishForm:Active')}
-                                            <FormInput type={InputVariants.RADIO} name="status" value="DISABLED" />{t('dishForm:Unactive')}
+                                            <InputLabel text={t('dishForm:status')} />
+                                            <FormInput type={InputVariants.RADIO} name="status" value="ENABLED" />{t('dishForm:active')}
+                                            <FormInput type={InputVariants.RADIO} name="status" value="DISABLED" />{t('dishForm:unactive')}
                                         </div>
                                     </div>
                                     <div className="right-column">
                                         <div className="form-group">
-                                            <InputLabel text={t('dishForm:Tags')} />
+                                            <InputLabel text={t('dishForm:tags')} />
                                             <select multiple className="form-control">
                                                 <option value="spicy">Spicy</option>
                                                 <option value="vegan">Vegan</option>
@@ -82,11 +82,11 @@ const DishForm: React.FC = () => {
                                             </select>
                                         </div>
                                         <div className="form-group">
-                                            <InputLabel text={t('dishForm:Price')} forInput="Price" />
+                                            <InputLabel text={t('dishForm:price')} forInput="Price" />
                                             <FormInput type={InputVariants.TEXT} name="Price" />
                                         </div>
                                         <div className="form-group">
-                                            <InputLabel text={t('dishForm:Image')} />
+                                            <InputLabel text={t('dishForm:image')} />
                                             <input type="file" className="form-control-file" />
                                         </div>
                                     </div>
