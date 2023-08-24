@@ -13,5 +13,10 @@
     "active": "Active",
     "unactive": "Unactive",
     "weight": "Weight",
-    "calories": "Calories"
+    "calories": "Calories",
+    "namePlaceholder": "Enter name...",
+    "pricePlaceholder": "Enter price...",
+    "weightPlaceholder": "Enter weight...",
+    "caloriesPlaceholder": "Enter calories...",
+    "descriptionPlaceholder": "Enter description..." 
   }
