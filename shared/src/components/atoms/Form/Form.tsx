@@ -11,6 +11,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { FormRef } from "./types";
 import { AxiosError } from "axios";
 import { useEffect } from "react";
+import { useTranslation } from "@libs/react-i18next";
 
 interface FormProps<T extends FieldValues> {
   defaultValues: DefaultValues<T>;
@@ -23,12 +24,13 @@ const FormInner = <T extends FieldValues>(
   props: FormProps<T>,
   ref: Ref<FormRef>
 ) => {
+  const { t } = useTranslation();
   const { defaultValues, validationSchema, onSubmit, children } = props;
   const methods = useForm<T>({
     defaultValues,
-    mode: "onBlur",
+    mode: 'all',
     resolver: yupResolver(validationSchema),
-  });
+  })
 
   const setTypedErrors = (errors: Partial<T>) => {
     for (const key in errors) {
@@ -44,6 +46,7 @@ const FormInner = <T extends FieldValues>(
 
   const internalSubmit = async (data: T) => {
     try {
+      methods.clearErrors();
       await onSubmit(data);
     } catch (e) {
       const error = e as AxiosError<T>;
@@ -62,9 +65,15 @@ const FormInner = <T extends FieldValues>(
 
   useEffect(() => {
     for (const key in defaultValues) {
-      methods.setValue(key as unknown as Path<T>, defaultValues[key]);
+      if (defaultValues[key]) {
+        methods.setValue(key as unknown as Path<T>, defaultValues[key]);
+      }
     }
   }, [defaultValues])
+
+  useEffect(() => {
+    methods.clearErrors();
+  }, [t])
 
   useImperativeHandle(ref, () => ({
     submit: () => methods.handleSubmit(internalSubmit)(),

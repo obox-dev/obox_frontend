@@ -1,4 +1,3 @@
-import * as yup from "yup";
 import { useState } from "react";
 import { Dialog } from "@shared/components/molecules/Dialog";
 import { useDialog } from "@shared/providers/DialogProvider/useDialog";
@@ -9,7 +8,6 @@ import {
   CreateDishRequest,
   Dish,
   DishesService,
-  DishState,
   UpdateDishRequest,
 } from "@shared/services/DishService";
 import { CategoriesService } from "@shared/services/CategoriesService";
@@ -26,37 +24,6 @@ export const useDish = (categoryId: string) => {
   const navigateToDish = (dishId: string) => {
     navigate(`/menu/${menuId}/category/${categoryId}/dish/${dishId}`);
   };
-
-  const createDishDefaultValues: CreateDishRequest = {
-    category_id: categoryId,
-    name: "",
-    description: "",
-    price: 0,
-    weight: undefined,
-    calories: undefined,
-    allergens: "",
-    tags: "",
-    state: DishState.ENABLED,
-    image: "",
-  };
-
-  const getDefaultValues = (dish: Dish) => {
-    if (dish) {
-      return {
-        ...dish,
-      } as UpdateDishRequest;
-    }
-    return createDishDefaultValues;
-  }
-
-  const createDishValidationSchema = yup.object().shape({
-    name: yup.string().required("Name is required"),
-    description: yup.string(),
-    price: yup.number().nullable(),
-    weight: yup.number().nullable(),
-    calories: yup.number().nullable(),
-    state: yup.string(),
-  });
 
   const loadDishes = async (category_id: string) => {
     try {
@@ -162,10 +129,7 @@ export const useDish = (categoryId: string) => {
     loadDishes,
     onCreateSubmit,
     onEditSubmit,
-    getDefaultValues,
     dishList,
     menuDishesActions,
-    createDishDefaultValues,
-    createDishValidationSchema,
   };
 };

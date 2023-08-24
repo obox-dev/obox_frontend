@@ -11,7 +11,7 @@ export const MenuCategoryItem = (props: MenuCategoryItem) => {
   const { categoryItem, actions } = props;
 
   return (
-  <li className="d-flex justify-content-between align-items-center my-2">
+  <li className="menu__categories-list-item d-flex justify-content-between align-items-center my-2">
     <NavLink to={`/menu/${categoryItem.menu_id}/category/${categoryItem.category_id}`}>{categoryItem.name}</NavLink>
     <ActionMenu entity={categoryItem} actions={actions}/>
   </li>
