@@ -13,5 +13,10 @@
 "active": "Активний",
 "unactive": "Неактивний",
 "weight": "Вага",
-"calories": "Калорії"
+"calories": "Калорії",
+"namePlaceholder": "Введіть назву...",
+"pricePlaceholder": "Введіть ціну...",
+"weightPlaceholder": "Введіть вагу...",
+"caloriesPlaceholder": "Введіть калорії...",
+"descriptionPlaceholder": "Введіть опис..."
 }
