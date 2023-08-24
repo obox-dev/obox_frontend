@@ -2,6 +2,7 @@ import { ChangeEvent } from "react";
 
 export enum InputVariants {
   TEXT = "text",
+  NUMBER = "number",
   PASSWORD = "password",
   EMAIL = "email",
   RADIO = "radio",

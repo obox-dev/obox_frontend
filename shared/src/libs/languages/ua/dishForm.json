@@ -1,0 +1,17 @@
+{
+"category": "Категорія",
+"name": "Назва",
+"description": "Опис",
+"allergens": "Алергени",
+"inactive": "Неактивний",
+"tags": "Теги",
+"price": "Ціна",
+"image": "Зображення",
+"createButton": "Створити",
+"backButton": "Назад",
+"status": "Статус",
+"active": "Активний",
+"unactive": "Неактивний",
+"weight": "Вага",
+"calories": "Калорії"
+}

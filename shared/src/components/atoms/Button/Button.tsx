@@ -6,9 +6,10 @@ export const Button = (props: IButton) => {
     onClick,
     variant,
     isDisabled,
+    type,
   } = props;
   return (
-    <button onClick={onClick} className={["btn", `btn-${variant}`].join(" ")} disabled={isDisabled}>
+    <button type={type} onClick={onClick} className={["btn", `btn-${variant}`].join(" ")} disabled={isDisabled}>
       {text}
     </button>
   );
