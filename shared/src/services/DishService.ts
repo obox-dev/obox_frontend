@@ -1,5 +1,4 @@
 import { API } from "./ApiService";
-import { Category } from "./CategoriesService";
 
 export enum DishState {
   ENABLED = "ENABLED",

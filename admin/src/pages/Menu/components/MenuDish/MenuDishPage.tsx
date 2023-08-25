@@ -18,7 +18,7 @@ export const MenuDishPage = () => {
     categoryId!
   );
 
-  const { createDishValidationSchema, getDefaultValues } = useDishForms(
+  const { createDishValidationSchema, createDishDefaultValues, getDefaultValues } = useDishForms(
     categoryId!
   );
 
@@ -30,22 +30,22 @@ export const MenuDishPage = () => {
   useEffect(() => {
     const loadDish = async (id: string) => {
       const response = await DishesService.getDishById(id);
-      setDefaultValues(getDefaultValues(response));
+      setDefaultValues(getDefaultValues(response) as CreateDishRequest | UpdateDishRequest)
     };
     if (dishId) {
       loadDish(dishId);
     } else {
-      setDefaultValues(getDefaultValues());
+      setDefaultValues(getDefaultValues() as CreateDishRequest | UpdateDishRequest);
     }
   }, [dishId]);
 
   return (
     <DishForm
-      onSubmit={(data) => {
+      onSubmit={ async (data) => {
         if (dishId) {
-          onEditSubmit(dishId, data as UpdateDishRequest, navigateToCategory);
+          await onEditSubmit(dishId, data as UpdateDishRequest, navigateToCategory);
         } else {
-          onCreateSubmit(data as CreateDishRequest, navigateToCategory);
+          await onCreateSubmit(data as CreateDishRequest, navigateToCategory);
         }
       }}
       defaultValues={defaultValues}

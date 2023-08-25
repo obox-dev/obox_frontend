@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router";
-import { Form } from "@shared/components/atoms/Form";
+import { Form, FormRef } from "@shared/components/atoms/Form";
 import { useTranslation } from "@libs/react-i18next";
 import { Button } from "@shared/components/atoms/Button/Button";
 import {
@@ -12,6 +12,9 @@ import "./DishForm.scss";
 import { FormInput } from "@shared/components/atoms/FormInput";
 import { Dish } from "@shared/services/DishService";
 import { ObjectSchema } from "yup";
+import { useState } from "react";
+import { useMemo } from "react";
+import { useRef } from "react";
 
 interface DishFormProps {
   onSubmit: (data: Partial<Dish>) => void;
@@ -26,8 +29,42 @@ export const DishForm = (props: DishFormProps) => {
 
   const navigate = useNavigate();
   const navigateToCategory = () => {
-    navigate(`/menu/${menuId}/category/${categoryId}`)
-  }
+    navigate(`/menu/${menuId}/category/${categoryId}`);
+  };
+
+  const [file, setFile] = useState<string | null>(null);
+
+  const fileToBase64 = (file: File): Promise<string> =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        resolve(reader.result as string);
+      };
+
+      reader.readAsDataURL(file);
+      reader.onerror = reject;
+    });
+
+  const onSelectFiles = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e?.target?.files?.[0];
+
+    if (file) {
+      const tempFile: { fileName: string; base64String: string } = {
+        fileName: file.name,
+        base64String:
+          file.type.indexOf("image") > -1 ? await fileToBase64(file) : "",
+      };
+
+      setFile(tempFile.base64String.replace("data:image/png;base64,", ""))
+    }
+  };
+
+  const formData = useMemo(() => {
+    return {
+      ...defaultValues,
+      image: file ? file : '',
+    }
+  }, [defaultValues, file])
 
   return (
     <div className="container">
@@ -36,7 +73,7 @@ export const DishForm = (props: DishFormProps) => {
           <div className="card">
             <div className="card-body">
               <Form
-                defaultValues={defaultValues}
+                defaultValues={formData}
                 validationSchema={validationSchema}
                 onSubmit={onSubmit}
               >
@@ -50,21 +87,33 @@ export const DishForm = (props: DishFormProps) => {
                       <FormInput type={InputVariants.HIDDEN} name="status" />
                       <div className="form-group">
                         <InputLabel text={t("dishForm:name")} forInput="name" />
-                        <FormInput type={InputVariants.TEXT} name="name" placeholder={t("dishForm:namePlaceholder")}/>
+                        <FormInput
+                          type={InputVariants.TEXT}
+                          name="name"
+                          placeholder={t("dishForm:namePlaceholder")}
+                        />
                       </div>
                       <div className="form-group">
                         <InputLabel
                           text={t("dishForm:price")}
                           forInput="price"
                         />
-                        <FormInput type={InputVariants.NUMBER} name="price" placeholder={t("dishForm:pricePlaceholder")}/>
+                        <FormInput
+                          type={InputVariants.NUMBER}
+                          name="price"
+                          placeholder={t("dishForm:pricePlaceholder")}
+                        />
                       </div>
                       <div className="form-group">
                         <InputLabel
                           text={t("dishForm:weight")}
                           forInput="weight"
                         />
-                        <FormInput type={InputVariants.NUMBER} name="weight" placeholder={t("dishForm:weightPlaceholder")} />
+                        <FormInput
+                          type={InputVariants.NUMBER}
+                          name="weight"
+                          placeholder={t("dishForm:weightPlaceholder")}
+                        />
                       </div>
                       <div className="form-group">
                         <InputLabel
@@ -95,26 +144,38 @@ export const DishForm = (props: DishFormProps) => {
                           text={t("dishForm:description")}
                           forInput="description"
                         />
-                        <textarea
-                          id="description"
+                        <FormInput
+                          type={InputVariants.TEXT}
                           name="description"
                           placeholder={t("dishForm:descriptionPlaceholder")}
-                          className="form-control"
                         />
                       </div>
                       <div className="form-group">
                         <InputLabel text={t("dishForm:image")} />
-                        <input type="file" disabled className="form-control-file" />
+                        <FormInput
+                          type={InputVariants.FILE}
+                          name="image"
+                          onChange={onSelectFiles}
+                        />
+                        <div>
+                          {file && (
+                            <img
+                              className="img"
+                              src={file}
+                            />
+                          )
+                          }
+                        </div>
                       </div>
                     </div>
                   </div>
                   <div className="d-flex gap-2 justify-content-end">
-                      <Button
-                        variant={ButtonVariants.SECONDARY}
-                        text={t("dishForm:backButton")}
-                        type={ButtonTypes.BUTTON}
-                        onClick={navigateToCategory}
-                      />
+                    <Button
+                      variant={ButtonVariants.SECONDARY}
+                      text={t("dishForm:backButton")}
+                      type={ButtonTypes.BUTTON}
+                      onClick={navigateToCategory}
+                    />
                     <Button
                       variant={ButtonVariants.PRIMARY}
                       text={t("dishForm:createButton")}

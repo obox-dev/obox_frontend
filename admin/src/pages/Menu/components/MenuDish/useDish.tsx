@@ -39,6 +39,7 @@ export const useDish = (categoryId: string) => {
     afterSubmit: () => void
   ) => {
     try {
+      console.log('on create data', data);
       await DishesService.create(data);
       afterSubmit();
     } catch (error) {

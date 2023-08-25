@@ -27,21 +27,19 @@ export const useDishForms = (categoryId: string) => {
     image: "",
   };
 
-
   const createDishValidationSchema = yup.object().shape({
     name: yup.string().required(t('common:validation:isRequired', { field: t('dishForm:name') })),
+    price: yup.number().required()
+    .typeError(t('common:validation:isRequired', { field: t('dishForm:price') })),
     description: yup.string(),
-    price: yup.mixed().required(t('common:validation:isRequired', { field: t('dishForm:price') }))
-      .typeError(t('common:validation:isNumber', { field: t('dishForm:price') })),
-    weight: yup.mixed().nullableNumber(t('common:validation:isNumber', { field: t('dishForm:weight') })),
-    calories: yup.mixed().nullableNumber(t('common:validation:isNumber', { field: t('dishForm:calories') })),
+    weight: yup.mixed().nullable(),
+    calories: yup.mixed().nullable(),
     state: yup.string(),
   }) as yup.ObjectSchema<Partial<Dish>>;
 
   const getDefaultValues = (dish?: Dish) => {
     if (dish) {
       return {
-        ...createDishDefaultValues,
         ...dish,
       } as UpdateDishRequest;
     }
