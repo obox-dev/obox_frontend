@@ -25,6 +25,8 @@
   "homeButton": "Home",
   "validation": {
     "isRequired": "{{field}} is required",
-    "isNumber": "{{field}} is required"
+    "isNumber": "{{field}} is required",
+    "morethan": "Must be at least 1 character",
+    "lessthan": "Must be no more that 200 characters"
   }
 }
