@@ -14,9 +14,10 @@ export interface Dish {
   associated_id?: string;
   weight?: number;
   calories?: number;
-  allergens?: string;
-  tags?: string;
+  allergens?: string[];
+  tags?: string[];
   image?: string;
+  image_url?: string;
   state?: DishState;
 }
 
@@ -34,7 +35,6 @@ export interface UpdateDishRequest {
   image?: string;
   state?: DishState;
 }
-
 export interface CreateDishResponse {
   dish_id: string;
 }

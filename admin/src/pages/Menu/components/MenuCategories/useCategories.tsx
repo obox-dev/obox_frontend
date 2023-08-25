@@ -66,7 +66,7 @@ export const useCategories = (menuId: string) => {
 
   const openCategoryEditDialog = (category: Category) =>
     openDialog(({ closeDialog }) => {
-      const formRef = useRef<FormRef | null>(null);
+      const formRef = useRef<FormRef<Partial<Category>> | null>(null);
 
       const defaultValues: Category = {
         ...category,
@@ -130,7 +130,7 @@ export const useCategories = (menuId: string) => {
 
   const openCategoryCreateDialog = () =>
     openDialog(({ closeDialog }) => {
-      const formRef = useRef<FormRef | null>(null);
+      const formRef = useRef<FormRef<Partial<Category>> | null>(null);
       const defaultValues: CreateCategoryRequest = {
         menu_id: menuId,
         name: '',

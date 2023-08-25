@@ -6,26 +6,28 @@ import {
   ButtonTypes,
   ButtonVariants,
 } from "@shared/components/atoms/Button/types";
-import { InputVariants } from "@shared/components/atoms/Input";
+import { Input, InputVariants } from "@shared/components/atoms/Input";
 import { InputLabel } from "@shared/components/atoms/InputLabel/InputLabel";
 import "./DishForm.scss";
 import { FormInput } from "@shared/components/atoms/FormInput";
 import { Dish } from "@shared/services/DishService";
 import { ObjectSchema } from "yup";
-import { useState } from "react";
-import { useMemo } from "react";
-import { useRef } from "react";
+import { useState, useRef } from "react";
+import type { DishDefaultValues } from './useDishForms';
 
 interface DishFormProps {
   onSubmit: (data: Partial<Dish>) => void;
   validationSchema: ObjectSchema<Partial<Dish>>;
-  defaultValues: Partial<Dish>;
+  defaultValues: DishDefaultValues;
 }
 
 export const DishForm = (props: DishFormProps) => {
+
   const { t } = useTranslation();
   const { menuId, categoryId } = useParams();
   const { onSubmit, validationSchema, defaultValues } = props;
+
+  const formRef = useRef<FormRef<Partial<Dish>> | null>(null);
 
   const navigate = useNavigate();
   const navigateToCategory = () => {
@@ -49,22 +51,12 @@ export const DishForm = (props: DishFormProps) => {
     const file = e?.target?.files?.[0];
 
     if (file) {
-      const tempFile: { fileName: string; base64String: string } = {
-        fileName: file.name,
-        base64String:
-          file.type.indexOf("image") > -1 ? await fileToBase64(file) : "",
-      };
+      const tempFile = await fileToBase64(file);
+      const fileAsBase64 = tempFile.split("base64,")[1];
 
-      setFile(tempFile.base64String.replace("data:image/png;base64,", ""))
+      formRef.current?.setValue("image", fileAsBase64);
     }
   };
-
-  const formData = useMemo(() => {
-    return {
-      ...defaultValues,
-      image: file ? file : '',
-    }
-  }, [defaultValues, file])
 
   return (
     <div className="container">
@@ -73,9 +65,10 @@ export const DishForm = (props: DishFormProps) => {
           <div className="card">
             <div className="card-body">
               <Form
-                defaultValues={formData}
+                defaultValues={defaultValues}
                 validationSchema={validationSchema}
                 onSubmit={onSubmit}
+                ref={formRef}
               >
                 <>
                   <div className="form-columns">
@@ -152,20 +145,13 @@ export const DishForm = (props: DishFormProps) => {
                       </div>
                       <div className="form-group">
                         <InputLabel text={t("dishForm:image")} />
-                        <FormInput
+                        <FormInput type={InputVariants.HIDDEN} name="image" />
+                        <Input
                           type={InputVariants.FILE}
-                          name="image"
+                          name="image_url"
                           onChange={onSelectFiles}
                         />
-                        <div>
-                          {file && (
-                            <img
-                              className="img"
-                              src={file}
-                            />
-                          )
-                          }
-                        </div>
+                        <div>{file && <img className="img" src={file} />}</div>
                       </div>
                     </div>
                   </div>

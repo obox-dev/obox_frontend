@@ -30,7 +30,7 @@ const FormInner = <T extends FieldValues>(
   const methods = useForm<T>({
     defaultValues,
     mode: 'all',
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(validationSchema, { abortEarly: false }),
   })
 
   const setTypedErrors = (errors: Partial<T>) => {
@@ -48,11 +48,9 @@ const FormInner = <T extends FieldValues>(
   const internalSubmit = async (data: T) => {
     try {
       methods.clearErrors();
-      console.log('on submit form values', methods.getValues());
       await onSubmit(data);
     } catch (e) {
       const error = e as AxiosError<T>;
-
       const errors =
         error &&
         error.response &&
