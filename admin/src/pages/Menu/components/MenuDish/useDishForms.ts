@@ -21,7 +21,7 @@ const mapDishToDefaultValues = (dish: Dish): DishDefaultValues => ({
   allergens: dish.allergens,
   tags: dish.tags,
   state: dish.state,
-  image: dish.image_url,
+  images: dish.image_url,
 });
 
 export const useDishForms = (categoryId: string) => {
@@ -37,7 +37,7 @@ export const useDishForms = (categoryId: string) => {
     allergens: [],
     tags: [],
     state: DishState.ENABLED,
-    image: "",
+    images: "",
   };
 
   const createDishValidationSchema = yup.object().shape({

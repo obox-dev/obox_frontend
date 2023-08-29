@@ -57,7 +57,7 @@ const FormInner = <T extends FieldValues>(
         error.response.data &&
         error.response.data.fields;
 
-      if (Object.keys(errors).length) {
+      if (errors && Object.keys(errors).length) {
         setTypedErrors(errors);
       }
     }

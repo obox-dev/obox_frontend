@@ -16,7 +16,7 @@ export interface Dish {
   calories?: number;
   allergens?: string[];
   tags?: string[];
-  image?: string;
+  images?: string;
   image_url?: string;
   state?: DishState;
 }
@@ -32,7 +32,7 @@ export interface UpdateDishRequest {
   calories?: number;
   allergens?: string;
   tags?: string;
-  image?: string;
+  images?: string;
   state?: DishState;
 }
 export interface CreateDishResponse {

@@ -13,7 +13,8 @@ import { FormInput } from "@shared/components/atoms/FormInput";
 import { Dish } from "@shared/services/DishService";
 import { ObjectSchema } from "yup";
 import { useState, useRef } from "react";
-import type { DishDefaultValues } from './useDishForms';
+import type { DishDefaultValues } from "./useDishForms";
+import { FileUpload } from "@shared/components/molecules/FileUpload/FileUpload";
 
 interface DishFormProps {
   onSubmit: (data: Partial<Dish>) => void;
@@ -22,7 +23,6 @@ interface DishFormProps {
 }
 
 export const DishForm = (props: DishFormProps) => {
-
   const { t } = useTranslation();
   const { menuId, categoryId } = useParams();
   const { onSubmit, validationSchema, defaultValues } = props;
@@ -32,30 +32,6 @@ export const DishForm = (props: DishFormProps) => {
   const navigate = useNavigate();
   const navigateToCategory = () => {
     navigate(`/menu/${menuId}/category/${categoryId}`);
-  };
-
-  const [file, setFile] = useState<string | null>(null);
-
-  const fileToBase64 = (file: File): Promise<string> =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        resolve(reader.result as string);
-      };
-
-      reader.readAsDataURL(file);
-      reader.onerror = reject;
-    });
-
-  const onSelectFiles = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e?.target?.files?.[0];
-
-    if (file) {
-      const tempFile = await fileToBase64(file);
-      const fileAsBase64 = tempFile.split("base64,")[1];
-
-      formRef.current?.setValue("image", fileAsBase64);
-    }
   };
 
   return (
@@ -119,17 +95,6 @@ export const DishForm = (props: DishFormProps) => {
                           placeholder={t("dishForm:caloriesPlaceholder")}
                         />
                       </div>
-                      {/* <div className="form-group">
-                        <InputLabel
-                          text={t("dishForm:allergens")}
-                          forInput="allergens"
-                        />
-                        <textarea
-                          id="allergens"
-                          name="allergens"
-                          className="form-control"
-                        />
-                      </div> */}
                     </div>
                     <div className="right-column">
                       <div className="form-group">
@@ -144,14 +109,9 @@ export const DishForm = (props: DishFormProps) => {
                         />
                       </div>
                       <div className="form-group">
-                        <InputLabel text={t("dishForm:image")} />
-                        <FormInput type={InputVariants.HIDDEN} name="image" />
-                        <Input
-                          type={InputVariants.FILE}
-                          name="image_url"
-                          onChange={onSelectFiles}
-                        />
-                        <div>{file && <img className="img" src={file} />}</div>
+                          <FileUpload onFileLoaded={(base64) => {
+                            formRef.current?.setValue('images', base64);
+                          }}/>
                       </div>
                     </div>
                   </div>
