@@ -57,7 +57,7 @@ export const useDish = (categoryId: string) => {
       calories,
       allergens,
       tags,
-      image,
+      images,
     }: UpdateDishRequest,
     afterSubmit: () => void
   ) => {
@@ -72,7 +72,7 @@ export const useDish = (categoryId: string) => {
         calories,
         allergens,
         tags,
-        image,
+        images,
       };
       await DishesService.update(id, request);
       afterSubmit();

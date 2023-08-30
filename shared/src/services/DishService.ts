@@ -1,5 +1,4 @@
 import { API } from "./ApiService";
-import { Category } from "./CategoriesService";
 
 export enum DishState {
   ENABLED = "ENABLED",
@@ -15,9 +14,10 @@ export interface Dish {
   associated_id?: string;
   weight?: number;
   calories?: number;
-  allergens?: string;
-  tags?: string;
-  image?: string;
+  allergens?: string[];
+  tags?: string[];
+  images?: string;
+  image_url?: string;
   state?: DishState;
 }
 
@@ -32,10 +32,9 @@ export interface UpdateDishRequest {
   calories?: number;
   allergens?: string;
   tags?: string;
-  image?: string;
+  images?: string;
   state?: DishState;
 }
-
 export interface CreateDishResponse {
   dish_id: string;
 }

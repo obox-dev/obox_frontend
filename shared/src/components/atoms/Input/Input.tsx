@@ -2,6 +2,7 @@ import { IInput, InputVariants } from "./types";
 
 export const Input = (props: IInput<HTMLInputElement>) => {
   const {
+    id,
     name,
     placeholder,
     onChange,
@@ -21,6 +22,7 @@ export const Input = (props: IInput<HTMLInputElement>) => {
 
   return (
     <input
+      id={id}
       value={value}
       name={name}
       type={type}
