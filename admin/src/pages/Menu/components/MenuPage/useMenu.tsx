@@ -54,7 +54,7 @@ export const useMenu = (props: UseMenuProps) => {
 
   const openMenuCreateDialog = () => {
     openDialog(({ closeDialog }) => {
-      const formRef = useRef<FormRef>(null);
+      const formRef = useRef<FormRef<Partial<Menu>> | null>(null);
 
       const defaultValues: CreateMenuRequest = {
         name: '',
@@ -63,7 +63,8 @@ export const useMenu = (props: UseMenuProps) => {
       };
 
       const validationSchema = new yup.ObjectSchema({
-        name: yup.string().required(t('common:validation:isRequired', { field: t('common:name') })),
+        name: yup.string().required(t('common:validation:isRequired', { field: t('common:name') })).min(1, t('common:validation:morethan', { field: t('common:name') }))
+        .max(200, t('common:validation:lessthan', { field: t('common:name') })).trim(),
       });
 
       return (
@@ -122,7 +123,7 @@ export const useMenu = (props: UseMenuProps) => {
 
   const openMenuEditDialog = (menu: Menu) =>
     openDialog(({ closeDialog }) => {
-      const formRef = useRef<FormRef | null>(null);
+      const formRef = useRef<FormRef<Partial<Menu>> | null>(null);
       const defaultValues: Menu = {
         ...menu,
       };

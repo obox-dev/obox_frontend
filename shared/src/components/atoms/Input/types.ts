@@ -8,10 +8,12 @@ export enum InputVariants {
   RADIO = "radio",
   CHECKBOX = "checkbox",
   HIDDEN = "hidden",
+  FILE = "file"
 }
 
 export interface IInput<T> {
   name: string;
+  id?: string;
   placeholder?: string;
   onChange?: (event: ChangeEvent<T>) => void;
   type: InputVariants;

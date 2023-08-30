@@ -6,6 +6,7 @@ import {
   FieldValues,
   DefaultValues,
   Path,
+  PathValue,
 } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormRef } from "./types";
@@ -22,14 +23,14 @@ interface FormProps<T extends FieldValues> {
 
 const FormInner = <T extends FieldValues>(
   props: FormProps<T>,
-  ref: Ref<FormRef>
+  ref: Ref<FormRef<T>>
 ) => {
   const { t } = useTranslation();
   const { defaultValues, validationSchema, onSubmit, children } = props;
   const methods = useForm<T>({
     defaultValues,
     mode: 'all',
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(validationSchema, { abortEarly: false }),
   })
 
   const setTypedErrors = (errors: Partial<T>) => {
@@ -50,14 +51,13 @@ const FormInner = <T extends FieldValues>(
       await onSubmit(data);
     } catch (e) {
       const error = e as AxiosError<T>;
-
       const errors =
         error &&
         error.response &&
         error.response.data &&
         error.response.data.fields;
 
-      if (Object.keys(errors).length) {
+      if (errors && Object.keys(errors).length) {
         setTypedErrors(errors);
       }
     }
@@ -76,7 +76,12 @@ const FormInner = <T extends FieldValues>(
   }, [t])
 
   useImperativeHandle(ref, () => ({
-    submit: () => methods.handleSubmit(internalSubmit)(),
+    submit: () => {
+      return methods.handleSubmit(internalSubmit)()
+    },
+    setValue: (key: Path<T>, value: PathValue<T, Path<T>>) => {
+      methods.setValue(key, value);
+    },
   }));
 
   return (

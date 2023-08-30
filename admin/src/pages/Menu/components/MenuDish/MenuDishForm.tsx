@@ -1,25 +1,26 @@
-import React, { useState } from "react"; // Import useState
+import React from "react"; // Import useState
 import { useNavigate, useParams } from "react-router";
-import { Form } from "@shared/components/atoms/Form";
+import { Form, FormRef } from "@shared/components/atoms/Form";
 import { useTranslation } from "@libs/react-i18next";
 import { Button } from "@shared/components/atoms/Button/Button";
 import {
   ButtonTypes,
   ButtonVariants,
 } from "@shared/components/atoms/Button/types";
-import { InputVariants } from "@shared/components/atoms/Input";
+import { Input, InputVariants } from "@shared/components/atoms/Input";
 import { InputLabel } from "@shared/components/atoms/InputLabel/InputLabel";
 import "./DishForm.scss";
-import "@shared/components/atoms/Loader/Loader.scss"
 import { FormInput } from "@shared/components/atoms/FormInput";
 import { Dish } from "@shared/services/DishService";
 import { ObjectSchema } from "yup";
-import ColorRingLoader from "@shared/components/atoms/Loader/Loader";
+import { useState, useRef } from "react";
+import type { DishDefaultValues } from "./useDishForms";
+import { FileUpload } from "@shared/components/molecules/FileUpload/FileUpload";
 
 interface DishFormProps {
   onSubmit: (data: Partial<Dish>) => void;
   validationSchema: ObjectSchema<Partial<Dish>>;
-  defaultValues: Partial<Dish>;
+  defaultValues: DishDefaultValues;
 }
 
 export const DishForm: React.FC<DishFormProps> = ({
@@ -30,25 +31,12 @@ export const DishForm: React.FC<DishFormProps> = ({
   const { t } = useTranslation();
   const { menuId, categoryId } = useParams();
 
+  const formRef = useRef<FormRef<Partial<Dish>> | null>(null);
+
   const navigate = useNavigate();
   const navigateToCategory = () => {
     navigate(`/menu/${menuId}/category/${categoryId}`);
   };
-
-  const [isLoading, setLoading] = useState(false);
-
-  const handleFormSubmit = async (data: Partial<Dish>) => {
-    setLoading(true); // Start loading
-    try {
-      // Simulate API request here, replace with actual submission logic
-      onSubmit(data);
-      // Reset loading state after successful submission
-      setLoading(false);
-    } catch (error) {
-      setLoading(false); // Handle error
-    }
-  };
-
 
   return (
     <div className="container">
@@ -59,7 +47,8 @@ export const DishForm: React.FC<DishFormProps> = ({
               <Form
                 defaultValues={defaultValues}
                 validationSchema={validationSchema}
-                onSubmit={handleFormSubmit}
+                onSubmit={onSubmit}
+                ref={formRef}
               >
                 <>
                   <div className="form-columns">
@@ -110,17 +99,6 @@ export const DishForm: React.FC<DishFormProps> = ({
                           placeholder={t("dishForm:caloriesPlaceholder")}
                         />
                       </div>
-                      {/* <div className="form-group">
-                        <InputLabel
-                          text={t("dishForm:allergens")}
-                          forInput="allergens"
-                        />
-                        <textarea
-                          id="allergens"
-                          name="allergens"
-                          className="form-control"
-                        />
-                      </div> */}
                     </div>
                     <div className="right-column">
                       <div className="form-group">
@@ -128,20 +106,16 @@ export const DishForm: React.FC<DishFormProps> = ({
                           text={t("dishForm:description")}
                           forInput="description"
                         />
-                        <textarea
-                          id="description"
+                        <FormInput
+                          type={InputVariants.TEXT}
                           name="description"
                           placeholder={t("dishForm:descriptionPlaceholder")}
-                          className="form-control"
                         />
                       </div>
                       <div className="form-group">
-                        <InputLabel text={t("dishForm:image")} />
-                        <input
-                          type="file"
-                          disabled
-                          className="form-control-file"
-                        />
+                          <FileUpload image_url={defaultValues.images} onFileChange={(base64) => {
+                            formRef.current?.setValue('images', base64);
+                          }}/>
                       </div>
                     </div>
                   </div>
@@ -152,27 +126,11 @@ export const DishForm: React.FC<DishFormProps> = ({
                       type={ButtonTypes.BUTTON}
                       onClick={navigateToCategory}
                     />
-                    {!isLoading && (
                     <Button
                       variant={ButtonVariants.PRIMARY}
                       text={t("dishForm:createButton")}
                       type={ButtonTypes.SUBMIT}
                     />
-                  )}
-                  {isLoading && (
-                    <div className="page-loader">
-                      <h4>{t("dishForm:loaderText")}</h4>
-                      <ColorRingLoader
-                        visible={true}
-                        height="80"
-                        width="80"
-                        ariaLabel="blocks-loading"
-                        wrapperStyle={{ /* ... */ }}
-                        wrapperClass="blocks-wrapper"
-                        colors={['#FFF633', '#f47e60']}
-                      />
-                      </div>
-                    )}
                   </div>
                 </>
               </Form>

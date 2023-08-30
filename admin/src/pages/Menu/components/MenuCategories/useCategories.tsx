@@ -66,7 +66,7 @@ export const useCategories = (menuId: string) => {
 
   const openCategoryEditDialog = (category: Category) =>
     openDialog(({ closeDialog }) => {
-      const formRef = useRef<FormRef | null>(null);
+      const formRef = useRef<FormRef<Partial<Category>> | null>(null);
 
       const defaultValues: Category = {
         ...category,
@@ -130,14 +130,15 @@ export const useCategories = (menuId: string) => {
 
   const openCategoryCreateDialog = () =>
     openDialog(({ closeDialog }) => {
-      const formRef = useRef<FormRef | null>(null);
+      const formRef = useRef<FormRef<Partial<Category>> | null>(null);
       const defaultValues: CreateCategoryRequest = {
         menu_id: menuId,
         name: '',
       };
 
       const validationSchema = new yup.ObjectSchema({
-        name: yup.string().required(t('common:validation:isRequired', { field: t('common:name') })),
+        name: yup.string().required(t('common:validation:isRequired', { field: t('common:name') })).min(1, t('common:validation:morethan', { field: t('common:name') }))
+        .max(200, t('common:validation:lessthan', { field: t('common:name') })).trim(),
       });
 
       return (
