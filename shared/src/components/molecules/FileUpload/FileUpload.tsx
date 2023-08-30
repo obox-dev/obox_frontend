@@ -1,19 +1,18 @@
 import { t } from "@libs/i18next";
-import { FormRef } from "@shared/components/atoms/Form";
-import { FormInput } from "@shared/components/atoms/FormInput";
+import { Button, ButtonVariants } from "@shared/components/atoms/Button";
+import { ButtonTypes } from "@shared/components/atoms/Button/types";
 import { Input, InputVariants } from "@shared/components/atoms/Input";
 import { InputLabel } from "@shared/components/atoms/InputLabel";
-import { Dish } from "@shared/services/DishService";
-import { useState, useRef } from "react";
+import { useState } from "react";
+import "./FileUpload.scss";
 
-interface FileUploadProps<T> {
-  onFileLoaded: (fileAsBase64: string) => void;
+interface FileUploadProps {
+  onFileChange: (fileAsBase64: string) => void;
   image_url?: string;
 }
 
-export const FileUpload = <T, >(props: FileUploadProps<T>) => {
-  const { image_url, onFileLoaded } = props;
-  const formRef = useRef<FormRef<Partial<Dish>> | null>(null);
+export const FileUpload = (props: FileUploadProps) => {
+  const { image_url, onFileChange } = props;
 
   const [file, setFile] = useState<string | null>(null);
 
@@ -37,20 +36,24 @@ export const FileUpload = <T, >(props: FileUploadProps<T>) => {
       const tempFile = await fileToBase64(file);
 
       setFile(tempFile);
-      onFileLoaded(tempFile);
+      onFileChange(tempFile);
     }
   };
 
+  // const deleteFile = () => {
+  //   setFile(null);
+  //   onFileChange('');
+  // }
+
   return (
-    <div>
-      <InputLabel text={t("dishForm:image")} />
-      {/* <FormInput type={InputVariants.HIDDEN} name="image" /> */}
-      <Input
-        type={InputVariants.FILE}
-        name="images"
-        onChange={onAddFile}
-      />
-      <div>{preview && <img className="img" src={preview} />}</div>
+    <div className="file-upload">
+      <InputLabel forInput="images" text={t("dishForm:image")}>
+        <Input id="images" type={InputVariants.FILE} name="images" onChange={onAddFile} />
+      </InputLabel>
+      <div>
+        {preview && <img className="file-upload__preview" src={preview} />}
+      </div>
+      {/* <Button variant={ButtonVariants.DANGER} type={ButtonTypes.BUTTON} text="Delete" onClick={deleteFile}/> */}
     </div>
   );
 };

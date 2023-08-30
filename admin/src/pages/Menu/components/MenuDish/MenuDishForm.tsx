@@ -109,7 +109,7 @@ export const DishForm = (props: DishFormProps) => {
                         />
                       </div>
                       <div className="form-group">
-                          <FileUpload onFileLoaded={(base64) => {
+                          <FileUpload image_url={defaultValues.images} onFileChange={(base64) => {
                             formRef.current?.setValue('images', base64);
                           }}/>
                       </div>
