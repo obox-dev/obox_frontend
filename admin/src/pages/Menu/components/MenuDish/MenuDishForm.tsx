@@ -1,3 +1,4 @@
+import React, { useState } from "react"; // Import useState
 import { useNavigate, useParams } from "react-router";
 import { Form } from "@shared/components/atoms/Form";
 import { useTranslation } from "@libs/react-i18next";
@@ -9,9 +10,11 @@ import {
 import { InputVariants } from "@shared/components/atoms/Input";
 import { InputLabel } from "@shared/components/atoms/InputLabel/InputLabel";
 import "./DishForm.scss";
+import "@shared/components/atoms/Loader/Loader.scss"
 import { FormInput } from "@shared/components/atoms/FormInput";
 import { Dish } from "@shared/services/DishService";
 import { ObjectSchema } from "yup";
+import ColorRingLoader from "@shared/components/atoms/Loader/Loader";
 
 interface DishFormProps {
   onSubmit: (data: Partial<Dish>) => void;
@@ -19,15 +22,33 @@ interface DishFormProps {
   defaultValues: Partial<Dish>;
 }
 
-export const DishForm = (props: DishFormProps) => {
+export const DishForm: React.FC<DishFormProps> = ({
+  onSubmit,
+  validationSchema,
+  defaultValues,
+}) => {
   const { t } = useTranslation();
   const { menuId, categoryId } = useParams();
-  const { onSubmit, validationSchema, defaultValues } = props;
 
   const navigate = useNavigate();
   const navigateToCategory = () => {
-    navigate(`/menu/${menuId}/category/${categoryId}`)
-  }
+    navigate(`/menu/${menuId}/category/${categoryId}`);
+  };
+
+  const [isLoading, setLoading] = useState(false);
+
+  const handleFormSubmit = async (data: Partial<Dish>) => {
+    setLoading(true); // Start loading
+    try {
+      // Simulate API request here, replace with actual submission logic
+      onSubmit(data);
+      // Reset loading state after successful submission
+      setLoading(false);
+    } catch (error) {
+      setLoading(false); // Handle error
+    }
+  };
+
 
   return (
     <div className="container">
@@ -38,7 +59,7 @@ export const DishForm = (props: DishFormProps) => {
               <Form
                 defaultValues={defaultValues}
                 validationSchema={validationSchema}
-                onSubmit={onSubmit}
+                onSubmit={handleFormSubmit}
               >
                 <>
                   <div className="form-columns">
@@ -50,21 +71,33 @@ export const DishForm = (props: DishFormProps) => {
                       <FormInput type={InputVariants.HIDDEN} name="status" />
                       <div className="form-group">
                         <InputLabel text={t("dishForm:name")} forInput="name" />
-                        <FormInput type={InputVariants.TEXT} name="name" placeholder={t("dishForm:namePlaceholder")}/>
+                        <FormInput
+                          type={InputVariants.TEXT}
+                          name="name"
+                          placeholder={t("dishForm:namePlaceholder")}
+                        />
                       </div>
                       <div className="form-group">
                         <InputLabel
                           text={t("dishForm:price")}
                           forInput="price"
                         />
-                        <FormInput type={InputVariants.NUMBER} name="price" placeholder={t("dishForm:pricePlaceholder")}/>
+                        <FormInput
+                          type={InputVariants.NUMBER}
+                          name="price"
+                          placeholder={t("dishForm:pricePlaceholder")}
+                        />
                       </div>
                       <div className="form-group">
                         <InputLabel
                           text={t("dishForm:weight")}
                           forInput="weight"
                         />
-                        <FormInput type={InputVariants.NUMBER} name="weight" placeholder={t("dishForm:weightPlaceholder")} />
+                        <FormInput
+                          type={InputVariants.NUMBER}
+                          name="weight"
+                          placeholder={t("dishForm:weightPlaceholder")}
+                        />
                       </div>
                       <div className="form-group">
                         <InputLabel
@@ -104,22 +137,42 @@ export const DishForm = (props: DishFormProps) => {
                       </div>
                       <div className="form-group">
                         <InputLabel text={t("dishForm:image")} />
-                        <input type="file" disabled className="form-control-file" />
+                        <input
+                          type="file"
+                          disabled
+                          className="form-control-file"
+                        />
                       </div>
                     </div>
                   </div>
                   <div className="d-flex gap-2 justify-content-end">
-                      <Button
-                        variant={ButtonVariants.SECONDARY}
-                        text={t("dishForm:backButton")}
-                        type={ButtonTypes.BUTTON}
-                        onClick={navigateToCategory}
-                      />
+                    <Button
+                      variant={ButtonVariants.SECONDARY}
+                      text={t("dishForm:backButton")}
+                      type={ButtonTypes.BUTTON}
+                      onClick={navigateToCategory}
+                    />
+                    {!isLoading && (
                     <Button
                       variant={ButtonVariants.PRIMARY}
                       text={t("dishForm:createButton")}
                       type={ButtonTypes.SUBMIT}
                     />
+                  )}
+                  {isLoading && (
+                    <div className="page-loader">
+                      <h4>{t("dishForm:loaderText")}</h4>
+                      <ColorRingLoader
+                        visible={true}
+                        height="80"
+                        width="80"
+                        ariaLabel="blocks-loading"
+                        wrapperStyle={{ /* ... */ }}
+                        wrapperClass="blocks-wrapper"
+                        colors={['#FFF633', '#f47e60']}
+                      />
+                      </div>
+                    )}
                   </div>
                 </>
               </Form>

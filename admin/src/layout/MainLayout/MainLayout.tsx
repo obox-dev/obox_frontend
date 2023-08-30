@@ -17,6 +17,7 @@ export const MainLayout: React.FC = () => {
       <Header userIsAuthenticated={userIsAuthenticated} />
       <main>
         <Routes>
+          
           <Route path="/" element={<Home />} />
           <Route path="/restaurants" element={<Restaurants />} />
           <Route path="/menu" element={<MenuPage />} />

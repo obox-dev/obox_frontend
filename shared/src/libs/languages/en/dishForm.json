@@ -18,6 +18,7 @@
   "weightPlaceholder": "Enter weight...",
   "caloriesPlaceholder": "Enter calories...",
   "descriptionPlaceholder": "Enter description...",
+  "loaderText": "Your dish is being prepared...",
   "dishesTable": {
     "state": "State",
     "name": "Name",

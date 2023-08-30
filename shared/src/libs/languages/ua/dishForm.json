@@ -18,6 +18,7 @@
   "weightPlaceholder": "Введіть вагу...",
   "caloriesPlaceholder": "Введіть калорії...",
   "descriptionPlaceholder": "Введіть опис...",
+  "loaderText": "Ваша страва вже готується...",
   "dishesTable": {
     "state": "Стан",
     "name": "Назва",
