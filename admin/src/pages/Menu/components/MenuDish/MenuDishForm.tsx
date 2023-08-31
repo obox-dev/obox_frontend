@@ -15,6 +15,7 @@ import { ObjectSchema } from "yup";
 import { useState, useRef } from "react";
 import type { DishDefaultValues } from "./useDishForms";
 import { FileUpload } from "@shared/components/molecules/FileUpload/FileUpload";
+import { Textarea } from "@shared/components/atoms/Textarea";
 
 interface DishFormProps {
   onSubmit: (data: Partial<Dish>) => void;
@@ -102,8 +103,7 @@ export const DishForm = (props: DishFormProps) => {
                           text={t("dishForm:description")}
                           forInput="description"
                         />
-                        <FormInput
-                          type={InputVariants.TEXT}
+                        <Textarea
                           name="description"
                           placeholder={t("dishForm:descriptionPlaceholder")}
                         />
