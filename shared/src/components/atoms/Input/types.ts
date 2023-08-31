@@ -20,4 +20,5 @@ export interface IInput<T> {
   value?: string;
   checked?: boolean;
   isDisabled?: boolean;
+  className?: string;
 }
