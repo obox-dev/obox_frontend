@@ -4,7 +4,6 @@ import {
   CreateDishRequest,
   Dish,
   DishState,
-  UpdateDishRequest,
 } from "@shared/services/DishService";
 
 type ExcludeKeys = 'price' | 'weight' | 'calories';
