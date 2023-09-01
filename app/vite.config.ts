@@ -5,6 +5,6 @@ export default {
     build: {
       outDir: '../build/app',
       emptyOutDir: true,
-      sourcemap: 'external',
+      sourcemap: true,
     },
 }

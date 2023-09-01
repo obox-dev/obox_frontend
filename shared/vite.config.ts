@@ -5,6 +5,6 @@ export default {
     build: {
       outDir: '../build/shared',
       emptyOutDir: true,
-      sourcemap: 'external',
+      sourcemap: true,
     },
 }

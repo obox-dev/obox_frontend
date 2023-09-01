@@ -11,8 +11,6 @@ import { useDish } from "./useDish";
 import { useDishForms } from "./useDishForms";
 import type { DishDefaultValues } from './useDishForms';
 
-type RequestType = CreateDishRequest | UpdateDishRequest;
-
 export const MenuDishPage = () => {
   const [defaultValues, setDefaultValues] = useState<DishDefaultValues | null>(null);
   const [loading, setLoading] = useState<boolean>(!!useParams().dishId);
@@ -43,9 +41,9 @@ export const MenuDishPage = () => {
 
   const handleOnSubmit = useCallback(async (data: Partial<Dish>) => {
     if (dishId) {
-      await onEditSubmit(dishId, data as UpdateDishRequest, navigateToCategory);
+      await onEditSubmit(dishId, data as UpdateDishRequest);
     } else {
-      await onCreateSubmit(data as CreateDishRequest, navigateToCategory);
+      await onCreateSubmit(data as CreateDishRequest);
     }
   }, [dishId, onEditSubmit, onCreateSubmit, navigateToCategory]);
 
