@@ -16,7 +16,7 @@ import {
 } from "@shared/services";
 import { ButtonVariants } from "@shared/components/atoms/Button";
 import { IAction } from "@shared/components/atoms/ActionMenu";
-import { useRequest } from '@shared/hooks';
+import { useRequest } from '@admin/hooks';
 import { useNavigate } from 'react-router-dom';
 
 export const useCategories = (menuId: string) => {
