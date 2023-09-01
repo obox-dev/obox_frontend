@@ -7,6 +7,9 @@ export default defineConfig({
   plugins: [
     react(),
   ],
+  build: {
+    sourcemap: 'external',
+  },
   resolve: {
     alias: {
       '@app': path.resolve(__dirname, 'app/src'),

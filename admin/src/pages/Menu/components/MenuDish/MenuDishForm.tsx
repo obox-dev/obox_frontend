@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router-dom";
 import { Form, FormRef } from "@shared/components/atoms/Form";
 import { useTranslation } from "@libs/react-i18next";
 import { Button } from "@shared/components/atoms/Button/Button";

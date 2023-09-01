@@ -5,7 +5,7 @@ import {
   Dish,
 } from "@shared/services/DishService";
 import { useEffect, useState, useCallback } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router-dom";
 import { DishForm } from "./MenuDishForm";
 import { useDish } from "./useDish";
 import { useDishForms } from "./useDishForms";

@@ -13,7 +13,7 @@ import {
   MenuService,
   UpdateMenuRequest,
 } from "@shared/services/MenuService";
-import { useRequest } from "@shared/hooks";
+import { useRequest } from "@admin/hooks";
 import { ButtonVariants } from "@shared/components/atoms/Button";
 import { IAction } from "@shared/components/atoms/ActionMenu";
 import { useTranslation } from "@libs/react-i18next";

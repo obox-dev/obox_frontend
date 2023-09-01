@@ -10,8 +10,8 @@ import {
   UpdateDishRequest,
 } from "@shared/services/DishService";
 import { CategoriesService } from "@shared/services/CategoriesService";
-import { useNavigate, useParams } from "react-router";
-import { useRequest } from "@shared/hooks";
+import { useNavigate, useParams } from "react-router-dom";
+import { useRequest } from "@admin/hooks";
 
 export const useDish = (categoryId: string) => {
   const { t } = useTranslation();
