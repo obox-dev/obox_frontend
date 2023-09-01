@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { Header } from '../../components/organisms/Header';
 import { Footer } from '../../components/organisms/Footer';
 import Home from '../../pages/Home/Home';
@@ -24,7 +24,9 @@ export const MainLayout: React.FC = () => {
           <Route path="/menu/:menuId/category/:categoryId" element={<MenuPage/>} />
           <Route path="/menu/:menuId/category/:categoryId/create-dish" element={<MenuDishPage/>} />
           <Route path="/menu/:menuId/category/:categoryId/dish/:dishId" element={<MenuDishPage/>} />
-          <Route path="*" element={<NotFound />} />
+          {/* <Route path="*" element={<NotFound />} /> */}
+          <Route path="/not-found" element={<NotFound />} />
+            <Route path="*" element={<Navigate replace to="/not-found" />} />
         </Routes>
       </main>
       <Footer currentYear={currentYear} />

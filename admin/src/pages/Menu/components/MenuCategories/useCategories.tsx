@@ -12,57 +12,80 @@ import {
   CreateCategoryRequest,
   UpdateCategoryRequest,
   Category,
+  CreateCategoryResponse,
 } from "@shared/services";
 import { ButtonVariants } from "@shared/components/atoms/Button";
 import { IAction } from "@shared/components/atoms/ActionMenu";
+import { useRequest } from '@shared/hooks';
+import { useNavigate } from 'react-router-dom';
 
 export const useCategories = (menuId: string) => {
   const { t } = useTranslation(["common", "menu"]);
-  const { openDialog } = useDialog();
+  const { openDialog, closeAll } = useDialog();
   const [categoriesList, setCategoriesList] = useState<Category[]>([]);
+  const navigate = useNavigate();
 
-  const loadCategories = async (id: string) => {
-    try {
-      const categories = await MenuService.getCategoriesByMenuId(id);
-      setCategoriesList(categories);
-    } catch (error) {
+  const loadCategories = () => {
+    return MenuService.getCategoriesByMenuId(menuId);
+  };
+
+  const { execute: loadAllCategories } = useRequest({
+    requestFunction: loadCategories,
+    onSuccess: (result: Category[]) => {
+      setCategoriesList(result);
+    },
+    onError: (error) => {
       console.error("Error fetching categories:", error);
-    }
-  };
+    },
+  });
 
-  const onCreateSubmit = async (data: CreateCategoryRequest, afterSubmit: () => void) => {
-    try {
-      const response = await CategoriesService.create(data);
-      await loadCategories(menuId);
-      // Navigate to category page here
-      afterSubmit();
-    } catch (error) {
+  const { execute: loadSingleCategory } = useRequest({
+    requestFunction: CategoriesService.getById,
+    redirect404: true,
+  });
+
+  const { execute: onCreateSubmit } = useRequest({
+    requestFunction: CategoriesService.create,
+    onSuccess: async (result: CreateCategoryResponse) => {
+      await loadAllCategories();
+      navigate(`/menu/${menuId}/category/${result.category_id}`);
+      closeAll();
+    },
+    onError: (error) => {
       throw error;
-    }
-  };
+    },
+  });
 
-  const onEditSubmit = async ({ category_id, name }: Category, afterSubmit: () => void) => {
-    try {
+  const editSubmit = async ({ category_id, name }: Category) => {
       const id = category_id;
       const request: UpdateCategoryRequest = {
         name,
       };
-      await CategoriesService.update(id, request);
-      await loadCategories(menuId);
-      afterSubmit();
-    } catch (error) {
-      throw error;
-    }
+      return CategoriesService.update(id, request);
   };
 
-  const onDeleteSubmit = async ({ category_id }: Category) => {
-    try {
-      await CategoriesService.delete(category_id);
-      await loadCategories(menuId);
-    } catch (error) {
+  const { execute: onEditSubmit } = useRequest({
+    requestFunction: editSubmit,
+    onSuccess: async () => {
+      await loadAllCategories();
+      closeAll();
+    },
+    onError: (error) => {
+      throw error;
+    },
+  });
+
+  const { execute: onDeleteSubmit } = useRequest({
+    requestFunction: MenuService.delete,
+    onSuccess: async () => {
+      await loadAllCategories();
+      navigate(`/menu/${menuId}/categories/`);
+    },
+    onFinally: () => closeAll(),
+    onError: (error) => {
       console.error("Error deleting category:", error);
-    }
-  };
+    },
+  });
 
   const openCategoryEditDialog = (category: Category) =>
     openDialog(({ closeDialog }) => {
@@ -96,7 +119,7 @@ export const useCategories = (menuId: string) => {
             defaultValues={defaultValues}
             validationSchema={validationSchema}
             onSubmit={async (data) => {
-              await onEditSubmit(data as Category, closeDialog);
+              await onEditSubmit(data as Category);
             }}
           >
             <>
@@ -161,7 +184,7 @@ export const useCategories = (menuId: string) => {
             validationSchema={validationSchema}
             defaultValues={defaultValues}
             onSubmit={async (data) => {
-              await onCreateSubmit(data as CreateCategoryRequest, closeDialog);
+              await onCreateSubmit(data as CreateCategoryRequest);
             }}
           >
             <>
@@ -182,7 +205,7 @@ export const useCategories = (menuId: string) => {
       return (
         <Dialog
           okCallback={() => {
-            onDeleteSubmit(category);
+            onDeleteSubmit(category.category_id);
             closeDialog();
           }}
           cancelCallback={() => {
@@ -203,6 +226,7 @@ export const useCategories = (menuId: string) => {
     openCategoryCreateDialog,
     categoriesList,
     menuCategoriesActions,
-    loadCategories,
+    loadAllCategories,
+    loadSingleCategory,
   };
 };
