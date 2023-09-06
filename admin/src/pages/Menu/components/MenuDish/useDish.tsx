@@ -12,6 +12,7 @@ import {
 import { CategoriesService } from "@shared/services/CategoriesService";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRequest } from "@admin/hooks";
+import { AttachmentService } from "@shared/services";
 
 export const useDish = (categoryId: string) => {
   const { t } = useTranslation();
@@ -71,7 +72,6 @@ export const useDish = (categoryId: string) => {
       calories,
       allergens,
       tags,
-      images,
     }: UpdateDishRequest) => {
       const id = dish_id;
       const request: UpdateDishRequest = {
@@ -83,7 +83,6 @@ export const useDish = (categoryId: string) => {
         calories,
         allergens,
         tags,
-        images,
       };
       return DishesService.update(id, request);
   };
