@@ -76,10 +76,10 @@ export const useCategories = (menuId: string) => {
   });
 
   const { execute: onDeleteSubmit } = useRequest({
-    requestFunction: MenuService.delete,
+    requestFunction: CategoriesService.delete,
     onSuccess: async () => {
       await loadAllCategories();
-      navigate(`/menu/${menuId}/categories/`);
+      navigate(`/menu/${menuId}`);
     },
     onFinally: () => closeAll(),
     onError: (error) => {

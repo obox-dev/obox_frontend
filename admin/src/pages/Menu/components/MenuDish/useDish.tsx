@@ -71,7 +71,6 @@ export const useDish = (categoryId: string) => {
       calories,
       allergens,
       tags,
-      images,
     }: UpdateDishRequest) => {
       const id = dish_id;
       const request: UpdateDishRequest = {
@@ -83,7 +82,6 @@ export const useDish = (categoryId: string) => {
         calories,
         allergens,
         tags,
-        images,
       };
       return DishesService.update(id, request);
   };

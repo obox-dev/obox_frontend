@@ -5,7 +5,7 @@ import { Menu } from "./components/MenuPage/Menu";
 import { useMenu } from "./components/MenuPage/useMenu";
 import "./Menu.scss";
 
-const HARDCODED_RESTAURANT_ID = "cce45739-fcb7-428d-991f-bdbe976d71e6";
+const HARDCODED_RESTAURANT_ID = "6d8c575c-a32f-41de-b9fd-614643f7b55b";
 
 export const MenuPage = () => {
   const { menuId } = useParams();
