@@ -14,9 +14,10 @@ interface FileUploadProps {
 export const FileUpload = (props: FileUploadProps) => {
   const { image_url, onFileChange } = props;
 
-  const [file, setFile] = useState<string | null>(null);
+  const [fileData, setFileData] = useState<{ base64String: string }[]>([]);
 
-  const preview = file || image_url || null;
+  const preview =
+    fileData.length > 0 ? fileData[0].base64String : image_url || null;
 
   const fileToBase64 = (file: File): Promise<string> =>
     new Promise((resolve, reject) => {
@@ -30,14 +31,19 @@ export const FileUpload = (props: FileUploadProps) => {
     });
 
   const onAddFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e?.target?.files?.[0];
-
-    if (file) {
-      const tempFile = await fileToBase64(file);
-
-      setFile(tempFile);
-      onFileChange(tempFile);
-    }
+    const tempFileList: { base64String: string }[] = [];
+    await Promise.all(
+      [].map.call(e.target.files, async (file: File) => {
+        tempFileList.push({
+          base64String:
+            file.type.indexOf("image") > -1 ? await fileToBase64(file) : "",
+        });
+      })
+    );
+    setFileData(tempFileList);
+    tempFileList.forEach((fileData) => {
+      onFileChange(fileData.base64String);
+    });
   };
 
   // const deleteFile = () => {
@@ -48,10 +54,23 @@ export const FileUpload = (props: FileUploadProps) => {
   return (
     <div className="file-upload">
       <InputLabel forInput="images" text={t("dishForm:image")}>
-        <Input id="images" type={InputVariants.FILE} name="images" onChange={onAddFile} />
+        <Input
+          id="images"
+          type={InputVariants.FILE}
+          name="images"
+          onChange={onAddFile}
+        />
       </InputLabel>
       <div>
-        {preview && <img className="file-upload__preview" src={preview} />}
+        {preview &&
+          fileData.map((file, index) => (
+            <img
+              key={index}
+              className="file-upload__preview"
+              src={file.base64String}
+              alt={`Preview ${index}`}
+            />
+          ))}
       </div>
       {/* <Button variant={ButtonVariants.DANGER} type={ButtonTypes.BUTTON} text="Delete" onClick={deleteFile}/> */}
     </div>

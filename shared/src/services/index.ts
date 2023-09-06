@@ -3,6 +3,7 @@ export { CategoriesService } from "./CategoriesService";
 export { MenuService } from "./MenuService";
 export { DishesService } from "./DishService";
 export { RestaurantsService } from "./RestaurantsService";
+export { AttachmentService } from "./AttachmentsService"
 
 export type {
   Category,
