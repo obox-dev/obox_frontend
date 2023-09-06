@@ -12,7 +12,6 @@ import {
 import { CategoriesService } from "@shared/services/CategoriesService";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRequest } from "@admin/hooks";
-import { AttachmentService } from "@shared/services";
 
 export const useDish = (categoryId: string) => {
   const { t } = useTranslation();
