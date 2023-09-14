@@ -3,10 +3,16 @@ import { initReactI18next } from "@libs/react-i18next";
 import en from "./en";
 import ua from "./ua";
 
-export const resources = {
+export const supportedLanguages = {
+  en: 'en-US',
+  ua: 'uk-UA'
+}
+
+export const resources: Record<keyof typeof supportedLanguages, any> = {
   en,
   ua,
 } as const;
+
 
 i18n
   .use(initReactI18next)

@@ -3,8 +3,9 @@ import axios, {
   AxiosResponse,
   AxiosError,
 } from "@libs/axios";
+import i18n from "@libs/i18next";
 import { Config } from "@shared/config";
-
+import { supportedLanguages } from "@shared/libs/languages/config";
 class API {
   static base_url: string;
 
@@ -21,7 +22,10 @@ class API {
       url,
       data,
       params,
-      headers,
+      headers: {
+        ...headers,
+        'Accept-Language': supportedLanguages[i18n.language as keyof typeof supportedLanguages],
+      },
     };
 
     try {
