@@ -1,9 +1,9 @@
-import * as yup from 'yup';
+import * as yup from "yup";
 import { Dialog } from "@shared/components/molecules/Dialog";
 import { useDialog } from "@shared/providers/DialogProvider/useDialog";
 import { Form, FormRef } from "@shared/components/atoms/Form";
 import { useState, useRef } from "react";
-import { useTranslation } from '@libs/react-i18next';
+import { useTranslation } from "@libs/react-i18next";
 import { InputVariants } from "@shared/components/atoms/Input";
 import { FormInput } from "@shared/components/atoms/FormInput";
 import {
@@ -16,8 +16,8 @@ import {
 } from "@shared/services";
 import { ButtonVariants } from "@shared/components/atoms/Button";
 import { IAction } from "@shared/components/atoms/ActionMenu";
-import { useRequest } from '@admin/hooks';
-import { useNavigate } from 'react-router-dom';
+import { useRequest } from "@admin/hooks";
+import { useNavigate } from "react-router-dom";
 
 export const useCategories = (menuId: string) => {
   const { t } = useTranslation(["common", "menu"]);
@@ -44,6 +44,32 @@ export const useCategories = (menuId: string) => {
     redirect404: true,
   });
 
+  const MIN_NAME_LENGTH = 1;
+  const MAX_NAME_LENGTH = 200;
+
+  const validationSchema = yup.object().shape({
+    name: yup
+      .string()
+      .required(
+        t("common:validation:isRequired", { field: t("common:name") })
+      )
+      .min(
+        MIN_NAME_LENGTH,
+        t("common:validation:morethan", {
+          field: t("common:name"),
+          min: MIN_NAME_LENGTH,
+        })
+      )
+      .max(
+        MAX_NAME_LENGTH,
+        t("common:validation:lessthan", {
+          field: t("common:name"),
+          max: MAX_NAME_LENGTH,
+        })
+      )
+      .trim(),
+  });
+
   const { execute: onCreateSubmit } = useRequest({
     requestFunction: CategoriesService.create,
     onSuccess: async (result: CreateCategoryResponse) => {
@@ -57,11 +83,11 @@ export const useCategories = (menuId: string) => {
   });
 
   const editSubmit = async ({ category_id, name }: Category) => {
-      const id = category_id;
-      const request: UpdateCategoryRequest = {
-        name,
-      };
-      return CategoriesService.update(id, request);
+    const id = category_id;
+    const request: UpdateCategoryRequest = {
+      name,
+    };
+    return CategoriesService.update(id, request);
   };
 
   const { execute: onEditSubmit } = useRequest({
@@ -95,11 +121,6 @@ export const useCategories = (menuId: string) => {
         ...category,
       };
 
-      const validationSchema = new yup.ObjectSchema({
-        name: yup.string().required(t('common:validation:isRequired', { field: t('common:name') })).min(1, t('common:validation:morethan', { field: t('common:name') }))
-        .max(200, t('common:validation:lessthan', { field: t('common:name') })).trim(),
-      });
-
       return (
         <Dialog
           okCallback={() => {
@@ -124,10 +145,7 @@ export const useCategories = (menuId: string) => {
             }}
           >
             <>
-              <FormInput
-                type={InputVariants.HIDDEN}
-                name="category_id"
-              />
+              <FormInput type={InputVariants.HIDDEN} name="category_id" />
               <FormInput
                 placeholder={t("menu:updateCategoryForm.placeholder")}
                 type={InputVariants.TEXT}
@@ -142,13 +160,11 @@ export const useCategories = (menuId: string) => {
   const menuCategoriesActions: IAction<Category>[] = [
     {
       label: t("common:buttons:edit"),
-      callback: (category: Category) =>
-        openCategoryEditDialog(category),
+      callback: (category: Category) => openCategoryEditDialog(category),
     },
     {
       label: t("common:buttons:delete"),
-      callback: (category: Category) =>
-        openCategoryDeleteDialog(category),
+      callback: (category: Category) => openCategoryDeleteDialog(category),
     },
   ];
 
@@ -157,13 +173,8 @@ export const useCategories = (menuId: string) => {
       const formRef = useRef<FormRef<Partial<Category>> | null>(null);
       const defaultValues: CreateCategoryRequest = {
         menu_id: menuId,
-        name: '',
+        name: "",
       };
-
-      const validationSchema = new yup.ObjectSchema({
-        name: yup.string().required(t('common:validation:isRequired', { field: t('common:name') })).min(1, t('common:validation:morethan', { field: t('common:name') }))
-        .max(200, t('common:validation:lessthan', { field: t('common:name') })).trim(),
-      });
 
       return (
         <Dialog
@@ -189,7 +200,11 @@ export const useCategories = (menuId: string) => {
             }}
           >
             <>
-              <FormInput type={InputVariants.HIDDEN} name="menu_id" value={menuId} />
+              <FormInput
+                type={InputVariants.HIDDEN}
+                name="menu_id"
+                value={menuId}
+              />
               <FormInput
                 placeholder={t("menu:createCategoryForm.placeholder")}
                 type={InputVariants.TEXT}
@@ -218,7 +233,10 @@ export const useCategories = (menuId: string) => {
           cancelText={t("common:buttons:cancel")}
           okButtonVariant={ButtonVariants.DANGER}
         >
-          <p>{t("menu:deleteCategoryForm.message")} <strong>{category.name}</strong></p>
+          <p>
+            {t("menu:deleteCategoryForm.message")}{" "}
+            <strong>{category.name}</strong>
+          </p>
         </Dialog>
       );
     });

@@ -26,7 +26,7 @@
   "validation": {
     "isRequired": "{{field}} is required",
     "isNumber": "{{field}} is required",
-    "morethan": "Must be at least 1 character",
-    "lessthan": "Must be no more that 200 characters"
+    "morethan": "{{field}} must be at least {{min}} character",
+    "lessthan": "{{field}} must be no more than {{max}} characters"
   }
 }

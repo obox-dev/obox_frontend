@@ -51,6 +51,32 @@ export const useMenu = (props: UseMenuProps) => {
     redirect404: true,
   });
 
+  const MIN_NAME_LENGTH = 1;
+  const MAX_NAME_LENGTH = 200;
+
+  const validationSchema = yup.object().shape({
+    name: yup
+      .string()
+      .required(
+        t("common:validation:isRequired", { field: t("common:name") })
+      )
+      .min(
+        MIN_NAME_LENGTH,
+        t("common:validation:morethan", {
+          field: t("common:name"),
+          min: MIN_NAME_LENGTH,
+        })
+      )
+      .max(
+        MAX_NAME_LENGTH,
+        t("common:validation:lessthan", {
+          field: t("common:name"),
+          max: MAX_NAME_LENGTH,
+        })
+      )
+      .trim(),
+  });
+
   const { execute: onCreateSubmit } = useRequest({
     requestFunction: MenuService.create,
     onSuccess: async (result: CreateMenuResponse) => {
@@ -72,20 +98,6 @@ export const useMenu = (props: UseMenuProps) => {
         language_code: DEFAULT_LANGUAGE_CODE,
         restaurant_id,
       };
-
-      const validationSchema = new yup.ObjectSchema({
-        name: yup
-          .string()
-          .required(
-            t("common:validation:isRequired", { field: t("common:name") })
-          )
-          .min(1, t("common:validation:morethan", { field: t("common:name") }))
-          .max(
-            200,
-            t("common:validation:lessthan", { field: t("common:name") })
-          )
-          .trim(),
-      });
 
       return (
         <Dialog
@@ -142,7 +154,7 @@ export const useMenu = (props: UseMenuProps) => {
     requestFunction: editSubmit,
     onSuccess: async () => {
       await loadAllMenus();
-      closeAll()
+      closeAll();
     },
     onError: (error) => {
       throw error;
@@ -156,14 +168,6 @@ export const useMenu = (props: UseMenuProps) => {
         ...menu,
       };
 
-      const validationSchema = new yup.ObjectSchema({
-        name: yup
-          .string()
-          .required(
-            t("common:validation:isRequired", { field: t("common:name") })
-          ).min(1, t('common:validation:morethan', { field: t('common:name') }))
-          .max(200, t('common:validation:lessthan', { field: t('common:name') })).trim()
-      });
       return (
         <Dialog
           okCallback={() => {
@@ -205,7 +209,7 @@ export const useMenu = (props: UseMenuProps) => {
     requestFunction: MenuService.delete,
     onSuccess: async () => {
       await loadAllMenus();
-      navigate("/menu")
+      navigate("/menu");
     },
     onFinally: () => closeAll(),
     onError: (error) => {
