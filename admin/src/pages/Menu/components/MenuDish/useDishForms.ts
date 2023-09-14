@@ -93,7 +93,7 @@ export const useDishForms = (categoryId: string) => {
           max: MAX_WEIGHT,
         }),
         (value) => {
-          if ((value as number) === null) return true;
+          if (value === "") return true;
           return (
             (value as number) >= MIN_WEIGHT && (value as number) <= MAX_WEIGHT
           );
@@ -110,7 +110,7 @@ export const useDishForms = (categoryId: string) => {
           max: MAX_CALORIES,
         }),
         (value) => {
-          if ((value as number) === null) return true;
+          if (value === "") return true;
           return (
             (value as number) >= MIX_CALORIES &&
             (value as number) <= MAX_CALORIES
