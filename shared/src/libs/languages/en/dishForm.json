@@ -23,5 +23,9 @@
     "name": "Name",
     "price": "Price",
     "actions": "Actions"
-  }
+  },
+  "minprice": "{{field}} must be grater than {{min}}",
+  "maxprice": "{{field}} must be no more than {{max}}",
+  "weightbetween": "{{field}} must be between {{min}} and {{max}}",
+  "caloriesbetween": "{{field}} must be between {{min}} and {{max}}"
 }
