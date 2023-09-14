@@ -38,12 +38,19 @@ export const useDishForms = (categoryId: string) => {
   };
 
   const createDishValidationSchema = yup.object().shape({
-    name: yup.string().required(t('common:validation:isRequired', { field: t('dishForm:name') })),
+    name: yup.string().required(t('common:validation:isRequired', { field: t('dishForm:name') })).min(1, t('common:validation:morethan', { field: t('common:name') }))
+    .max(200, t('common:validation:lessthan', { field: t('common:name') })).trim(),
     price: yup.number().required(t('common:validation:isRequired', { field: t('dishForm:price') }))
-    .typeError(t('common:validation:isRequired', { field: t('dishForm:price') })),
+    .typeError(t('common:validation:isRequired', { field: t('dishForm:price') })).positive().max(100000, t('dishForm:maxprice', { field: t('dishForm:price') })),
     description: yup.string(),
-    weight: yup.mixed().nullable(),
-    calories: yup.mixed().nullable(),
+    weight: yup.mixed().nullable().test('min-max', t('dishForm:weightbetween'), (value) => {
+      if (value as number === null) return true;
+      return value as number >= 1 && value as number <= 100000;
+    }),
+    calories: yup.mixed().nullable().test('min-max', t('dishForm:caloriesbetween'), (value) => {
+      if (value as number === null) return true;
+      return value as number >= 1 && value as number <= 30000;
+    }),
     state: yup.string(),
   }) as yup.ObjectSchema<Partial<Dish>>;
 

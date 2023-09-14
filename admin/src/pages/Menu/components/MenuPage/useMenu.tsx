@@ -161,7 +161,8 @@ export const useMenu = (props: UseMenuProps) => {
           .string()
           .required(
             t("common:validation:isRequired", { field: t("common:name") })
-          ),
+          ).min(1, t('common:validation:morethan', { field: t('common:name') }))
+          .max(200, t('common:validation:lessthan', { field: t('common:name') })).trim()
       });
       return (
         <Dialog

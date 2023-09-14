@@ -14,7 +14,7 @@ import { Dish } from "@shared/services/DishService";
 import { ObjectSchema } from "yup";
 import { useRef } from "react";
 import type { DishDefaultValues } from "./useDishForms";
-import { FileUpload } from "@shared/components/molecules/FileUpload/FileUpload";
+// import { FileUpload } from "@shared/components/molecules/FileUpload/FileUpload";
 import { Textarea } from "@shared/components/atoms/Textarea";
 
 interface DishFormProps {
@@ -108,11 +108,11 @@ export const DishForm = (props: DishFormProps) => {
                           placeholder={t("dishForm:descriptionPlaceholder")}
                         />
                       </div>
-                      <div className="form-group">
+                      {/* <div className="form-group">
                           <FileUpload image_url={defaultValues.images} onFileChange={(base64) => {
                             formRef.current?.setValue('images', base64);
                           }}/>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                   <div className="d-flex gap-2 justify-content-end">
