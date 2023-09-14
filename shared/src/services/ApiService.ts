@@ -24,7 +24,7 @@ class API {
       params,
       headers: {
         ...headers,
-        'Accept-Language': supportedLanguages[i18n.language as 'en' | 'ua'],
+        'Accept-Language': supportedLanguages[i18n.language as keyof typeof supportedLanguages],
       },
     };
 
