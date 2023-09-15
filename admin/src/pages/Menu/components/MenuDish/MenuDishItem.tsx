@@ -11,7 +11,7 @@ export const MenuDishItem = (props: MenuDishItem) => {
   return (
     <tr className="align-middle">
       <td width={120}>{dishItem.state}</td>
-      <td>{dishItem.name}</td>
+      <td  className="dish-item__name">{dishItem.name}</td>
       <td>{dishItem.price}</td>
       <td className="text-end" width={50}>
         <ActionMenu entity={dishItem} actions={actions} />
