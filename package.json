@@ -20,6 +20,7 @@
   "dependencies": {
     "@hookform/resolvers": "3.1.1",
     "@rollup/plugin-alias": "5.0.0",
+    "@tanstack/react-query": "4.33.0",
     "axios": "1.4.0",
     "bootstrap": "5.3.0",
     "i18next": "23.2.11",
@@ -44,6 +45,7 @@
     "@storybook/react": "7.0.27",
     "@storybook/react-vite": "7.0.27",
     "@storybook/testing-library": "0.0.14-next.2",
+    "prettier": "3.0.3",
     "prop-types": "15.8.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
