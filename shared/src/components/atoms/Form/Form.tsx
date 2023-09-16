@@ -31,7 +31,7 @@ const FormInner = <T extends FieldValues>(
     defaultValues,
     mode: 'all',
     resolver: yupResolver(validationSchema, { abortEarly: false }),
-  })
+  })  
 
   const setTypedErrors = (errors: Partial<T>) => {
     for (const key in errors) {

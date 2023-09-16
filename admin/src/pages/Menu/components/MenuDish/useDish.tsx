@@ -1,22 +1,18 @@
-import { useState } from "react";
-import { Dialog } from "@shared/components/molecules/Dialog";
-import { useDialog } from "@shared/providers/DialogProvider/useDialog";
-import { ButtonVariants } from "@shared/components/atoms/Button";
-import { IAction } from "@shared/components/atoms/ActionMenu";
-import { useTranslation } from "@libs/react-i18next";
+import { useDialog } from '@shared/providers/DialogProvider/useDialog';
+import { IAction } from '@shared/components/atoms/ActionMenu';
+import { useTranslation } from '@libs/react-i18next';
+import { Dish } from '@shared/services/DishService';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
-  Dish,
-  DishesService,
-  UpdateDishRequest,
-} from "@shared/services/DishService";
-import { CategoriesService } from "@shared/services/CategoriesService";
-import { useNavigate, useParams } from "react-router-dom";
-import { useRequest } from "@admin/hooks";
+  useGetDish,
+  useCreateDish,
+  useUpdateDish,
+  useDeleteDish,
+} from './hooks';
 
 export const useDish = (categoryId: string) => {
   const { t } = useTranslation();
-  const { openDialog, closeAll } = useDialog();
-  const [dishList, setDishList] = useState<Dish[]>([]);
+  const { closeAll } = useDialog();
 
   const { menuId } = useParams();
 
@@ -29,125 +25,49 @@ export const useDish = (categoryId: string) => {
     navigate(`/menu/${menuId}/category/${categoryId}`);
   };
 
-  const loadDishes = () => {
-    return CategoriesService.getDishesByCategoryId(categoryId);
-  };
-
-  const { execute: loadAllDishes } = useRequest({
-    requestFunction: loadDishes,
-    onSuccess: (result: Dish[]) => {
-      setDishList(result);
-    },
-    onError: (error) => {
-      console.error("Error fetching categories:", error);
-    },
+  const { loadAllDishes, loadSingleDish, dishList } = useGetDish({
+    categoryId,
   });
 
-  const { execute: loadSingleDish } = useRequest({
-    requestFunction: DishesService.getDishById,
-    redirect404: true,
-  });
-
-  const { execute: onCreateSubmit } = useRequest({
-    requestFunction: DishesService.create,
+  const { onCreateSubmit } = useCreateDish({
     onSuccess: async () => {
       await loadAllDishes();
       navigateToCategory();
       closeAll();
     },
-    onError: (error) => {
-      throw error;
-    },
   });
 
-  const editSubmit = async (
-    dish_id: string,
-    {
-      name,
-      description,
-      price,
-      associated_id,
-      weight,
-      calories,
-      allergens,
-      tags,
-    }: UpdateDishRequest) => {
-      const id = dish_id;
-      const request: UpdateDishRequest = {
-        name,
-        description,
-        price,
-        associated_id,
-        weight,
-        calories,
-        allergens,
-        tags,
-      };
-      return DishesService.update(id, request);
-  };
-
-  const { execute: onEditSubmit } = useRequest({
-    requestFunction: editSubmit,
+  const { onUpdateSubmit } = useUpdateDish({
     onSuccess: async () => {
       await loadAllDishes();
       navigateToCategory();
       closeAll();
     },
-    onError: (error) => {
-      throw error;
-    },
   });
 
-  const { execute: onDeleteSubmit } = useRequest({
-    requestFunction: DishesService.delete,
+  const { openDishDeleteDialog } = useDeleteDish({
     onSuccess: async () => {
       await loadAllDishes();
     },
-    onFinally: () => closeAll(),
-    onError: (error) => {
-      console.error("Error deleting category:", error);
+    onFinally: () => {
+      closeAll();
     },
   });
-
-  const openDishDeleteDialog = (dish: Dish) =>
-    openDialog(({ closeDialog }) => {
-      return (
-        <Dialog
-          okCallback={() => {
-            onDeleteSubmit(dish.dish_id);
-            closeDialog();
-          }}
-          cancelCallback={() => {
-            closeDialog();
-          }}
-          title={t("menu:deleteMenuForm.title")}
-          size="lg"
-          okText={t("common:buttons:confirm")}
-          cancelText={t("common:buttons:cancel")}
-          okButtonVariant={ButtonVariants.DANGER}
-        >
-          <p>
-            {t("menu:deleteMenuForm.message")} <strong>{dish.name}</strong>?
-          </p>
-        </Dialog>
-      );
-    });
 
   const menuDishesActions: IAction<Dish>[] = [
     {
-      label: t("common:buttons:edit"),
+      label: t('common:buttons:edit'),
       callback: (dish: Dish) => navigateToDish(dish.dish_id),
     },
     {
-      label: t("common:buttons:delete"),
+      label: t('common:buttons:delete'),
       callback: (dish: Dish) => openDishDeleteDialog(dish),
     },
   ];
 
   return {
-    loadDishes,
     onCreateSubmit,
-    onEditSubmit,
+    onUpdateSubmit,
     dishList,
     menuDishesActions,
     loadSingleDish,
