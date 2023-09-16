@@ -27,6 +27,8 @@
     "isRequired": "{{field}} is required",
     "isNumber": "{{field}} is required",
     "floatFormat": "{{field}} must only contain digits and . symbol",
-    "isInteger": "{{field}} must be an intagre"
+    "isInteger": "{{field}} must be an intagre",
+    "morethan": "{{field}} must be at least {{min}} character",
+    "lessthan": "{{field}} must be no more than {{max}} characters"
   }
 }
