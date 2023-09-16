@@ -1,10 +1,10 @@
-import * as yup from "yup";
 import { useTranslation } from "@libs/react-i18next";
 import {
   CreateDishRequest,
   Dish,
   DishState,
 } from "@shared/services/DishService";
+import { object, string, mixed } from 'yup';
 
 type ExcludeKeys = "price" | "weight" | "calories";
 type ExcludedAsOptionalString = Record<ExcludeKeys, string | null>;
@@ -47,12 +47,10 @@ export const useDishForms = (categoryId: string) => {
   const MIX_CALORIES = 1;
   const MAX_CALORIES = 30000;
 
-  const createDishValidationSchema = yup.object().shape({
-    name: yup
-      .string()
-      .required(
-        t("common:validation:isRequired", { field: t("dishForm:name") })
-      )
+  const NAME_IS_REQUIRED = t("common:validation:isRequired", { field: t("dishForm:name") });
+
+  const createDishSchema = object({
+    name: string().required(NAME_IS_REQUIRED)
       .min(
         MIN_NAME_LENGTH,
         t("common:validation:morethan", {
@@ -68,22 +66,25 @@ export const useDishForms = (categoryId: string) => {
         })
       )
       .trim(),
-    price: yup
-      .number()
+    price: 
+      string()
       .required(
         t("common:validation:isRequired", { field: t("dishForm:price") })
       )
-      .typeError(
-        t("common:validation:isRequired", { field: t("dishForm:price") })
+      .matches(
+        /^(0(?!\d)(?:\.\d+)?|[1-9]\d*(?:\.\d+)?)$/,
+        'Invalid price format'
       )
-      .positive()
-      .max(
-        MAX_PRICE,
-        t("dishForm:maxprice", { field: t("dishForm:price"), max: MAX_PRICE })
-      ),
-    description: yup.string(),
-    weight: yup
-      .mixed()
+      .test('max', t("dishForm:maxprice", { field: t("dishForm:price"), max: MAX_PRICE }), (v) => {
+        if (+v > MAX_PRICE) return false;
+        return true;
+      }),
+      // .max(
+      //   MAX_PRICE,
+      //   t("dishForm:maxprice", { field: t("dishForm:price"), max: MAX_PRICE })
+      // ),
+    description: string(),
+    weight: mixed()
       .nullable()
       .test(
         "min-max",
@@ -99,8 +100,7 @@ export const useDishForms = (categoryId: string) => {
           );
         }
       ),
-    calories: yup
-      .mixed()
+    calories: mixed()
       .nullable()
       .test(
         "min-max",
@@ -117,8 +117,8 @@ export const useDishForms = (categoryId: string) => {
           );
         }
       ),
-    state: yup.string(),
-  }) as yup.ObjectSchema<Partial<Dish>>;
+    state: string(),
+  });
 
   const getDefaultValues = (dish?: Dish): DishDefaultValues => {
     if (dish) {
@@ -129,7 +129,7 @@ export const useDishForms = (categoryId: string) => {
 
   return {
     getDefaultValues,
-    createDishValidationSchema,
+    createDishSchema,
     createDishDefaultValues,
   };
 };

@@ -30,7 +30,7 @@ const FormInner = <T extends FieldValues>(
   const methods = useForm<T>({
     defaultValues,
     mode: 'all',
-    resolver: yupResolver(validationSchema, { abortEarly: false }),
+    resolver: yupResolver(validationSchema, { abortEarly: false, strict: true }),
   })
 
   const setTypedErrors = (errors: Partial<T>) => {

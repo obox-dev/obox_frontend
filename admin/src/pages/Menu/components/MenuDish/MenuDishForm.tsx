@@ -1,3 +1,5 @@
+import { useRef } from "react";
+import { ObjectSchema } from "yup";
 import { useNavigate, useParams } from "react-router-dom";
 import { Form, FormRef } from "@shared/components/atoms/Form";
 import { useTranslation } from "@libs/react-i18next";
@@ -8,22 +10,21 @@ import {
 } from "@shared/components/atoms/Button/types";
 import { InputVariants } from "@shared/components/atoms/Input";
 import { InputLabel } from "@shared/components/atoms/InputLabel/InputLabel";
-import "./DishForm.scss";
 import { FormInput } from "@shared/components/atoms/FormInput";
 import { Dish } from "@shared/services/DishService";
-import { ObjectSchema } from "yup";
-import { useRef } from "react";
-import type { DishDefaultValues } from "./useDishForms";
+import type { DishDefaultValues } from "./hooks/useDishForms";
 // import { FileUpload } from "@shared/components/molecules/FileUpload/FileUpload";
 import { Textarea } from "@shared/components/atoms/Textarea";
+import "./DishForm.scss";
+import { FieldValues } from "react-hook-form";
 
-interface DishFormProps {
+interface DishFormProps<T extends FieldValues> {
   onSubmit: (data: Partial<Dish>) => void;
-  validationSchema: ObjectSchema<Partial<Dish>>;
+  validationSchema: ObjectSchema<T>;
   defaultValues: DishDefaultValues;
 }
 
-export const DishForm = (props: DishFormProps) => {
+export const DishForm = <T extends FieldValues, >(props: DishFormProps<T>) => {
   const { t } = useTranslation();
   const { menuId, categoryId } = useParams();
   const { onSubmit, validationSchema, defaultValues } = props;
@@ -69,7 +70,7 @@ export const DishForm = (props: DishFormProps) => {
                           forInput="price"
                         />
                         <FormInput
-                          type={InputVariants.NUMBER}
+                          type={InputVariants.TEXT}
                           name="price"
                           placeholder={t("dishForm:pricePlaceholder")}
                         />
