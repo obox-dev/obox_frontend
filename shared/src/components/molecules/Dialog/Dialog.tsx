@@ -4,6 +4,7 @@ import { Button } from "@shared/components/atoms/Button";
 
 import { ButtonVariants } from "@shared/components/atoms/Button";
 import { DialogPropTypes } from "./types";
+import "./Dialog.scss";
 
 export const Dialog: React.FC<DialogPropTypes> = (props: DialogPropTypes) => {
   const {

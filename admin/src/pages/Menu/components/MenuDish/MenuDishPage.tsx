@@ -8,16 +8,16 @@ import { useEffect, useState, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { DishForm } from "./MenuDishForm";
 import { useDish } from "./useDish";
-import { useDishForms } from "./useDishForms";
-import type { DishDefaultValues } from './useDishForms';
+import { useDishForms } from "./hooks/useDishForms";
+import type { DishDefaultValues } from './hooks/useDishForms';
 
 export const MenuDishPage = () => {
   const [defaultValues, setDefaultValues] = useState<DishDefaultValues | null>(null);
   const [loading, setLoading] = useState<boolean>(!!useParams().dishId);
   const { menuId, categoryId, dishId } = useParams();
 
-  const { onCreateSubmit, onEditSubmit } = useDish(categoryId!);
-  const { createDishValidationSchema, getDefaultValues } = useDishForms(categoryId!);
+  const { onCreateSubmit, onUpdateSubmit } = useDish(categoryId!);
+  const { createDishSchema, getDefaultValues } = useDishForms(categoryId!);
   const navigate = useNavigate();
 
   const navigateToCategory = useCallback(() => {
@@ -41,11 +41,11 @@ export const MenuDishPage = () => {
 
   const handleOnSubmit = useCallback(async (data: Partial<Dish>) => {
     if (dishId) {
-      await onEditSubmit(dishId, data as UpdateDishRequest);
+      await onUpdateSubmit(dishId, data as UpdateDishRequest);
     } else {
       await onCreateSubmit(data as CreateDishRequest);
     }
-  }, [dishId, onEditSubmit, onCreateSubmit, navigateToCategory]);
+  }, [dishId, onUpdateSubmit, onCreateSubmit, navigateToCategory]);
 
   return loading || !defaultValues ? (
     <div>Loading...</div>
@@ -53,7 +53,7 @@ export const MenuDishPage = () => {
     <DishForm
       onSubmit={handleOnSubmit}
       defaultValues={defaultValues}
-      validationSchema={createDishValidationSchema}
+      validationSchema={createDishSchema}
     />
   );
 };
