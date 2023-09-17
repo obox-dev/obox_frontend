@@ -1,13 +1,14 @@
+import { AxiosError } from 'axios';
+import { useTranslation } from '@libs/react-i18next';
 import { useRequest } from '@admin/hooks';
 import { ButtonVariants } from '@shared/components/atoms/Button';
 import { Dialog } from '@shared/components/molecules/Dialog';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
 import { Menu, MenuService } from '@shared/services';
-import { useTranslation } from '@libs/react-i18next';
 
 interface DeleteMenuParams {
   onSuccess: () => Promise<void>;
-  onError?: () => void;
+  onError?: (error: AxiosError) => void;
   onFinally?: () => void;
 }
 

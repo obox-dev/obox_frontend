@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from '@libs/react-i18next';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
 import { Menu } from '@shared/services';
 import { IAction } from '@shared/components/atoms/ActionMenu';
-import { useTranslation } from '@libs/react-i18next';
 import { useGetMenu } from './hooks/useGetMenu';
 import { useCreateMenu, useDeleteMenu, useUpdateMenu } from './hooks';
 
@@ -35,12 +35,24 @@ export const useMenu = (props: UseMenuProps) => {
       await loadAllMenus();
       closeAll();
     },
+    onError: async (error) => {
+      if (error.response?.status === 404) {
+        await loadAllMenus();
+        closeAll();
+      }
+    }
   });
 
   const { openMenuDeleteDialog } = useDeleteMenu({
     onSuccess: async () => {
       await loadAllMenus();
-      navigate("/menu");
+      navigate('/menu');
+    },
+    onError: async (error) => {
+      if (error.response?.status === 404) {
+        await loadAllMenus();
+        closeAll();
+      }
     },
     onFinally: () => {
       closeAll();

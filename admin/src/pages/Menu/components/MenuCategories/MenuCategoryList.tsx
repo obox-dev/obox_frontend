@@ -1,6 +1,6 @@
 import { Category } from "@shared/services";
-import { MenuCategoryItem } from "./MenuCategoryItem";
 import { IAction } from "@shared/components/atoms/ActionMenu"
+import { MenuCategoryItem } from "./MenuCategoryItem";
 
 
 export interface MenuCategoryListProps {
