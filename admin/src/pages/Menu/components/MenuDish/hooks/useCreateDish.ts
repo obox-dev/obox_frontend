@@ -6,7 +6,7 @@ interface CreateDishParams {
 }
 
 export const useCreateDish = (args: CreateDishParams) => {
-  const { onSuccess } = args
+  const { onSuccess } = args;
   const { execute: onCreateSubmit } = useRequest({
     requestFunction: DishesService.create,
     onSuccess,
