@@ -14,7 +14,7 @@ export const useDishFormValidation = () => {
   const MAX_CALORIES = 30000;
 
   const REGEXP_FLOAT_NUMBER = /^(0(?!\d)(?:\.\d+)?|[1-9]\d*(?:\.\d+)?)$/;
-  const REGEXP_FLOAT_INTEGER = /^(0|[1-9]\d*)$/;
+  const REGEXP_INTEGER = /^(0|[1-9]\d*)$/;
   
 
   const NAME_IS_REQUIRED_MESSAGE = t('common:validation:isRequired', {
@@ -75,7 +75,7 @@ export const useDishFormValidation = () => {
       ),
     description: string(),
     weight: string()
-      .matches(REGEXP_FLOAT_INTEGER, {
+      .matches(REGEXP_INTEGER, {
         excludeEmptyString: true,
         message: getIntegerMessageFor(t('dishForm:weight')),
       })
@@ -90,7 +90,7 @@ export const useDishFormValidation = () => {
         }
       ),
     calories: string()
-      .matches(REGEXP_FLOAT_INTEGER, {
+      .matches(REGEXP_INTEGER, {
         excludeEmptyString: true,
         message: getIntegerMessageFor(t('dishForm:calories')),
       })
