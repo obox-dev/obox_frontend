@@ -1,6 +1,6 @@
+import { useState } from 'react';
 import { useRequest } from '@admin/hooks';
 import { Category, CategoriesService, MenuService } from '@shared/services';
-import { useState } from 'react';
 
 interface GetCategoryParams {
   menuId: string;

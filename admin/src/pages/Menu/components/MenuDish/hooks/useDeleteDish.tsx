@@ -4,10 +4,11 @@ import { useDialog } from "@shared/providers/DialogProvider/useDialog";
 import { Dish, DishesService } from "@shared/services/DishService";
 import { ButtonVariants } from "@shared/components/atoms/Button";
 import { useRequest } from "@admin/hooks";
+import { AxiosError } from "axios";
 
 interface DeleteDishParams {
   onSuccess: () => Promise<void>;
-  onError?: () => void;
+  onError?: (error: AxiosError) => void;
   onFinally?: () => void;
 }
 

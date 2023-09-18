@@ -1,27 +1,29 @@
-import { useDialog } from '@shared/providers/DialogProvider/useDialog';
-import { useCategoryFormValidation } from '../validation/useCategoryFormValidation';
+import { useRef } from 'react';
+import { AxiosError } from 'axios';
 import { useTranslation } from '@libs/react-i18next';
+import { useRequest } from '@admin/hooks';
+import { useDialog } from '@shared/providers/DialogProvider/useDialog';
 import {
   CategoriesService,
   Category,
   UpdateCategoryRequest,
 } from '@shared/services';
-import { useRequest } from '@admin/hooks';
-import { useRef } from 'react';
 import { Form, FormRef } from '@shared/components/atoms/Form';
 import { Dialog } from '@shared/components/molecules/Dialog';
 import { FormInput } from '@shared/components/atoms/FormInput';
 import { InputVariants } from '@shared/components/atoms/Input';
+import { useCategoryFormValidation } from '../validation/useCategoryFormValidation';
 
 interface UpdateCategoryParams {
   onSuccess: () => Promise<void>;
+  onError?: (error: AxiosError) => void;
 }
 
 export const useUpdateCategory = (args: UpdateCategoryParams) => {
   const { t } = useTranslation();
   const { validationSchema } = useCategoryFormValidation();
   const { openDialog } = useDialog();
-  const { onSuccess } = args;
+  const { onSuccess, onError } = args;
 
   const updateSubmit = async ({ category_id, name }: Category) => {
     const id = category_id;
@@ -34,6 +36,7 @@ export const useUpdateCategory = (args: UpdateCategoryParams) => {
   const { execute: onUpdateSubmit } = useRequest({
     requestFunction: updateSubmit,
     onSuccess,
+    onError,
   });
 
   const openCategoryUpdateDialog = (category: Category) =>

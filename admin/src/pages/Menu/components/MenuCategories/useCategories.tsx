@@ -30,6 +30,12 @@ export const useCategories = (menuId: string) => {
       await loadAllCategories();
       closeAll();
     },
+    onError: async (error) => {
+      if (error.response?.status === 404) {
+        await loadAllCategories();
+        closeAll();
+      }
+    }
   });
 
   const { openCategoryDeleteDialog } = useDeleteCategory({
@@ -38,6 +44,12 @@ export const useCategories = (menuId: string) => {
       navigate(`/menu/${menuId}`);
     },
     onFinally: () => closeAll(),
+    onError: async (error) => {
+      if (error.response?.status === 404) {
+        await loadAllCategories();
+        closeAll();
+      }
+    }
   });
 
   const menuCategoriesActions: IAction<Category>[] = [

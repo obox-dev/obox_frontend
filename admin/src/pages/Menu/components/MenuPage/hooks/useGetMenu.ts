@@ -1,6 +1,6 @@
+import { useState } from 'react';
 import { useRequest } from '@admin/hooks';
 import { Menu, MenuService, RestaurantsService } from '@shared/services';
-import { useState } from 'react';
 
 interface GetMenuParams {
   restaurant_id: string;

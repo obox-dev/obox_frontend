@@ -1,8 +1,8 @@
+import { useNavigate, useParams } from 'react-router-dom';
+import { useTranslation } from '@libs/react-i18next';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
 import { IAction } from '@shared/components/atoms/ActionMenu';
-import { useTranslation } from '@libs/react-i18next';
 import { Dish } from '@shared/services/DishService';
-import { useNavigate, useParams } from 'react-router-dom';
 import {
   useGetDish,
   useCreateDish,
@@ -43,6 +43,12 @@ export const useDish = (categoryId: string) => {
       navigateToCategory();
       closeAll();
     },
+    onError: async (error) => {
+      if (error.response?.status === 404) {
+        await loadAllDishes();
+        closeAll();
+      }
+    }
   });
 
   const { openDishDeleteDialog } = useDeleteDish({
@@ -52,6 +58,12 @@ export const useDish = (categoryId: string) => {
     onFinally: () => {
       closeAll();
     },
+    onError: async (error) => {
+      if (error.response?.status === 404) {
+        await loadAllDishes();
+        closeAll();
+      }
+    }
   });
 
   const menuDishesActions: IAction<Dish>[] = [

@@ -1,7 +1,7 @@
 import { useTranslation } from '@libs/react-i18next';
 import { Dish } from "@shared/services/DishService";
-import { MenuDishItem } from "./MenuDishItem";
 import { IAction } from "@shared/components/atoms/ActionMenu";
+import { MenuDishItem } from "./MenuDishItem";
 export interface MenuDishListProps {
   dishItems: Dish[];
   actions: IAction<Dish>[];

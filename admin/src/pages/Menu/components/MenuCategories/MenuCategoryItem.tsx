@@ -1,6 +1,6 @@
+import { NavLink } from "react-router-dom";
 import { Category } from "@shared/services";
 import { ActionMenu, IAction } from "@shared/components/atoms/ActionMenu"
-import { NavLink } from "react-router-dom";
 
 export interface MenuCategoryItem {
   categoryItem: Category;

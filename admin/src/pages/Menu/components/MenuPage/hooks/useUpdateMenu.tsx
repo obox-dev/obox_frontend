@@ -1,24 +1,26 @@
+import { useRef } from 'react';
+import { AxiosError } from 'axios';
+import { useTranslation } from '@libs/react-i18next';
 import { useRequest } from '@admin/hooks';
 import { Form, FormRef } from '@shared/components/atoms/Form';
 import { Dialog } from '@shared/components/molecules/Dialog';
 import { Menu } from '@shared/services';
-import { UpdateMenuRequest, MenuService } from '@shared/services/MenuService';
-import { useRef } from 'react';
-import { useTranslation } from '@libs/react-i18next';
-import { useMenuFormValidation } from '../validation/useMenuFormValidation';
 import { FormInput } from '@shared/components/atoms/FormInput';
+import { UpdateMenuRequest, MenuService } from '@shared/services/MenuService';
 import { InputVariants } from '@shared/components/atoms/Input';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
+import { useMenuFormValidation } from '../validation/useMenuFormValidation';
 
 interface UpdateMenuParams {
   onSuccess: () => Promise<void>;
+  onError?: (error: AxiosError) => void;
 }
 
 export const useUpdateMenu = (args: UpdateMenuParams) => {
   const { t } = useTranslation();
   const { validationSchema } = useMenuFormValidation();
   const { openDialog } = useDialog();
-  const { onSuccess } = args;
+  const { onSuccess, onError } = args;
 
   const updateSubmit = async ({ menu_id, name }: Menu) => {
     const id = menu_id;
@@ -32,9 +34,7 @@ export const useUpdateMenu = (args: UpdateMenuParams) => {
   const { execute: onUpdateSubmit } = useRequest({
     requestFunction: updateSubmit,
     onSuccess,
-    onError: (error) => {
-      throw error;
-    },
+    onError,
   });
 
   const openMenuUpdateDialog = (menu: Menu) =>

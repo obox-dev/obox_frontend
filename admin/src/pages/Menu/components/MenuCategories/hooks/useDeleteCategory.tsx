@@ -1,13 +1,14 @@
-import { useDialog } from '@shared/providers/DialogProvider/useDialog';
+import { AxiosError } from 'axios';
 import { useTranslation } from '@libs/react-i18next';
-import { CategoriesService, Category } from '@shared/services';
 import { useRequest } from '@admin/hooks';
+import { useDialog } from '@shared/providers/DialogProvider/useDialog';
+import { CategoriesService, Category } from '@shared/services';
 import { Dialog } from '@shared/components/molecules/Dialog';
 import { ButtonVariants } from '@shared/components/atoms/Button';
 
 interface DeleteCategoryParams {
   onSuccess: () => Promise<void>;
-  onError?: () => void;
+  onError?: (error: AxiosError) => void;
   onFinally?: () => void;
 }
 
