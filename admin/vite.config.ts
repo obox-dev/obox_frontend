@@ -5,5 +5,6 @@ export default {
     build: {
       outDir: '../build/admin',
       emptyOutDir: true,
+      sourcemap: true,
     },
 }

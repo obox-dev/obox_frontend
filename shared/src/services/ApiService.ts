@@ -3,8 +3,10 @@ import axios, {
   AxiosResponse,
   AxiosError,
 } from "@libs/axios";
+import { toast} from 'react-toastify';
+import i18n from "@libs/i18next";
 import { Config } from "@shared/config";
-
+import { supportedLanguages } from "@shared/libs/languages/config";
 class API {
   static base_url: string;
 
@@ -21,13 +23,21 @@ class API {
       url,
       data,
       params,
-      headers,
+      headers: {
+        ...headers,
+        'Accept-Language': supportedLanguages[i18n.language as keyof typeof supportedLanguages],
+      },
     };
 
     try {
       const response: AxiosResponse<K> = await axios(config);
       return response.data;
     } catch (error) {
+      const e = error as AxiosError;
+      const message = e.message;
+      toast(message, {
+        toastId: message,
+      });
       throw API.handleRequestError<T>(error as AxiosError<T>);
     }
   }

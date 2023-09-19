@@ -1,207 +1,73 @@
-import * as yup from 'yup';
-import { Dialog } from "@shared/components/molecules/Dialog";
-import { useDialog } from "@shared/providers/DialogProvider/useDialog";
-import { Form, FormRef } from "@shared/components/atoms/Form";
-import { useState, useRef } from "react";
+import { useDialog } from '@shared/providers/DialogProvider/useDialog';
 import { useTranslation } from '@libs/react-i18next';
-import { InputVariants } from "@shared/components/atoms/Input";
-import { FormInput } from "@shared/components/atoms/FormInput";
-import {
-  MenuService,
-  CategoriesService,
-  CreateCategoryRequest,
-  UpdateCategoryRequest,
-  Category,
-} from "@shared/services";
-import { ButtonVariants } from "@shared/components/atoms/Button";
-import { IAction } from "@shared/components/atoms/ActionMenu";
+import { Category, CreateCategoryResponse } from '@shared/services';
+import { IAction } from '@shared/components/atoms/ActionMenu';
+import { useNavigate } from 'react-router-dom';
+import { useCreateCategory, useGetCategory, useUpdateCategory } from './hooks';
+import { useDeleteCategory } from './hooks/useDeleteCategory';
 
 export const useCategories = (menuId: string) => {
-  const { t } = useTranslation(["common", "menu"]);
-  const { openDialog } = useDialog();
-  const [categoriesList, setCategoriesList] = useState<Category[]>([]);
+  const { t } = useTranslation(['common', 'menu']);
+  const { closeAll } = useDialog();
+  const navigate = useNavigate();
 
-  const loadCategories = async (id: string) => {
-    try {
-      const categories = await MenuService.getCategoriesByMenuId(id);
-      setCategoriesList(categories);
-    } catch (error) {
-      console.error("Error fetching categories:", error);
-    }
-  };
-
-  const onCreateSubmit = async (data: CreateCategoryRequest, afterSubmit: () => void) => {
-    try {
-      const response = await CategoriesService.create(data);
-      await loadCategories(menuId);
-      // Navigate to category page here
-      afterSubmit();
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  const onEditSubmit = async ({ category_id, name }: Category, afterSubmit: () => void) => {
-    try {
-      const id = category_id;
-      const request: UpdateCategoryRequest = {
-        name,
-      };
-      await CategoriesService.update(id, request);
-      await loadCategories(menuId);
-      afterSubmit();
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  const onDeleteSubmit = async ({ category_id }: Category) => {
-    try {
-      await CategoriesService.delete(category_id);
-      await loadCategories(menuId);
-    } catch (error) {
-      console.error("Error deleting category:", error);
-    }
-  };
-
-  const openCategoryEditDialog = (category: Category) =>
-    openDialog(({ closeDialog }) => {
-      const formRef = useRef<FormRef<Partial<Category>> | null>(null);
-
-      const defaultValues: Category = {
-        ...category,
-      };
-
-      const validationSchema = new yup.ObjectSchema({
-        name: yup.string().required(t('common:validation:isRequired', { field: t('common:name') })),
-      });
-
-      return (
-        <Dialog
-          okCallback={() => {
-            if (formRef.current) {
-              formRef.current.submit();
-            }
-          }}
-          cancelCallback={() => {
-            closeDialog();
-          }}
-          title={t("menu:updateCategoryForm.title")}
-          size="lg"
-          okText={t("common:buttons:confirm")}
-          cancelText={t("common:buttons:cancel")}
-        >
-          <Form
-            ref={formRef}
-            defaultValues={defaultValues}
-            validationSchema={validationSchema}
-            onSubmit={async (data) => {
-              await onEditSubmit(data as Category, closeDialog);
-            }}
-          >
-            <>
-              <FormInput
-                type={InputVariants.HIDDEN}
-                name="category_id"
-              />
-              <FormInput
-                placeholder={t("menu:updateCategoryForm.placeholder")}
-                type={InputVariants.TEXT}
-                name="name"
-              />
-            </>
-          </Form>
-        </Dialog>
-      );
+  const { loadSingleCategory, loadAllCategories, categoriesList } =
+    useGetCategory({
+      menuId,
     });
+
+  const { openCategoryCreateDialog } = useCreateCategory({
+    onSuccess: async (result: CreateCategoryResponse) => {
+      await loadAllCategories();
+      navigate(`/menu/${menuId}/category/${result.category_id}`);
+      closeAll();
+    },
+    menuId: menuId,
+  });
+
+  const { openCategoryUpdateDialog } = useUpdateCategory({
+    onSuccess: async () => {
+      await loadAllCategories();
+      closeAll();
+    },
+    onError: async (error) => {
+      if (error.response?.status === 404) {
+        await loadAllCategories();
+        closeAll();
+      }
+    }
+  });
+
+  const { openCategoryDeleteDialog } = useDeleteCategory({
+    onSuccess: async () => {
+      await loadAllCategories();
+      navigate(`/menu/${menuId}`);
+    },
+    onFinally: () => closeAll(),
+    onError: async (error) => {
+      if (error.response?.status === 404) {
+        await loadAllCategories();
+        closeAll();
+      }
+    }
+  });
 
   const menuCategoriesActions: IAction<Category>[] = [
     {
-      label: t("common:buttons:edit"),
-      callback: (category: Category) =>
-        openCategoryEditDialog(category),
+      label: t('common:buttons:edit'),
+      callback: (category: Category) => openCategoryUpdateDialog(category),
     },
     {
-      label: t("common:buttons:delete"),
-      callback: (category: Category) =>
-        openCategoryDeleteDialog(category),
+      label: t('common:buttons:delete'),
+      callback: (category: Category) => openCategoryDeleteDialog(category),
     },
   ];
-
-  const openCategoryCreateDialog = () =>
-    openDialog(({ closeDialog }) => {
-      const formRef = useRef<FormRef<Partial<Category>> | null>(null);
-      const defaultValues: CreateCategoryRequest = {
-        menu_id: menuId,
-        name: '',
-      };
-
-      const validationSchema = new yup.ObjectSchema({
-        name: yup.string().required(t('common:validation:isRequired', { field: t('common:name') })),
-      });
-
-      return (
-        <Dialog
-          okCallback={() => {
-            if (formRef.current) {
-              formRef.current.submit();
-            }
-          }}
-          cancelCallback={() => {
-            closeDialog();
-          }}
-          title={t("menu:createCategoryForm.title")}
-          size="lg"
-          okText={t("common:buttons:confirm")}
-          cancelText={t("common:buttons:cancel")}
-        >
-          <Form
-            ref={formRef}
-            validationSchema={validationSchema}
-            defaultValues={defaultValues}
-            onSubmit={async (data) => {
-              await onCreateSubmit(data as CreateCategoryRequest, closeDialog);
-            }}
-          >
-            <>
-              <FormInput type={InputVariants.HIDDEN} name="menu_id" value={menuId} />
-              <FormInput
-                placeholder={t("menu:createCategoryForm.placeholder")}
-                type={InputVariants.TEXT}
-                name="name"
-              />
-            </>
-          </Form>
-        </Dialog>
-      );
-    });
-
-  const openCategoryDeleteDialog = (category: Category) =>
-    openDialog(({ closeDialog }) => {
-      return (
-        <Dialog
-          okCallback={() => {
-            onDeleteSubmit(category);
-            closeDialog();
-          }}
-          cancelCallback={() => {
-            closeDialog();
-          }}
-          title={t("menu:deleteCategoryForm.title")}
-          size="lg"
-          okText={t("common:buttons:confirm")}
-          cancelText={t("common:buttons:cancel")}
-          okButtonVariant={ButtonVariants.DANGER}
-        >
-          <p>{t("menu:deleteCategoryForm.message")} <strong>{category.name}</strong></p>
-        </Dialog>
-      );
-    });
 
   return {
     openCategoryCreateDialog,
     categoriesList,
     menuCategoriesActions,
-    loadCategories,
+    loadAllCategories,
+    loadSingleCategory,
   };
 };

@@ -1,8 +1,8 @@
+import { useTranslation } from '@libs/react-i18next';
 import { Button, ButtonVariants } from "@shared/components/atoms/Button";
 import { Menu } from '@shared/services'
 import { IAction } from "@shared/components/atoms/ActionMenu";
 import { MenuNavigationItem } from "./MenuINavigationItem";
-import { useTranslation } from '@libs/react-i18next';
 
 interface MenuNavigationProps {
   items: Menu[],

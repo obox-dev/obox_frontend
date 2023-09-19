@@ -1,5 +1,6 @@
 import { API } from "./ApiService";
 import { Category } from "./CategoriesService";
+import { Menu } from "./RestaurantsService";
 export interface CreateMenuRequest {
   name: string;
   language_code: string;
@@ -14,6 +15,10 @@ export interface UpdateMenuRequest {
 }
 
 export class MenuService {
+  static async getById(id: string): Promise<Menu> {
+    return API.get<void, Menu>(`/menus/${id}`);
+  }
+
   static async create(params: CreateMenuRequest): Promise<CreateMenuResponse> {
     return API.post<CreateMenuRequest, CreateMenuResponse>(`/menus/`, params);
   }
