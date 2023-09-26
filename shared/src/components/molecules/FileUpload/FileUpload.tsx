@@ -1,6 +1,4 @@
 import { t } from "@libs/i18next";
-import { Button, ButtonVariants } from "@shared/components/atoms/Button";
-import { ButtonTypes } from "@shared/components/atoms/Button/types";
 import { Input, InputVariants } from "@shared/components/atoms/Input";
 import { InputLabel } from "@shared/components/atoms/InputLabel";
 import { useState } from "react";

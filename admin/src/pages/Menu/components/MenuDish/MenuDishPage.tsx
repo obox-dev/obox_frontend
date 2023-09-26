@@ -5,15 +5,13 @@ import {
   Dish,
 } from "@shared/services/DishService";
 import { useEffect, useState, useCallback } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router-dom";
 import { DishForm } from "./MenuDishForm";
 import { useDish } from "./useDish";
 import { useDishForms } from "./useDishForms";
 import type { DishDefaultValues } from './useDishForms';
 import ColorRingLoader from "@shared/components/atoms/Loader/Loader";
 import "@shared/components/atoms/Loader/Loader.scss"
-
-type RequestType = CreateDishRequest | UpdateDishRequest;
 
 export const MenuDishPage = () => {
   const [defaultValues, setDefaultValues] = useState<DishDefaultValues | null>(null);
@@ -45,9 +43,9 @@ export const MenuDishPage = () => {
 
   const handleOnSubmit = useCallback(async (data: Partial<Dish>) => {
     if (dishId) {
-      await onEditSubmit(dishId, data as UpdateDishRequest, navigateToCategory);
+      await onEditSubmit(dishId, data as UpdateDishRequest);
     } else {
-      await onCreateSubmit(data as CreateDishRequest, navigateToCategory);
+      await onCreateSubmit(data as CreateDishRequest);
     }
   }, [dishId, onEditSubmit, onCreateSubmit, navigateToCategory]);
 

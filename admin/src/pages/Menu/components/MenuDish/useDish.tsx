@@ -5,17 +5,17 @@ import { ButtonVariants } from "@shared/components/atoms/Button";
 import { IAction } from "@shared/components/atoms/ActionMenu";
 import { useTranslation } from "@libs/react-i18next";
 import {
-  CreateDishRequest,
   Dish,
   DishesService,
   UpdateDishRequest,
 } from "@shared/services/DishService";
 import { CategoriesService } from "@shared/services/CategoriesService";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router-dom";
+import { useRequest } from "@admin/hooks";
 
 export const useDish = (categoryId: string) => {
   const { t } = useTranslation();
-  const { openDialog } = useDialog();
+  const { openDialog, closeAll } = useDialog();
   const [dishList, setDishList] = useState<Dish[]>([]);
 
   const { menuId } = useParams();
@@ -25,28 +25,42 @@ export const useDish = (categoryId: string) => {
     navigate(`/menu/${menuId}/category/${categoryId}/dish/${dishId}`);
   };
 
-  const loadDishes = async (category_id: string) => {
-    try {
-      const dish = await CategoriesService.getDishesByCategoryId(category_id);
-      setDishList(dish);
-    } catch (error) {
+  const navigateToCategory = () => {
+    navigate(`/menu/${menuId}/category/${categoryId}`);
+  };
+
+  const loadDishes = () => {
+    return CategoriesService.getDishesByCategoryId(categoryId);
+  };
+
+  const { execute: loadAllDishes } = useRequest({
+    requestFunction: loadDishes,
+    onSuccess: (result: Dish[]) => {
+      setDishList(result);
+    },
+    onError: (error) => {
       console.error("Error fetching categories:", error);
-    }
-  };
+    },
+  });
 
-  const onCreateSubmit = async (
-    data: CreateDishRequest,
-    afterSubmit: () => void
-  ) => {
-    try {
-      await DishesService.create(data);
-      afterSubmit();
-    } catch (error) {
+  const { execute: loadSingleDish } = useRequest({
+    requestFunction: DishesService.getDishById,
+    redirect404: true,
+  });
+
+  const { execute: onCreateSubmit } = useRequest({
+    requestFunction: DishesService.create,
+    onSuccess: async () => {
+      await loadAllDishes();
+      navigateToCategory();
+      closeAll();
+    },
+    onError: (error) => {
       throw error;
-    }
-  };
+    },
+  });
 
-  const onEditSubmit = async (
+  const editSubmit = async (
     dish_id: string,
     {
       name,
@@ -58,10 +72,7 @@ export const useDish = (categoryId: string) => {
       allergens,
       tags,
       images,
-    }: UpdateDishRequest,
-    afterSubmit: () => void
-  ) => {
-    try {
+    }: UpdateDishRequest) => {
       const id = dish_id;
       const request: UpdateDishRequest = {
         name,
@@ -74,28 +85,38 @@ export const useDish = (categoryId: string) => {
         tags,
         images,
       };
-      await DishesService.update(id, request);
-      afterSubmit();
-    } catch (error) {
-      throw error;
-    }
+      return DishesService.update(id, request);
   };
 
-  const onDeleteSubmit = async ({ dish_id }: Dish) => {
-    try {
-      await DishesService.delete(dish_id);
-      await loadDishes(categoryId);
-    } catch (error) {
+  const { execute: onEditSubmit } = useRequest({
+    requestFunction: editSubmit,
+    onSuccess: async () => {
+      await loadAllDishes();
+      navigateToCategory();
+      closeAll();
+    },
+    onError: (error) => {
+      throw error;
+    },
+  });
+
+  const { execute: onDeleteSubmit } = useRequest({
+    requestFunction: DishesService.delete,
+    onSuccess: async () => {
+      await loadAllDishes();
+    },
+    onFinally: () => closeAll(),
+    onError: (error) => {
       console.error("Error deleting category:", error);
-    }
-  };
+    },
+  });
 
   const openDishDeleteDialog = (dish: Dish) =>
     openDialog(({ closeDialog }) => {
       return (
         <Dialog
           okCallback={() => {
-            onDeleteSubmit(dish);
+            onDeleteSubmit(dish.dish_id);
             closeDialog();
           }}
           cancelCallback={() => {
@@ -131,5 +152,7 @@ export const useDish = (categoryId: string) => {
     onEditSubmit,
     dishList,
     menuDishesActions,
+    loadSingleDish,
+    loadAllDishes,
   };
 };

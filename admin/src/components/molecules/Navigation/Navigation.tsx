@@ -27,7 +27,7 @@ const Navigation = () => {
           <NavLink
             to={to}
             className={({ isActive }) =>
-              `nav-link ${isActive ? "text-light" : "text-secondary"}`
+              `nav-link ${isActive ? "text-light" : "text-secondary text-hover"}`
             }
           >
             {icon}

@@ -1,4 +1,4 @@
-import * as yup from 'yup';
+import * as yup from "yup";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Dialog } from "@shared/components/molecules/Dialog";
@@ -9,12 +9,14 @@ import { InputVariants } from "@shared/components/atoms/Input";
 import { FormInput } from "@shared/components/atoms/FormInput";
 import {
   CreateMenuRequest,
+  CreateMenuResponse,
   MenuService,
   UpdateMenuRequest,
 } from "@shared/services/MenuService";
+import { useRequest } from "@admin/hooks";
 import { ButtonVariants } from "@shared/components/atoms/Button";
 import { IAction } from "@shared/components/atoms/ActionMenu";
-import { useTranslation } from '@libs/react-i18next';
+import { useTranslation } from "@libs/react-i18next";
 
 interface UseMenuProps {
   restaurant_id: string;
@@ -28,43 +30,61 @@ export const useMenu = (props: UseMenuProps) => {
   const [menuList, setMenuList] = useState<Menu[]>([]);
 
   const navigate = useNavigate();
-  const { openDialog } = useDialog();
+  const { openDialog, closeAll } = useDialog();
 
-  const loadMenus = async () => {
-    try {
-      const menus = await RestaurantsService.getMenusByRestaurantId(
-        restaurant_id
-      );
-      setMenuList(menus);
-    } catch (error) {
+  const loadMenus = () => {
+    return RestaurantsService.getMenusByRestaurantId(restaurant_id);
+  };
+
+  const { execute: loadAllMenus } = useRequest({
+    requestFunction: loadMenus,
+    onSuccess: (result: Menu[]) => {
+      setMenuList(result);
+    },
+    onError: (error) => {
       console.error("Error fetching categories:", error);
-    }
-  };
+    },
+  });
 
-  const onCreateSubmit = async (data: CreateMenuRequest, afterSubmit: () => void) => {
-    try {
-      const response = await MenuService.create(data);
-      await loadMenus();
-      navigate(`/menu/${response.menu_id}`);
-      afterSubmit();
-    } catch (error) {
+  const { execute: loadSingleMenu } = useRequest({
+    requestFunction: MenuService.getById,
+    redirect404: true,
+  });
+
+  const { execute: onCreateSubmit } = useRequest({
+    requestFunction: MenuService.create,
+    onSuccess: async (result: CreateMenuResponse) => {
+      await loadAllMenus();
+      navigate(`/menu/${result.menu_id}`);
+      closeAll();
+    },
+    onError: (error) => {
       throw error;
-    }
-  };
+    },
+  });
 
   const openMenuCreateDialog = () => {
     openDialog(({ closeDialog }) => {
       const formRef = useRef<FormRef<Partial<Menu>> | null>(null);
 
       const defaultValues: CreateMenuRequest = {
-        name: '',
+        name: "",
         language_code: DEFAULT_LANGUAGE_CODE,
         restaurant_id,
       };
 
       const validationSchema = new yup.ObjectSchema({
-        name: yup.string().required(t('common:validation:isRequired', { field: t('common:name') })).min(1, t('common:validation:morethan', { field: t('common:name') }))
-        .max(200, t('common:validation:lessthan', { field: t('common:name') })).trim(),
+        name: yup
+          .string()
+          .required(
+            t("common:validation:isRequired", { field: t("common:name") })
+          )
+          .min(1, t("common:validation:morethan", { field: t("common:name") }))
+          .max(
+            200,
+            t("common:validation:lessthan", { field: t("common:name") })
+          )
+          .trim(),
       });
 
       return (
@@ -82,19 +102,21 @@ export const useMenu = (props: UseMenuProps) => {
           okText={t("common:buttons:confirm")}
           cancelText={t("common:buttons:cancel")}
         >
-          <Form ref={formRef} defaultValues={defaultValues} validationSchema={validationSchema} onSubmit={async (data) => {
-              await onCreateSubmit(data as CreateMenuRequest, closeDialog);
-          }}>
+          <Form
+            ref={formRef}
+            defaultValues={defaultValues}
+            validationSchema={validationSchema}
+            onSubmit={async (data) => {
+              await onCreateSubmit(data as CreateMenuRequest);
+            }}
+          >
             <>
               <FormInput
                 type={InputVariants.HIDDEN}
                 name="restaurant_id"
                 value={restaurant_id}
               />
-              <FormInput
-                type={InputVariants.HIDDEN}
-                name="language_code"
-              />
+              <FormInput type={InputVariants.HIDDEN} name="language_code" />
               <FormInput
                 placeholder={t("menu:createMenuForm.placeholder")}
                 type={InputVariants.TEXT}
@@ -103,23 +125,29 @@ export const useMenu = (props: UseMenuProps) => {
             </>
           </Form>
         </Dialog>
-      )
+      );
     });
-  }
-
-  const onEditSubmit = async ({ menu_id, name }: Menu, afterSubmit: () => void) => {
-    try {
-      const id = menu_id;
-      const request: UpdateMenuRequest = {
-        name,
-      };
-      await MenuService.update(id, request);
-      await loadMenus();
-      afterSubmit();
-    } catch (error) {
-      throw error;
-    }
   };
+
+  const editSubmit = async ({ menu_id, name }: Menu) => {
+    const id = menu_id;
+    const request: UpdateMenuRequest = {
+      name,
+    };
+
+    return MenuService.update(id, request);
+  };
+
+  const { execute: onEditSubmit } = useRequest({
+    requestFunction: editSubmit,
+    onSuccess: async () => {
+      await loadAllMenus();
+      closeAll()
+    },
+    onError: (error) => {
+      throw error;
+    },
+  });
 
   const openMenuEditDialog = (menu: Menu) =>
     openDialog(({ closeDialog }) => {
@@ -129,14 +157,17 @@ export const useMenu = (props: UseMenuProps) => {
       };
 
       const validationSchema = new yup.ObjectSchema({
-        name: yup.string().required(t('common:validation:isRequired', { field: t('common:name') })),
+        name: yup
+          .string()
+          .required(
+            t("common:validation:isRequired", { field: t("common:name") })
+          ),
       });
       return (
         <Dialog
           okCallback={() => {
             if (formRef.current) {
               formRef.current.submit();
-              closeDialog();
             }
           }}
           cancelCallback={() => {
@@ -147,18 +178,17 @@ export const useMenu = (props: UseMenuProps) => {
           okText={t("common:buttons:confirm")}
           cancelText={t("common:buttons:cancel")}
         >
-          <Form ref={formRef} defaultValues={defaultValues} validationSchema={validationSchema} onSubmit={async (data) => {
-              await onEditSubmit(data as Menu, closeDialog);
-          }}>
+          <Form
+            ref={formRef}
+            defaultValues={defaultValues}
+            validationSchema={validationSchema}
+            onSubmit={async (data) => {
+              await onEditSubmit(data as Menu);
+            }}
+          >
             <>
-              <FormInput
-                type={InputVariants.HIDDEN}
-                name="restaurant_id"
-              />
-              <FormInput
-                type={InputVariants.HIDDEN}
-                name="language_code"
-              />
+              <FormInput type={InputVariants.HIDDEN} name="restaurant_id" />
+              <FormInput type={InputVariants.HIDDEN} name="language_code" />
               <FormInput
                 placeholder={t("menu:createMenuForm.placeholder")}
                 type={InputVariants.TEXT}
@@ -170,22 +200,24 @@ export const useMenu = (props: UseMenuProps) => {
       );
     });
 
-  const onDeleteSubmit = async ({ menu_id }: Menu) => {
-    try {
-      await MenuService.delete(menu_id);
-      await loadMenus();
-    } catch (error) {
+  const { execute: onDeleteSubmit } = useRequest({
+    requestFunction: MenuService.delete,
+    onSuccess: async () => {
+      await loadAllMenus();
+      navigate("/menu")
+    },
+    onFinally: () => closeAll(),
+    onError: (error) => {
       console.error("Error deleting category:", error);
-    }
-  };
+    },
+  });
 
   const openMenuDeleteDialog = (menu: Menu) =>
     openDialog(({ closeDialog }) => {
       return (
         <Dialog
           okCallback={() => {
-            onDeleteSubmit(menu);
-            closeDialog();
+            onDeleteSubmit(menu.menu_id);
           }}
           cancelCallback={() => {
             closeDialog();
@@ -197,8 +229,7 @@ export const useMenu = (props: UseMenuProps) => {
           okButtonVariant={ButtonVariants.DANGER}
         >
           <p>
-          {t("menu:deleteMenuForm.message")} {" "}
-            <strong>{menu.name}</strong>?
+            {t("menu:deleteMenuForm.message")} <strong>{menu.name}</strong>?
           </p>
         </Dialog>
       );
@@ -219,7 +250,8 @@ export const useMenu = (props: UseMenuProps) => {
     openMenuCreateDialog,
     menuList,
     setMenuList,
-    loadMenus,
+    loadSingleMenu,
+    loadAllMenus,
     menuActions,
   };
 };
