@@ -10,8 +10,7 @@ import { DishForm } from "./MenuDishForm";
 import { useDish } from "./useDish";
 import { useDishForms } from "./useDishForms";
 import type { DishDefaultValues } from './useDishForms';
-import ColorRingLoader from "@shared/components/atoms/Loader/Loader";
-import "@shared/components/atoms/Loader/Loader.scss"
+
 
 export const MenuDishPage = () => {
   const [defaultValues, setDefaultValues] = useState<DishDefaultValues | null>(null);
@@ -53,7 +52,7 @@ export const MenuDishPage = () => {
     <div className="page-loader">
       {loading || !defaultValues ? (
         <div>
-          <h4>Loading...</h4>
+          {/* <h4>Loading...</h4>
           <ColorRingLoader
             visible={true}
             height="80"
@@ -61,7 +60,7 @@ export const MenuDishPage = () => {
             ariaLabel="blocks-loading"
             wrapperClass="loader"
             colors={["#FFF633", "#f47e60"]}
-          />
+          /> */}
         </div>
       ) : (
         <DishForm

@@ -1,40 +1,20 @@
 import React from "react";
-import { ColorRing } from "react-loader-spinner";
+import Loader from "react-loader-spinner";
 
-interface ColorRingLoaderProps {
-  visible: boolean;
-  height: string;
-  width: string;
-  ariaLabel: string;
-  wrapperStyle?: React.CSSProperties;
-  wrapperClass?: string;
-  colors: string[];
+interface CustomLoaderProps {
+  size: number;
+  color: string;
 }
 
-const ColorRingLoader: React.FC<ColorRingLoaderProps> = ({
-  visible,
-  height,
-  width,
-  ariaLabel,
-  wrapperStyle,
-  wrapperClass,
-  colors,
-}) => {
-  if (!visible) {
-    return null;
-  }
-
+const CustomLoader: React.FC<CustomLoaderProps> = ({ size, color }) => {
   return (
-    <div className={wrapperClass} style={wrapperStyle}>
-      <ColorRing
-        height={height}
-        width={width}
-        color={colors[0]}
-        ariaLabel={ariaLabel}
-        visible={visible}
-      />
-    </div>
+    <Loader
+      type="TailSpin" 
+      color={color}
+      height={size}
+      width={size}
+    />
   );
 };
 
-export default ColorRingLoader;
+export default CustomLoader;
