@@ -1,21 +1,31 @@
-import { t } from "@libs/i18next";
-import { Input, InputVariants } from "@shared/components/atoms/Input";
-import { InputLabel } from "@shared/components/atoms/InputLabel";
-import { useState } from "react";
-import "./FileUpload.scss";
-
+import { t } from '@libs/i18next';
+import { Button, ButtonVariants } from '@shared/components/atoms/Button';
+import { ButtonTypes } from '@shared/components/atoms/Button/types';
+import { Input, InputVariants } from '@shared/components/atoms/Input';
+import { InputLabel } from '@shared/components/atoms/InputLabel';
+import './FileUpload.scss';
+import {
+  Attachment,
+  AttachmentOrFile,
+  FileToUpload,
+} from '@shared/services/AttachmentsService';
 interface FileUploadProps {
-  onFileChange: (fileAsBase64: string) => void;
-  image_url?: string;
+  imagesToUpload: FileToUpload[];
+  uploadedImages: Attachment[];
+  onDeleteImage: (
+    type: 'attachment' | 'file',
+    attachment: AttachmentOrFile
+  ) => void;
+  onFileUpload: (fileToUpload: FileToUpload[]) => void;
+  onFileDelete?: (attachment: Attachment[]) => void;
 }
 
 export const FileUpload = (props: FileUploadProps) => {
-  const { image_url, onFileChange } = props;
+  const { imagesToUpload, uploadedImages, onFileUpload, onDeleteImage } = props;
 
-  const [fileData, setFileData] = useState<{ base64String: string }[]>([]);
+  const images = [...uploadedImages, ...imagesToUpload];
 
-  const preview =
-    fileData.length > 0 ? fileData[0].base64String : image_url || null;
+  const preview = images?.length || null;
 
   const fileToBase64 = (file: File): Promise<string> =>
     new Promise((resolve, reject) => {
@@ -29,29 +39,39 @@ export const FileUpload = (props: FileUploadProps) => {
     });
 
   const onAddFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const tempFileList: { base64String: string }[] = [];
+    const imagesList = [...(imagesToUpload || [])];
+
     await Promise.all(
       [].map.call(e.target.files, async (file: File) => {
-        tempFileList.push({
-          base64String:
-            file.type.indexOf("image") > -1 ? await fileToBase64(file) : "",
-        });
+        const base64image =
+          file.type.indexOf('image') > -1 ? await fileToBase64(file) : '';
+        imagesList.push({ base64image });
       })
     );
-    setFileData(tempFileList);
-    tempFileList.forEach((fileData) => {
-      onFileChange(fileData.base64String);
-    });
+    onFileUpload(imagesList);
   };
 
-  // const deleteFile = () => {
-  //   setFile(null);
-  //   onFileChange('');
-  // }
+  const getFileSrc = (file: AttachmentOrFile) => {
+    if ('base64image' in file) {
+      return file.base64image;
+    }
+
+    return file.attachment_url;
+  };
+
+  const handleDelete = (file: AttachmentOrFile) => {
+    console.log(file);
+
+    if ('base64image' in file) {
+      onDeleteImage('file', file);
+    }
+
+    onDeleteImage('attachment', file);
+  };
 
   return (
     <div className="file-upload">
-      <InputLabel forInput="images" text={t("dishForm:image")}>
+      <InputLabel forInput="images" text={t('dishForm:image')}>
         <Input
           id="images"
           type={InputVariants.FILE}
@@ -61,16 +81,22 @@ export const FileUpload = (props: FileUploadProps) => {
       </InputLabel>
       <div>
         {preview &&
-          fileData.map((file, index) => (
-            <img
-              key={index}
-              className="file-upload__preview"
-              src={file.base64String}
-              alt={`Preview ${index}`}
-            />
+          images?.map((file, index) => (
+            <div key={index}>
+              <img
+                className="file-upload__preview"
+                src={getFileSrc(file)}
+                alt={`Preview ${index}`}
+              />
+              <Button
+                variant={ButtonVariants.DANGER}
+                type={ButtonTypes.BUTTON}
+                text="Delete"
+                onClick={() => handleDelete(file)}
+              />
+            </div>
           ))}
       </div>
-      {/* <Button variant={ButtonVariants.DANGER} type={ButtonTypes.BUTTON} text="Delete" onClick={deleteFile}/> */}
     </div>
   );
 };

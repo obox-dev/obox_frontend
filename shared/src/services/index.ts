@@ -4,6 +4,7 @@ export { MenuService } from "./MenuService";
 export { DishesService } from "./DishService";
 export { RestaurantsService } from "./RestaurantsService";
 export { AttachmentService } from "./AttachmentsService"
+export type { FileToUpload, AttachmentOrFile } from './AttachmentsService';
 
 export type {
   Category,
