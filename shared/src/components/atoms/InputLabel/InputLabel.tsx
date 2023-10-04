@@ -9,8 +9,8 @@ export const InputLabel = (props: IInputLabel) => {
   } = props;
 
   return (
-    <label className={[className, "input-label"].join(" ")} htmlFor={forInput}>
-      <span className="input-label__text">{text}</span>
+    <label className="input-label" htmlFor={forInput}>
+      <span className={[className, "input-label__text"].join(" ")}>{text}</span>
       {children}
     </label>
   )

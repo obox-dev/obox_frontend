@@ -3,12 +3,13 @@ import { Button, ButtonVariants } from '@shared/components/atoms/Button';
 import { ButtonTypes } from '@shared/components/atoms/Button/types';
 import { Input, InputVariants } from '@shared/components/atoms/Input';
 import { InputLabel } from '@shared/components/atoms/InputLabel';
-import './FileUpload.scss';
 import {
   Attachment,
   AttachmentOrFile,
   FileToUpload,
 } from '@shared/services/AttachmentsService';
+import './FileUpload.scss';
+
 interface FileUploadProps {
   imagesToUpload: FileToUpload[];
   uploadedImages: Attachment[];
@@ -60,33 +61,31 @@ export const FileUpload = (props: FileUploadProps) => {
   };
 
   const handleDelete = (file: AttachmentOrFile) => {
-    console.log(file);
-
     if ('base64image' in file) {
       onDeleteImage('file', file);
+    } else {
+      onDeleteImage('attachment', file);
     }
-
-    onDeleteImage('attachment', file);
   };
 
   return (
     <div className="file-upload">
-      <InputLabel forInput="images" text={t('dishForm:image')}>
+      <InputLabel className="file-upload__trigger btn btn-primary mb-3" forInput="files" text={t('dishForm:image')}>
         <Input
-          id="images"
+          id="files"
           type={InputVariants.FILE}
-          name="images"
+          name="files"
           onChange={onAddFile}
         />
       </InputLabel>
       <div>
         {preview &&
           images?.map((file, index) => (
-            <div key={index}>
+            <div className="file-upload__preview-item mb-3" key={index}>
               <img
-                className="file-upload__preview"
+                className="file-upload__preview-image"
                 src={getFileSrc(file)}
-                alt={`Preview ${index}`}
+                alt={`Preview ${index + 1}`}
               />
               <Button
                 variant={ButtonVariants.DANGER}
