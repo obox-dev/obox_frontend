@@ -25,10 +25,11 @@ export const useUpdateCategory = (args: UpdateCategoryParams) => {
   const { openDialog } = useDialog();
   const { onSuccess, onError } = args;
 
-  const updateSubmit = async ({ category_id, name }: Category) => {
+  const updateSubmit = async ({ category_id, name, state }: Category) => {
     const id = category_id;
     const request: UpdateCategoryRequest = {
       name,
+      state,
     };
     return CategoriesService.update(id, request);
   };
@@ -72,6 +73,7 @@ export const useUpdateCategory = (args: UpdateCategoryParams) => {
           >
             <>
               <FormInput type={InputVariants.HIDDEN} name="category_id" />
+              <FormInput type={InputVariants.HIDDEN} name="state" />
               <FormInput
                 placeholder={t('menu:updateCategoryForm.placeholder')}
                 type={InputVariants.TEXT}

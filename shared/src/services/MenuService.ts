@@ -1,10 +1,16 @@
 import { API } from "./ApiService";
 import { Category } from "./CategoriesService";
 import { Menu } from "./RestaurantsService";
+
+export enum MenuState {
+  ENABLED = "ENABLED",
+  DISABLED = "DISABLED",
+}
 export interface CreateMenuRequest {
   name: string;
   language_code: string;
   restaurant_id: string;
+  state: MenuState;
 }
 export interface CreateMenuResponse {
   menu_id: string;
@@ -12,6 +18,7 @@ export interface CreateMenuResponse {
 
 export interface UpdateMenuRequest {
   name: string;
+  state: MenuState;
 }
 
 export class MenuService {

@@ -22,10 +22,11 @@ export const useUpdateMenu = (args: UpdateMenuParams) => {
   const { openDialog } = useDialog();
   const { onSuccess, onError } = args;
 
-  const updateSubmit = async ({ menu_id, name }: Menu) => {
+  const updateSubmit = async ({ menu_id, name, state }: Menu) => {
     const id = menu_id;
     const request: UpdateMenuRequest = {
       name,
+      state,
     };
 
     return MenuService.update(id, request);
@@ -70,6 +71,7 @@ export const useUpdateMenu = (args: UpdateMenuParams) => {
             <>
               <FormInput type={InputVariants.HIDDEN} name="restaurant_id" />
               <FormInput type={InputVariants.HIDDEN} name="language_code" />
+              <FormInput type={InputVariants.HIDDEN} name="state" />
               <FormInput
                 placeholder={t('menu:createMenuForm.placeholder')}
                 type={InputVariants.TEXT}
