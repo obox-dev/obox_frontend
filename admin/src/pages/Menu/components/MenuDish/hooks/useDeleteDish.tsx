@@ -49,8 +49,6 @@ export const useDeleteDish = (args: DeleteDishParams) => {
     });
   }
 
-  
-
   return {
     openDishDeleteDialog,
   }
