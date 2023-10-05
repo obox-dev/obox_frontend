@@ -32,8 +32,6 @@ export const useDishImage = () => {
     type: 'attachment' | 'file',
     attachment: AttachmentOrFile
   ) => {
-    console.log(type, attachment);
-    
     if (type === 'attachment') {
       const existingImage = attachment as Attachment;
       setAttachments(

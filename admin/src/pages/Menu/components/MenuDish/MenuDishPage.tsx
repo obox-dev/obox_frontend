@@ -53,8 +53,6 @@ export const MenuDishPage = () => {
     }
   }, [dishId]);
 
-
-
   const handleOnSubmit = useCallback(
     async (data: Partial<Dish>) => {
       await deleteMarkedAttachments();
