@@ -1,18 +1,25 @@
 import { API } from "./ApiService";
 import { Dish } from "./DishService";
 
+export enum CategoryState {
+  ENABLED = "ENABLED",
+  DISABLED = "DISABLED",
+}
 export interface Category {
   menu_id: string;
   name: string;
   category_id: string;
+  state: CategoryState;
 }
 export interface CreateCategoryRequest {
   menu_id: string;
   name: string;
+  state: CategoryState;
 }
 
 export interface UpdateCategoryRequest {
   name: string;
+  state: CategoryState;
 }
 
 export interface CreateCategoryResponse {

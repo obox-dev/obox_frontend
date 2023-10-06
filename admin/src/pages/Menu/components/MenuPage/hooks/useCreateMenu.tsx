@@ -12,6 +12,7 @@ import {
 import { FormInput } from '@shared/components/atoms/FormInput';
 import { InputVariants } from '@shared/components/atoms/Input';
 import { useMenuFormValidation } from '../validation/useMenuFormValidation';
+import { MenuState } from '@shared/services/MenuService';
 
 interface CreateMenuParams {
   onSuccess: (result: CreateMenuResponse) => Promise<void>;
@@ -42,6 +43,7 @@ export const useCreateMenu = (args: CreateMenuParams) => {
         name: '',
         language_code: DEFAULT_LANGUAGE_CODE,
         restaurant_id: restaurantId,
+        state: MenuState.ENABLED,
       };
 
       return (
@@ -74,6 +76,7 @@ export const useCreateMenu = (args: CreateMenuParams) => {
                 value={restaurantId}
               />
               <FormInput type={InputVariants.HIDDEN} name="language_code" />
+              <FormInput type={InputVariants.HIDDEN} name="state" />
               <FormInput
                 placeholder={t('menu:createMenuForm.placeholder')}
                 type={InputVariants.TEXT}

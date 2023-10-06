@@ -8,6 +8,7 @@ import { Form, FormRef } from "@shared/components/atoms/Form";
 import { Dialog } from "@shared/components/molecules/Dialog";
 import { FormInput } from "@shared/components/atoms/FormInput";
 import { InputVariants } from "@shared/components/atoms/Input";
+import { CategoryState } from "@shared/services/CategoriesService";
 
 interface CreateCategoryParams {
     onSuccess: (result: CreateCategoryResponse) => Promise<void>;
@@ -33,6 +34,7 @@ export const useCreateCategory = (args: CreateCategoryParams) => {
         const defaultValues: CreateCategoryRequest = {
           menu_id: menuId,
           name: "",
+          state: CategoryState.ENABLED,
         };
   
         return (
@@ -64,6 +66,7 @@ export const useCreateCategory = (args: CreateCategoryParams) => {
                   name="menu_id"
                   value={menuId}
                 />
+                <FormInput type={InputVariants.HIDDEN} name="state" />
                 <FormInput
                   placeholder={t("menu:createCategoryForm.placeholder")}
                   type={InputVariants.TEXT}
