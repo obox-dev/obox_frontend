@@ -1,18 +1,21 @@
-import { useEffect, useState, useCallback } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState, useCallback } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
-  CreateDishRequest,
   UpdateDishRequest,
   DishesService,
+  CreateDishRequest,
   Dish,
-} from "@shared/services/DishService";
-import { DishForm } from "./MenuDishForm";
-import { useDish } from "./useDish";
-import { useDishForms } from "./hooks/useDishForms";
+} from '@shared/services/DishService';
+import { DishForm } from './MenuDishForm';
+import { useDish } from './useDish';
+import { useDishForms } from './hooks/useDishForms';
 import type { DishDefaultValues } from './hooks/useDishForms';
+import { useDishImage } from './hooks/useDishImage';
 
 export const MenuDishPage = () => {
-  const [defaultValues, setDefaultValues] = useState<DishDefaultValues | null>(null);
+  const [defaultValues, setDefaultValues] = useState<DishDefaultValues | null>(
+    null
+  );
   const [loading, setLoading] = useState<boolean>(!!useParams().dishId);
   const { menuId, categoryId, dishId } = useParams();
 
@@ -24,9 +27,20 @@ export const MenuDishPage = () => {
     navigate(`/menu/${menuId}/category/${categoryId}`);
   }, [navigate, menuId, categoryId]);
 
+  const {
+    attachments,
+    filesToUpload,
+    handleDeleteButtonClick,
+    uploadFiles,
+    deleteMarkedAttachments,
+    getDishAttachments,
+    setFilesToUpload
+  } = useDishImage();
+
   useEffect(() => {
     const loadDish = async (id: string) => {
       const response = await DishesService.getDishById(id);
+      await getDishAttachments(id);
       setDefaultValues(getDefaultValues(response));
       setLoading(false);
     };
@@ -39,13 +53,21 @@ export const MenuDishPage = () => {
     }
   }, [dishId]);
 
-  const handleOnSubmit = useCallback(async (data: Partial<Dish>) => {
-    if (dishId) {
-      await onUpdateSubmit(dishId, data as UpdateDishRequest);
-    } else {
-      await onCreateSubmit(data as CreateDishRequest);
-    }
-  }, [dishId, onUpdateSubmit, onCreateSubmit, navigateToCategory]);
+  const handleOnSubmit = useCallback(
+    async (data: Partial<Dish>) => {
+      await deleteMarkedAttachments();
+      if (dishId) {
+        await onUpdateSubmit(dishId, data as UpdateDishRequest);
+        await uploadFiles(dishId, filesToUpload);
+        await getDishAttachments(dishId);
+      } else {
+        const { dish_id } = await onCreateSubmit(data as CreateDishRequest);
+        await uploadFiles(dish_id, filesToUpload);
+        await getDishAttachments(dish_id);
+      }
+    },
+    [dishId, onUpdateSubmit, onCreateSubmit, navigateToCategory]
+  );
 
   return loading || !defaultValues ? (
     <div>Loading...</div>
@@ -54,7 +76,10 @@ export const MenuDishPage = () => {
       onSubmit={handleOnSubmit}
       defaultValues={defaultValues}
       validationSchema={createDishSchema}
+      onUploadImage={setFilesToUpload}
+      imagesToUpload={filesToUpload}
+      uploadedImages={attachments}
+      onDeleteImage={handleDeleteButtonClick}
     />
   );
 };
-
