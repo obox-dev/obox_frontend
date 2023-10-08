@@ -1,6 +1,7 @@
 import {
   CreateDishRequest,
   Dish,
+  DishInStock,
   DishState,
 } from '@shared/services/DishService';
 import { useDishFormValidation } from '../validation/useDishFormValidation';
@@ -20,6 +21,7 @@ const mapDishToDefaultValues = (dish: Dish): DishDefaultValues => ({
   allergens: dish.allergens,
   tags: dish.tags,
   state: dish.state,
+  in_stock: dish.in_stock,
 });
 
 export const useDishForms = (categoryId: string) => {
@@ -35,6 +37,7 @@ export const useDishForms = (categoryId: string) => {
     allergens: [],
     tags: [],
     state: DishState.ENABLED,
+    in_stock: DishInStock.ENABLED
   };
 
   const getDefaultValues = (dish?: Dish): DishDefaultValues => {
