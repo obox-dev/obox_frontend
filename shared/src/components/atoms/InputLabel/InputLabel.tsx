@@ -5,11 +5,12 @@ export const InputLabel = (props: IInputLabel) => {
     text,
     forInput,
     children,
-    className
+    className,
+    wrapperClassName
   } = props;
 
   return (
-    <label className="input-label" htmlFor={forInput}>
+    <label className={[wrapperClassName, "input-label"].join(" ")} htmlFor={forInput}>
       <span className={[className, "input-label__text"].join(" ")}>{text}</span>
       {children}
     </label>

@@ -1,18 +1,13 @@
 import { NavLink } from "react-router-dom";
 import { Nav } from "react-bootstrap";
 import { useTranslation } from "@libs/react-i18next";
-import { RestaurantIcon, MenuIcon } from "@admin/assets/icons";
+import { MenuIcon } from "@admin/assets/icons";
 import "./Navigation.scss"
 
 const Navigation = () => {
   const { t } = useTranslation();
 
   const links = [
-    {
-      to: "/restaurants",
-      text: t("common:restaurants"),
-      icon: <RestaurantIcon />,
-    },
     {
       to: "/menu",
       text: t("common:menu"),
@@ -21,7 +16,7 @@ const Navigation = () => {
   ];
 
   return (
-    <Nav>
+    <Nav className="me-auto d-flex flex-column">
       {links.map(({ to, text, icon }) => (
         <Nav.Item key={to}>
           <NavLink

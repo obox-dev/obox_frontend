@@ -1,6 +1,7 @@
 export interface IInputLabel {
-  text: string;
+  text?: string;
   forInput?: string;
   children?: Array<JSX.Element> | JSX.Element;
   className?: string;
+  wrapperClassName?: string;
 }
