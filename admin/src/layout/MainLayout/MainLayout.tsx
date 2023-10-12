@@ -5,6 +5,7 @@ import Home from "../../pages/Home/Home";
 import { MenuPage } from "../../pages/Menu/MenuPage";
 import NotFound from "../../pages/Page_404/NotFound";
 import { MenuDishPage } from "../../pages/Menu/components/MenuDish/MenuDishPage";
+import Tags from "@admin/pages/TagsAndAllergenes/Tags";
 
 export const MainLayout: React.FC = () => {
   const userIsAuthenticated = true; // Replace this with your authentication logic
@@ -16,6 +17,7 @@ export const MainLayout: React.FC = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/menu" element={<MenuPage />} />
+          <Route path="/tags" element={<Tags />} />
           <Route path="/menu/:menuId" element={<MenuPage />} />
           <Route
             path="/menu/:menuId/category/:categoryId"

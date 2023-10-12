@@ -4,3 +4,17 @@
   }
 
 }
+.nav-container {
+  padding-block: 32px;
+
+  .accordion {
+    --bs-accordion-border-color: none; 
+    --bs-accordion-border-width: none; 
+    --bs-accordion-border-radius: none; 
+    --bs-accordion-inner-border-radius: none;
+    --bs-accordion-bg: none;
+    --bs-accordion-btn-focus-border-color: none;
+    --bs-accordion-btn-focus-box-shadow: none;
+    --bs-accordion-active-bg: none;
+  }
+}

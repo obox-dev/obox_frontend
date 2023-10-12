@@ -5,6 +5,11 @@ export enum DishState {
   DISABLED = "DISABLED",
 }
 
+export enum DishInStock {
+  ENABLED = "ENABLED",
+  DISABLED = "DISABLED",
+}
+
 export interface Dish {
   dish_id: string;
   category_id: string;
@@ -17,6 +22,7 @@ export interface Dish {
   allergens?: string[];
   tags?: string[];
   state?: DishState;
+  in_stock?: DishInStock;
 }
 
 export interface CreateDishRequest extends Omit<Dish, 'dish_id'> {}
@@ -31,6 +37,7 @@ export interface UpdateDishRequest {
   allergens?: string;
   tags?: string;
   state?: DishState;
+  in_stock?: DishInStock;
 }
 export interface CreateDishResponse {
   dish_id: string;

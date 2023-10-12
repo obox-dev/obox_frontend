@@ -22,6 +22,7 @@ export const useUpdateDish = (args: UpdateDishParams) => {
       calories,
       allergens,
       tags,
+      in_stock,
     }: UpdateDishRequest) => {
     const id = dish_id;
     const request: UpdateDishRequest = {
@@ -33,6 +34,7 @@ export const useUpdateDish = (args: UpdateDishParams) => {
       calories,
       allergens,
       tags,
+      in_stock,
     };
     return DishesService.update(id, request);
   };
