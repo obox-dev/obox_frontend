@@ -1,20 +1,42 @@
-.nav-item {
-  .text-hover:hover {
-    opacity: 0.6;
-  }
 
-}
-.nav-container {
+.nav {
   padding-block: 32px;
 
+  &-item {
+
+    &__icon {
+      display: inline-block;
+      margin-right: 8px;
+    }
+  
+    .text-hover:hover {
+      opacity: 0.6;
+    }
+  }
+
+  .nav-link {
+    padding-inline: 0;
+    padding-inline-start: 32px;
+  }
+
   .accordion {
-    --bs-accordion-border-color: none; 
-    --bs-accordion-border-width: none; 
-    --bs-accordion-border-radius: none; 
+    --bs-accordion-border-color: none;
+    --bs-accordion-border-width: none;
+    --bs-accordion-border-radius: none;
     --bs-accordion-inner-border-radius: none;
     --bs-accordion-bg: none;
     --bs-accordion-btn-focus-border-color: none;
     --bs-accordion-btn-focus-box-shadow: none;
     --bs-accordion-active-bg: none;
+
+    &-body {
+      padding: 0;
+    }
+
+    &-button {
+      padding: 24px 0;
+    }
   }
 }
+
+

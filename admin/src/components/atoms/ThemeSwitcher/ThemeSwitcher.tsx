@@ -1,4 +1,5 @@
 import { Switcher } from '@shared/components/atoms/Switcher';
+import "./ThemeSwither.scss"
 // import { useState } from 'react';
 
 // enum ThemeOptions {
@@ -20,5 +21,5 @@ export const ThemeSwitcher = () => {
     if (true) {
     }
   };
-  return <Switcher onChange={onThemeChange} name="theme" />;
+  return <Switcher isDisabled onChange={onThemeChange} name="theme" textForChecked='dark mode' textForUnchecked='light mode' />;
 };

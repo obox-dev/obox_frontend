@@ -1,10 +1,10 @@
+import { t } from 'i18next';
 import { NavLink } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
 import { useTranslation } from '@libs/react-i18next';
 import { CreateMenuIcon } from '@admin/assets/icons';
 import './Navigation.scss';
-import { t } from 'i18next';
 
 interface NavLinkItem {
   to: string;
@@ -43,7 +43,7 @@ const Navigation = () => {
   ];
 
   const renderNavItem = (
-    item: NavLinkItem | NavAccordionItem | NoIconNavLinkItem, 
+    item: NavLinkItem | NavAccordionItem | NoIconNavLinkItem,
     index: number
   ) => {
     const { to, text } = item;
@@ -61,7 +61,7 @@ const Navigation = () => {
               }`
             }
           >
-            {icon ?? ""} 
+            {icon && <span className="nav-item__icon">{icon}</span>}
             {text}
           </NavLink>
         </Nav.Item>
@@ -73,7 +73,7 @@ const Navigation = () => {
         <>
           <Accordion.Item eventKey={index.toString()}>
             <Accordion.Header>
-              {icon}
+              <span className="nav-item__icon">{icon}</span>
               {text}
             </Accordion.Header>
             <Accordion.Body>
@@ -82,34 +82,14 @@ const Navigation = () => {
               )}
             </Accordion.Body>
           </Accordion.Item>
-          {/* 
-            {
-              const { to: childTo, text: childText, icon: childIcon } = child;
-              return (
-                <Nav.Item key={childTo}>
-                  <NavLink
-                    to={childTo}
-                    className={({ isActive }) =>
-                      `nav-link ${
-                        isActive ? 'text-light' : 'text-secondary text-hover'
-                      }`
-                    }
-                  >
-                    {childIcon}
-                    {childText}
-                  </NavLink>
-                </Nav.Item>
-              );
-            }
-             */}
         </>
       );
     }
   };
 
   return (
-    <Nav className="nav-container me-auto d-flex flex-column">
-      <Accordion defaultActiveKey="0">
+    <Nav className="me-auto d-flex flex-column">
+      <Accordion>
         {links.map((link, index) => renderNavItem(link, index))}
       </Accordion>
     </Nav>
