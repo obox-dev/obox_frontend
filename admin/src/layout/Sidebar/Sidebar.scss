@@ -1,7 +1,8 @@
 .side-bar {
-  $header-height: 90px;
-  $footer-height: 64px;
-  min-height: calc(100vh - $header-height - $footer-height);
-  width: 300px;
+  width: 328px;
   background: rgb(205, 205, 205);
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }

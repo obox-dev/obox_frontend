@@ -1,0 +1,37 @@
+.language-switcher {
+    display: flex;
+    line-height: 1;
+    margin-left: -12px;
+
+    .form-check {
+        padding-left: 0 !important;
+        position: relative;
+        min-height: 0;
+        margin-inline: 12px;
+        margin-bottom: 0;
+        
+        label {
+            cursor: pointer;
+        }
+
+        &:not(:last-child):before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: -12px;
+            width: 1.5px;
+            background: #000;
+        }
+    }
+
+    .active {
+        color: green;
+    }
+
+    input {
+        display: none;
+    }
+
+    
+}
