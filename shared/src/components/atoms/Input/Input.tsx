@@ -10,27 +10,31 @@ export const Input = (props: IInput<HTMLInputElement>) => {
     value,
     checked,
     isDisabled,
+    className,
+    innerRef,
   } = props;
 
-  const getClass = (type: InputVariants):string => {
-    const classes: Partial<{ [key in InputVariants]: string }> = {
+  const combineClasses = (type: InputVariants):string => {
+    const commonClasses = "form-control mb-2";
+    const classesByInputType: Partial<{ [key in InputVariants]: string }> = {
       [InputVariants.CHECKBOX]: 'form-check-input',
       [InputVariants.RADIO]: 'form-check-input',
     }
-    return classes[type] || "form-control mb-2";
+    return `${commonClasses} ${classesByInputType[type] || ''} ${className}`;;
   }
 
   return (
     <input
       id={id}
+      ref={innerRef}
       value={value}
       name={name}
       type={type}
       onChange={onChange}
-      className={getClass(type)}
+      className={combineClasses(type)}
       placeholder={placeholder}
       checked={checked}
       disabled={isDisabled}
-    />
+      />
   )
 }

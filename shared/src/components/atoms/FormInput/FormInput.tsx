@@ -1,36 +1,23 @@
-import { useFormContext } from "react-hook-form";
-import { IInput, InputVariants } from "../Input/types";
+import { IInput } from '../Input/types';
+import { Input } from '../Input';
+import { useFormInput } from '@shared/hooks/useFormInput';
 
 export const FormInput = (props: IInput<HTMLInputElement>) => {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext();
-
   const { name, placeholder, type, isDisabled, onChange } = props;
-
-  const getClass = (type: InputVariants): string => {
-    const classes: Partial<{ [key in InputVariants]: string }> = {
-      [InputVariants.CHECKBOX]: "form-check-input",
-      [InputVariants.RADIO]: "form-check-input",
-    };
-    return classes[type] || "form-control mb-2";
-  };
+  const { ref, registerParams, error } = useFormInput(name, { onChange });
 
   return (
     <div>
-      <input
-        {...register(name, {
-          onChange
-        })}
+      <Input
+        {...registerParams}
+        innerRef={ref}
         name={name}
         type={type}
-        className={getClass(type)}
         placeholder={placeholder}
-        disabled={isDisabled}
+        isDisabled={isDisabled}
       />
-      {errors[name] && (
-        <span className="text-danger">{errors[name]?.message as string}</span>
+      {error && (
+        <span className="text-danger">{error.message as string}</span>
       )}
     </div>
   );

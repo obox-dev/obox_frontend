@@ -13,12 +13,13 @@ export enum InputVariants {
 
 export interface IInput<T> {
   name: string;
+  type: InputVariants;
   id?: string;
   placeholder?: string;
   onChange?: (event: ChangeEvent<T>) => void;
-  type: InputVariants;
   value?: string;
   checked?: boolean;
   isDisabled?: boolean;
   className?: string;
+  innerRef?: any;
 }
