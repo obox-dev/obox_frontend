@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { t } from 'i18next';
 import { NavLink } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
@@ -70,7 +71,7 @@ const Navigation = () => {
 
     if (children.length) {
       return (
-        <>
+        <Fragment key={text}>
           <Accordion.Item eventKey={index.toString()}>
             <Accordion.Header>
               <span className="nav-item__icon">{icon}</span>
@@ -82,7 +83,7 @@ const Navigation = () => {
               )}
             </Accordion.Body>
           </Accordion.Item>
-        </>
+        </Fragment>
       );
     }
   };
