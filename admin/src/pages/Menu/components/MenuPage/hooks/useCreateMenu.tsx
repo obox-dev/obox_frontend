@@ -11,8 +11,7 @@ import {
   CreateMenuRequest,
   CreateMenuResponse,
 } from '@shared/services/MenuService';
-import { FormInput } from '@shared/components/atoms/FormInput';
-import { InputVariants } from '@shared/components/atoms/Input';
+import { Input, InputVariants } from '@shared/components/atoms/Input';
 import { useMenuFormValidation } from '../validation/useMenuFormValidation';
 
 interface CreateMenuParams {
@@ -71,13 +70,13 @@ export const useCreateMenu = (args: CreateMenuParams) => {
             }}
           >
             <>
-              <FormInput
+              <Input
                 type={InputVariants.HIDDEN}
                 name="restaurant_id"
                 value={restaurantId}
               />
-              <FormInput type={InputVariants.HIDDEN} name="language_code" />
-              <FormInput
+              <Input type={InputVariants.HIDDEN} name="language_code" />
+              <Input
                 placeholder={t('menu:createMenuForm.placeholder')}
                 type={InputVariants.TEXT}
                 name="name"

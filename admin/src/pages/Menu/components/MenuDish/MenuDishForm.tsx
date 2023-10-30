@@ -8,16 +8,19 @@ import {
   ButtonTypes,
   ButtonVariants,
 } from '@shared/components/atoms/Button/types';
-import { InputVariants } from '@shared/components/atoms/Input';
+import { Input, InputVariants } from '@shared/components/atoms/Input';
 import { InputLabel } from '@shared/components/atoms/InputLabel/InputLabel';
-import { FormInput } from '@shared/components/atoms/FormInput';
 import { Dish } from '@shared/services/DishService';
 import type { DishDefaultValues } from './hooks/useDishForms';
 import { FileUpload } from '@shared/components/molecules/FileUpload/FileUpload';
 import { Textarea } from '@shared/components/atoms/Textarea';
 import './DishForm.scss';
 import { FieldValues } from 'react-hook-form';
-import { Attachment, FileToUpload, AttachmentOrFile } from '@shared/services/AttachmentsService';
+import {
+  Attachment,
+  FileToUpload,
+  AttachmentOrFile,
+} from '@shared/services/AttachmentsService';
 
 interface DishFormProps<T extends FieldValues> {
   onSubmit: (data: Partial<Dish>) => void;
@@ -27,7 +30,10 @@ interface DishFormProps<T extends FieldValues> {
   onUploadImage: (attachment: { base64image: string }[]) => void;
   uploadedImages: Attachment[];
   imagesToDelete?: Attachment[];
-  onDeleteImage: (type: 'attachment' | 'file', attachment: AttachmentOrFile) => void;
+  onDeleteImage: (
+    type: 'attachment' | 'file',
+    attachment: AttachmentOrFile
+  ) => void;
 }
 
 export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
@@ -66,14 +72,14 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
                 <>
                   <div className="form-columns">
                     <div className="left-column">
-                      <FormInput
+                      <Input
                         type={InputVariants.HIDDEN}
                         name="category_id"
                       />
-                      <FormInput type={InputVariants.HIDDEN} name="status" />
+                      <Input type={InputVariants.HIDDEN} name="status" />
                       <div className="form-group">
                         <InputLabel text={t('dishForm:name')} forInput="name" />
-                        <FormInput
+                        <Input
                           type={InputVariants.TEXT}
                           name="name"
                           placeholder={t('dishForm:namePlaceholder')}
@@ -84,7 +90,7 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
                           text={t('dishForm:price')}
                           forInput="price"
                         />
-                        <FormInput
+                        <Input
                           type={InputVariants.TEXT}
                           name="price"
                           placeholder={t('dishForm:pricePlaceholder')}
@@ -95,7 +101,7 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
                           text={t('dishForm:weight')}
                           forInput="weight"
                         />
-                        <FormInput
+                        <Input
                           type={InputVariants.TEXT}
                           name="weight"
                           placeholder={t('dishForm:weightPlaceholder')}
@@ -106,7 +112,7 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
                           text={t('dishForm:calories')}
                           forInput="calories"
                         />
-                        <FormInput
+                        <Input
                           type={InputVariants.TEXT}
                           name="calories"
                           placeholder={t('dishForm:caloriesPlaceholder')}

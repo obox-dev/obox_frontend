@@ -6,8 +6,7 @@ import { CategoriesService, Category, CreateCategoryRequest, CreateCategoryRespo
 import { useCategoryFormValidation } from "../validation/useCategoryFormValidation";
 import { Form, FormRef } from "@shared/components/atoms/Form";
 import { Dialog } from "@shared/components/molecules/Dialog";
-import { FormInput } from "@shared/components/atoms/FormInput";
-import { InputVariants } from "@shared/components/atoms/Input";
+import { Input, InputVariants } from "@shared/components/atoms/Input";
 import { CategoryState } from "@shared/services/CategoriesService";
 
 interface CreateCategoryParams {
@@ -61,13 +60,13 @@ export const useCreateCategory = (args: CreateCategoryParams) => {
               }}
             >
               <>
-                <FormInput
+                <Input
                   type={InputVariants.HIDDEN}
                   name="menu_id"
                   value={menuId}
                 />
-                <FormInput type={InputVariants.HIDDEN} name="state" />
-                <FormInput
+                <Input type={InputVariants.HIDDEN} name="state" />
+                <Input
                   placeholder={t("menu:createCategoryForm.placeholder")}
                   type={InputVariants.TEXT}
                   name="name"
