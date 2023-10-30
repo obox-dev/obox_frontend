@@ -5,11 +5,11 @@ import { useRequest } from '@admin/hooks';
 import { Form, FormRef } from '@shared/components/atoms/Form';
 import { Dialog } from '@shared/components/molecules/Dialog';
 import { Menu } from '@shared/services';
-import { FormInput } from '@shared/components/atoms/FormInput';
-import { UpdateMenuRequest, MenuService } from '@shared/services/MenuService';
-import { InputVariants } from '@shared/components/atoms/Input';
+import { UpdateMenuRequest, MenuService, MenuState } from '@shared/services/MenuService';
+import { Input, InputVariants } from '@shared/components/atoms/Input';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
 import { useMenuFormValidation } from '../validation/useMenuFormValidation';
+import { Switcher } from '@shared/components/atoms/Switcher';
 
 interface UpdateMenuParams {
   onSuccess: () => Promise<void>;
@@ -60,6 +60,7 @@ export const useUpdateMenu = (args: UpdateMenuParams) => {
           okText={t('common:buttons:confirm')}
           cancelText={t('common:buttons:cancel')}
         >
+          
           <Form
             ref={formRef}
             defaultValues={defaultValues}
@@ -69,14 +70,16 @@ export const useUpdateMenu = (args: UpdateMenuParams) => {
             }}
           >
             <>
-              <FormInput type={InputVariants.HIDDEN} name="restaurant_id" />
-              <FormInput type={InputVariants.HIDDEN} name="language_code" />
-              <FormInput type={InputVariants.HIDDEN} name="state" />
-              <FormInput
+              <Input type={InputVariants.HIDDEN} name="restaurant_id" />
+              <Input type={InputVariants.HIDDEN} name="language_code" />
+              <Input
                 placeholder={t('menu:createMenuForm.placeholder')}
                 type={InputVariants.TEXT}
                 name="name"
               />
+              <Switcher value={defaultValues.state} name="state" onChange={(val) => {
+                formRef.current?.setValue('state', val ? MenuState.ENABLED : MenuState.DISABLED);
+              }}/>
             </>
           </Form>
         </Dialog>
