@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, Ref } from "react";
 
 export enum InputVariants {
   TEXT = "text",
@@ -21,5 +21,5 @@ export interface IInput<T> {
   checked?: boolean;
   isDisabled?: boolean;
   className?: string;
-  innerRef?: any;
+  innerRef?: Ref<T>;
 }
