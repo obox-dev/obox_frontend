@@ -1,6 +1,8 @@
 import { API } from './ApiService';
 import { Dish } from './DishService';
 
+console.log(API);
+
 export enum CategoryState {
   ENABLED = 'ENABLED',
   DISABLED = 'DISABLED',
