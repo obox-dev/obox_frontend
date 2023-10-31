@@ -29,7 +29,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD_DEV }}
 
           server-dir: /app
-          local-dir: ./build/app
+          local-dir: ./build/app/
 
       - name: Deploy Landing via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -38,7 +38,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME_DEV }}
           password: ${{ secrets.FTP_PASSWORD_DEV }}
           server-dir: /public_html
-          local-dir: ./build/landing
+          local-dir: ./build/landing/
 
       - name: Deploy Admin via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -47,7 +47,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME_DEV }}
           password: ${{ secrets.FTP_PASSWORD_DEV }}
           server-dir: /admin
-          local-dir: ./build/admin
+          local-dir: ./build/admin/
 
       - name: Deploy Storybook via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -56,4 +56,4 @@ jobs:
           username: ${{ secrets.FTP_USERNAME_DEV }}
           password: ${{ secrets.FTP_PASSWORD_DEV }}
           server-dir: /storybook
-          local-dir: ./build/storybook
+          local-dir: ./build/storybook/
