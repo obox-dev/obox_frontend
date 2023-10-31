@@ -7,6 +7,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './customValidations';
 import '@shared/libs/languages/config';
 import 'react-toastify/dist/ReactToastify.css';
+import './styles/style.scss';
 
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

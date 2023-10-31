@@ -1,4 +1,9 @@
+@import '@shared/styles/variables';
+
 .switcher {
+  color: $secondary-text-color;
+  font-size: 18px;
+  font-weight: 400;
   display: flex;
   align-items: center;
 
@@ -17,7 +22,7 @@
 
       &:checked {
         + .slider {
-          background-color: #2196f5;
+          background-color: $primary-color;
         }
 
         + .slider::before {
@@ -26,7 +31,7 @@
       }
 
       &:focus + .slider {
-        box-shadow: 0 0 1px #2196f3;
+        box-shadow: $switcher-toggle-shadow;
       }
     }
   }
@@ -38,11 +43,12 @@
   .slider {
     position: absolute;
     cursor: pointer;
+    border-radius: 34px;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #000;
+    background-color: $secondary-color;
     transition: 0.4s;
 
     &:before {
@@ -52,16 +58,10 @@
       width: 16px;
       left: 2px;
       bottom: 2px;
-      background-color: #fff;
+      background-color: $global-white;
       transition: 0.4s;
-    }
-  }
-
-  .slider.round {
-    border-radius: 34px;
-
-    &:before {
       border-radius: 50%;
+      box-shadow: $switcher-toggle-shadow;
     }
   }
 }

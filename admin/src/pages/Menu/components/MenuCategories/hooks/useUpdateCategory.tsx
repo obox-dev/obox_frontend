@@ -12,6 +12,8 @@ import { Form, FormRef } from '@shared/components/atoms/Form';
 import { Dialog } from '@shared/components/molecules/Dialog';
 import { Input, InputVariants } from '@shared/components/atoms/Input';
 import { useCategoryFormValidation } from '../validation/useCategoryFormValidation';
+import { Switcher } from '@shared/components/atoms/Switcher';
+import { CategoryState } from '@shared/services/CategoriesService';
 
 interface UpdateCategoryParams {
   onSuccess: () => Promise<void>;
@@ -77,6 +79,17 @@ export const useUpdateCategory = (args: UpdateCategoryParams) => {
                 placeholder={t('menu:updateCategoryForm.placeholder')}
                 type={InputVariants.TEXT}
                 name="name"
+              />
+              <Switcher
+                value={defaultValues.state}
+                name="state"
+                text={t('menu:visibleCategory')}
+                onChange={(val) => {
+                  formRef.current?.setValue(
+                    'state',
+                    val ? CategoryState.ENABLED : CategoryState.DISABLED
+                  );
+                }}
               />
             </>
           </Form>

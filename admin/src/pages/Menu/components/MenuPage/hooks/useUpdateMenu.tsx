@@ -77,7 +77,7 @@ export const useUpdateMenu = (args: UpdateMenuParams) => {
                 type={InputVariants.TEXT}
                 name="name"
               />
-              <Switcher value={defaultValues.state} name="state" onChange={(val) => {
+              <Switcher value={defaultValues.state} name="state" text={t('menu:visibleMenu')} onChange={(val) => {
                 formRef.current?.setValue('state', val ? MenuState.ENABLED : MenuState.DISABLED);
               }}/>
             </>
