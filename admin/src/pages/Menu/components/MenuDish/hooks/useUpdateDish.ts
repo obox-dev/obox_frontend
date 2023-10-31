@@ -1,7 +1,7 @@
-import { AxiosError } from "axios";
-import { useRequest } from "@admin/hooks";
-import { DishesService } from "@shared/services";
-import { UpdateDishRequest } from "@shared/services/DishService";
+import { AxiosError } from 'axios';
+import { useRequest } from '@admin/hooks';
+import { DishesService } from '@shared/services';
+import { UpdateDishRequest } from '@shared/services/DishService';
 
 interface UpdateDishParams {
   onSuccess: () => Promise<void>;
@@ -47,5 +47,5 @@ export const useUpdateDish = (args: UpdateDishParams) => {
 
   return {
     onUpdateSubmit,
-  }
-}
+  };
+};

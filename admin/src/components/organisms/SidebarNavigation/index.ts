@@ -1,1 +1,1 @@
-export { SidebarNavigation } from "./SidebarNavigation";
+export { SidebarNavigation } from './SidebarNavigation';

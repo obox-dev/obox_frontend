@@ -1,4 +1,4 @@
-import { IInputLabel } from "./types";
+import { IInputLabel } from './types';
 
 export const InputLabel = (props: IInputLabel) => {
   const {
@@ -10,9 +10,9 @@ export const InputLabel = (props: IInputLabel) => {
   } = props;
 
   return (
-    <label className={[wrapperClassName, "input-label"].join(" ")} htmlFor={forInput}>
-      <span className={[className, "input-label__text"].join(" ")}>{text}</span>
+    <label className={[wrapperClassName, 'input-label'].join(' ')} htmlFor={forInput}>
+      <span className={[className, 'input-label__text'].join(' ')}>{text}</span>
       {children}
     </label>
-  )
-}
+  );
+};

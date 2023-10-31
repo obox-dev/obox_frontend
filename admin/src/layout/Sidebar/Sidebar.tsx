@@ -1,5 +1,5 @@
-import { ISidebar } from "./types"
-import "./Sidebar.scss"
+import { ISidebar } from './types';
+import './Sidebar.scss';
 
 export const Sidebar = (props: ISidebar) => {
   const { header, children } = props;
@@ -8,5 +8,5 @@ export const Sidebar = (props: ISidebar) => {
       {header}
       {children}
     </div>
-  )
-}
+  );
+};

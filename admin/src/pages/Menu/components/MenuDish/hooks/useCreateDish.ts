@@ -1,5 +1,5 @@
-import { useRequest } from "@admin/hooks";
-import { DishesService } from "@shared/services";
+import { useRequest } from '@admin/hooks';
+import { DishesService } from '@shared/services';
 
 interface CreateDishParams {
   onSuccess: () => Promise<void>;
@@ -17,5 +17,5 @@ export const useCreateDish = (args: CreateDishParams) => {
 
   return {
     onCreateSubmit,
-  }
-}
+  };
+};

@@ -1,5 +1,5 @@
-import { API } from "./ApiService";
-import { MenuState } from "./MenuService";
+import { API } from './ApiService';
+import { MenuState } from './MenuService';
 
 export interface Menu {
   menu_id: string,
@@ -7,7 +7,7 @@ export interface Menu {
   name: string,
   language_code: string,
   state: MenuState,
-};
+}
 
 export class RestaurantsService {
   static async getMenusByRestaurantId(restaurantId: string) {

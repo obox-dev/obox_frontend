@@ -1,7 +1,7 @@
 import {
   Path,
   PathValue,
-} from "react-hook-form";
+} from 'react-hook-form';
 export interface IForm<T> {
   onSubmit: (data: T) => void;
   children: Array<JSX.Element> | JSX.Element;

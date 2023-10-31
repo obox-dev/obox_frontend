@@ -1,8 +1,8 @@
-import i18n from "@libs/i18next";
+import i18n from '@libs/i18next';
 import { useState } from 'react';
-import { RadioInput } from "@shared/components/atoms/RadioInput";
+import { RadioInput } from '@shared/components/atoms/RadioInput';
 import { useTranslation } from '@libs/react-i18next';
-import "./LanguageSwitcher.scss";
+import './LanguageSwitcher.scss';
 
 const DEFAULT_LANGUAGE = 'ua';
 
@@ -13,7 +13,7 @@ export const LanguageSwitcher = () => {
   const changeLanguage = (language: string) => {
     setSelectedLanguage(language);
     i18n.changeLanguage(language);
-  }
+  };
 
   const languages = [
     {
@@ -26,7 +26,7 @@ export const LanguageSwitcher = () => {
       value: 'en',
       name: 'language',
     },
-  ]
+  ];
 
   return (
     <div className="language-switcher py-2">
@@ -40,5 +40,5 @@ export const LanguageSwitcher = () => {
         }} />)
       }
     </div>
-  )
-}
+  );
+};

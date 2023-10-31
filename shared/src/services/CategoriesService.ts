@@ -1,9 +1,9 @@
-import { API } from "./ApiService";
-import { Dish } from "./DishService";
+import { API } from './ApiService';
+import { Dish } from './DishService';
 
 export enum CategoryState {
-  ENABLED = "ENABLED",
-  DISABLED = "DISABLED",
+  ENABLED = 'ENABLED',
+  DISABLED = 'DISABLED',
 }
 export interface Category {
   menu_id: string;
@@ -31,7 +31,7 @@ export class CategoriesService {
     return API.get<void, Category>(`/categories/${id}`);
   }
   static async create(params: CreateCategoryRequest) {
-    return API.post<CreateCategoryRequest, CreateCategoryResponse>("/categories/", params);
+    return API.post<CreateCategoryRequest, CreateCategoryResponse>('/categories/', params);
   }
   static async update(id: string, params: UpdateCategoryRequest) {
     return API.patch<UpdateCategoryRequest, CreateCategoryResponse>(`/categories/${id}`, params);

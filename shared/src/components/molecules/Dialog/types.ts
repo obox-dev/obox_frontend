@@ -1,6 +1,6 @@
-import { ButtonVariants } from "@shared/components/atoms/Button";
+import { ButtonVariants } from '@shared/components/atoms/Button';
 
-export type DialogSizeOptions = "xl" | "lg" | "sm";
+export type DialogSizeOptions = 'xl' | 'lg' | 'sm';
 export interface DialogPropTypes {
   title: string;
   okCallback: () => void;

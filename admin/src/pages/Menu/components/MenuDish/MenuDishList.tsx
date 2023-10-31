@@ -1,7 +1,7 @@
 import { useTranslation } from '@libs/react-i18next';
-import { Dish } from "@shared/services/DishService";
-import { IAction } from "@shared/components/atoms/ActionMenu";
-import { MenuDishItem } from "./MenuDishItem";
+import { Dish } from '@shared/services/DishService';
+import { IAction } from '@shared/components/atoms/ActionMenu';
+import { MenuDishItem } from './MenuDishItem';
 export interface MenuDishListProps {
   dishItems: Dish[];
   actions: IAction<Dish>[];
@@ -19,19 +19,19 @@ export const MenuDishList = (props: MenuDishListProps) => {
   const dishListHeader: HeaderItem[] = [
     {
       label: t('dishForm:dishesTable.state'),
-      dataIndex: "state",
+      dataIndex: 'state',
     },
     {
       label: t('dishForm:dishesTable.name'),
-      dataIndex: "name",
+      dataIndex: 'name',
     },
     {
       label: t('dishForm:dishesTable.price'),
-      dataIndex: "price",
+      dataIndex: 'price',
     },
     {
       label: t('dishForm:dishesTable.actions'),
-      dataIndex: "actions",
+      dataIndex: 'actions',
     },
   ];
 
