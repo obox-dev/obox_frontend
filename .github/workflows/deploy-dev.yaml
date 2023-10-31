@@ -17,19 +17,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Show Actual Secrets
-        id: secrets
-        run: |
-          echo "::set-output name=FTP_SERVER_DEV::${{ secrets.FTP_SERVER_DEV }}"
-          echo "::set-output name=FTP_USERNAME_DEV::${{ secrets.FTP_USERNAME_DEV }}"
-        env:
-          ACTIONS_RUNNER_DEBUG: true
-      
-      - name: Display Secrets
-        run: |
-          echo "FTP_SERVER_DEV: ${{ steps.secrets.outputs.FTP_SERVER_DEV }}"
-          echo "FTP_USERNAME_DEV: ${{ steps.secrets.outputs.FTP_USERNAME_DEV }}"
-
 
       - name: Build Apps
         run: npm install && npm run build
@@ -37,7 +24,7 @@ jobs:
       - name: Deploy Apps via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ${{ secrets.FTP_SERVER_DEV }}
+          server: ftp://obox.pp.ua
           username: ${{ secrets.FTP_USERNAME_DEV }}
           password: ${{ secrets.FTP_PASSWORD_DEV }}
 
@@ -47,7 +34,7 @@ jobs:
       - name: Deploy Landing via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ${{ secrets.FTP_SERVER_DEV }}
+          server: ftp://obox.pp.ua
           username: ${{ secrets.FTP_USERNAME_DEV }}
           password: ${{ secrets.FTP_PASSWORD_DEV }}
           server-dir: /public_html/
@@ -56,7 +43,7 @@ jobs:
       - name: Deploy Admin via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ${{ secrets.FTP_SERVER_DEV }}
+          server: ftp://obox.pp.ua
           username: ${{ secrets.FTP_USERNAME_DEV }}
           password: ${{ secrets.FTP_PASSWORD_DEV }}
           server-dir: /admin/
@@ -65,7 +52,7 @@ jobs:
       - name: Deploy Storybook via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ${{ secrets.FTP_SERVER_DEV }}
+          server: ftp://obox.pp.ua
           username: ${{ secrets.FTP_USERNAME_DEV }}
           password: ${{ secrets.FTP_PASSWORD_DEV }}
           server-dir: /storybook/
