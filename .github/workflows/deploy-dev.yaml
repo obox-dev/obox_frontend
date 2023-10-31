@@ -21,38 +21,38 @@ jobs:
       - name: Build Apps
         run: npm install && npm run build
 
-      - name: Deploy Apps via FTP
+      - name: Deploy App
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: obox.pp.ua
+          server: ${{ secrets.FTP_USERNAME_DEV }}
           username: ${{ secrets.FTP_USERNAME_DEV }}
           password: ${{ secrets.FTP_PASSWORD_DEV }}
 
           server-dir: /app/
           local-dir: ./build/app/
 
-      - name: Deploy Landing via FTP
+      - name: Deploy Landing
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: obox.pp.ua
+          server: ${{ secrets.FTP_USERNAME_DEV }}
           username: ${{ secrets.FTP_USERNAME_DEV }}
           password: ${{ secrets.FTP_PASSWORD_DEV }}
           server-dir: /public_html/
           local-dir: ./build/public_html/
 
-      - name: Deploy Admin via FTP
+      - name: Deploy Admin
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: obox.pp.ua
+          server: ${{ secrets.FTP_USERNAME_DEV }}
           username: ${{ secrets.FTP_USERNAME_DEV }}
           password: ${{ secrets.FTP_PASSWORD_DEV }}
           server-dir: /admin/
           local-dir: ./build/admin/
 
-      - name: Deploy Storybook via FTP
+      - name: Deploy Storybook
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: obox.pp.ua
+          server: ${{ secrets.FTP_USERNAME_DEV }}
           username: ${{ secrets.FTP_USERNAME_DEV }}
           password: ${{ secrets.FTP_PASSWORD_DEV }}
           server-dir: /storybook/
