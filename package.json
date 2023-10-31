@@ -14,7 +14,9 @@
     "install:admin": "cd admin && npm install",
     "install:shared": "cd shared && npm install",
     "install": "npm run install:app && npm run install:admin && npm run install:shared",
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "precommit": "lint-staged",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {
@@ -22,11 +24,7 @@
     }
   },
   "lint-staged": {
-    "linters": {
-      "*.{js,jsx}": [
-        "eslint"
-      ]
-    }
+    "*.{js,jsx,ts,tsx}": ["eslint --fix", "git add"]
   },
   "author": "",
   "license": "ISC",
