@@ -18,15 +18,17 @@ jobs:
         with:
           node-version: 16
       - name: Show Actual Secrets
+        id: secrets
         run: |
-          FTP_SERVER_DEV=${{ secrets.FTP_SERVER_DEV }}
-          FTP_USERNAME_DEV=${{ secrets.FTP_USERNAME_DEV }}
-          
-          echo "FTP_SERVER_DEV: $FTP_SERVER_DEV"
-          echo "FTP_USERNAME_DEV: $FTP_USERNAME_DEV"
-          # Add more secrets if needed
+          echo "::set-output name=FTP_SERVER_DEV::${{ secrets.FTP_SERVER_DEV }}"
+          echo "::set-output name=FTP_USERNAME_DEV::${{ secrets.FTP_USERNAME_DEV }}"
         env:
           ACTIONS_RUNNER_DEBUG: true
+      
+      - name: Display Secrets
+        run: |
+          echo "FTP_SERVER_DEV: ${{ steps.secrets.outputs.FTP_SERVER_DEV }}"
+          echo "FTP_USERNAME_DEV: ${{ steps.secrets.outputs.FTP_USERNAME_DEV }}"
 
 
       - name: Build Apps
