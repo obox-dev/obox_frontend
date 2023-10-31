@@ -27,5 +27,6 @@
   "deleteMenuForm": {
     "title": "Are you sure you want to delete this menu?",
     "message": "Confirming the deletion of menu:"
-  }
+  },
+  "tagsPagePlaceholder": "Tags and allergenes will be here"
 }
