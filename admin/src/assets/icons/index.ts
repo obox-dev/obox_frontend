@@ -1,2 +1,3 @@
 export { RestaurantIcon } from "./RestaurantIcon";
-export { MenuIcon } from "./MenuIcon";
+export { CreateMenuIcon } from "./CreateMenuIcon";
+export { LogoIcon } from "./LogoIcon";

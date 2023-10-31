@@ -4,15 +4,15 @@ import { useRequest } from '@admin/hooks';
 import { Form, FormRef } from '@shared/components/atoms/Form';
 import { Dialog } from '@shared/components/molecules/Dialog';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
+import { MenuState } from '@shared/services/MenuService';
+import { Switcher } from '@shared/components/atoms/Switcher';
 import { Menu, MenuService } from '@shared/services';
 import {
   CreateMenuRequest,
   CreateMenuResponse,
 } from '@shared/services/MenuService';
-import { FormInput } from '@shared/components/atoms/FormInput';
-import { InputVariants } from '@shared/components/atoms/Input';
+import { Input, InputVariants } from '@shared/components/atoms/Input';
 import { useMenuFormValidation } from '../validation/useMenuFormValidation';
-import { MenuState } from '@shared/services/MenuService';
 
 interface CreateMenuParams {
   onSuccess: (result: CreateMenuResponse) => Promise<void>;
@@ -70,18 +70,20 @@ export const useCreateMenu = (args: CreateMenuParams) => {
             }}
           >
             <>
-              <FormInput
+              <Input
                 type={InputVariants.HIDDEN}
                 name="restaurant_id"
                 value={restaurantId}
               />
-              <FormInput type={InputVariants.HIDDEN} name="language_code" />
-              <FormInput type={InputVariants.HIDDEN} name="state" />
-              <FormInput
+              <Input type={InputVariants.HIDDEN} name="language_code" />
+              <Input
                 placeholder={t('menu:createMenuForm.placeholder')}
                 type={InputVariants.TEXT}
                 name="name"
               />
+              <Switcher value={defaultValues.state} name="state" onChange={(val) => {
+                formRef.current?.setValue('state', val ? MenuState.ENABLED : MenuState.DISABLED);
+              }}/>
             </>
           </Form>
         </Dialog>

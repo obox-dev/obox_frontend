@@ -10,8 +10,7 @@ import {
 } from '@shared/services';
 import { Form, FormRef } from '@shared/components/atoms/Form';
 import { Dialog } from '@shared/components/molecules/Dialog';
-import { FormInput } from '@shared/components/atoms/FormInput';
-import { InputVariants } from '@shared/components/atoms/Input';
+import { Input, InputVariants } from '@shared/components/atoms/Input';
 import { useCategoryFormValidation } from '../validation/useCategoryFormValidation';
 
 interface UpdateCategoryParams {
@@ -72,9 +71,9 @@ export const useUpdateCategory = (args: UpdateCategoryParams) => {
             }}
           >
             <>
-              <FormInput type={InputVariants.HIDDEN} name="category_id" />
-              <FormInput type={InputVariants.HIDDEN} name="state" />
-              <FormInput
+              <Input type={InputVariants.HIDDEN} name="category_id" />
+              <Input type={InputVariants.HIDDEN} name="state" />
+              <Input
                 placeholder={t('menu:updateCategoryForm.placeholder')}
                 type={InputVariants.TEXT}
                 name="name"

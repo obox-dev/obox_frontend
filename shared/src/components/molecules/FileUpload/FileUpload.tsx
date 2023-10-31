@@ -1,20 +1,32 @@
-import { t } from "@libs/i18next";
-import { Input, InputVariants } from "@shared/components/atoms/Input";
-import { InputLabel } from "@shared/components/atoms/InputLabel";
-import { useState } from "react";
-import "./FileUpload.scss";
+import { t } from '@libs/i18next';
+import { Button, ButtonVariants } from '@shared/components/atoms/Button';
+import { ButtonTypes } from '@shared/components/atoms/Button/types';
+import { Input, InputVariants } from '@shared/components/atoms/Input';
+import { InputLabel } from '@shared/components/atoms/InputLabel';
+import {
+  Attachment,
+  AttachmentOrFile,
+  FileToUpload,
+} from '@shared/services/AttachmentsService';
+import './FileUpload.scss';
 
 interface FileUploadProps {
-  onFileChange: (fileAsBase64: string) => void;
-  image_url?: string;
+  imagesToUpload: FileToUpload[];
+  uploadedImages: Attachment[];
+  onDeleteImage: (
+    type: 'attachment' | 'file',
+    attachment: AttachmentOrFile
+  ) => void;
+  onFileUpload: (fileToUpload: FileToUpload[]) => void;
+  onFileDelete?: (attachment: Attachment[]) => void;
 }
 
 export const FileUpload = (props: FileUploadProps) => {
-  const { image_url, onFileChange } = props;
+  const { imagesToUpload, uploadedImages, onFileUpload, onDeleteImage } = props;
 
-  const [file, setFile] = useState<string | null>(null);
+  const images = [...uploadedImages, ...imagesToUpload];
 
-  const preview = file || image_url || null;
+  const preview = images?.length || null;
 
   const fileToBase64 = (file: File): Promise<string> =>
     new Promise((resolve, reject) => {
@@ -28,30 +40,62 @@ export const FileUpload = (props: FileUploadProps) => {
     });
 
   const onAddFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e?.target?.files?.[0];
+    const imagesList = [...(imagesToUpload || [])];
 
-    if (file) {
-      const tempFile = await fileToBase64(file);
+    await Promise.all(
+      [].map.call(e.target.files, async (file: File) => {
+        const base64image =
+          file.type.indexOf('image') > -1 ? await fileToBase64(file) : '';
+        imagesList.push({ base64image });
+      })
+    );
+    onFileUpload(imagesList);
+  };
 
-      setFile(tempFile);
-      onFileChange(tempFile);
+  const getFileSrc = (file: AttachmentOrFile) => {
+    if ('base64image' in file) {
+      return file.base64image;
+    }
+
+    return file.attachment_url;
+  };
+
+  const handleDelete = (file: AttachmentOrFile) => {
+    if ('base64image' in file) {
+      onDeleteImage('file', file);
+    } else {
+      onDeleteImage('attachment', file);
     }
   };
 
-  // const deleteFile = () => {
-  //   setFile(null);
-  //   onFileChange('');
-  // }
-
   return (
     <div className="file-upload">
-      <InputLabel forInput="images" text={t("dishForm:image")}>
-        <Input id="images" type={InputVariants.FILE} name="images" onChange={onAddFile} />
+      <InputLabel className="file-upload__trigger btn btn-primary mb-3" forInput="files" text={t('dishForm:image')}>
+        <Input
+          id="files"
+          type={InputVariants.FILE}
+          name="files"
+          onChange={onAddFile}
+        />
       </InputLabel>
       <div>
-        {preview && <img className="file-upload__preview" src={preview} />}
+        {preview &&
+          images?.map((file, index) => (
+            <div className="file-upload__preview-item mb-3" key={index}>
+              <img
+                className="file-upload__preview-image"
+                src={getFileSrc(file)}
+                alt={`Preview ${index + 1}`}
+              />
+              <Button
+                variant={ButtonVariants.DANGER}
+                type={ButtonTypes.BUTTON}
+                text="Delete"
+                onClick={() => handleDelete(file)}
+              />
+            </div>
+          ))}
       </div>
-      {/* <Button variant={ButtonVariants.DANGER} type={ButtonTypes.BUTTON} text="Delete" onClick={deleteFile}/> */}
     </div>
   );
 };

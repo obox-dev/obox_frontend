@@ -10,7 +10,10 @@
   "signin": "Sign In",
   "logout": "Log Out",
   "restaurants": "Restaurants",
+  "createmenu": "Create Menu",
   "menu": "Menu",
+  "tagsAllergens": "Tags and Allergens",
+  "settings": "Settings",
   "name": "Name",
   "poweredby": "Powered by",
   "buttons": {

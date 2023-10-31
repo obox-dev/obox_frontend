@@ -1,10 +1,15 @@
-import LogoImage from '@admin/assets/layout/header/Logo.png';
 import { NavLink } from 'react-router-dom';
+import { LogoIcon } from '@admin/assets/icons/LogoIcon';
+import "./Logo.scss"
 
 const Logo = () => {
-  return <NavLink to="/">
-    <img src={LogoImage} alt="Logo" style={{ width: "4rem", height: "4rem" }} />
+  return (
+    <NavLink to="/">
+      <div className='logo'>
+      <LogoIcon />
+      </div>
     </NavLink>
+  );
 };
 
 export default Logo;

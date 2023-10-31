@@ -8,6 +8,7 @@ export enum ButtonVariants {
   LIGHT = "light",
   DARK = "dark",
   LINK = "link",
+  ICON_LINK = "icon-link"
 }
 
 export enum ButtonTypes {
@@ -16,8 +17,9 @@ export enum ButtonTypes {
 }
 export interface IButton {
   text: string;
-  onClick?: () => void;
   variant: ButtonVariants;
+  icon?: JSX.Element;
+  onClick?: () => void;
   isDisabled?: boolean;
   type?: ButtonTypes;
 }

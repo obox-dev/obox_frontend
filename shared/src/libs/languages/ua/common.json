@@ -10,7 +10,10 @@
   "signin": "Зареєструватися",
   "logout": "Вийти",
   "restaurants": "Ресторани",
-  "menu": "Меню",
+  "createmenu": "Створити меню",
+  "menu": "Наповнення",
+  "tagsAllergens": "Мітки та алергени",
+  "settings": "Налаштування",
   "name": "Назва",
   "poweredby": "Працює на основі",
   "buttons": {
