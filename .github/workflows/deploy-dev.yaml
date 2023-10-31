@@ -24,7 +24,7 @@ jobs:
       - name: Deploy Apps via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ftp://obox.pp.ua
+          server: obox.pp.ua
           username: ${{ secrets.FTP_USERNAME_DEV }}
           password: ${{ secrets.FTP_PASSWORD_DEV }}
 
@@ -34,7 +34,7 @@ jobs:
       - name: Deploy Landing via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ftp://obox.pp.ua
+          server: obox.pp.ua
           username: ${{ secrets.FTP_USERNAME_DEV }}
           password: ${{ secrets.FTP_PASSWORD_DEV }}
           server-dir: /public_html/
@@ -43,7 +43,7 @@ jobs:
       - name: Deploy Admin via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ftp://obox.pp.ua
+          server: obox.pp.ua
           username: ${{ secrets.FTP_USERNAME_DEV }}
           password: ${{ secrets.FTP_PASSWORD_DEV }}
           server-dir: /admin/
@@ -52,7 +52,7 @@ jobs:
       - name: Deploy Storybook via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ftp://obox.pp.ua
+          server: obox.pp.ua
           username: ${{ secrets.FTP_USERNAME_DEV }}
           password: ${{ secrets.FTP_PASSWORD_DEV }}
           server-dir: /storybook/
