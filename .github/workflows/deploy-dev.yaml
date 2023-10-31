@@ -1,0 +1,54 @@
+name: Deploy to Dev
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  deploy-app:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Apps
+        run: npm install && npm run build
+
+      - name: Deploy Apps via FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.0
+        with:
+          server: ${{ secrets.FTP_SERVER_DEV }}
+          username: ${{ secrets.FTP_USERNAME_DEV }}
+          password: ${{ secrets.FTP_PASSWORD_DEV }}
+
+          server-dir: /app
+          local-dir: ./build/app
+
+      - name: Deploy Landing via FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.0
+        with:
+          server: ${{ secrets.FTP_SERVER_DEV }}
+          username: ${{ secrets.FTP_USERNAME_DEV }}
+          password: ${{ secrets.FTP_PASSWORD_DEV }}
+          server-dir: /public_html
+          local-dir: ./build/landing
+
+      - name: Deploy Admin via FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.0
+        with:
+          server: ${{ secrets.FTP_SERVER_DEV }}
+          username: ${{ secrets.FTP_USERNAME_DEV }}
+          password: ${{ secrets.FTP_PASSWORD_DEV }}
+          server-dir: /admin
+          local-dir: ./build/admin
+
+      - name: Deploy Storybook via FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.0
+        with:
+          server: ${{ secrets.FTP_SERVER_DEV }}
+          username: ${{ secrets.FTP_USERNAME_DEV }}
+          password: ${{ secrets.FTP_PASSWORD_DEV }}
+          server-dir: /storybook
+          local-dir: ./build/storybook
