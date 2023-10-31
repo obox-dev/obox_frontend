@@ -24,7 +24,7 @@ jobs:
       - name: Deploy App
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ${{ secrets.FTP_USERNAME_DEV }}
+          server: ${{ secrets.FTP_SERVER_DEV }}
           username: ${{ secrets.FTP_USERNAME_DEV }}
           password: ${{ secrets.FTP_PASSWORD_DEV }}
 
@@ -34,7 +34,7 @@ jobs:
       - name: Deploy Landing
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ${{ secrets.FTP_USERNAME_DEV }}
+          server: ${{ secrets.FTP_SERVER_DEV }}
           username: ${{ secrets.FTP_USERNAME_DEV }}
           password: ${{ secrets.FTP_PASSWORD_DEV }}
           server-dir: /public_html/
@@ -43,7 +43,7 @@ jobs:
       - name: Deploy Admin
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ${{ secrets.FTP_USERNAME_DEV }}
+          server: ${{ secrets.FTP_SERVER_DEV }}
           username: ${{ secrets.FTP_USERNAME_DEV }}
           password: ${{ secrets.FTP_PASSWORD_DEV }}
           server-dir: /admin/
@@ -52,7 +52,7 @@ jobs:
       - name: Deploy Storybook
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ${{ secrets.FTP_USERNAME_DEV }}
+          server: ${{ secrets.FTP_SERVER_DEV }}
           username: ${{ secrets.FTP_USERNAME_DEV }}
           password: ${{ secrets.FTP_PASSWORD_DEV }}
           server-dir: /storybook/
