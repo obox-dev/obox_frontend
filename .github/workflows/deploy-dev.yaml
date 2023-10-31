@@ -17,6 +17,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
+      - name: Show Actual Secrets
+        run: |
+          echo "FTP_SERVER_DEV: ${{ secrets.FTP_SERVER_DEV }}"
+          echo "FTP_USERNAME_DEV: ${{ secrets.FTP_USERNAME_DEV }}"
+        env:
+          ACTIONS_RUNNER_DEBUG: true
 
       - name: Build Apps
         run: npm install && npm run build
