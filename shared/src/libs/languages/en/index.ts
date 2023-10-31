@@ -8,6 +8,6 @@ const en = {
   home,
   menu,
   dishForm,
-}
+};
 
 export default en;

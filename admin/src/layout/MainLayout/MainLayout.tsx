@@ -1,11 +1,11 @@
-import React from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
-import { SidebarNavigation } from "../../components/organisms/SidebarNavigation";
-import Home from "../../pages/Home/Home";
-import { MenuPage } from "../../pages/Menu/MenuPage";
-import NotFound from "../../pages/Page_404/NotFound";
-import { MenuDishPage } from "../../pages/Menu/components/MenuDish/MenuDishPage";
-import Tags from "@admin/pages/TagsAndAllergenes/Tags";
+import React from 'react';
+import { Route, Routes, Navigate } from 'react-router-dom';
+import { SidebarNavigation } from '../../components/organisms/SidebarNavigation';
+import Home from '../../pages/Home/Home';
+import { MenuPage } from '../../pages/Menu/MenuPage';
+import NotFound from '../../pages/Page_404/NotFound';
+import { MenuDishPage } from '../../pages/Menu/components/MenuDish/MenuDishPage';
+import Tags from '@admin/pages/TagsAndAllergenes/Tags';
 
 export const MainLayout: React.FC = () => {
   const userIsAuthenticated = true; // Replace this with your authentication logic

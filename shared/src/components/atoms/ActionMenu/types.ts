@@ -1,4 +1,4 @@
-import { IButton } from "../Button/types";
+import { IButton } from '../Button/types';
 
 export interface IActionToggle extends IButton {
   id: string;

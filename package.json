@@ -13,7 +13,18 @@
     "install:app": "cd app && npm install",
     "install:admin": "cd admin && npm install",
     "install:shared": "cd shared && npm install",
-    "install": "npm run install:app && npm run install:admin && npm run install:shared"
+    "install": "npm run install:app && npm run install:admin && npm run install:shared",
+    "lint": "eslint . --fix",
+    "precommit": "lint-staged",
+    "prepare": "husky install"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": ["eslint --fix"]
   },
   "author": "",
   "license": "ISC",
@@ -47,6 +58,13 @@
     "@storybook/react": "7.0.27",
     "@storybook/react-vite": "7.0.27",
     "@storybook/testing-library": "0.0.14-next.2",
+    "@typescript-eslint/eslint-plugin": "6.9.1",
+    "@typescript-eslint/parser": "6.9.1",
+    "eslint": "8.52.0",
+    "eslint-plugin-react": "7.33.2",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "husky": "8.0.3",
+    "lint-staged": "15.0.2",
     "prettier": "3.0.3",
     "prop-types": "15.8.1",
     "react": "18.2.0",

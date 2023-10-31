@@ -1,5 +1,5 @@
-import * as yup from "yup";
-import { Ref, useImperativeHandle, forwardRef } from "react";
+import * as yup from 'yup';
+import { Ref, useImperativeHandle, forwardRef } from 'react';
 import {
   useForm,
   FormProvider,
@@ -7,12 +7,12 @@ import {
   DefaultValues,
   Path,
   PathValue,
-} from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { FormRef } from "./types";
-import { AxiosError } from "axios";
-import { useEffect } from "react";
-import { useTranslation } from "@libs/react-i18next";
+} from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { FormRef } from './types';
+import { AxiosError } from 'axios';
+import { useEffect } from 'react';
+import { useTranslation } from '@libs/react-i18next';
 
 interface FormProps<T extends FieldValues> {
   defaultValues: DefaultValues<T>;
@@ -35,10 +35,10 @@ const FormInner = <T extends FieldValues>(
 
   const setTypedErrors = (errors: Partial<T>) => {
     for (const key in errors) {
-      if (errors.hasOwnProperty(key)) {
+      if (key in errors) {
         const element = errors[key as keyof typeof errors];
         methods.setError(key as unknown as Path<T>, {
-          type: "response",
+          type: 'response',
           message: element as string,
         });
       }
@@ -69,15 +69,15 @@ const FormInner = <T extends FieldValues>(
         methods.setValue(key as unknown as Path<T>, defaultValues[key]);
       }
     }
-  }, [defaultValues])
+  }, [defaultValues]);
 
   useEffect(() => {
     methods.clearErrors();
-  }, [t])
+  }, [t]);
 
   useImperativeHandle(ref, () => ({
     submit: () => {
-      return methods.handleSubmit(internalSubmit)()
+      return methods.handleSubmit(internalSubmit)();
     },
     setValue: (key: Path<T>, value: PathValue<T, Path<T>>) => {
       methods.setValue(key, value);

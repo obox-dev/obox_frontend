@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTranslation } from "@libs/react-i18next";
+import { useTranslation } from '@libs/react-i18next';
 import { Button, ButtonVariants } from '@shared/components/atoms/Button';
 import './NotFound.scss';
 

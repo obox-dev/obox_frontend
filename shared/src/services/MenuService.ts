@@ -1,10 +1,10 @@
-import { API } from "./ApiService";
-import { Category } from "./CategoriesService";
-import { Menu } from "./RestaurantsService";
+import { API } from './ApiService';
+import { Category } from './CategoriesService';
+import { Menu } from './RestaurantsService';
 
 export enum MenuState {
-  ENABLED = "ENABLED",
-  DISABLED = "DISABLED",
+  ENABLED = 'ENABLED',
+  DISABLED = 'DISABLED',
 }
 export interface CreateMenuRequest {
   name: string;
@@ -27,7 +27,7 @@ export class MenuService {
   }
 
   static async create(params: CreateMenuRequest): Promise<CreateMenuResponse> {
-    return API.post<CreateMenuRequest, CreateMenuResponse>(`/menus/`, params);
+    return API.post<CreateMenuRequest, CreateMenuResponse>('/menus/', params);
   }
 
   static async update(id: string, params: UpdateMenuRequest): Promise<void> {

@@ -1,8 +1,8 @@
-import { AxiosError } from "axios";
-import { useState } from "react";
-import { useNavigate, createSearchParams } from "react-router-dom";
+import { AxiosError } from 'axios';
+import { useState } from 'react';
+import { useNavigate, createSearchParams } from 'react-router-dom';
 
-export const useRequest = <T, R extends readonly any[]>({
+export const useRequest = <T, R extends readonly unknown[]>({
   onSuccess,
   onStart,
   onError,
@@ -47,7 +47,7 @@ export const useRequest = <T, R extends readonly any[]>({
 
       if (isEnabledRedirectTo404) {
         navigate({
-          pathname: "/not-found",
+          pathname: '/not-found',
           ...(redirect404Path
             ? { search: createSearchParams({ redirect404Path }).toString() }
             : {}),

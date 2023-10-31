@@ -1,1 +1,1 @@
-export { RestaurantIcon } from "./RestaurantIcon";
+export { RestaurantIcon } from './RestaurantIcon';

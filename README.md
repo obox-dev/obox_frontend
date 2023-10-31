@@ -9,6 +9,7 @@ npm 9.7.1
 1. Clone repository
 2. Type in terminal: npm install
 3. Type in terminal: npm run app or npm run admin
+4. Type in terminal: npx husky install
 
 For development
 

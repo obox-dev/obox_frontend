@@ -1,7 +1,7 @@
-import { useRequest } from "@admin/hooks";
-import { CategoriesService } from "@shared/services";
-import { Dish, DishesService } from "@shared/services/DishService";
-import { useState } from "react";
+import { useRequest } from '@admin/hooks';
+import { CategoriesService } from '@shared/services';
+import { Dish, DishesService } from '@shared/services/DishService';
+import { useState } from 'react';
 
 interface GetDishParams {
   categoryId: string;
@@ -22,7 +22,7 @@ export const useGetDish = (args: GetDishParams) => {
       setDishList(result);
     },
     onError: (error) => {
-      console.error("Error fetching categories:", error);
+      console.error('Error fetching categories:', error);
     },
   });
 
@@ -35,5 +35,5 @@ export const useGetDish = (args: GetDishParams) => {
     loadSingleDish,
     loadAllDishes,
     dishList,
-  }
-}
+  };
+};

@@ -1,1 +1,1 @@
-export { UserProfileIcon } from "./UserProfileIcon";
+export { UserProfileIcon } from './UserProfileIcon';
