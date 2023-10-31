@@ -1,5 +1,5 @@
-import { Dish } from "@shared/services/DishService";
-import { ActionMenu, IAction } from "@shared/components/atoms/ActionMenu";
+import { Dish } from '@shared/services/DishService';
+import { ActionMenu, IAction } from '@shared/components/atoms/ActionMenu';
 export interface MenuDishItem {
   dishItem: Dish;
   actions: IAction<Dish>[];

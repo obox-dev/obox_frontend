@@ -1,5 +1,5 @@
-import { IButton } from "./types";
-import "./Button.scss";
+import { IButton } from './types';
+import './Button.scss';
 
 export const Button = (props: IButton) => {
   const {
@@ -11,7 +11,7 @@ export const Button = (props: IButton) => {
     icon,
   } = props;
   return (
-    <button type={type} onClick={onClick} className={["btn", `btn-${variant}`].join(" ")} disabled={isDisabled}>
+    <button type={type} onClick={onClick} className={['btn', `btn-${variant}`].join(' ')} disabled={isDisabled}>
       {icon}
       {text}
     </button>

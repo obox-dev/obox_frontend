@@ -1,10 +1,10 @@
-import React from "react";
-import Modal from "react-bootstrap/Modal";
-import { Button } from "@shared/components/atoms/Button";
+import React from 'react';
+import Modal from 'react-bootstrap/Modal';
+import { Button } from '@shared/components/atoms/Button';
 
-import { ButtonVariants } from "@shared/components/atoms/Button";
-import { DialogPropTypes } from "./types";
-import "./Dialog.scss";
+import { ButtonVariants } from '@shared/components/atoms/Button';
+import { DialogPropTypes } from './types';
+import './Dialog.scss';
 
 export const Dialog: React.FC<DialogPropTypes> = (props: DialogPropTypes) => {
   const {

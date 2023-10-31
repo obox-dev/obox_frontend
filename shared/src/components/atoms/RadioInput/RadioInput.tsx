@@ -7,7 +7,7 @@ export const RadioInput = (props: IRadioInput) => {
 
   return (
     <div className="form-check">
-      <InputLabel className="form-check-label" forInput={id} text={label} wrapperClassName={checked ? "active" : ""}>
+      <InputLabel className="form-check-label" forInput={id} text={label} wrapperClassName={checked ? 'active' : ''}>
         <Input
           id={id}
           value={value}

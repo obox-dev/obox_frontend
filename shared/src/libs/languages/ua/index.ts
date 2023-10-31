@@ -9,6 +9,6 @@ const ua = {
   home,
   menu,
   dishForm,
-}
+};
 
 export default ua;

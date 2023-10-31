@@ -6,7 +6,7 @@ export const SelectInput = <T, >(props: ISelectInput<T>) => {
 
   return (
     <Select
-      className={[className, "basic-single"].join(" ")}
+      className={[className, 'basic-single'].join(' ')}
       classNamePrefix="select"
       defaultValue={defaultValue}
       name={name}

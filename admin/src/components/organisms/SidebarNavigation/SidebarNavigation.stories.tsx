@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { MemoryRouter } from "react-router";
-import { SidebarNavigation } from "./SidebarNavigation";
+import type { Meta, StoryObj } from '@storybook/react';
+import { MemoryRouter } from 'react-router';
+import { SidebarNavigation } from './SidebarNavigation';
 
 const meta: Meta<typeof SidebarNavigation> = {
-  title: "Story system/Layout/Header",
+  title: 'Story system/Layout/Header',
   decorators: [(Story) => (<MemoryRouter><Story/></MemoryRouter>)],
   component: SidebarNavigation,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 };
 
 export default meta;

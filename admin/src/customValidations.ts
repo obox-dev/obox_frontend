@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-yup.addMethod(yup.mixed, 'nullableNumber', function (message = `Invalid number`) {
+yup.addMethod(yup.mixed, 'nullableNumber', function (message = 'Invalid number') {
   return this.test('nullableNumber', message, function (value) {
     if (value === null || !isNaN(value as number)) {
       return true;

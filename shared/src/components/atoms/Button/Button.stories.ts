@@ -1,14 +1,14 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from '@storybook/react';
 
-import { Button } from "./Button";
-import { ButtonVariants } from "./types";
+import { Button } from './Button';
+import { ButtonVariants } from './types';
 
 const meta: Meta<typeof Button> = {
-  title: "Story system/Button",
+  title: 'Story system/Button',
   component: Button,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
-    variant: { control: "select", options: ButtonVariants },
+    variant: { control: 'select', options: ButtonVariants },
   },
 };
 
@@ -21,7 +21,7 @@ export const Primary: Story = {
   args: {
     text,
     variant: ButtonVariants.PRIMARY,
-    onClick: () => {alert("hello")}
+    onClick: () => {alert('hello');}
   },
 };
 
@@ -29,7 +29,7 @@ export const Secondary: Story = {
   args: {
     text,
     variant: ButtonVariants.SECONDARY,
-    onClick: () => {alert("hello")}
+    onClick: () => {alert('hello');}
   },
 };
 
@@ -37,7 +37,7 @@ export const Success: Story = {
   args: {
     text,
     variant: ButtonVariants.SUCCESS,
-    onClick: () => {alert("hello")}
+    onClick: () => {alert('hello');}
   },
 };
 
@@ -45,7 +45,7 @@ export const Danger: Story = {
   args: {
     text,
     variant: ButtonVariants.DANGER,
-    onClick: () => {alert("hello")}
+    onClick: () => {alert('hello');}
   },
 };
 
@@ -53,7 +53,7 @@ export const Warning: Story = {
   args: {
     text,
     variant: ButtonVariants.WARNING,
-    onClick: () => {alert("hello")}
+    onClick: () => {alert('hello');}
   },
 };
 
@@ -61,7 +61,7 @@ export const Info: Story = {
   args: {
     text,
     variant: ButtonVariants.INFO,
-    onClick: () => {alert("hello")}
+    onClick: () => {alert('hello');}
   },
 };
 
@@ -69,7 +69,7 @@ export const Light: Story = {
   args: {
     text,
     variant: ButtonVariants.LIGHT,
-    onClick: () => {alert("hello")}
+    onClick: () => {alert('hello');}
   },
 };
 
@@ -77,7 +77,7 @@ export const Dark: Story = {
   args: {
     text,
     variant: ButtonVariants.DARK,
-    onClick: () => {alert("hello")}
+    onClick: () => {alert('hello');}
   },
 };
 
@@ -85,6 +85,6 @@ export const Link: Story = {
   args: {
     text,
     variant: ButtonVariants.LINK,
-    onClick: () => {alert("hello")}
+    onClick: () => {alert('hello');}
   },
 };

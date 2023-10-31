@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { LanguageSwitcher } from "./LanguageSwitcher";
+import type { Meta, StoryObj } from '@storybook/react';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 const meta: Meta<typeof LanguageSwitcher> = {
-  title: "Story system/LanguageSwitcher",
+  title: 'Story system/LanguageSwitcher',
   component: LanguageSwitcher,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 };
 
 export default meta;

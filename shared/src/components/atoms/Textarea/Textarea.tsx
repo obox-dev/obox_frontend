@@ -1,5 +1,5 @@
-import { useFormContext } from "react-hook-form";
-import { IInput } from "../Input/types";
+import { useFormContext } from 'react-hook-form';
+import { IInput } from '../Input/types';
 
 export const Textarea = (props: Omit<IInput<HTMLTextAreaElement>, 'type'>) => {
   const {

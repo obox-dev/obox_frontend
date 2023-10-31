@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { RadioInput } from "./RadioInput";
+import type { Meta, StoryObj } from '@storybook/react';
+import { RadioInput } from './RadioInput';
 
 const meta: Meta<typeof RadioInput> = {
-  title: "Story system/RadioInput",
+  title: 'Story system/RadioInput',
   component: RadioInput,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   argTypes: {
   },
 };
@@ -12,15 +12,15 @@ const meta: Meta<typeof RadioInput> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const label = "label";
-const name = "name";
-const value = "value";
+const label = 'label';
+const name = 'name';
+const value = 'value';
 
 export const SingleRadio: Story = {
   args: {
     label,
     name,
     value,
-    onChange: () => {console.log(123)},
+    onChange: () => {console.log(123);},
   },
 };

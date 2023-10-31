@@ -1,13 +1,13 @@
-import { API } from "./ApiService";
+import { API } from './ApiService';
 
 export enum DishState {
-  ENABLED = "ENABLED",
-  DISABLED = "DISABLED",
+  ENABLED = 'ENABLED',
+  DISABLED = 'DISABLED',
 }
 
 export enum DishInStock {
-  ENABLED = "ENABLED",
-  DISABLED = "DISABLED",
+  ENABLED = 'ENABLED',
+  DISABLED = 'DISABLED',
 }
 
 export interface Dish {
@@ -45,7 +45,7 @@ export interface CreateDishResponse {
 
 export class DishesService {
   static async create(params: CreateDishRequest) {
-    return API.post<CreateDishRequest, CreateDishResponse>("/dishes/", params);
+    return API.post<CreateDishRequest, CreateDishResponse>('/dishes/', params);
   }
   static async update(id: string, params: UpdateDishRequest) {
     return API.patch<UpdateDishRequest, CreateDishResponse>(`/dishes/${id}`, params);

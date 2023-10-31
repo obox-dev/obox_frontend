@@ -84,5 +84,5 @@ export const useDishImage = () => {
     deleteMarkedAttachments,
     getDishAttachments,
     setFilesToUpload,
-  }
+  };
 };

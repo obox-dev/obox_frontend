@@ -1,19 +1,19 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { withActions } from "@storybook/addon-actions/decorator";
-import { Form } from "./Form";
-import { Input, InputVariants } from "../Input";
-import { InputLabel } from "../InputLabel";
-import { RadioInput } from "../RadioInput";
+import type { Meta, StoryObj } from '@storybook/react';
+import { withActions } from '@storybook/addon-actions/decorator';
+import { Form } from './Form';
+import { Input, InputVariants } from '../Input';
+import { InputLabel } from '../InputLabel';
+import { RadioInput } from '../RadioInput';
 
-const submitButtonText = "Submit";
+const submitButtonText = 'Submit';
 
 const meta: Meta<typeof Form> = {
-  title: "Story system/Form",
+  title: 'Story system/Form',
   component: Form,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     actions: {
-      handles: ["submit"],
+      handles: ['submit'],
     },
   },
   args: {

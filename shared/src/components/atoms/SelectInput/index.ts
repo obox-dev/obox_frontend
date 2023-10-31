@@ -1,2 +1,2 @@
-export { SelectInput } from "./SelectInput";
-export type { ISelectInput } from "./types";
+export { SelectInput } from './SelectInput';
+export type { ISelectInput } from './types';

@@ -1,7 +1,7 @@
-import { NavLink } from "react-router-dom";
-import { ActionMenu } from "@shared/components/atoms/ActionMenu";
-import { Menu } from "@shared/services";
-import { IAction } from "@shared/components/atoms/ActionMenu";
+import { NavLink } from 'react-router-dom';
+import { ActionMenu } from '@shared/components/atoms/ActionMenu';
+import { Menu } from '@shared/services';
+import { IAction } from '@shared/components/atoms/ActionMenu';
 
 export interface MenuNavigationItemProps {
   menuItem: Menu;
@@ -16,5 +16,5 @@ export const MenuNavigationItem = (props: MenuNavigationItemProps) => {
       <NavLink to={`/menu/${menuItem.menu_id}`} className="menu__navigation-item-link">{label}</NavLink>
       <ActionMenu entity={menuItem} actions={actions}/>
     </li>
-  )
-}
+  );
+};
