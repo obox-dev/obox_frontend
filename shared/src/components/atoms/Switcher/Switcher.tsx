@@ -8,6 +8,7 @@ import './Switcher.scss';
 export const Switcher = (props: ISwitcher) => {
   const {
     name,
+    text,
     value,
     textForChecked,
     textForUnchecked,
@@ -25,6 +26,13 @@ export const Switcher = (props: ISwitcher) => {
     onChange?.(value);
   };
 
+  const finalText = () => {
+    if (text) {
+      return text;
+    }
+    return isChecked ? textForChecked : textForUnchecked;
+  };
+
   return (
     <div className={[isDisabled ? 'disabled' : '', 'switcher'].join(' ')}>
       <InputLabel wrapperClassName="switch">
@@ -38,7 +46,7 @@ export const Switcher = (props: ISwitcher) => {
         <span className="slider round"></span>
       </InputLabel>
       <span className="switch-text">
-        {isChecked ? textForChecked : textForUnchecked}
+        {finalText()}
       </span>
     </div>
   );
