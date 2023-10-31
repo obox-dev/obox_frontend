@@ -3,7 +3,7 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { DialogContext } from './DialogContext';
+import { DialogContext } from './dialogContext';
 import { IDialog, DialogComponent } from './types';
 
 export const DialogProvider = ({ children }: { children: JSX.Element }) => {
