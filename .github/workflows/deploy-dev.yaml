@@ -28,7 +28,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME_DEV }}
           password: ${{ secrets.FTP_PASSWORD_DEV }}
 
-          server-dir: /app
+          server-dir: /app/
           local-dir: ./build/app/
 
       - name: Deploy Landing via FTP
@@ -37,7 +37,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER_DEV }}
           username: ${{ secrets.FTP_USERNAME_DEV }}
           password: ${{ secrets.FTP_PASSWORD_DEV }}
-          server-dir: /public_html
+          server-dir: /public_html/
           local-dir: ./build/landing/
 
       - name: Deploy Admin via FTP
@@ -46,7 +46,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER_DEV }}
           username: ${{ secrets.FTP_USERNAME_DEV }}
           password: ${{ secrets.FTP_PASSWORD_DEV }}
-          server-dir: /admin
+          server-dir: /admin/
           local-dir: ./build/admin/
 
       - name: Deploy Storybook via FTP
@@ -55,5 +55,5 @@ jobs:
           server: ${{ secrets.FTP_SERVER_DEV }}
           username: ${{ secrets.FTP_USERNAME_DEV }}
           password: ${{ secrets.FTP_PASSWORD_DEV }}
-          server-dir: /storybook
+          server-dir: /storybook/
           local-dir: ./build/storybook/
