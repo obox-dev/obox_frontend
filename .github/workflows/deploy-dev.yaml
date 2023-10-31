@@ -13,11 +13,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
       - name: Build Apps
         run: npm install && npm run build
 
       - name: Deploy Apps via FTP
-        uses: SamKirkland/FTP-Deploy-Action@4.0
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_SERVER_DEV }}
           username: ${{ secrets.FTP_USERNAME_DEV }}
@@ -27,7 +32,7 @@ jobs:
           local-dir: ./build/app
 
       - name: Deploy Landing via FTP
-        uses: SamKirkland/FTP-Deploy-Action@4.0
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_SERVER_DEV }}
           username: ${{ secrets.FTP_USERNAME_DEV }}
@@ -36,7 +41,7 @@ jobs:
           local-dir: ./build/landing
 
       - name: Deploy Admin via FTP
-        uses: SamKirkland/FTP-Deploy-Action@4.0
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_SERVER_DEV }}
           username: ${{ secrets.FTP_USERNAME_DEV }}
@@ -45,7 +50,7 @@ jobs:
           local-dir: ./build/admin
 
       - name: Deploy Storybook via FTP
-        uses: SamKirkland/FTP-Deploy-Action@4.0
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_SERVER_DEV }}
           username: ${{ secrets.FTP_USERNAME_DEV }}
