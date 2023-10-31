@@ -38,7 +38,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME_DEV }}
           password: ${{ secrets.FTP_PASSWORD_DEV }}
           server-dir: /public_html/
-          local-dir: ./build/landing/
+          local-dir: ./build/public_html/
 
       - name: Deploy Admin via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
