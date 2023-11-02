@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRequest } from '@admin/hooks';
-import { Category, CategoriesService, MenuService } from '@shared/services';
+import { CategoriesService, MenuService, CategoryResponse } from '@shared/services';
 
 interface GetCategoryParams {
   menuId: string;
@@ -8,7 +8,7 @@ interface GetCategoryParams {
 
 export const useGetCategory = (args: GetCategoryParams) => {
   const { menuId } = args;
-  const [categoriesList, setCategoriesList] = useState<Category[]>([]);
+  const [categoriesList, setCategoriesList] = useState<CategoryResponse[]>([]);
 
   const loadCategories = () => {
     return MenuService.getCategoriesByMenuId(menuId);
@@ -16,7 +16,7 @@ export const useGetCategory = (args: GetCategoryParams) => {
 
   const { execute: loadAllCategories } = useRequest({
     requestFunction: loadCategories,
-    onSuccess: (result: Category[]) => {
+    onSuccess: (result: CategoryResponse[]) => {
       setCategoriesList(result);
     },
     onError: (error) => {

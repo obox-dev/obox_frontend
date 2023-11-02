@@ -11,10 +11,11 @@ import { useDish } from '../MenuDish/useDish';
 
 interface MenuProps {
   menuId: string;
+  currentLanguage: string;
 }
 
 export const Menu = (props: MenuProps) => {
-  const { menuId } = props;
+  const { menuId, currentLanguage } = props;
   const { categoryId, dishId } = useParams();
   const { t } = useTranslation();
   const {
@@ -23,7 +24,7 @@ export const Menu = (props: MenuProps) => {
     loadSingleCategory,
     categoriesList,
     menuCategoriesActions,
-  } = useCategories(menuId!);
+  } = useCategories(menuId!, currentLanguage);
   const { loadSingleDish, loadAllDishes, dishList, menuDishesActions } = useDish(categoryId!);
 
   useEffect(() => {
@@ -62,6 +63,7 @@ export const Menu = (props: MenuProps) => {
         <MenuCategoryList
           actions={menuCategoriesActions}
           categoryItems={categoriesList}
+          currentLanguage={currentLanguage}
         />
       </Sidebar>
       {categoryId && (

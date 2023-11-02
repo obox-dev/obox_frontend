@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCreateCategory, useGetCategory, useUpdateCategory } from './hooks';
 import { useDeleteCategory } from './hooks/useDeleteCategory';
 
-export const useCategories = (menuId: string) => {
+export const useCategories = (menuId: string, language: string) => {
   const { t } = useTranslation(['common', 'menu']);
   const { closeAll } = useDialog();
   const navigate = useNavigate();
@@ -23,6 +23,7 @@ export const useCategories = (menuId: string) => {
       closeAll();
     },
     menuId: menuId,
+    language,
   });
 
   const { openCategoryUpdateDialog } = useUpdateCategory({
@@ -35,7 +36,8 @@ export const useCategories = (menuId: string) => {
         await loadAllCategories();
         closeAll();
       }
-    }
+    },
+    language,
   });
 
   const { openCategoryDeleteDialog } = useDeleteCategory({

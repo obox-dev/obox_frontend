@@ -43,7 +43,7 @@ export const MenuPage = () => {
         actions={menuActions}
         currentLanguage={HARDCODED_LANGUAGE}
       />
-      {menuId && <Menu menuId={menuId} />}
+      {menuId && <Menu menuId={menuId} currentLanguage={language}/>}
     </div>
   );
 };

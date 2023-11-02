@@ -5,21 +5,29 @@ export enum CategoryState {
   ENABLED = 'ENABLED',
   DISABLED = 'DISABLED',
 }
-export interface Category {
-  menu_id: string;
+
+export interface CategoryContent {
   name: string;
+  description?: string;
+}
+export interface CategoryResponse {
+  menu_id: string;
   category_id: string;
   state: CategoryState;
+  content: Record<string, CategoryContent>;
 }
+export type Category = CategoryContent & Omit<CategoryResponse, 'content'>;
 export interface CreateCategoryRequest {
   menu_id: string;
   name: string;
   state: CategoryState;
+  language: string;
 }
 
 export interface UpdateCategoryRequest {
   name: string;
   state: CategoryState;
+  language: string;
 }
 
 export interface CreateCategoryResponse {

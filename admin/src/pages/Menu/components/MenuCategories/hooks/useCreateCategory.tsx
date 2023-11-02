@@ -18,10 +18,11 @@ import { Switcher } from '@shared/components/atoms/Switcher';
 interface CreateCategoryParams {
   onSuccess: (result: CreateCategoryResponse) => Promise<void>;
   menuId: string;
+  language: string;
 }
 
 export const useCreateCategory = (args: CreateCategoryParams) => {
-  const { onSuccess, menuId } = args;
+  const { onSuccess, menuId, language } = args;
   const { openDialog } = useDialog();
   const { t } = useTranslation();
   const { validationSchema } = useCategoryFormValidation();
@@ -40,6 +41,7 @@ export const useCreateCategory = (args: CreateCategoryParams) => {
         menu_id: menuId,
         name: '',
         state: CategoryState.ENABLED,
+        language,
       };
   
       return (
@@ -71,7 +73,11 @@ export const useCreateCategory = (args: CreateCategoryParams) => {
                 name="menu_id"
                 value={menuId}
               />
-              <Input type={InputVariants.HIDDEN} name="state" />
+              <Input
+                type={InputVariants.HIDDEN}
+                name="language"
+                value={language}
+              />
               <Input
                 placeholder={t('menu:createCategoryForm.placeholder')}
                 type={InputVariants.TEXT}
