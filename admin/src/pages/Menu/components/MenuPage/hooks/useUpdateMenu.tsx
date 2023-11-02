@@ -14,19 +14,21 @@ import { Switcher } from '@shared/components/atoms/Switcher';
 interface UpdateMenuParams {
   onSuccess: () => Promise<void>;
   onError?: (error: AxiosError) => void;
+  language: string;
 }
 
 export const useUpdateMenu = (args: UpdateMenuParams) => {
   const { t } = useTranslation();
   const { validationSchema } = useMenuFormValidation();
   const { openDialog } = useDialog();
-  const { onSuccess, onError } = args;
+  const { onSuccess, onError, language } = args;
 
   const updateSubmit = async ({ menu_id, name, state }: Menu) => {
     const id = menu_id;
     const request: UpdateMenuRequest = {
       name,
       state,
+      language
     };
 
     return MenuService.update(id, request);
@@ -71,7 +73,7 @@ export const useUpdateMenu = (args: UpdateMenuParams) => {
           >
             <>
               <Input type={InputVariants.HIDDEN} name="restaurant_id" />
-              <Input type={InputVariants.HIDDEN} name="language_code" />
+              <Input type={InputVariants.HIDDEN} name="language" value={language} />
               <Input
                 placeholder={t('menu:createMenuForm.placeholder')}
                 type={InputVariants.TEXT}

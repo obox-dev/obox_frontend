@@ -12,4 +12,4 @@ export type {
   CreateCategoryResponse,
   UpdateCategoryRequest,
 } from './CategoriesService';
-export type { Menu } from './RestaurantsService';
+export type { MenuResponse, Menu } from './RestaurantsService';

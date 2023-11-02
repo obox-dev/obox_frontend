@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRequest } from '@admin/hooks';
-import { Menu, MenuService, RestaurantsService } from '@shared/services';
+import { MenuResponse, MenuService, RestaurantsService } from '@shared/services';
 
 interface GetMenuParams {
   restaurant_id: string;
@@ -9,7 +9,7 @@ interface GetMenuParams {
 export const useGetMenu = (args: GetMenuParams) => {
   const { restaurant_id } = args;
 
-  const [menuList, setMenuList] = useState<Menu[]>([]);
+  const [menuList, setMenuList] = useState<MenuResponse[]>([]);
 
   const loadMenus = () => {
     return RestaurantsService.getMenusByRestaurantId(restaurant_id);
@@ -17,7 +17,7 @@ export const useGetMenu = (args: GetMenuParams) => {
 
   const { execute: loadAllMenus } = useRequest({
     requestFunction: loadMenus,
-    onSuccess: (result: Menu[]) => {
+    onSuccess: (result: MenuResponse[]) => {
       setMenuList(result);
     },
     onError: (error) => {

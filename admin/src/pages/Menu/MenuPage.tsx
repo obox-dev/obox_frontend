@@ -5,11 +5,13 @@ import { Menu } from './components/MenuPage/Menu';
 import { useMenu } from './components/MenuPage/useMenu';
 import './Menu.scss';
 
-const HARDCODED_RESTAURANT_ID = '6d8c575c-a32f-41de-b9fd-614643f7b55b';
+const HARDCODED_RESTAURANT_ID = '793ecd10-c0c0-4b06-ac09-c7a3ecdc9f04';
+const HARDCODED_LANGUAGE = 'uk-UA';
 
 export const MenuPage = () => {
   const { menuId } = useParams();
   const restaurantId = HARDCODED_RESTAURANT_ID;
+  const language = HARDCODED_LANGUAGE;
   const {
     openMenuCreateDialog,
     loadSingleMenu,
@@ -18,6 +20,7 @@ export const MenuPage = () => {
     menuActions,
   } = useMenu({
     restaurant_id: restaurantId,
+    language,
   });
 
   useEffect(() => {
@@ -38,6 +41,7 @@ export const MenuPage = () => {
         items={menuList}
         addMenu={openMenuCreateDialog}
         actions={menuActions}
+        currentLanguage={HARDCODED_LANGUAGE}
       />
       {menuId && <Menu menuId={menuId} />}
     </div>

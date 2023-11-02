@@ -11,6 +11,7 @@ export interface MenuNavigationItemProps {
 
 export const MenuNavigationItem = (props: MenuNavigationItemProps) => {
   const { label, menuItem, actions } = props;
+  
   return (
     <li className="menu__navigation-item d-flex align-items-center">
       <NavLink to={`/menu/${menuItem.menu_id}`} className="menu__navigation-item-link">{label}</NavLink>

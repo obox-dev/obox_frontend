@@ -17,12 +17,11 @@ import { useMenuFormValidation } from '../validation/useMenuFormValidation';
 interface CreateMenuParams {
   onSuccess: (result: CreateMenuResponse) => Promise<void>;
   restaurantId: string;
+  language: string;
 }
 
-const DEFAULT_LANGUAGE_CODE = 'en';
-
 export const useCreateMenu = (args: CreateMenuParams) => {
-  const { onSuccess, restaurantId } = args;
+  const { onSuccess, restaurantId, language } = args;
   const { openDialog } = useDialog();
   const { t } = useTranslation();
   const { validationSchema } = useMenuFormValidation();
@@ -41,7 +40,7 @@ export const useCreateMenu = (args: CreateMenuParams) => {
 
       const defaultValues: CreateMenuRequest = {
         name: '',
-        language_code: DEFAULT_LANGUAGE_CODE,
+        language,
         restaurant_id: restaurantId,
         state: MenuState.ENABLED,
       };
@@ -75,7 +74,7 @@ export const useCreateMenu = (args: CreateMenuParams) => {
                 name="restaurant_id"
                 value={restaurantId}
               />
-              <Input type={InputVariants.HIDDEN} name="language_code" />
+              <Input type={InputVariants.HIDDEN} name="language" value={language}/>
               <Input
                 placeholder={t('menu:createMenuForm.placeholder')}
                 type={InputVariants.TEXT}

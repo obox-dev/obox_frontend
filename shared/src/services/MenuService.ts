@@ -8,7 +8,7 @@ export enum MenuState {
 }
 export interface CreateMenuRequest {
   name: string;
-  language_code: string;
+  language: string;
   restaurant_id: string;
   state: MenuState;
 }
@@ -19,6 +19,7 @@ export interface CreateMenuResponse {
 export interface UpdateMenuRequest {
   name: string;
   state: MenuState;
+  language: string;
 }
 
 export class MenuService {
