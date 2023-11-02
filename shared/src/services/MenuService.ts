@@ -1,5 +1,5 @@
 import { API } from './ApiService';
-import { Category } from './CategoriesService';
+import { CategoryResponse } from './CategoriesService';
 import { Menu } from './RestaurantsService';
 
 export enum MenuState {
@@ -8,7 +8,7 @@ export enum MenuState {
 }
 export interface CreateMenuRequest {
   name: string;
-  language_code: string;
+  language: string;
   restaurant_id: string;
   state: MenuState;
 }
@@ -19,6 +19,7 @@ export interface CreateMenuResponse {
 export interface UpdateMenuRequest {
   name: string;
   state: MenuState;
+  language: string;
 }
 
 export class MenuService {
@@ -38,7 +39,7 @@ export class MenuService {
     return API.delete<void, void>(`/menus/${id}`);
   }
 
-  static async getCategoriesByMenuId(menuId: string): Promise<Category[]> {
-    return API.get<null, Category[]>(`/menus/${menuId}/categories/`);
+  static async getCategoriesByMenuId(menuId: string): Promise<CategoryResponse[]> {
+    return API.get<null, CategoryResponse[]>(`/menus/${menuId}/categories/`);
   }
 }

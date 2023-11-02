@@ -3,12 +3,15 @@ import { useParams } from 'react-router';
 import { MenuNavigation } from './components/MenuPage/MenuNavigation';
 import { Menu } from './components/MenuPage/Menu';
 import { useMenu } from './components/MenuPage/useMenu';
+import { useMainProvider } from '@admin/providers/main';
 import './Menu.scss';
 
-const HARDCODED_RESTAURANT_ID = '6d8c575c-a32f-41de-b9fd-614643f7b55b';
+const HARDCODED_RESTAURANT_ID = '793ecd10-c0c0-4b06-ac09-c7a3ecdc9f04';
 
 export const MenuPage = () => {
   const { menuId } = useParams();
+  const { menuLanguage } = useMainProvider();
+  
   const restaurantId = HARDCODED_RESTAURANT_ID;
   const {
     openMenuCreateDialog,
@@ -18,6 +21,7 @@ export const MenuPage = () => {
     menuActions,
   } = useMenu({
     restaurant_id: restaurantId,
+    language: menuLanguage,
   });
 
   useEffect(() => {
@@ -38,8 +42,9 @@ export const MenuPage = () => {
         items={menuList}
         addMenu={openMenuCreateDialog}
         actions={menuActions}
+        currentLanguage={menuLanguage}
       />
-      {menuId && <Menu menuId={menuId} />}
+      {menuId && <Menu menuId={menuId} currentLanguage={menuLanguage} />}
     </div>
   );
 };

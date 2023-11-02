@@ -8,11 +8,12 @@ import { useCreateMenu, useDeleteMenu, useUpdateMenu } from './hooks';
 
 interface UseMenuProps {
   restaurant_id: string;
+  language: string;
 }
 
 export const useMenu = (props: UseMenuProps) => {
   const { t } = useTranslation();
-  const { restaurant_id } = props;
+  const { restaurant_id, language } = props;
 
   const navigate = useNavigate();
   const { closeAll } = useDialog();
@@ -28,6 +29,7 @@ export const useMenu = (props: UseMenuProps) => {
       closeAll();
     },
     restaurantId: restaurant_id,
+    language,
   });
 
   const { openMenuUpdateDialog } = useUpdateMenu({
@@ -40,7 +42,8 @@ export const useMenu = (props: UseMenuProps) => {
         await loadAllMenus();
         closeAll();
       }
-    }
+    },
+    language,
   });
 
   const { openMenuDeleteDialog } = useDeleteMenu({

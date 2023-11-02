@@ -18,19 +18,21 @@ import { CategoryState } from '@shared/services/CategoriesService';
 interface UpdateCategoryParams {
   onSuccess: () => Promise<void>;
   onError?: (error: AxiosError) => void;
+  language: string;
 }
 
 export const useUpdateCategory = (args: UpdateCategoryParams) => {
   const { t } = useTranslation();
   const { validationSchema } = useCategoryFormValidation();
   const { openDialog } = useDialog();
-  const { onSuccess, onError } = args;
+  const { onSuccess, onError, language } = args;
 
   const updateSubmit = async ({ category_id, name, state }: Category) => {
     const id = category_id;
     const request: UpdateCategoryRequest = {
       name,
       state,
+      language,
     };
     return CategoriesService.update(id, request);
   };
@@ -74,7 +76,7 @@ export const useUpdateCategory = (args: UpdateCategoryParams) => {
           >
             <>
               <Input type={InputVariants.HIDDEN} name="category_id" />
-              <Input type={InputVariants.HIDDEN} name="state" />
+              <Input type={InputVariants.HIDDEN} name="language" value={language} />
               <Input
                 placeholder={t('menu:updateCategoryForm.placeholder')}
                 type={InputVariants.TEXT}

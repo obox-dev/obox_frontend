@@ -1,10 +1,12 @@
 import { useTranslation } from '@libs/react-i18next';
-import { Dish } from '@shared/services/DishService';
+import { Dish, DishResponse } from '@shared/services/DishService';
 import { IAction } from '@shared/components/atoms/ActionMenu';
+import { mapDishContent } from '@shared/mappers/DishMapper';
 import { MenuDishItem } from './MenuDishItem';
 export interface MenuDishListProps {
-  dishItems: Dish[];
+  dishItems: DishResponse[];
   actions: IAction<Dish>[];
+  currentLanguage: string;
 }
 
 interface HeaderItem {
@@ -13,7 +15,7 @@ interface HeaderItem {
 }
 
 export const MenuDishList = (props: MenuDishListProps) => {
-  const { dishItems, actions } = props;
+  const { dishItems, actions, currentLanguage } = props;
   const { t } = useTranslation();
 
   const dishListHeader: HeaderItem[] = [
@@ -49,12 +51,13 @@ export const MenuDishList = (props: MenuDishListProps) => {
         </tr>
       </thead>
       <tbody>
-        {dishItems.map((item: Dish) => {
+        {dishItems.map((item: DishResponse) => {
+          const dishItem = mapDishContent(item, currentLanguage);
           return (
             <MenuDishItem
               actions={actions}
               key={item.dish_id}
-              dishItem={item}
+              dishItem={dishItem}
             />
           );
         })}

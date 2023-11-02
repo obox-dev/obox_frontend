@@ -48,7 +48,7 @@ export const useDish = (categoryId: string) => {
         await loadAllDishes();
         closeAll();
       }
-    }
+    },
   });
 
   const { openDishDeleteDialog } = useDeleteDish({
