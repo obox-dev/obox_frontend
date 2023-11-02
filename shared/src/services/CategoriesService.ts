@@ -1,5 +1,5 @@
 import { API } from './ApiService';
-import { Dish } from './DishService';
+import { DishResponse } from './DishService';
 
 export enum CategoryState {
   ENABLED = 'ENABLED',
@@ -47,8 +47,8 @@ export class CategoriesService {
   static async delete(id: string) {
     return API.delete<void, void>(`/categories/${id}`);
   }
-  static async getDishesByCategoryId(categoryId: string): Promise<Dish[]> {
-    return API.get<null, Dish[]>(`/categories/${categoryId}/dishes`);
+  static async getDishesByCategoryId(categoryId: string): Promise<DishResponse[]> {
+    return API.get<null, DishResponse[]>(`/categories/${categoryId}/dishes`);
   }
 }
 

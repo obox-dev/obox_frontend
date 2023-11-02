@@ -1,6 +1,6 @@
 import { useRequest } from '@admin/hooks';
 import { CategoriesService } from '@shared/services';
-import { Dish, DishesService } from '@shared/services/DishService';
+import { DishesService, DishResponse } from '@shared/services/DishService';
 import { useState } from 'react';
 
 interface GetDishParams {
@@ -10,7 +10,7 @@ interface GetDishParams {
 export const useGetDish = (args: GetDishParams) => {
   const { categoryId } = args;
 
-  const [dishList, setDishList] = useState<Dish[]>([]);
+  const [dishList, setDishList] = useState<DishResponse[]>([]);
 
   const loadDishes = () => {
     return CategoriesService.getDishesByCategoryId(categoryId);
@@ -18,7 +18,7 @@ export const useGetDish = (args: GetDishParams) => {
 
   const { execute: loadAllDishes } = useRequest({
     requestFunction: loadDishes,
-    onSuccess: (result: Dish[]) => {
+    onSuccess: (result: DishResponse[]) => {
       setDishList(result);
     },
     onError: (error) => {

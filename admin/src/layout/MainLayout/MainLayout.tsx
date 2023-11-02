@@ -6,6 +6,7 @@ import { MenuPage } from '../../pages/Menu/MenuPage';
 import NotFound from '../../pages/Page_404/NotFound';
 import { MenuDishPage } from '../../pages/Menu/components/MenuDish/MenuDishPage';
 import Tags from '@admin/pages/TagsAndAllergenes/Tags';
+import { MainProvider } from '@admin/providers/main';
 
 export const MainLayout: React.FC = () => {
   const userIsAuthenticated = true; // Replace this with your authentication logic
@@ -14,26 +15,28 @@ export const MainLayout: React.FC = () => {
     <div className="main-layout d-flex min-vh-100">
       <SidebarNavigation userIsAuthenticated={userIsAuthenticated} />
       <main className="flex-grow-1">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/menu" element={<MenuPage />} />
-          <Route path="/tags" element={<Tags />} />
-          <Route path="/menu/:menuId" element={<MenuPage />} />
-          <Route
-            path="/menu/:menuId/category/:categoryId"
-            element={<MenuPage />}
-          />
-          <Route
-            path="/menu/:menuId/category/:categoryId/create-dish"
-            element={<MenuDishPage />}
-          />
-          <Route
-            path="/menu/:menuId/category/:categoryId/dish/:dishId"
-            element={<MenuDishPage />}
-          />
-          <Route path="/not-found" element={<NotFound />} />
-          <Route path="*" element={<Navigate replace to="/not-found" />} />
-        </Routes>
+        <MainProvider>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/menu" element={<MenuPage />} />
+            <Route path="/tags" element={<Tags />} />
+            <Route path="/menu/:menuId" element={<MenuPage />} />
+            <Route
+              path="/menu/:menuId/category/:categoryId"
+              element={<MenuPage />}
+            />
+            <Route
+              path="/menu/:menuId/category/:categoryId/create-dish"
+              element={<MenuDishPage />}
+            />
+            <Route
+              path="/menu/:menuId/category/:categoryId/dish/:dishId"
+              element={<MenuDishPage />}
+            />
+            <Route path="/not-found" element={<NotFound />} />
+            <Route path="*" element={<Navigate replace to="/not-found" />} />
+          </Routes>
+        </MainProvider>
       </main>
     </div>
   );

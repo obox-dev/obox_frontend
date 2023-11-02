@@ -2,9 +2,12 @@ import {
   CreateDishRequest,
   Dish,
   DishInStock,
+  DishResponse,
   DishState,
 } from '@shared/services/DishService';
 import { useDishFormValidation } from '../validation/useDishFormValidation';
+import { mapDishContent } from '@shared/mappers/DishMapper';
+
 
 type ExcludeKeys = 'price' | 'weight' | 'calories';
 type ExcludedAsOptionalString = Record<ExcludeKeys, string | null>;
@@ -22,9 +25,10 @@ const mapDishToDefaultValues = (dish: Dish): DishDefaultValues => ({
   tags: dish.tags,
   state: dish.state,
   in_stock: dish.in_stock,
+  language: dish.language,
 });
 
-export const useDishForms = (categoryId: string) => {
+export const useDishForms = (categoryId: string, currentLanguage: string) => {
   const { createDishSchema } = useDishFormValidation();
 
   const createDishDefaultValues: DishDefaultValues = {
@@ -37,12 +41,14 @@ export const useDishForms = (categoryId: string) => {
     allergens: [],
     tags: [],
     state: DishState.ENABLED,
-    in_stock: DishInStock.ENABLED
+    in_stock: DishInStock.ENABLED,
+    language: currentLanguage,
   };
 
-  const getDefaultValues = (dish?: Dish): DishDefaultValues => {
+  const getDefaultValues = (dish?: DishResponse): DishDefaultValues => {
     if (dish) {
-      return mapDishToDefaultValues(dish);
+      const dishItem = mapDishContent(dish, currentLanguage);
+      return mapDishToDefaultValues(dishItem);
     }
     return createDishDefaultValues;
   };

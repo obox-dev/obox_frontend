@@ -25,7 +25,8 @@ export const Menu = (props: MenuProps) => {
     categoriesList,
     menuCategoriesActions,
   } = useCategories(menuId!, currentLanguage);
-  const { loadSingleDish, loadAllDishes, dishList, menuDishesActions } = useDish(categoryId!);
+  const { loadSingleDish, loadAllDishes, dishList, menuDishesActions } =
+    useDish(categoryId!);
 
   useEffect(() => {
     if (menuId) {
@@ -77,7 +78,11 @@ export const Menu = (props: MenuProps) => {
               ></Button>
             </Link>
           </div>
-          <MenuDishList dishItems={dishList} actions={menuDishesActions} />
+          <MenuDishList
+            dishItems={dishList}
+            actions={menuDishesActions}
+            currentLanguage={currentLanguage}
+          />
         </div>
       )}
     </div>

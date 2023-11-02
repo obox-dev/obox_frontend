@@ -34,6 +34,7 @@ interface DishFormProps<T extends FieldValues> {
     type: 'attachment' | 'file',
     attachment: AttachmentOrFile
   ) => void;
+  language: string;
 }
 
 export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
@@ -48,6 +49,7 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
     uploadedImages,
     onUploadImage,
     onDeleteImage,
+    language,
   } = props;
 
   const formRef = useRef<FormRef<Partial<Dish>> | null>(null);
@@ -72,11 +74,13 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
                 <>
                   <div className="form-columns">
                     <div className="left-column">
+                      <Input type={InputVariants.HIDDEN} name="category_id" />
+                      <Input type={InputVariants.HIDDEN} name="status" />
                       <Input
                         type={InputVariants.HIDDEN}
-                        name="category_id"
+                        name="language"
+                        value={language}
                       />
-                      <Input type={InputVariants.HIDDEN} name="status" />
                       <div className="form-group">
                         <InputLabel text={t('dishForm:name')} forInput="name" />
                         <Input
