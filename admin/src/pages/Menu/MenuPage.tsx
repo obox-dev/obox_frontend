@@ -5,13 +5,14 @@ import { Menu } from './components/MenuPage/Menu';
 import { useMenu } from './components/MenuPage/useMenu';
 import { useMainProvider } from '@admin/providers/main';
 import './Menu.scss';
+import { LayoutWithSearch } from '@admin/layout/LayoutWithSearch/LayoutWithSearch';
 
 const HARDCODED_RESTAURANT_ID = '793ecd10-c0c0-4b06-ac09-c7a3ecdc9f04';
 
 export const MenuPage = () => {
   const { menuId } = useParams();
   const { menuLanguage } = useMainProvider();
-  
+
   const restaurantId = HARDCODED_RESTAURANT_ID;
   const {
     openMenuCreateDialog,
@@ -37,14 +38,18 @@ export const MenuPage = () => {
   }, [restaurantId]);
 
   return (
-    <div>
-      <MenuNavigation
-        items={menuList}
-        addMenu={openMenuCreateDialog}
-        actions={menuActions}
-        currentLanguage={menuLanguage}
-      />
-      {menuId && <Menu menuId={menuId} currentLanguage={menuLanguage} />}
+    <div className="menu-page">
+      <LayoutWithSearch>
+        <>
+          <MenuNavigation
+            items={menuList}
+            addMenu={openMenuCreateDialog}
+            actions={menuActions}
+            currentLanguage={menuLanguage}
+          />
+          {menuId && <Menu menuId={menuId} currentLanguage={menuLanguage} />}
+        </>
+      </LayoutWithSearch>
     </div>
   );
 };

@@ -1,14 +1,8 @@
-import React from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
 import { SidebarNavigation } from '../../components/organisms/SidebarNavigation';
-import Home from '../../pages/Home/Home';
-import { MenuPage } from '../../pages/Menu/MenuPage';
-import NotFound from '../../pages/Page_404/NotFound';
-import { MenuDishPage } from '../../pages/Menu/components/MenuDish/MenuDishPage';
-import Tags from '@admin/pages/TagsAndAllergenes/Tags';
 import { MainProvider } from '@admin/providers/main';
+import { MainRouter } from '@admin/routes/MainRouter';
 
-export const MainLayout: React.FC = () => {
+export const MainLayout = () => {
   const userIsAuthenticated = true; // Replace this with your authentication logic
 
   return (
@@ -16,26 +10,7 @@ export const MainLayout: React.FC = () => {
       <SidebarNavigation userIsAuthenticated={userIsAuthenticated} />
       <main className="flex-grow-1">
         <MainProvider>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/menu" element={<MenuPage />} />
-            <Route path="/tags" element={<Tags />} />
-            <Route path="/menu/:menuId" element={<MenuPage />} />
-            <Route
-              path="/menu/:menuId/category/:categoryId"
-              element={<MenuPage />}
-            />
-            <Route
-              path="/menu/:menuId/category/:categoryId/create-dish"
-              element={<MenuDishPage />}
-            />
-            <Route
-              path="/menu/:menuId/category/:categoryId/dish/:dishId"
-              element={<MenuDishPage />}
-            />
-            <Route path="/not-found" element={<NotFound />} />
-            <Route path="*" element={<Navigate replace to="/not-found" />} />
-          </Routes>
+          <MainRouter />
         </MainProvider>
       </main>
     </div>
