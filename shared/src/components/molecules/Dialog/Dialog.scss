@@ -1,3 +1,183 @@
+@import "../../../styles/variables.scss";
+
+@mixin modal-styles(
+  $size-modal-window,
+  $padding,
+  $right,
+  $top,
+  $button-width,
+  $button-height,
+  $header-marButt,
+  $has-border-radius
+) {
+  max-width: $size-modal-window;
+
+  .modal-content {
+    padding: $padding;
+    border-color: transparent;
+    color: $secondary-text-color;
+    @if $has-border-radius {
+      border: 1px solid $primary-color;
+      border-radius: 20px;
+    }
+
+    .modal-header {
+      font-size: $heading-lg-font-size;
+      line-height: 1.2;
+      font-weight: 500;
+      margin: 0 auto;
+      border-bottom: none;
+      padding: 0;
+      margin-bottom: $header-marButt;
+      .btn-close {
+        position: absolute;
+        right: $right;
+        top: $top;
+        background: transparent;
+        width: $button-width;
+        height: $button-height;
+        padding: 0;
+
+        &:focus {
+          box-shadow: none;
+        }
+
+        &::before,
+        &::after {
+          content: "";
+          width: 3px;
+          height: 24px;
+          position: absolute;
+          background-color: $primary-color;
+          top: 50%;
+          left: 50%;
+        }
+
+        &::before {
+          transform: translate(-50%, -50%) rotate(45deg);
+        }
+        &::after {
+          transform: translate(-50%, -50%) rotate(-45deg);
+        }
+      }
+    }
+    .modal-body {
+      padding: 0px;
+      width: 520px;
+      margin-bottom: 28px;
+
+      .input-label {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 1.4;
+      }
+
+      .form-control {
+        padding: 18.5px 16px;
+        margin-bottom: 28px !important;
+        height: 48px;
+        border: 1px solid $primary-color;
+        border-radius: 8px;
+
+        &:focus {
+          box-shadow: 0 0 0 0.1rem #404bbf;
+        }
+      }
+
+      .text-danger {
+        position: relative;
+        bottom: 24px;
+      }
+
+      textarea {
+        width: 100%;
+        height: 140px;
+        padding: 12px 16px 117px;
+        overflow: hidden;
+        resize: none;
+      }
+    }
+
+    .modal-footer {
+      padding: 0px;
+      border-color: transparent;
+      width: 520px;
+      gap: 24px;
+
+      .btn {
+        width: 248px;
+        height: 48px;
+        margin: 0px;
+        border-radius: 16px;
+        flex: 1;
+        border-top: none;
+        font-weight: 500;
+        transition: $main-transition;
+        outline: 0;
+        border: 1px solid $primary-color;
+      }
+
+      .btn-primary {
+        background-color: $primary-color;
+        color: $primary-contrast-text-color;
+
+        &:focus {
+          background-color: #404bbf;
+        }
+
+        &:hover {
+          background-color: #404bbf;
+          border: 1px solid #404bbf;
+        }
+      }
+
+      .btn-secondary {
+        background-color: inherit;
+        color: inherit;
+
+        &:focus {
+          background-color: #404bbf;
+          color: $primary-contrast-text-color;
+        }
+
+        &:hover {
+          background-color: #404bbf;
+          border: 1px solid #404bbf;
+          color: $primary-contrast-text-color;
+        }
+      }
+    }
+  }
+}
+
 .modal-body {
   overflow-wrap: break-word;
+}
+
+// We use "lg" for CreateMenu and Update and AddAction modal windows
+.modal {
+  .modal-lg {
+    @include modal-styles(648px, 58px 64px, 16px, 16px, 64px, 48px, 36px, true);
+  }
+
+  // We use "sm" for AddCategory modal window
+  .modal-sm {
+    @include modal-styles(648px, 52px 64px, 16px, 16px, 64px, 48px, 36px, true);
+  }
+
+  // We use "sm" for useDeleteMenu modal window
+  .modal-xl {
+    @include modal-styles(
+      920px,
+      127px 154px 32px,
+      24px,
+      24px,
+      32px,
+      32px,
+      48px,
+      false
+    );
+  }
 }

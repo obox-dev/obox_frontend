@@ -1,14 +1,19 @@
 :root {
   --global-white: #ffffff;
   --primary-color: #6a9775;
-  --secondary-color: #D8DEDA;
+  --secondary-color: #d8deda;
   --primary-text-color: #42423d;
   --primary-contrast-text-color: #f4f6f4;
   --secondary-text-color: #3d4840;
 
-  --switcher-toggle-shadow: 0px 1px 2px 0px #1018280F, 0px 1px 3px 0px #1018281A;
-}
+  --switcher-toggle-shadow: 0px 1px 2px 0px #1018280f, 0px 1px 3px 0px #1018281a;
 
+  --heading-lg-font-size: 32px;
+  --heading-md-font-size: 24px;
+  --heading-sm-font-size: 20px;
+
+  --main-transition: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
 
 $global-white: var(--global-white);
 $primary-color: var(--primary-color);
@@ -17,3 +22,7 @@ $primary-text-color: var(--primary-text-color);
 $primary-contrast-text-color: var(--primary-contrast-text-color);
 $secondary-text-color: var(--secondary-text-color);
 $switcher-toggle-shadow: var(--switcher-toggle-shadow);
+$heading-lg-font-size: var(--heading-lg-font-size);
+$heading-md-font-size: var(--heading-md-font-size);
+$heading-sm-font-size: var(--heading-sm-font-size);
+$main-transition: var(--main-transition);

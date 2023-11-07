@@ -6,10 +6,13 @@
   "dishes": "Dishes",
   "createCategoryForm": {
     "title": "Enter your category name",
-    "placeholder": "Enter your category name"
+    "placeholder": "Enter the name of the category",
+    "label": "Category name *",
+    "description": "Category description",
+    "descriptionTextArea": "Enter the name of the category" 
   },
   "updateCategoryForm": {
-    "title": "Enter new name for the category",
+    "title": "Add a category",
     "placeholder": "Enter new name for the category"
   },
   "deleteCategoryForm": {
@@ -17,12 +20,14 @@
     "message": "Confirming the deletion of category:"
   },
   "createMenuForm": {
-    "title": "Enter your menu name",
-    "placeholder": "Enter your menu name"
+    "title": "Add Menu",
+    "placeholder": "Enter your menu name",
+    "label": "Menu name *"
   },
   "updateMenuForm": {
-    "title": "Enter new name for the menu",
-    "placeholder": "Enter new name for the menu"
+    "title": "Editing",
+    "placeholder": "Main menu",
+    "label": "Menu name *"
   },
   "deleteMenuForm": {
     "title": "Are you sure you want to delete this menu?",

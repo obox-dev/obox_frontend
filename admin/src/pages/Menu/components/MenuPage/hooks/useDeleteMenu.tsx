@@ -35,7 +35,7 @@ export const useDeleteMenu = (args: DeleteMenuParams) => {
             closeDialog();
           }}
           title={t('menu:deleteMenuForm.title')}
-          size="lg"
+          size="xl"
           okText={t('common:buttons:confirm')}
           cancelText={t('common:buttons:cancel')}
           okButtonVariant={ButtonVariants.DANGER}

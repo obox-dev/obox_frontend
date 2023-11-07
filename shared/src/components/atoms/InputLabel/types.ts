@@ -4,4 +4,6 @@ export interface IInputLabel {
   children?: Array<JSX.Element> | JSX.Element;
   className?: string;
   wrapperClassName?: string;
+  labelClassName?: string;
+  labelTextClassName?: string;
 }

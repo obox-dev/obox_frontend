@@ -14,6 +14,8 @@ import { Dialog } from '@shared/components/molecules/Dialog';
 import { Input, InputVariants } from '@shared/components/atoms/Input';
 import { CategoryState } from '@shared/services/CategoriesService';
 import { Switcher } from '@shared/components/atoms/Switcher';
+import { InputLabel } from '@shared/components/atoms/InputLabel';
+import { Textarea } from '@shared/components/atoms/Textarea';
 
 interface CreateCategoryParams {
   onSuccess: (result: CreateCategoryResponse) => Promise<void>;
@@ -43,7 +45,7 @@ export const useCreateCategory = (args: CreateCategoryParams) => {
         state: CategoryState.ENABLED,
         language,
       };
-  
+
       return (
         <Dialog
           okCallback={() => {
@@ -78,10 +80,22 @@ export const useCreateCategory = (args: CreateCategoryParams) => {
                 name="language"
                 value={language}
               />
+              <InputLabel
+                forInput="name"
+                text={t('menu:createCategoryForm.label')}
+              />
               <Input
                 placeholder={t('menu:createCategoryForm.placeholder')}
                 type={InputVariants.TEXT}
                 name="name"
+              />
+              <InputLabel
+                forInput="description"
+                text={t('menu:createCategoryForm.description')}
+              />
+              <Textarea
+                name="description"
+                placeholder={t('menu:createCategoryForm:descriptionTextArea')}
               />
               <Switcher
                 value={defaultValues.state}
