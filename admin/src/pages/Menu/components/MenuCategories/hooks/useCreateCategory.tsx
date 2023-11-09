@@ -41,7 +41,7 @@ export const useCreateCategory = (args: CreateCategoryParams) => {
       const formRef = useRef<FormRef<Partial<Category>> | null>(null);
       const defaultValues: CreateCategoryRequest = {
         menu_id: menuId,
-        name: '',
+        name: ' ',
         state: CategoryState.ENABLED,
         language,
       };
