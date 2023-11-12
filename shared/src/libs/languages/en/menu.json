@@ -33,6 +33,10 @@
     "title": "Are you sure you want to delete this menu?",
     "message": "Confirming the deletion of menu:"
   },
+   "deleteDishForm": {
+    "title": "Are you sure you want to delete this dish?",
+    "message": "Confirming the deletion of menu:"
+  },
   "tagsPagePlaceholder": "Tags and allergenes will be here",
   "visibleMenu": "Is menu visible?",
   "visibleCategory": "Is category visible?"

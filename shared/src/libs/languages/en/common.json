@@ -17,8 +17,7 @@
   "name": "Name",
   "poweredby": "Powered by",
   "buttons": {
-    "cancel": "Cancel",
-    "confirm": "Confirm",
+    "cancel": "Cancel changes",
     "edit": "Edit",
     "delete": "Delete",
     "add": "Add"

@@ -41,7 +41,7 @@ export const useCreateCategory = (args: CreateCategoryParams) => {
       const formRef = useRef<FormRef<Partial<Category>> | null>(null);
       const defaultValues: CreateCategoryRequest = {
         menu_id: menuId,
-        name: ' ',
+        name: '',
         state: CategoryState.ENABLED,
         language,
       };
@@ -58,7 +58,7 @@ export const useCreateCategory = (args: CreateCategoryParams) => {
           }}
           title={t('menu:createCategoryForm.title')}
           size="lg"
-          okText={t('common:buttons:confirm')}
+          okText={t('common:buttons:add')}
           cancelText={t('common:buttons:cancel')}
         >
           <Form
@@ -96,6 +96,7 @@ export const useCreateCategory = (args: CreateCategoryParams) => {
               <Textarea
                 name="description"
                 placeholder={t('menu:createCategoryForm:descriptionTextArea')}
+                maxLength={100}
               />
               <Switcher
                 value={defaultValues.state}

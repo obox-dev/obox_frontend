@@ -63,7 +63,7 @@ export const useUpdateCategory = (args: UpdateCategoryParams) => {
           }}
           title={t('menu:updateCategoryForm.title')}
           size="lg"
-          okText={t('common:buttons:confirm')}
+          okText={t('common:buttons:edit')}
           cancelText={t('common:buttons:cancel')}
         >
           <Form
@@ -76,7 +76,11 @@ export const useUpdateCategory = (args: UpdateCategoryParams) => {
           >
             <>
               <Input type={InputVariants.HIDDEN} name="category_id" />
-              <Input type={InputVariants.HIDDEN} name="language" value={language} />
+              <Input
+                type={InputVariants.HIDDEN}
+                name="language"
+                value={language}
+              />
               <Input
                 placeholder={t('menu:updateCategoryForm.placeholder')}
                 type={InputVariants.TEXT}

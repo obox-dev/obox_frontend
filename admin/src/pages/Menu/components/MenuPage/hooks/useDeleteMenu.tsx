@@ -36,14 +36,11 @@ export const useDeleteMenu = (args: DeleteMenuParams) => {
           }}
           title={t('menu:deleteMenuForm.title')}
           size="xl"
-          okText={t('common:buttons:confirm')}
+          okText={t('common:buttons:delete')}
           cancelText={t('common:buttons:cancel')}
-          okButtonVariant={ButtonVariants.DANGER}
-        >
-          <p>
-            {t('menu:deleteMenuForm.message')} <strong>{menu.name}</strong>?
-          </p>
-        </Dialog>
+          okButtonVariant={ButtonVariants.PRIMARY}
+          cancelButtonVariant={ButtonVariants.TERTIARY}
+        ></Dialog>
       );
     });
   return { openMenuDeleteDialog };

@@ -1,4 +1,5 @@
 import { IInputLabel } from './types';
+import './InputLabel.scss';
 
 export const InputLabel = (props: IInputLabel) => {
   const { text, forInput, children, className, wrapperClassName } = props;

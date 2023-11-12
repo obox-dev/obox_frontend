@@ -1,5 +1,6 @@
 import { useFormInput } from '@shared/hooks/useFormInput';
 import { IInput, InputVariants } from './types';
+import './Input.scss';
 
 export const Input = (props: IInput<HTMLInputElement>) => {
   const {

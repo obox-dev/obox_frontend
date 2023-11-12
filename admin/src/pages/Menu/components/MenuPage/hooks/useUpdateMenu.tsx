@@ -64,7 +64,7 @@ export const useUpdateMenu = (args: UpdateMenuParams) => {
           }}
           title={t('menu:updateMenuForm.title')}
           size="lg"
-          okText={t('common:buttons:confirm')}
+          okText={t('common:buttons:edit')}
           cancelText={t('common:buttons:cancel')}
         >
           <Form
