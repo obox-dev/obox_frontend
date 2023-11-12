@@ -4,7 +4,7 @@
   $size-modal-window,
   $content-padding,
   $header-bottom-margin,
-  $isButton-delte
+  $isButton-delete
 ) {
   max-width: $size-modal-window;
 
@@ -12,7 +12,7 @@
     padding: $content-padding;
     border-color: transparent;
     color: $secondary-text-color;
-    @if $isButton-delte {
+    @if $isButton-delete {
       border: 1px solid $primary-color;
       border-radius: 20px;
     }
@@ -69,7 +69,7 @@
     border-color: transparent;
     padding: 0px;
 
-    @if $isButton-delte {
+    @if $isButton-delete {
       width: 248px;
       margin: 0 auto;
       gap: 8px;
