@@ -96,7 +96,8 @@ export const useCreateCategory = (args: CreateCategoryParams) => {
               <Textarea
                 name="description"
                 placeholder={t('menu:createCategoryForm:descriptionTextArea')}
-                maxLength={100}
+                maxLength={255}
+                showCounter
               />
               <Switcher
                 value={defaultValues.state}

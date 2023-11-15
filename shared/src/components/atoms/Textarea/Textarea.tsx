@@ -1,10 +1,11 @@
 import { useFormContext } from 'react-hook-form';
-import { ITextArea } from './types';
+import { TextareaProps } from './types';
 import './Textarea.scss';
-import { ChangeEvent, useState } from 'react';
+
+import { ChangeEvent, useState } from 'eact';
 
 export const Textarea = (
-  props: Omit<ITextArea<HTMLTextAreaElement>, 'type'>
+  props: Omit<TextareaProps<HTMLTextAreaElement>, 'type'>
 ) => {
   const {
     register,
@@ -20,6 +21,7 @@ export const Textarea = (
     isDisabled,
     className,
     maxLength,
+    showCounter,
   } = props;
 
   const [count, setCount] = useState(value ? value.length : 0);
@@ -34,9 +36,11 @@ export const Textarea = (
 
   return (
     <div className="textarea-wrapper">
-      <p className="textarea-count">
-        {count}/{maxLength}
-      </p>
+      {showCounter && (
+        <p className="textarea-count">
+          {count}/{maxLength}
+        </p>
+      )}
       <textarea
         {...register(name, {
           onChange,

@@ -10,4 +10,17 @@ export interface ITextArea<T> {
   isDisabled?: boolean;
   className?: string;
   maxLength?: number;
+  showCounter?: boolean;
 }
+
+type PropsWithCounter<T> = ITextArea<T> & {
+  showCounter: true;
+  maxLength: number;
+};
+
+type PropsWithoutCounter<T> = ITextArea<T> & {
+  showCounter?: false;
+  maxLength?: number;
+};
+
+export type TextareaProps<T> = PropsWithCounter<T> | PropsWithoutCounter<T>;
