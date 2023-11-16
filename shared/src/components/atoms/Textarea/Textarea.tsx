@@ -1,7 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 import { TextareaProps } from './types';
 import './Textarea.scss';
-
 import { ChangeEvent, useState } from 'react';
 
 export const Textarea = (
