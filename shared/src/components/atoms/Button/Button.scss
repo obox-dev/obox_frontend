@@ -34,20 +34,21 @@
   }
 
   &.btn-secondary {
-    background-color: $btn-secondary-default-bkg-color;
+    background-color: #ffffff;
     color: $btn-secondary-default-text;
     border: 1px solid $btn-secondary-default-bkg-color;
 
     &:hover,
     &:focus {
-      background-color: $btn-secondary-hover-bkg-color;
+      background-color: #ffffff;
       color: $btn-secondary-hover-text;
       border: 1px solid $btn-secondary-hover-bkg-color;
     }
 
     &:active {
-      background-color: $btn-secondary-press-bkg-color;
+      background-color: #ffffff;
       color: $btn-secondary-press-text;
+      border: 1px solid $btn-secondary-press-bkg-color;
     }
   }
 
