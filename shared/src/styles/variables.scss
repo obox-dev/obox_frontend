@@ -1,14 +1,57 @@
 :root {
   --global-white: #ffffff;
   --primary-color: #6a9775;
-  --secondary-color: #D8DEDA;
+  --secondary-color: #d8deda;
   --primary-text-color: #42423d;
   --primary-contrast-text-color: #f4f6f4;
   --secondary-text-color: #3d4840;
 
-  --switcher-toggle-shadow: 0px 1px 2px 0px #1018280F, 0px 1px 3px 0px #1018281A;
-}
+  /* Button General Styles */
+  --btn-text-weight: 500;
+  --btn-text-size: 16px;
+  --btn-text-line-height: 1.2;
 
+  /* Button Primary Styles */
+  --btn-primary-default-bkg-color: #6a9775;
+  --btn-primary-hover-bkg-color: #80b08c;
+  --btn-primary-press-bkg-color: #b0e4be;
+  --btn-primary-disabled-bkg-color: #cbfdd8;
+
+  --btn-primary-default-text: #f4f6f4;
+  --btn-primary-hover-text: #f4f6f4;
+  --btn-primary-press-text: #86988a;
+  --btn-primary-disabled-text: #a1afa5;
+
+  /* Button Secondary Styles */
+  --btn-secondary-default-bkg-color: #6a9775;
+  --btn-secondary-hover-bkg-color: #80b08c;
+  --btn-secondary-press-bkg-color: #b0e4be;
+  --btn-secondary-disabled-bkg-color: #cbfdd8;
+
+  --btn-secondary-default-text: #3d4840;
+  --btn-secondary-hover-text: #3d4840;
+  --btn-secondary-press-text: #86988a;
+  --btn-secondary-disabled-text: #a1afa5;
+
+  /* Button Tertiary Styles */
+  --btn-tertiary-bkg-color: #ffffff;
+
+  --btn-tertiary-default-text: #6a9775;
+  --btn-tertiary-hover-text: #80b08c;
+  --btn-tertiary-press-text: #98caa5;
+  --btn-tertiary-disabled-text: #a1afa5;
+
+  /* Switcher Styles */
+  --switcher-toggle-shadow: 0px 1px 2px 0px #1018280f, 0px 1px 3px 0px #1018281a;
+
+  /* Heading Styles */
+  --heading-lg-font-size: 32px;
+  --heading-md-font-size: 24px;
+  --heading-sm-font-size: 20px;
+
+  /* Transition */
+  --main-transition: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
 
 $global-white: var(--global-white);
 $primary-color: var(--primary-color);
@@ -16,4 +59,49 @@ $secondary-color: var(--secondary-color);
 $primary-text-color: var(--primary-text-color);
 $primary-contrast-text-color: var(--primary-contrast-text-color);
 $secondary-text-color: var(--secondary-text-color);
+
+/* Button General Styles */
+$btn-text-weight: var(--btn-text-weight);
+$btn-text-size: var(--btn-text-size);
+$btn-text-line-height: var(--btn-line-height);
+
+/* Button Primary Styles */
+$btn-primary-default-bkg-color: var(--btn-primary-default-bkg-color);
+$btn-primary-hover-bkg-color: var(--btn-primary-hover-bkg-color);
+$btn-primary-press-bkg-color: var(--btn-primary-press-bkg-color);
+$btn-primary-disabled-bkg-color: var(--btn-primary-disabled-bkg-color);
+
+$btn-primary-default-text: var(--btn-primary-default-text);
+$btn-primary-hover-text: var(--btn-primary-hover-text);
+$btn-primary-press-text: var(--btn-primary-press-text);
+$btn-primary-disabled-text: var(--btn-primary-disabled-text);
+
+/* Button Secondary Styles */
+$btn-secondary-default-bkg-color: var(--btn-secondary-default-bkg-color);
+$btn-secondary-hover-bkg-color: var(--btn-secondary-hover-bkg-color);
+$btn-secondary-press-bkg-color: var(--btn-secondary-press-bkg-color);
+$btn-secondary-disabled-bkg-color: var(--btn-secondary-disabled-bkg-color);
+
+$btn-secondary-default-text: var(--btn-secondary-default-text);
+$btn-secondary-hover-text: var(--btn-secondary-hover-text);
+$btn-secondary-press-text: var(--btn-secondary-press-text);
+$btn-secondary-disabled-text: var(--btn-secondary-disabled-text);
+
+/* Button Tertiary Styles */
+$btn-tertiary-bkg-color: var(--btn-tertiary-bkg-color);
+
+$btn-tertiary-default-text: var(--btn-tertiary-default-text);
+$btn-tertiary-hover-text: var(--btn-tertiary-hover-text);
+$btn-tertiary-press-text: var(--btn-tertiary-press-text);
+$btn-tertiary-disabled-text: var(--btn-tertiary-disabled-text);
+
+/* Switcher Styles */
 $switcher-toggle-shadow: var(--switcher-toggle-shadow);
+
+/* Heading Styles */
+$heading-lg-font-size: var(--heading-lg-font-size);
+$heading-md-font-size: var(--heading-md-font-size);
+$heading-sm-font-size: var(--heading-sm-font-size);
+
+/* Transition */
+$main-transition: var(--main-transition);

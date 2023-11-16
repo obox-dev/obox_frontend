@@ -1,3 +1,112 @@
-.modal-body {
-  overflow-wrap: break-word;
+@import "../../../styles/variables.scss";
+
+@mixin modal-styles(
+  $size-modal-window,
+  $content-padding,
+  $header-bottom-margin,
+  $isButton-delete
+) {
+  max-width: $size-modal-window;
+
+  .modal-content {
+    padding: $content-padding;
+    border-color: transparent;
+    color: $secondary-text-color;
+    @if $isButton-delete {
+      border: 1px solid $primary-color;
+      border-radius: 20px;
+    }
+
+    .modal-header {
+      font-size: $heading-lg-font-size;
+      line-height: 1.2;
+      font-weight: 500;
+      margin: 0 auto;
+      border-bottom: none;
+      padding: 0;
+      margin-bottom: $header-bottom-margin;
+    }
+    .btn-close {
+      position: absolute;
+      right: 16px;
+      top: 16px;
+      background: transparent;
+      width: 64px;
+      height: 48px;
+      padding: 0;
+
+      &:focus {
+        box-shadow: none;
+      }
+
+      &::before,
+      &::after {
+        content: "";
+        width: 3px;
+        height: 24px;
+        position: absolute;
+        background-color: $primary-color;
+        top: 50%;
+        left: 50%;
+      }
+
+      &::before {
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+      &::after {
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+    }
+  }
+  .modal-body {
+    padding: 0px;
+    width: 520px;
+    margin-bottom: 28px;
+    overflow-wrap: break-word;
+  }
+
+  .modal-footer {
+    border-color: transparent;
+    padding: 0px;
+
+    @if $isButton-delete {
+      width: 248px;
+      margin: 0 auto;
+      gap: 8px;
+    } @else {
+      width: 520px;
+      gap: 24px;
+    }
+
+    .btn {
+      min-width: 248px;
+      min-height: 48px;
+      margin: 0px;
+      border-radius: 16px;
+      flex: 1;
+      border-top: none;
+      font-weight: $btn-text-weight;
+      font-size: $btn-text-size;
+      line-height: $btn-text-line-height;
+      transition: $main-transition;
+      outline: 0;
+    }
+  }
+}
+
+.modal {
+  // We use "lg" for CreateMenu and Update and AddAction modal windows
+  .modal-lg {
+    @include modal-styles(648px, 58px 64px, 36px, false);
+  }
+
+  // We use "sm" for AddCategory modal window
+  .modal-sm {
+    @include modal-styles(648px, 58px 64px, 36px, false);
+  }
+
+  // We use "xl" for useDeleteMenu modal window
+  .modal-xl {
+    @include modal-styles(920px, 127px 95px 32px, 48px, true);
+  }
 }

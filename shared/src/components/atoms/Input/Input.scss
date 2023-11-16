@@ -1,0 +1,19 @@
+@import "../../../styles/variables.scss";
+
+.modal-body .form-control {
+  padding: 18.5px 16px;
+  margin-bottom: 28px !important;
+  height: 48px;
+  border: 1px solid $primary-color;
+  border-radius: 8px;
+
+  &:focus {
+    border: 1px solid $btn-primary-hover-bkg-color;
+    box-shadow: 0 0 0 0.03rem $btn-primary-hover-bkg-color;
+  }
+}
+
+.text-danger {
+  position: relative;
+  bottom: 24px;
+}

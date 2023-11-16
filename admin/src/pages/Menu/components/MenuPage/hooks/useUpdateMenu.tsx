@@ -5,11 +5,16 @@ import { useRequest } from '@admin/hooks';
 import { Form, FormRef } from '@shared/components/atoms/Form';
 import { Dialog } from '@shared/components/molecules/Dialog';
 import { Menu } from '@shared/services';
-import { UpdateMenuRequest, MenuService, MenuState } from '@shared/services/MenuService';
+import {
+  UpdateMenuRequest,
+  MenuService,
+  MenuState,
+} from '@shared/services/MenuService';
 import { Input, InputVariants } from '@shared/components/atoms/Input';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
 import { useMenuFormValidation } from '../validation/useMenuFormValidation';
 import { Switcher } from '@shared/components/atoms/Switcher';
+import { InputLabel } from '@shared/components/atoms/InputLabel';
 
 interface UpdateMenuParams {
   onSuccess: () => Promise<void>;
@@ -28,7 +33,7 @@ export const useUpdateMenu = (args: UpdateMenuParams) => {
     const request: UpdateMenuRequest = {
       name,
       state,
-      language
+      language,
     };
 
     return MenuService.update(id, request);
@@ -59,10 +64,9 @@ export const useUpdateMenu = (args: UpdateMenuParams) => {
           }}
           title={t('menu:updateMenuForm.title')}
           size="lg"
-          okText={t('common:buttons:confirm')}
+          okText={t('common:buttons:edit')}
           cancelText={t('common:buttons:cancel')}
         >
-          
           <Form
             ref={formRef}
             defaultValues={defaultValues}
@@ -73,15 +77,31 @@ export const useUpdateMenu = (args: UpdateMenuParams) => {
           >
             <>
               <Input type={InputVariants.HIDDEN} name="restaurant_id" />
-              <Input type={InputVariants.HIDDEN} name="language" value={language} />
+              <Input
+                type={InputVariants.HIDDEN}
+                name="language"
+                value={language}
+              />
+              <InputLabel
+                forInput="name"
+                text={t('menu:createMenuForm.label')}
+              />
               <Input
                 placeholder={t('menu:createMenuForm.placeholder')}
                 type={InputVariants.TEXT}
                 name="name"
               />
-              <Switcher value={defaultValues.state} name="state" text={t('menu:visibleMenu')} onChange={(val) => {
-                formRef.current?.setValue('state', val ? MenuState.ENABLED : MenuState.DISABLED);
-              }}/>
+              <Switcher
+                value={defaultValues.state}
+                name="state"
+                text={t('menu:visibleMenu')}
+                onChange={(val) => {
+                  formRef.current?.setValue(
+                    'state',
+                    val ? MenuState.ENABLED : MenuState.DISABLED
+                  );
+                }}
+              />
             </>
           </Form>
         </Dialog>

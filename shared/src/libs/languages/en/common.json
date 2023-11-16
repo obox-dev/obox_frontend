@@ -17,10 +17,10 @@
   "name": "Name",
   "poweredby": "Powered by",
   "buttons": {
-    "cancel": "Cancel",
-    "confirm": "Confirm",
+    "cancel": "Cancel changes",
     "edit": "Edit",
-    "delete": "Delete"
+    "delete": "Delete",
+    "add": "Add"
   },
   "notFoundTitle": "Whoops!",
   "notFoundMessage": "Our chef is still working on this page. We suggest you try others.",

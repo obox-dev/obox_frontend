@@ -35,16 +35,13 @@ export const useDeleteDish = (args: DeleteDishParams) => {
           cancelCallback={() => {
             closeDialog();
           }}
-          title={t('menu:deleteMenuForm.title')}
-          size="lg"
-          okText={t('common:buttons:confirm')}
+          title={t('menu:deleteDishForm.title')}
+          size="xl"
+          okText={t('common:buttons:delete')}
           cancelText={t('common:buttons:cancel')}
-          okButtonVariant={ButtonVariants.DANGER}
-        >
-          <p>
-            {t('menu:deleteMenuForm.message')} <strong>{dish.name}</strong>?
-          </p>
-        </Dialog>
+          okButtonVariant={ButtonVariants.PRIMARY}
+          cancelButtonVariant={ButtonVariants.TERTIARY}
+        ></Dialog>
       );
     });
   };
