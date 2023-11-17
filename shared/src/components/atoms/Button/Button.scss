@@ -20,16 +20,17 @@
   &.btn-primary {
     background-color: $btn-primary-default-bkg-color;
     color: $btn-primary-default-text;
-    border: 1px solid $btn-primary-default-bkg-color;
+    border: none !important;
+    // border: 1px solid $btn-primary-default-bkg-color;
 
     &:hover,
     &:focus {
       background-color: $btn-primary-hover-bkg-color;
-      border: 1px solid $btn-primary-hover-bkg-color;
+      // border: 1px solid $btn-primary-hover-bkg-color;
     }
-    s &:active {
-      background-color: $btn-primary-press-bkg-color;
-      color: $btn-primary-press-text;
+    &:active {
+      background-color: $btn-primary-press-bkg-color !important;
+      color: $btn-primary-press-text !important;
     }
   }
 
@@ -46,9 +47,9 @@
     }
 
     &:active {
-      background-color: #ffffff;
-      color: $btn-secondary-press-text;
-      border: 1px solid $btn-secondary-press-bkg-color;
+      background-color: #ffffff !important;
+      color: $btn-secondary-press-text !important;
+      border: 1px solid $btn-secondary-press-bkg-color !important;
     }
   }
 

@@ -12,6 +12,7 @@ export const Input = (props: IInput<HTMLInputElement>) => {
     value,
     checked,
     isDisabled,
+    сlassName,
   } = props;
 
   const combineClasses = (type: InputVariants, error: boolean, ): string => {
@@ -20,7 +21,7 @@ export const Input = (props: IInput<HTMLInputElement>) => {
       [InputVariants.CHECKBOX]: 'form-check-input',
       [InputVariants.RADIO]: 'form-check-input',
     };
-    return `${commonClasses}${classesByInputType[type] || ''} ${error ? 'error-input' : ''}`;
+    return `${commonClasses}${classesByInputType[type] || ''} ${error ? 'error-input' : ''} ${сlassName || ''}`;
   };
 
   const options = { ...(onChange ? { onChange } : {}) };

@@ -20,6 +20,6 @@ export interface IInput<T> {
   value?: string;
   checked?: boolean;
   isDisabled?: boolean;
-  className?: string;
   innerRef?: Ref<T>;
+  сlassName?: string;
 }
