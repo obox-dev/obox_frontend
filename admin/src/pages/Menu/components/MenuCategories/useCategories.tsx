@@ -1,6 +1,6 @@
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
 import { useTranslation } from '@libs/react-i18next';
-import { Category, CreateCategoryResponse } from '@shared/services';
+import { CategoryResponse, CreateCategoryResponse } from '@shared/services';
 import { IAction } from '@shared/components/atoms/ActionMenu';
 import { useNavigate } from 'react-router-dom';
 import { useCreateCategory, useGetCategory, useUpdateCategory } from './hooks';
@@ -51,17 +51,18 @@ export const useCategories = (menuId: string, language: string) => {
         await loadAllCategories();
         closeAll();
       }
-    }
+    },
+    language,
   });
 
-  const menuCategoriesActions: IAction<Category>[] = [
+  const menuCategoriesActions: IAction<CategoryResponse>[] = [
     {
       label: t('common:buttons:edit'),
-      callback: (category: Category) => openCategoryUpdateDialog(category),
+      callback: (category: CategoryResponse) => openCategoryUpdateDialog(category),
     },
     {
       label: t('common:buttons:delete'),
-      callback: (category: Category) => openCategoryDeleteDialog(category),
+      callback: (category: CategoryResponse) => openCategoryDeleteDialog(category),
     },
   ];
 

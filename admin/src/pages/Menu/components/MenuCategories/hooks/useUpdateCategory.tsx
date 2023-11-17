@@ -6,6 +6,7 @@ import { useDialog } from '@shared/providers/DialogProvider/useDialog';
 import {
   CategoriesService,
   Category,
+  CategoryResponse,
   UpdateCategoryRequest,
 } from '@shared/services';
 import { Form, FormRef } from '@shared/components/atoms/Form';
@@ -14,6 +15,7 @@ import { Input, InputVariants } from '@shared/components/atoms/Input';
 import { useCategoryFormValidation } from '../validation/useCategoryFormValidation';
 import { Switcher } from '@shared/components/atoms/Switcher';
 import { CategoryState } from '@shared/services/CategoriesService';
+import { mapCategoryContent } from '../mappers/mapCategoryContent';
 
 interface UpdateCategoryParams {
   onSuccess: () => Promise<void>;
@@ -43,13 +45,11 @@ export const useUpdateCategory = (args: UpdateCategoryParams) => {
     onError,
   });
 
-  const openCategoryUpdateDialog = (category: Category) =>
+  const openCategoryUpdateDialog = (category: CategoryResponse) =>
     openDialog(({ closeDialog }) => {
       const formRef = useRef<FormRef<Partial<Category>> | null>(null);
 
-      const defaultValues: Category = {
-        ...category,
-      };
+      const defaultValues = mapCategoryContent(category, language);
 
       return (
         <Dialog

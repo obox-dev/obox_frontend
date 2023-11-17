@@ -27,7 +27,7 @@ export const MenuPage = () => {
     openCategoryCreateDialog,
     loadAllCategories,
     categoriesList,
-    // menuActions,
+    menuCategoriesActions,
   } = useCategories(menuId!, menuLanguage);
 
   useEffect(() => {
@@ -76,7 +76,7 @@ export const MenuPage = () => {
             onTabChange={(tabId) => {
               setCategoryId(tabId);
             }}
-            actions={[]}
+            actions={menuCategoriesActions}
           />
         </>
       </LayoutWithSearch>
