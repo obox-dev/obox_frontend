@@ -1,6 +1,6 @@
 import { API } from './ApiService';
 import { CategoryResponse } from './CategoriesService';
-import { Menu } from './RestaurantsService';
+import { MenuResponse } from './RestaurantsService';
 
 export enum MenuState {
   ENABLED = 'ENABLED',
@@ -23,8 +23,8 @@ export interface UpdateMenuRequest {
 }
 
 export class MenuService {
-  static async getById(id: string): Promise<Menu> {
-    return API.get<void, Menu>(`/menus/${id}`);
+  static async getById(id: string): Promise<MenuResponse> {
+    return API.get<void, MenuResponse>(`/menus/${id}`);
   }
 
   static async create(params: CreateMenuRequest): Promise<CreateMenuResponse> {

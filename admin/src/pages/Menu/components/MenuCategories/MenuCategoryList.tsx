@@ -21,7 +21,7 @@ export const MenuCategoryList = (props: MenuCategoryListProps) => {
   };
 
   return (
-    <ul className="menu-category-list p-0">
+    <ul className="menu-category-list">
       {categoryItems.map((item: CategoryResponse) => {
         const categoryItem = mapCategoryContent(item);
         return (

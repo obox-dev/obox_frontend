@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from '@libs/react-i18next';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
-import { Menu } from '@shared/services';
+import { MenuResponse } from '@shared/services';
 import { IAction } from '@shared/components/atoms/ActionMenu';
 import { useGetMenu } from './hooks/useGetMenu';
 import { useCreateMenu, useDeleteMenu, useUpdateMenu } from './hooks';
@@ -60,16 +60,17 @@ export const useMenu = (props: UseMenuProps) => {
     onFinally: () => {
       closeAll();
     },
+    language,
   });
 
-  const menuActions: IAction<Menu>[] = [
+  const menuActions: IAction<MenuResponse>[] = [
     {
       label: t('common:buttons:edit'),
-      callback: (menu: Menu) => openMenuUpdateDialog(menu),
+      callback: (menu: MenuResponse) => openMenuUpdateDialog(menu),
     },
     {
       label: t('common:buttons:delete'),
-      callback: (menu: Menu) => openMenuDeleteDialog(menu),
+      callback: (menu: MenuResponse) => openMenuDeleteDialog(menu),
     },
   ];
 
