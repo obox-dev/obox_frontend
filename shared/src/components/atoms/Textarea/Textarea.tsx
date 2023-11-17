@@ -1,8 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import { TextareaProps } from './types';
 import './Textarea.scss';
-
-import { ChangeEvent, useState } from 'eact';
+import { ChangeEvent, useState } from 'react';
 
 export const Textarea = (
   props: Omit<TextareaProps<HTMLTextAreaElement>, 'type'>
