@@ -38,10 +38,11 @@ export const useDeleteCategory = (args: DeleteCategoryParams) => {
             closeDialog();
           }}
           title={t('menu:deleteCategoryForm.title')}
-          size="lg"
-          okText={t('common:buttons:confirm')}
+          size="xl"
+          okText={t('common:buttons:delete')}
           cancelText={t('common:buttons:cancel')}
-          okButtonVariant={ButtonVariants.DANGER}
+          okButtonVariant={ButtonVariants.PRIMARY}
+          cancelButtonVariant={ButtonVariants.TERTIARY}
         >
           <p>
             {t('menu:deleteCategoryForm.message')}{' '}

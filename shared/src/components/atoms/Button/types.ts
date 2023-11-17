@@ -8,7 +8,8 @@ export enum ButtonVariants {
   LIGHT = 'light',
   DARK = 'dark',
   LINK = 'link',
-  ICON_LINK = 'icon-link'
+  ICON_LINK = 'icon-link',
+  TERTIARY = 'tertiary'
 }
 
 export enum ButtonTypes {

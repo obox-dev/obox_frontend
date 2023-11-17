@@ -17,4 +17,11 @@ export default defineConfig({
       '@libs': path.resolve(__dirname, 'node_modules'),
     },
   },
+  // css: {
+  //   preprocessorOptions: {
+  //     scss: {
+  //       additionalData: '@use "@shared/src/style/variables.scss";',
+  //     },
+  //   },
+  // },
 });

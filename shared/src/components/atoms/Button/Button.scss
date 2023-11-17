@@ -1,18 +1,68 @@
+@import "../../../styles/variables.scss";
+
 .btn {
-    &.btn-icon-link {
-        --bs-btn-padding-x: 0;
-        --bs-btn-padding-y: 0;
-        display: flex;
-        align-items: center;
-        border: none;
-        color: #546358;
+  &.btn-icon-link {
+    --bs-btn-padding-x: 0;
+    --bs-btn-padding-y: 0;
+    display: flex;
+    align-items: center;
+    border: none;
+    color: #546358;
 
-        &:hover {
-            color: black;
-        }
-
-        svg {
-            margin-right: 12px;
-        }
+    &:hover {
+      color: black;
     }
+
+    svg {
+      margin-right: 12px;
+    }
+  }
+  &.btn-primary {
+    background-color: $btn-primary-default-bkg-color;
+    color: $btn-primary-default-text;
+    border: 1px solid $btn-primary-default-bkg-color;
+
+    &:hover,
+    &:focus {
+      background-color: $btn-primary-hover-bkg-color;
+      border: 1px solid $btn-primary-hover-bkg-color;
+    }
+    s &:active {
+      background-color: $btn-primary-press-bkg-color;
+      color: $btn-primary-press-text;
+    }
+  }
+
+  &.btn-secondary {
+    background-color: $btn-secondary-default-bkg-color;
+    color: $btn-secondary-default-text;
+    border: 1px solid $btn-secondary-default-bkg-color;
+
+    &:hover,
+    &:focus {
+      background-color: $btn-secondary-hover-bkg-color;
+      color: $btn-secondary-hover-text;
+      border: 1px solid $btn-secondary-hover-bkg-color;
+    }
+
+    &:active {
+      background-color: $btn-secondary-press-bkg-color;
+      color: $btn-secondary-press-text;
+    }
+  }
+
+  &.btn-tertiary {
+    background-color: $btn-tertiary-bkg-color;
+    color: $btn-tertiary-default-text;
+    border: none;
+
+    &:hover,
+    &:focus {
+      color: $btn-tertiary-hover-text;
+    }
+
+    &:active {
+      color: $btn-tertiary-press-text;
+    }
+  }
 }

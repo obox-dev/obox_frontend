@@ -13,6 +13,7 @@ import {
 } from '@shared/services/MenuService';
 import { Input, InputVariants } from '@shared/components/atoms/Input';
 import { useMenuFormValidation } from '../validation/useMenuFormValidation';
+import { InputLabel } from '@shared/components/atoms/InputLabel';
 
 interface CreateMenuParams {
   onSuccess: (result: CreateMenuResponse) => Promise<void>;
@@ -57,7 +58,7 @@ export const useCreateMenu = (args: CreateMenuParams) => {
           }}
           title={t('menu:createMenuForm.title')}
           size="lg"
-          okText={t('common:buttons:confirm')}
+          okText={t('common:buttons:add')}
           cancelText={t('common:buttons:cancel')}
         >
           <Form
@@ -74,15 +75,31 @@ export const useCreateMenu = (args: CreateMenuParams) => {
                 name="restaurant_id"
                 value={restaurantId}
               />
-              <Input type={InputVariants.HIDDEN} name="language" value={language}/>
+              <Input
+                type={InputVariants.HIDDEN}
+                name="language"
+                value={language}
+              />
+              <InputLabel
+                forInput="name"
+                text={t('menu:createMenuForm.label')}
+              />
               <Input
                 placeholder={t('menu:createMenuForm.placeholder')}
                 type={InputVariants.TEXT}
                 name="name"
               />
-              <Switcher value={defaultValues.state} name="state" text={t('menu:visibleMenu')} onChange={(val) => {
-                formRef.current?.setValue('state', val ? MenuState.ENABLED : MenuState.DISABLED);
-              }}/>
+              <Switcher
+                value={defaultValues.state}
+                name="state"
+                text={t('menu:visibleMenu')}
+                onChange={(val) => {
+                  formRef.current?.setValue(
+                    'state',
+                    val ? MenuState.ENABLED : MenuState.DISABLED
+                  );
+                }}
+              />
             </>
           </Form>
         </Dialog>
