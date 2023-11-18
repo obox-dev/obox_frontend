@@ -7,10 +7,10 @@
     display: flex;
     align-items: center;
     border: none;
-    color: #546358;
+    color: $color-placeholder-text;
 
     &:hover {
-      color: black;
+      color: $color-global-black;
     }
 
     svg {
@@ -18,51 +18,50 @@
     }
   }
   &.btn-primary {
-    background-color: $btn-primary-default-bkg-color;
-    color: $btn-primary-default-text;
-    border: 1px solid $btn-primary-default-bkg-color;
-
-    &:hover,
-    &:focus {
-      background-color: $btn-primary-hover-bkg-color;
-      border: 1px solid $btn-primary-hover-bkg-color;
-    }
-    s &:active {
-      background-color: $btn-primary-press-bkg-color;
-      color: $btn-primary-press-text;
-    }
-  }
-
-  &.btn-secondary {
-    background-color: $btn-secondary-default-bkg-color;
-    color: $btn-secondary-default-text;
-    border: 1px solid $btn-secondary-default-bkg-color;
-
-    &:hover,
-    &:focus {
-      background-color: $btn-secondary-hover-bkg-color;
-      color: $btn-secondary-hover-text;
-      border: 1px solid $btn-secondary-hover-bkg-color;
-    }
-
-    &:active {
-      background-color: $btn-secondary-press-bkg-color;
-      color: $btn-secondary-press-text;
-    }
-  }
-
-  &.btn-tertiary {
-    background-color: $btn-tertiary-bkg-color;
-    color: $btn-tertiary-default-text;
+    background-color: $color-primary;
+    color: $color-primary-text-contrast;
     border: none;
 
     &:hover,
     &:focus {
-      color: $btn-tertiary-hover-text;
+      background-color: $btn-hover-color;
+    }
+    &:active {
+      background-color: $btn-press-color!important;
+      color: $btn-press-color-text !important;
+    }
+  }
+
+  &.btn-secondary {
+    background-color: $color-global-white;
+    color: $color-secondary-text;
+    border: 1px solid $color-primary;
+
+    &:hover,
+    &:focus {
+      background-color: $color-global-white;
+      color: $color-secondary-text;
+      border: 1px solid $btn-hover-color;
     }
 
     &:active {
-      color: $btn-tertiary-press-text;
+      background-color: $color-global-white !important;
+      color: $btn-press-color-text !important;
+      border: 1px solid $btn-press-color !important;
+    }
+  }
+
+  &.btn-tertiary {
+    color: $color-primary;
+
+    &:hover,
+    &:focus {
+      color: $btn-hover-color;
+    }
+
+    &:active {
+      color: $btn-press-color-text-tertiary !important;
+      border: none !important;
     }
   }
 }

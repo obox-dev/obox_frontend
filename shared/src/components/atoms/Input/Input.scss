@@ -4,16 +4,34 @@
   padding: 18.5px 16px;
   margin-bottom: 28px !important;
   height: 48px;
-  border: 1px solid $primary-color;
+  border: 1px solid $color-border-focus-1px;
   border-radius: 8px;
 
-  &:focus {
-    border: 1px solid $btn-primary-hover-bkg-color;
-    box-shadow: 0 0 0 0.03rem $btn-primary-hover-bkg-color;
+  &:hover {
+    border: 1px solid $color-secondary-text;
   }
+
+  &:focus {
+    border: 2px solid $color-border-focus-2px;
+    box-shadow: none;
+  }
+
+  &::placeholder {
+    color: $color-placeholder-text;
+  }
+
+ 
+}
+.form-control.error-input {
+  border: 1px solid $color-accent-mistake;
+    &::placeholder {
+      color: $color-accent-mistake-placeholder;
+    }
 }
 
-.text-danger {
+.modal-body .text-danger {
+  color: $color-accent-mistake !important;
   position: relative;
   bottom: 24px;
 }
+

@@ -1,47 +1,22 @@
 :root {
-  --global-white: #ffffff;
-  --primary-color: #6a9775;
-  --secondary-color: #d8deda;
-  --primary-text-color: #42423d;
-  --primary-contrast-text-color: #f4f6f4;
-  --secondary-text-color: #3d4840;
+  --color-global-white: #ffffff;
+  --color-global-black: #000000;
 
-  /* Button General Styles */
-  --btn-text-weight: 500;
-  --btn-text-size: 16px;
-  --btn-text-line-height: 1.2;
+  --color-primary: #6a9775;
+  --color-primary-text: #42423d;
+  --color-primary-text-contrast: #f4f6f4;
 
-  /* Button Primary Styles */
-  --btn-primary-default-bkg-color: #6a9775;
-  --btn-primary-hover-bkg-color: #80b08c;
-  --btn-primary-press-bkg-color: #b0e4be;
-  --btn-primary-disabled-bkg-color: #cbfdd8;
+  --color-secondary: #d8deda;
+  --color-secondary-text: #3d4840;
 
-  --btn-primary-default-text: #f4f6f4;
-  --btn-primary-hover-text: #f4f6f4;
-  --btn-primary-press-text: #86988a;
-  --btn-primary-disabled-text: #a1afa5;
+  --color-accent-mistake: #F21111;
+  --color-accent-mistake-placeholder: #252C27;
+  --color-placeholder-text: #546358;
+  --color-border-focus-1px: #6C7F70;
+  --color-border-focus-2px: #557E5F;
 
-  /* Button Secondary Styles */
-  --btn-secondary-default-bkg-color: #6a9775;
-  --btn-secondary-hover-bkg-color: #80b08c;
-  --btn-secondary-press-bkg-color: #b0e4be;
-  --btn-secondary-disabled-bkg-color: #cbfdd8;
 
-  --btn-secondary-default-text: #3d4840;
-  --btn-secondary-hover-text: #3d4840;
-  --btn-secondary-press-text: #86988a;
-  --btn-secondary-disabled-text: #a1afa5;
-
-  /* Button Tertiary Styles */
-  --btn-tertiary-bkg-color: #ffffff;
-
-  --btn-tertiary-default-text: #6a9775;
-  --btn-tertiary-hover-text: #80b08c;
-  --btn-tertiary-press-text: #98caa5;
-  --btn-tertiary-disabled-text: #a1afa5;
-
-  /* Switcher Styles */
+    /* Switcher Styles */
   --switcher-toggle-shadow: 0px 1px 2px 0px #1018280f, 0px 1px 3px 0px #1018281a;
 
   /* Heading Styles */
@@ -51,49 +26,36 @@
 
   /* Transition */
   --main-transition: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Buttons */
+  --btn-text-weight: 500;
+  --btn-text-size: 16px;
+  --btn-text-line-height: 1.2;
+
+  --btn-hover-color: #80b08c;
+  --btn-press-color: #b0e4be;
+  --btn-press-color-text: #86988a;
+  --btn-disabled-color: #cbfdd8;
+  --btn-disabled-color-text: #a1afa5;
+  --btn-press-color-text-tertiary: #98caa5;
 }
 
-$global-white: var(--global-white);
-$primary-color: var(--primary-color);
-$secondary-color: var(--secondary-color);
-$primary-text-color: var(--primary-text-color);
-$primary-contrast-text-color: var(--primary-contrast-text-color);
-$secondary-text-color: var(--secondary-text-color);
 
-/* Button General Styles */
-$btn-text-weight: var(--btn-text-weight);
-$btn-text-size: var(--btn-text-size);
-$btn-text-line-height: var(--btn-line-height);
+$color-global-white: var(--color-global-white);
+$color-global-black: var(--color-global-black);
 
-/* Button Primary Styles */
-$btn-primary-default-bkg-color: var(--btn-primary-default-bkg-color);
-$btn-primary-hover-bkg-color: var(--btn-primary-hover-bkg-color);
-$btn-primary-press-bkg-color: var(--btn-primary-press-bkg-color);
-$btn-primary-disabled-bkg-color: var(--btn-primary-disabled-bkg-color);
+$color-primary: var(--color-primary);
+$color-primary-text: var(--color-primary-text);
+$color-primary-text-contrast: var(--color-primary-text-contrast);
 
-$btn-primary-default-text: var(--btn-primary-default-text);
-$btn-primary-hover-text: var(--btn-primary-hover-text);
-$btn-primary-press-text: var(--btn-primary-press-text);
-$btn-primary-disabled-text: var(--btn-primary-disabled-text);
+$color-secondary: var(--color-secondary);
+$color-secondary-text: var(--color-secondary-text);
 
-/* Button Secondary Styles */
-$btn-secondary-default-bkg-color: var(--btn-secondary-default-bkg-color);
-$btn-secondary-hover-bkg-color: var(--btn-secondary-hover-bkg-color);
-$btn-secondary-press-bkg-color: var(--btn-secondary-press-bkg-color);
-$btn-secondary-disabled-bkg-color: var(--btn-secondary-disabled-bkg-color);
-
-$btn-secondary-default-text: var(--btn-secondary-default-text);
-$btn-secondary-hover-text: var(--btn-secondary-hover-text);
-$btn-secondary-press-text: var(--btn-secondary-press-text);
-$btn-secondary-disabled-text: var(--btn-secondary-disabled-text);
-
-/* Button Tertiary Styles */
-$btn-tertiary-bkg-color: var(--btn-tertiary-bkg-color);
-
-$btn-tertiary-default-text: var(--btn-tertiary-default-text);
-$btn-tertiary-hover-text: var(--btn-tertiary-hover-text);
-$btn-tertiary-press-text: var(--btn-tertiary-press-text);
-$btn-tertiary-disabled-text: var(--btn-tertiary-disabled-text);
+$color-accent-mistake:var(--color-accent-mistake);
+$color-accent-mistake-placeholder:var(--color-accent-mistake-placeholder);
+$color-placeholder-text:var(--color-placeholder-text);
+$color-border-focus-1px:var(--color-border-focus-1px);
+$color-border-focus-2px:var(--color-border-focus-2px);
 
 /* Switcher Styles */
 $switcher-toggle-shadow: var(--switcher-toggle-shadow);
@@ -105,3 +67,19 @@ $heading-sm-font-size: var(--heading-sm-font-size);
 
 /* Transition */
 $main-transition: var(--main-transition);
+
+/* Buttons*/
+$btn-text-weight: var(--btn-text-weight);
+$btn-text-size: var(--btn-text-size);
+$btn-text-line-height: var(--btn-line-height);
+
+$btn-hover-color: var(--btn-hover-color);
+$btn-press-color: var(--btn-press-color);
+$btn-press-color-text: var(--btn-press-color-text);
+$btn-disabled-color: var(--btn-disabled-color);
+$btn-disabled-color-text: var(--btn-disabled-color-text);
+$btn-press-color-text-tertiary: var(--btn-press-color-text-tertiary);
+
+
+
+
