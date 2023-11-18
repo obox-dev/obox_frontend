@@ -12,21 +12,21 @@ export const Input = (props: IInput<HTMLInputElement>) => {
     value,
     checked,
     isDisabled,
-    className,
+    сlassName,
   } = props;
 
-  const combineClasses = (type: InputVariants): string => {
+  const combineClasses = (type: InputVariants, error: boolean, ): string => {
     const commonClasses = 'form-control mb-2';
     const classesByInputType: Partial<{ [key in InputVariants]: string }> = {
       [InputVariants.CHECKBOX]: 'form-check-input',
       [InputVariants.RADIO]: 'form-check-input',
     };
-    return `${commonClasses} ${classesByInputType[type] || ''} ${className}`;
+    return `${commonClasses}${classesByInputType[type] || ''} ${error ? 'error-input' : ''} ${сlassName || ''}`;
   };
 
   const options = { ...(onChange ? { onChange } : {}) };
-
   const { ref, registerParams, error } = useFormInput(name, options);
+  const inputClassName = combineClasses(type, !!error);
 
   return (
     <>
@@ -37,7 +37,7 @@ export const Input = (props: IInput<HTMLInputElement>) => {
         value={value}
         name={name}
         type={type}
-        className={combineClasses(type)}
+        className={inputClassName}
         placeholder={placeholder}
         checked={checked}
         disabled={isDisabled}

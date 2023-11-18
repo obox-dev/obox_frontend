@@ -11,9 +11,9 @@
   .modal-content {
     padding: $content-padding;
     border-color: transparent;
-    color: $secondary-text-color;
+    color: $color-secondary-text;
     @if $isButton-delete {
-      border: 1px solid $primary-color;
+      border: 1px solid $color-primary;
       border-radius: 20px;
     }
 
@@ -45,7 +45,7 @@
         width: 3px;
         height: 24px;
         position: absolute;
-        background-color: $primary-color;
+        background-color: $color-primary;
         top: 50%;
         left: 50%;
       }
@@ -84,7 +84,6 @@
       margin: 0px;
       border-radius: 16px;
       flex: 1;
-      border-top: none;
       font-weight: $btn-text-weight;
       font-size: $btn-text-size;
       line-height: $btn-text-line-height;

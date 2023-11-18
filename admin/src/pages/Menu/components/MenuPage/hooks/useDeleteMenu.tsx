@@ -41,7 +41,7 @@ export const useDeleteMenu = (args: DeleteMenuParams) => {
           title={t('menu:deleteMenuForm.title')}
           size="xl"
           okText={t('common:buttons:delete')}
-          cancelText={t('common:buttons:cancel')}
+          cancelText={t('common:buttons:cancelChanges')}
           okButtonVariant={ButtonVariants.PRIMARY}
           cancelButtonVariant={ButtonVariants.TERTIARY}
         >

@@ -20,12 +20,12 @@
   .dropdown-item,
   .switcher {
     font-size: 14px;
-    color: $primary-text-color;
+    color: $color-primary-text;
     transition: color .3s ease-in-out;
 
     &:hover {
       background-color: transparent;
-      color: $primary-color;
+      color: $color-primary;
     }
   }
 }
