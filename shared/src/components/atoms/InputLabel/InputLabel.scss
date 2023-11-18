@@ -1,6 +1,8 @@
+@import "../../../styles/variables.scss";
+
 .modal-body {
   .input-label {
-    color: #3D4840;
+    color: $color-secondary-text;
     display: block;
     margin-bottom: 4px;
     font-size: 20px;

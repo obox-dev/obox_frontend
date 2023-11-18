@@ -4,33 +4,33 @@
   padding: 18.5px 16px;
   margin-bottom: 28px !important;
   height: 48px;
-  border: 1px solid #6C7F70;
+  border: 1px solid $color-border-focus-1px;
   border-radius: 8px;
 
   &:hover {
-    border: 1px solid #3D4840;
+    border: 1px solid $color-secondary-text;
   }
 
   &:focus {
-    border: 2px solid #557E5F;
+    border: 2px solid $color-border-focus-2px;
     box-shadow: none;
   }
 
   &::placeholder {
-    color: #546358;
+    color: $color-placeholder-text;
   }
 
  
 }
 .form-control.error-input {
-  border: 1px solid #F21111;
+  border: 1px solid $color-accent-mistake;
     &::placeholder {
-      color: #252C27;
+      color: $color-accent-mistake-placeholder;
     }
 }
 
 .modal-body .text-danger {
-  color: #F21111 !important;
+  color: $color-accent-mistake !important;
   position: relative;
   bottom: 24px;
 }
