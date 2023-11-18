@@ -3,10 +3,10 @@ import {
   Dish,
   DishInStock,
   DishResponse,
-  DishState,
 } from '@shared/services/DishService';
-import { useDishFormValidation } from '../validation/useDishFormValidation';
 import { mapDishContent } from '@shared/mappers/DishMapper';
+import { EntityState } from '@shared/utils/types';
+import { useDishFormValidation } from '../validation/useDishFormValidation';
 
 
 type ExcludeKeys = 'price' | 'weight' | 'calories';
@@ -40,7 +40,7 @@ export const useDishForms = (categoryId: string, currentLanguage: string) => {
     calories: '',
     allergens: [],
     tags: [],
-    state: DishState.ENABLED,
+    state: EntityState.ENABLED,
     in_stock: DishInStock.ENABLED,
     language: currentLanguage,
   };

@@ -12,10 +12,10 @@ import { useCategoryFormValidation } from '../validation/useCategoryFormValidati
 import { Form, FormRef } from '@shared/components/atoms/Form';
 import { Dialog } from '@shared/components/molecules/Dialog';
 import { Input, InputVariants } from '@shared/components/atoms/Input';
-import { CategoryState } from '@shared/services/CategoriesService';
 import { Switcher } from '@shared/components/atoms/Switcher';
 import { InputLabel } from '@shared/components/atoms/InputLabel';
 import { Textarea } from '@shared/components/atoms/Textarea';
+import { EntityState } from '@shared/utils/types';
 
 interface CreateCategoryParams {
   onSuccess: (result: CreateCategoryResponse) => Promise<void>;
@@ -42,7 +42,7 @@ export const useCreateCategory = (args: CreateCategoryParams) => {
       const defaultValues: CreateCategoryRequest = {
         menu_id: menuId,
         name: '',
-        state: CategoryState.ENABLED,
+        state: EntityState.ENABLED,
         language,
       };
 
@@ -106,7 +106,7 @@ export const useCreateCategory = (args: CreateCategoryParams) => {
                 onChange={(val) => {
                   formRef.current?.setValue(
                     'state',
-                    val ? CategoryState.ENABLED : CategoryState.DISABLED
+                    val ? EntityState.ENABLED : EntityState.DISABLED
                   );
                 }}
               />

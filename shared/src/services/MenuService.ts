@@ -1,24 +1,20 @@
+import { EntityState } from '@shared/utils/types';
 import { API } from './ApiService';
 import { CategoryResponse } from './CategoriesService';
 import { MenuResponse } from './RestaurantsService';
-
-export enum MenuState {
-  ENABLED = 'ENABLED',
-  DISABLED = 'DISABLED',
-}
 export interface CreateMenuRequest {
   name: string;
   language: string;
   restaurant_id: string;
-  state: MenuState;
+  state: EntityState;
 }
 export interface CreateMenuResponse {
   menu_id: string;
 }
 
 export interface UpdateMenuRequest {
-  name: string;
-  state: MenuState;
+  name?: string;
+  state?: EntityState;
   language: string;
 }
 

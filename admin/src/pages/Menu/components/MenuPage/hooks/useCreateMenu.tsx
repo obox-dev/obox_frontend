@@ -4,7 +4,6 @@ import { useRequest } from '@admin/hooks';
 import { Form, FormRef } from '@shared/components/atoms/Form';
 import { Dialog } from '@shared/components/molecules/Dialog';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
-import { MenuState } from '@shared/services/MenuService';
 import { Switcher } from '@shared/components/atoms/Switcher';
 import { Menu, MenuService } from '@shared/services';
 import {
@@ -12,8 +11,9 @@ import {
   CreateMenuResponse,
 } from '@shared/services/MenuService';
 import { Input, InputVariants } from '@shared/components/atoms/Input';
-import { useMenuFormValidation } from '../validation/useMenuFormValidation';
 import { InputLabel } from '@shared/components/atoms/InputLabel';
+import { EntityState } from '@shared/utils/types';
+import { useMenuFormValidation } from '../validation/useMenuFormValidation';
 
 interface CreateMenuParams {
   onSuccess: (result: CreateMenuResponse) => Promise<void>;
@@ -43,7 +43,7 @@ export const useCreateMenu = (args: CreateMenuParams) => {
         name: '',
         language,
         restaurant_id: restaurantId,
-        state: MenuState.ENABLED,
+        state: EntityState.ENABLED,
       };
 
       return (
@@ -96,7 +96,7 @@ export const useCreateMenu = (args: CreateMenuParams) => {
                 onChange={(val) => {
                   formRef.current?.setValue(
                     'state',
-                    val ? MenuState.ENABLED : MenuState.DISABLED
+                    val ? EntityState.ENABLED : EntityState.DISABLED
                   );
                 }}
               />

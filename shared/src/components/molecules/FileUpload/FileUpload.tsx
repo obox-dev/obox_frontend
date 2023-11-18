@@ -90,7 +90,7 @@ export const FileUpload = (props: FileUploadProps) => {
               <Button
                 variant={ButtonVariants.DANGER}
                 type={ButtonTypes.BUTTON}
-                text="Delete"
+                innerContent="Delete"
                 onClick={() => handleDelete(file)}
               />
             </div>

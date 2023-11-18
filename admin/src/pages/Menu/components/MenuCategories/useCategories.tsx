@@ -5,6 +5,10 @@ import { IAction } from '@shared/components/atoms/ActionMenu';
 import { useNavigate } from 'react-router-dom';
 import { useCreateCategory, useGetCategory, useUpdateCategory } from './hooks';
 import { useDeleteCategory } from './hooks/useDeleteCategory';
+import { IActionLabelRenderParams } from '@shared/components/atoms/ActionMenu/types';
+import { EntityState } from '@shared/utils/types';
+import { Switcher } from '@shared/components/atoms/Switcher';
+import { mapCategoryContent } from './mappers/mapCategoryContent';
 
 export const useCategories = (menuId: string, language: string) => {
   const { t } = useTranslation(['common', 'menu']);
@@ -26,7 +30,7 @@ export const useCategories = (menuId: string, language: string) => {
     language,
   });
 
-  const { openCategoryUpdateDialog } = useUpdateCategory({
+  const { openCategoryUpdateDialog, updateState } = useUpdateCategory({
     onSuccess: async () => {
       await loadAllCategories();
       closeAll();
@@ -56,6 +60,36 @@ export const useCategories = (menuId: string, language: string) => {
   });
 
   const menuCategoriesActions: IAction<CategoryResponse>[] = [
+    {
+      renderLabel: (params?: IActionLabelRenderParams) => {
+        const value =
+          params?.state === EntityState.ENABLED
+            ? EntityState.ENABLED
+            : EntityState.DISABLED;
+        return (
+          <>
+            <Switcher
+              textForChecked="checked"
+              textForUnchecked="unchecked"
+              name="state"
+              value={value}
+            />
+          </>
+        );
+      },
+      callback: async (category: CategoryResponse) => {
+        const categoryContent = {
+          ...mapCategoryContent(category, language),
+          state:
+            category.state === EntityState.ENABLED
+              ? EntityState.DISABLED
+              : EntityState.ENABLED,
+        };
+        
+        await updateState(categoryContent);
+        await loadAllCategories();
+      },
+    },
     {
       label: t('common:buttons:edit'),
       callback: (category: CategoryResponse) => openCategoryUpdateDialog(category),

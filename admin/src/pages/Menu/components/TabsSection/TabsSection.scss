@@ -1,0 +1,15 @@
+@import '@shared/styles/variables.scss';
+
+.tabs-section {
+  margin-bottom: 48px;
+  &__title {
+    margin-bottom: 34px;
+    color: $primary-text-color;
+    font-size: $heading-md-font-size;
+  }
+  &__action {
+    &.btn {
+      border-radius: 16px;
+    }
+  }
+}

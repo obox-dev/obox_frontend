@@ -11,4 +11,5 @@ export interface ITabItem<T> {
 export interface ITabs<T> {
   items: ITabItem<T>[];
   actions: IAction<T>[];
+  addToList: JSX.Element;
 }

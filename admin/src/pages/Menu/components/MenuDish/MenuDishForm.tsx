@@ -147,13 +147,13 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
                   <div className="d-flex gap-2 justify-content-end">
                     <Button
                       variant={ButtonVariants.SECONDARY}
-                      text={t('dishForm:backButton')}
+                      innerContent={t('dishForm:backButton')}
                       type={ButtonTypes.BUTTON}
                       onClick={navigateToCategory}
                     />
                     <Button
                       variant={ButtonVariants.PRIMARY}
-                      text={t('dishForm:createButton')}
+                      innerContent={t('dishForm:createButton')}
                       type={ButtonTypes.SUBMIT}
                     />
                   </div>

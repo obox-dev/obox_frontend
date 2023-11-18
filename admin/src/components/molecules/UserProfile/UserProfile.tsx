@@ -7,7 +7,15 @@ const UserProfile = () => {
 
   return (
     <div className="user-profile d-flex align-items-center gap-2 py-2 mt-4">
-      <Button icon={<ExitButton/>} text={t('common:logout')} variant={ButtonVariants.ICON_LINK}></Button>
+      <Button
+        innerContent={
+          <>
+            <ExitButton />
+            {t('common:logout')}
+          </>
+        }
+        variant={ButtonVariants.ICON_LINK}
+      ></Button>
     </div>
   );
 };

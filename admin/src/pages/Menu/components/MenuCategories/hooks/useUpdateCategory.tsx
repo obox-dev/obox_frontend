@@ -14,8 +14,9 @@ import { Dialog } from '@shared/components/molecules/Dialog';
 import { Input, InputVariants } from '@shared/components/atoms/Input';
 import { useCategoryFormValidation } from '../validation/useCategoryFormValidation';
 import { Switcher } from '@shared/components/atoms/Switcher';
-import { CategoryState } from '@shared/services/CategoriesService';
+import { EntityState, UpdateStateRequest } from '@shared/utils/types';
 import { mapCategoryContent } from '../mappers/mapCategoryContent';
+
 
 interface UpdateCategoryParams {
   onSuccess: () => Promise<void>;
@@ -37,6 +38,16 @@ export const useUpdateCategory = (args: UpdateCategoryParams) => {
       language,
     };
     return CategoriesService.update(id, request);
+  };
+
+  const updateState = async ({ category_id, state }: Category) => {
+    const id = category_id;
+    const request: UpdateStateRequest = {
+      state,
+      language,
+    };
+
+    await CategoriesService.update(id, request);
   };
 
   const { execute: onUpdateSubmit } = useRequest({
@@ -93,7 +104,7 @@ export const useUpdateCategory = (args: UpdateCategoryParams) => {
                 onChange={(val) => {
                   formRef.current?.setValue(
                     'state',
-                    val ? CategoryState.ENABLED : CategoryState.DISABLED
+                    val ? EntityState.ENABLED : EntityState.DISABLED
                   );
                 }}
               />
@@ -102,5 +113,5 @@ export const useUpdateCategory = (args: UpdateCategoryParams) => {
         </Dialog>
       );
     });
-  return { openCategoryUpdateDialog };
+  return { openCategoryUpdateDialog, updateState };
 };

@@ -14,13 +14,13 @@ const NotFound: React.FC = () => {
         <p className="p">{t('common:notFoundMessage')}</p>
         <div className="button-group">
           <Button
-            text={t('common:prevPageButton')}
+            innerContent={t('common:prevPageButton')}
             variant={ButtonVariants.SUCCESS}
             onClick={() => window.history.back()}
           />
           <div style={{ width: '20px' }}></div>
           <Button
-            text={t('common:homeButton')}
+            innerContent={t('common:homeButton')}
             variant={ButtonVariants.PRIMARY}
             onClick={() => (window.location.href = '/')}
           />

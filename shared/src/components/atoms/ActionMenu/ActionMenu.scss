@@ -1,0 +1,5 @@
+.dropdown-toggle.btn {
+  &::after {
+    display: none;
+  }
+}

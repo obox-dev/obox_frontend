@@ -5,8 +5,8 @@ const AuthButtons = () => {
   const { t } = useTranslation();
   return (
     <div className="auth-buttons d-flex align-items-center gap-2">
-      <Button text={t('common:login')} variant={ButtonVariants.PRIMARY}></Button>
-      <Button text={t('common:signin')} variant={ButtonVariants.WARNING}></Button>
+      <Button innerContent={t('common:login')} variant={ButtonVariants.PRIMARY} />
+      <Button innerContent={t('common:signin')} variant={ButtonVariants.WARNING} />
     </div>
   );
 };

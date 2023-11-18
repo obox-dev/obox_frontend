@@ -5,6 +5,10 @@ import { MenuResponse } from '@shared/services';
 import { IAction } from '@shared/components/atoms/ActionMenu';
 import { useGetMenu } from './hooks/useGetMenu';
 import { useCreateMenu, useDeleteMenu, useUpdateMenu } from './hooks';
+import { Switcher } from '@shared/components/atoms/Switcher';
+import { IActionLabelRenderParams } from '@shared/components/atoms/ActionMenu/types';
+import { EntityState } from '@shared/utils/types';
+import { mapMenuContent } from './mappers/mapMenuContent';
 
 interface UseMenuProps {
   restaurant_id: string;
@@ -32,7 +36,7 @@ export const useMenu = (props: UseMenuProps) => {
     language,
   });
 
-  const { openMenuUpdateDialog } = useUpdateMenu({
+  const { openMenuUpdateDialog, updateState } = useUpdateMenu({
     onSuccess: async () => {
       await loadAllMenus();
       closeAll();
@@ -64,6 +68,36 @@ export const useMenu = (props: UseMenuProps) => {
   });
 
   const menuActions: IAction<MenuResponse>[] = [
+    {
+      renderLabel: (params?: IActionLabelRenderParams) => {
+        const value =
+          params?.state === EntityState.ENABLED
+            ? EntityState.ENABLED
+            : EntityState.DISABLED;
+        return (
+          <>
+            <Switcher
+              textForChecked="checked"
+              textForUnchecked="unchecked"
+              name="state"
+              value={value}
+            />
+          </>
+        );
+      },
+      callback: async (menu: MenuResponse) => {
+        const menuContent = {
+          ...mapMenuContent(menu, language),
+          state:
+            menu.state === EntityState.ENABLED
+              ? EntityState.DISABLED
+              : EntityState.ENABLED,
+        };
+        
+        await updateState(menuContent);
+        await loadAllMenus();
+      },
+    },
     {
       label: t('common:buttons:edit'),
       callback: (menu: MenuResponse) => openMenuUpdateDialog(menu),
