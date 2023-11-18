@@ -1,11 +1,10 @@
 import { ITabs } from './types';
-import { ActionMenu } from '@shared/components/atoms/ActionMenu';
-import { Button, ButtonVariants } from '@shared/components/atoms/Button';
-import { EntityState } from '@shared/utils/types';
-import { ToggleDots } from '@admin/assets/icons';
+import { ButtonVariants } from '@shared/components/atoms/Button';
+import { WithEntityState } from '@shared/utils/types';
+import { ActionButton } from '@admin/components/atoms/ActionButton';
 import './Tabs.scss';
 
-export const Tabs = <T extends { state: EntityState },>(props: ITabs<T>) => {
+export const Tabs = <T extends WithEntityState>(props: ITabs<T>) => {
   const { items, actions, addToList } = props;
 
   return (
@@ -18,21 +17,14 @@ export const Tabs = <T extends { state: EntityState },>(props: ITabs<T>) => {
               className="tabs-section__tabs-item nav-item d-flex align-items-stretch"
               key={label}
             >
-              <Button
-                innerContent={label}
-                variant={ButtonVariants.SECONDARY}
-                className={[
-                  'tabs-section__tabs-button',
-                  isSelected ? 'active' : '',
-                ].join(' ')}
-                onClick={() => {
-                  onClick(id);
-                }}
-              />
-              <ActionMenu
-                toggleContent={<ToggleDots />}
+              <ActionButton
                 entity={entity}
                 actions={actions}
+                variant={ButtonVariants.SECONDARY}
+                id={id}
+                label={label}
+                onClick={onClick}
+                isSelected={isSelected}
               />
             </li>
           );

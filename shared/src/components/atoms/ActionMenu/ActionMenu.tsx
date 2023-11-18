@@ -1,10 +1,10 @@
 import Dropdown from 'react-bootstrap/Dropdown';
-import { EntityState } from '@shared/utils/types';
+import { WithEntityState } from '@shared/utils/types';
 import { Button, ButtonVariants } from '../Button';
 import { IActionMenu } from './types';
 import './ActionMenu.scss';
 
-export const ActionMenu = <T extends { state: EntityState }>(
+export const ActionMenu = <T extends WithEntityState>(
   props: IActionMenu<T>
 ) => {
   const {

@@ -7,3 +7,7 @@ export interface UpdateStateRequest {
   state: EntityState;
   language: string;
 }
+
+export interface WithEntityState {
+  state: EntityState;
+}

@@ -1,4 +1,4 @@
-import { EntityState } from '@shared/utils/types';
+import { EntityState, WithEntityState } from '@shared/utils/types';
 import { ButtonVariants } from '../Button/types';
 
 export interface IActionLabelRenderParams {
@@ -10,7 +10,7 @@ export interface IAction<T> {
   callback: (item: T) => void;
 }
 
-export interface IActionMenu<T extends { state: EntityState }> {
+export interface IActionMenu<T extends WithEntityState> {
   actions: IAction<T>[];
   entity: T;
   toggleContent: JSX.Element | string;
