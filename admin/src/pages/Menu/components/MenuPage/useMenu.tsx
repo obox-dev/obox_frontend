@@ -9,6 +9,7 @@ import { Switcher } from '@shared/components/atoms/Switcher';
 import { IActionLabelRenderParams } from '@shared/components/atoms/ActionMenu/types';
 import { EntityState } from '@shared/utils/types';
 import { mapMenuContent } from './mappers/mapMenuContent';
+import { DeleteIcon, EditIcon } from '@admin/assets/icons';
 
 interface UseMenuProps {
   restaurant_id: string;
@@ -77,8 +78,8 @@ export const useMenu = (props: UseMenuProps) => {
         return (
           <>
             <Switcher
-              textForChecked="checked"
-              textForUnchecked="unchecked"
+              textForChecked={t('menu:actions.menuStatusEnabled')}
+              textForUnchecked={t('menu:actions.menuStatusDisabled')}
               name="state"
               value={value}
             />
@@ -93,17 +94,27 @@ export const useMenu = (props: UseMenuProps) => {
               ? EntityState.DISABLED
               : EntityState.ENABLED,
         };
-        
+
         await updateState(menuContent);
         await loadAllMenus();
       },
     },
     {
-      label: t('common:buttons:edit'),
+      label: (
+        <>
+          <EditIcon />
+          {t('menu:actions.edit')}
+        </>
+      ),
       callback: (menu: MenuResponse) => openMenuUpdateDialog(menu),
     },
     {
-      label: t('common:buttons:delete'),
+      label: (
+        <>
+          <DeleteIcon />
+          {t('menu:actions.delete')}
+        </>
+      ),
       callback: (menu: MenuResponse) => openMenuDeleteDialog(menu),
     },
   ];

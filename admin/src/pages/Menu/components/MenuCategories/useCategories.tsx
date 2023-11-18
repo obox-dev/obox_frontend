@@ -9,6 +9,7 @@ import { IActionLabelRenderParams } from '@shared/components/atoms/ActionMenu/ty
 import { EntityState } from '@shared/utils/types';
 import { Switcher } from '@shared/components/atoms/Switcher';
 import { mapCategoryContent } from './mappers/mapCategoryContent';
+import { DeleteIcon, EditIcon } from '@admin/assets/icons';
 
 export const useCategories = (menuId: string, language: string) => {
   const { t } = useTranslation(['common', 'menu']);
@@ -69,8 +70,8 @@ export const useCategories = (menuId: string, language: string) => {
         return (
           <>
             <Switcher
-              textForChecked="checked"
-              textForUnchecked="unchecked"
+              textForChecked={t('menu:actions.categoryStatusEnabled')}
+              textForUnchecked={t('menu:actions.categoryStatusDisabled')}
               name="state"
               value={value}
             />
@@ -91,11 +92,21 @@ export const useCategories = (menuId: string, language: string) => {
       },
     },
     {
-      label: t('common:buttons:edit'),
+      label: (
+        <>
+          <EditIcon />
+          {t('menu:actions.edit')}
+        </>
+      ),
       callback: (category: CategoryResponse) => openCategoryUpdateDialog(category),
     },
     {
-      label: t('common:buttons:delete'),
+      label: (
+        <>
+          <DeleteIcon />
+          {t('menu:actions.delete')}
+        </>
+      ),
       callback: (category: CategoryResponse) => openCategoryDeleteDialog(category),
     },
   ];

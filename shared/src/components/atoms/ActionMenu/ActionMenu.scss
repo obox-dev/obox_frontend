@@ -1,5 +1,31 @@
-.dropdown-toggle.btn {
-  &::after {
-    display: none;
+@import '@shared/styles/variables.scss';
+
+.dropdown-toggle {
+  &.btn {
+    &::after {
+      display: none;
+    }
+  }
+}
+
+.dropdown-menu {
+  .dropdown-item {
+    display: flex;
+    svg {
+      margin-right: 10px;
+      align-self: center;
+    }
+  }
+
+  .dropdown-item,
+  .switcher {
+    font-size: 14px;
+    color: $primary-text-color;
+    transition: color .3s ease-in-out;
+
+    &:hover {
+      background-color: transparent;
+      color: $primary-color;
+    }
   }
 }
