@@ -18,7 +18,6 @@
     color: $color-placeholder-text;
   }
 
- 
 }
 .form-control.error-input {
   border: 1px solid $color-accent-mistake;
@@ -29,6 +28,7 @@
 
 .modal-body .text-danger {
   color: $color-accent-mistake !important;
+
   position: relative;
   bottom: 24px;
 }
