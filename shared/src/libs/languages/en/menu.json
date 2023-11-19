@@ -12,7 +12,7 @@
     "descriptionTextArea": "Enter the name of the category" 
   },
   "updateCategoryForm": {
-    "title": "Add a category",
+    "title": "Editing",
     "placeholder": "Enter new name for the category"
   },
   "deleteCategoryForm": {
