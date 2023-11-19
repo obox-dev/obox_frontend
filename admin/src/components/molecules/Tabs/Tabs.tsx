@@ -11,7 +11,7 @@ export const Tabs = <T extends WithEntityState>(props: ITabs<T>) => {
     <>
       <ul className="tabs-section__tabs nav nav-pills">
         {items.map((item) => {
-          const { id, label, isSelected, onClick, entity } = item;
+          const { id, label, isSelected, onClick, entity, isDisabled } = item;
           return (
             <li
               className="tabs-section__tabs-item nav-item d-flex align-items-stretch"
@@ -24,6 +24,7 @@ export const Tabs = <T extends WithEntityState>(props: ITabs<T>) => {
                 id={id}
                 label={label}
                 onClick={onClick}
+                isDisabled={isDisabled}
                 isSelected={isSelected}
               />
             </li>

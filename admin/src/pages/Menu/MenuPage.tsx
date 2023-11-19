@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import { useEffect, useMemo } from 'react';
+import { useNavigate, useParams } from 'react-router';
 import { useTranslation } from '@libs/react-i18next';
 import { useMainProvider } from '@admin/providers/main';
 import { LayoutWithSearch } from '@admin/layout/LayoutWithSearch/LayoutWithSearch';
@@ -7,12 +7,21 @@ import { useMenu } from './components/MenuPage/useMenu';
 import { TabsSection } from './components/TabsSection/TabsSection';
 import { useCategories } from './components/MenuCategories/useCategories';
 import './Menu.scss';
+import { useState } from 'react';
 
 const HARDCODED_RESTAURANT_ID = '793ecd10-c0c0-4b06-ac09-c7a3ecdc9f04';
 
 export const MenuPage = () => {
   const { t } = useTranslation();
-  const { menuLanguage, menuId, setMenuId } = useMainProvider();
+  const { menuId: selectedMenuId = '' } = useParams();
+  const { menuLanguage } = useMainProvider();
+
+  const [loadingMenus, setLoadingMenus] = useState(false);
+  const [loadingCategories, setLoadingCategories] = useState(false);
+
+  const selectedMenu = useMemo(() => {
+    return selectedMenuId;
+  }, [selectedMenuId]);
 
   const restaurantId = HARDCODED_RESTAURANT_ID;
   const { openMenuCreateDialog, loadAllMenus, menuList, menuActions } = useMenu(
@@ -29,17 +38,27 @@ export const MenuPage = () => {
     loadAllCategories,
     categoriesList,
     menuCategoriesActions,
-  } = useCategories(menuId!, menuLanguage);
+  } = useCategories(selectedMenu, menuLanguage);
 
   useEffect(() => {
-    if (menuId) {
-      loadAllCategories();
+    const load = async () => {
+      setLoadingCategories(true);
+      await loadAllCategories();
+      setLoadingCategories(false);
+    };
+    if (selectedMenu) {
+      load();
     }
-  }, [menuId]);
+  }, [selectedMenu]);
 
   useEffect(() => {
+    const load = async () => {
+      setLoadingMenus(true);
+      await loadAllMenus();
+      setLoadingMenus(false);
+    };
     if (restaurantId) {
-      loadAllMenus();
+      load();
     }
   }, [restaurantId]);
 
@@ -48,6 +67,7 @@ export const MenuPage = () => {
       <LayoutWithSearch>
         <>
           <TabsSection
+            isLoading={loadingMenus}
             items={menuList.map((menu) => {
               return {
                 id: menu.menu_id,
@@ -59,12 +79,14 @@ export const MenuPage = () => {
             currentLanguage={menuLanguage}
             mainAction={openMenuCreateDialog}
             onTabChange={(tabId) => {
-              setMenuId(tabId);
+              navigate(`/menu/${tabId}`);
             }}
             actions={menuActions}
+            selected={selectedMenu}
           />
-          {menuId && (
+          {selectedMenu && (
             <TabsSection
+              isLoading={loadingCategories}
               items={categoriesList.map((category) => {
                 return {
                   id: category.category_id,
@@ -76,7 +98,7 @@ export const MenuPage = () => {
               currentLanguage={menuLanguage}
               mainAction={openCategoryCreateDialog}
               onTabChange={(tabId) => {
-                navigate(`/menu/${menuId}/category/${tabId}`);
+                navigate(`/menu/${selectedMenu}/category/${tabId}`);
               }}
               actions={menuCategoriesActions}
             />

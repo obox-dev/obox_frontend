@@ -9,16 +9,16 @@ import './ActionButton.scss';
 export const ActionButton = <T extends WithEntityState>(
   props: ActionButtonProps<T>
 ) => {
-  const { id, label, isSelected, onClick, entity, actions, variant } = props;
-  const isDisabled = useMemo(() => {
+  const { id, label, isSelected, onClick, entity, actions, variant, isDisabled } = props;
+  const isInavtive = useMemo(() => {
     return entity.state === EntityState.DISABLED;
   }, [entity]);
   return (
     <div
       className={[
         'action-button d-inline-flex',
-        isSelected ? 'active' : '',
-        isDisabled ? 'disabled' : '',
+        isSelected ? 'selected' : '',
+        isInavtive ? 'is-inactive' : '',
       ].join(' ')}
     >
       <Button
@@ -28,12 +28,14 @@ export const ActionButton = <T extends WithEntityState>(
         onClick={() => {
           onClick(id);
         }}
+        isDisabled={isDisabled}
       />
       <ActionMenu
         toggleContent={<ToggleDots />}
         toggleVariant={variant}
         entity={entity}
         actions={actions}
+        isDisabled={isDisabled}
       />
     </div>
   );

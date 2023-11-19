@@ -15,4 +15,5 @@ export interface IActionMenu<T extends WithEntityState> {
   entity: T;
   toggleContent: JSX.Element | string;
   toggleVariant?: ButtonVariants;
+  isDisabled?: boolean;
 }

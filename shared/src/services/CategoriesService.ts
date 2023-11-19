@@ -30,8 +30,8 @@ export interface CreateCategoryResponse {
 }
 
 export class CategoriesService {
-  static async getById(id: string): Promise<Category> {
-    return API.get<void, Category>(`/categories/${id}`);
+  static async getById(id: string): Promise<CategoryResponse> {
+    return API.get<void, CategoryResponse>(`/categories/${id}`);
   }
   static async create(params: CreateCategoryRequest) {
     return API.post<CreateCategoryRequest, CreateCategoryResponse>('/categories/', params);
