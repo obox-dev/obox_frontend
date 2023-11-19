@@ -21,12 +21,11 @@
     "descriptionTextArea": "Enter the name of the category" 
   },
   "updateCategoryForm": {
-    "title": "Add a category",
+    "title": "Editing",
     "placeholder": "Enter new name for the category"
   },
   "deleteCategoryForm": {
-    "title": "Are you sure you want to delete this category?",
-    "message": "Confirming the deletion of category:"
+    "title": "Are you sure you want to delete this category?"
   },
   "createMenuForm": {
     "title": "Add Menu",
@@ -39,12 +38,10 @@
     "label": "Menu name *"
   },
   "deleteMenuForm": {
-    "title": "Are you sure you want to delete this menu?",
-    "message": "Confirming the deletion of menu:"
+    "title": "Are you sure you want to delete this menu?"
   },
    "deleteDishForm": {
-    "title": "Are you sure you want to delete this dish?",
-    "message": "Confirming the deletion of menu:"
+    "title": "Are you sure you want to delete this dish?"
   },
   "tagsPagePlaceholder": "Tags and allergenes will be here",
   "visibleMenu": "Is menu visible?",

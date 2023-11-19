@@ -1,4 +1,3 @@
-@import '@shared/styles/variables.scss';
 .btn {
   min-height: 48px;
   border-radius: 16px;
@@ -34,8 +33,8 @@
       background-color: $btn-hover-color;
     }
     &:active {
-      background-color: $btn-press-color !important;
-      color: $btn-press-color-text !important;
+      background-color: $btn-press-color;
+      color: $btn-press-color-text ;
     }
   }
 
@@ -52,9 +51,9 @@
     }
 
     &:active {
-      background-color: $color-global-white !important;
-      color: $btn-press-color-text !important;
-      border: 1px solid $btn-press-color !important;
+      background-color: $color-global-white ;
+      color: $btn-press-color-text ;
+      border: 1px solid $btn-press-color;
     }
   }
 
@@ -67,8 +66,8 @@
     }
 
     &:active {
-      color: $btn-press-color-text-tertiary !important;
-      border: none !important;
+      color: $btn-press-color-text-tertiary;
+      border: none;
     }
   }
 

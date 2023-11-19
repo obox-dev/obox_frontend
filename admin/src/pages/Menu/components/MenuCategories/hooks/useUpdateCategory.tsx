@@ -16,7 +16,8 @@ import { useCategoryFormValidation } from '../validation/useCategoryFormValidati
 import { Switcher } from '@shared/components/atoms/Switcher';
 import { EntityState, UpdateStateRequest } from '@shared/utils/types';
 import { mapCategoryContent } from '../mappers/mapCategoryContent';
-
+import { Textarea } from '@shared/components/atoms/Textarea';
+import { InputLabel } from '@shared/components/atoms/InputLabel';
 
 interface UpdateCategoryParams {
   onSuccess: () => Promise<void>;
@@ -96,6 +97,16 @@ export const useUpdateCategory = (args: UpdateCategoryParams) => {
                 placeholder={t('menu:updateCategoryForm.placeholder')}
                 type={InputVariants.TEXT}
                 name="name"
+              />
+              <InputLabel
+                forInput="description"
+                text={t('menu:createCategoryForm.description')}
+              />
+              <Textarea
+                name="description"
+                placeholder={t('menu:createCategoryForm:descriptionTextArea')}
+                maxLength={255}
+                showCounter
               />
               <Switcher
                 value={defaultValues.state}

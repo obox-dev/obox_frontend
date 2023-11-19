@@ -5,7 +5,6 @@ import { ButtonVariants } from '@shared/components/atoms/Button';
 import { Dialog } from '@shared/components/molecules/Dialog';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
 import { MenuResponse, MenuService } from '@shared/services';
-import { mapMenuContent } from '../mappers/mapMenuContent';
 
 interface DeleteMenuParams {
   onSuccess: () => Promise<void>;
@@ -15,7 +14,7 @@ interface DeleteMenuParams {
 }
 
 export const useDeleteMenu = (args: DeleteMenuParams) => {
-  const { onSuccess, onError, onFinally, language } = args;
+  const { onSuccess, onError, onFinally } = args;
   const { openDialog } = useDialog();
   const { t } = useTranslation();
 
@@ -28,7 +27,6 @@ export const useDeleteMenu = (args: DeleteMenuParams) => {
 
   const openMenuDeleteDialog = (menu: MenuResponse) =>
     openDialog(({ closeDialog }) => {
-      const menuContent = mapMenuContent(menu, language);
 
       return (
         <Dialog
@@ -45,10 +43,6 @@ export const useDeleteMenu = (args: DeleteMenuParams) => {
           okButtonVariant={ButtonVariants.PRIMARY}
           cancelButtonVariant={ButtonVariants.TERTIARY}
         >
-          <p>
-            {t('menu:deleteMenuForm.message')}{' '}
-            <strong>{menuContent.name}</strong>?
-          </p>
         </Dialog>
       );
     });

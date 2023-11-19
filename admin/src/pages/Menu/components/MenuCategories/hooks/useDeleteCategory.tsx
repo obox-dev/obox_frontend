@@ -5,7 +5,7 @@ import { useDialog } from '@shared/providers/DialogProvider/useDialog';
 import { CategoriesService, CategoryResponse } from '@shared/services';
 import { Dialog } from '@shared/components/molecules/Dialog';
 import { ButtonVariants } from '@shared/components/atoms/Button';
-import { mapCategoryContent } from '../mappers/mapCategoryContent';
+
 
 interface DeleteCategoryParams {
   onSuccess: () => Promise<void>;
@@ -15,7 +15,7 @@ interface DeleteCategoryParams {
 }
 
 export const useDeleteCategory = (args: DeleteCategoryParams) => {
-  const { onSuccess, onFinally, language } = args;
+  const { onSuccess, onFinally, } = args;
   const { openDialog } = useDialog();
   const { t } = useTranslation();
 
@@ -27,7 +27,6 @@ export const useDeleteCategory = (args: DeleteCategoryParams) => {
 
   const openCategoryDeleteDialog = (category: CategoryResponse) =>
     openDialog(({ closeDialog }) => {
-      const categoryItem = mapCategoryContent(category, language);
       return (
         <Dialog
           okCallback={() => {
@@ -44,10 +43,6 @@ export const useDeleteCategory = (args: DeleteCategoryParams) => {
           okButtonVariant={ButtonVariants.PRIMARY}
           cancelButtonVariant={ButtonVariants.TERTIARY}
         >
-          <p>
-            {t('menu:deleteCategoryForm.message')}{' '}
-            <strong>{categoryItem.name}</strong>
-          </p>
         </Dialog>
       );
     });
