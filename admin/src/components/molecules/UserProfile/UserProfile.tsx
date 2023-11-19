@@ -15,7 +15,7 @@ const UserProfile = () => {
           </>
         }
         variant={ButtonVariants.ICON_LINK}
-      ></Button>
+      />
     </div>
   );
 };

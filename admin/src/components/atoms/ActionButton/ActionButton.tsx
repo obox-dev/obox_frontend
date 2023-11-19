@@ -1,10 +1,10 @@
+import { useMemo } from 'react';
 import { ToggleDots } from '@admin/assets/icons';
 import { ActionMenu } from '@shared/components/atoms/ActionMenu';
 import { Button } from '@shared/components/atoms/Button';
 import { EntityState, WithEntityState } from '@shared/utils/types';
 import { ActionButtonProps } from './types';
 import './ActionButton.scss';
-import { useMemo } from 'react';
 
 export const ActionButton = <T extends WithEntityState>(
   props: ActionButtonProps<T>
