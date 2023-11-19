@@ -14,7 +14,7 @@ export const MenuDishItem = (props: MenuDishItem) => {
       <td  className="dish-item__name">{dishItem.name}</td>
       <td>{dishItem.price}</td>
       <td className="text-end" width={50}>
-        <ActionMenu entity={dishItem} actions={actions} />
+        <ActionMenu toggleContent='Toggle' entity={dishItem} actions={actions} />
       </td>
     </tr>
   );

@@ -3,17 +3,16 @@ import './Button.scss';
 
 export const Button = (props: IButton) => {
   const {
-    text,
+    innerContent,
     onClick,
     variant,
     isDisabled,
     type,
-    icon,
+    className,
   } = props;
   return (
-    <button type={type} onClick={onClick} className={['btn', `btn-${variant}`].join(' ')} disabled={isDisabled}>
-      {icon}
-      {text}
+    <button type={type} onClick={onClick} className={['btn', `btn-${variant}`, className].join(' ')} disabled={isDisabled}>
+      {innerContent}
     </button>
   );
 };

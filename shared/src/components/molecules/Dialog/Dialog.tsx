@@ -23,9 +23,9 @@ export const Dialog: React.FC<DialogPropTypes> = (props: DialogPropTypes) => {
       {title && <Modal.Header closeButton>{title}</Modal.Header>}
       {children && <Modal.Body>{children}</Modal.Body>}
       <Modal.Footer>
-        <Button text={okText} variant={okButtonVariant} onClick={okCallback} />
+        <Button innerContent={okText} variant={okButtonVariant} onClick={okCallback} />
         <Button
-          text={cancelText}
+          innerContent={cancelText}
           variant={cancelButtonVariant}
           onClick={cancelCallback}
         />

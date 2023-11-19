@@ -1,4 +1,8 @@
 :root {
+  --primary-color: #6a9775;
+  --secondary-color: #d8deda;
+  --primary-text-color: #3d4840;
+  --secondary-text-color: #546358;
   --color-global-white: #ffffff;
   --color-global-black: #000000;
 
@@ -38,6 +42,8 @@
   --btn-disabled-color: #cbfdd8;
   --btn-disabled-color-text: #a1afa5;
   --btn-press-color-text-tertiary: #98caa5;
+  --action-button-active: #41644A;
+  --action-button-disabled: #BDC7BF; 
 }
 
 
@@ -79,6 +85,8 @@ $btn-press-color-text: var(--btn-press-color-text);
 $btn-disabled-color: var(--btn-disabled-color);
 $btn-disabled-color-text: var(--btn-disabled-color-text);
 $btn-press-color-text-tertiary: var(--btn-press-color-text-tertiary);
+$action-button-active: var(--action-button-active);
+$action-button-disabled: var(--action-button-disabled);
 
 
 

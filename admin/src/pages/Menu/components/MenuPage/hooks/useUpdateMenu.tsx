@@ -4,17 +4,15 @@ import { useTranslation } from '@libs/react-i18next';
 import { useRequest } from '@admin/hooks';
 import { Form, FormRef } from '@shared/components/atoms/Form';
 import { Dialog } from '@shared/components/molecules/Dialog';
-import { Menu } from '@shared/services';
-import {
-  UpdateMenuRequest,
-  MenuService,
-  MenuState,
-} from '@shared/services/MenuService';
+import { Menu, MenuResponse } from '@shared/services';
+import { UpdateMenuRequest, MenuService } from '@shared/services/MenuService';
 import { Input, InputVariants } from '@shared/components/atoms/Input';
-import { useDialog } from '@shared/providers/DialogProvider/useDialog';
-import { useMenuFormValidation } from '../validation/useMenuFormValidation';
 import { Switcher } from '@shared/components/atoms/Switcher';
 import { InputLabel } from '@shared/components/atoms/InputLabel';
+import { useDialog } from '@shared/providers/DialogProvider/useDialog';
+import { EntityState, UpdateStateRequest } from '@shared/utils/types';
+import { useMenuFormValidation } from '../validation/useMenuFormValidation';
+import { mapMenuContent } from '../mappers/mapMenuContent';
 
 interface UpdateMenuParams {
   onSuccess: () => Promise<void>;
@@ -38,6 +36,15 @@ export const useUpdateMenu = (args: UpdateMenuParams) => {
 
     return MenuService.update(id, request);
   };
+  const updateState = async ({ menu_id, state }: Menu) => {
+    const id = menu_id;
+    const request: UpdateStateRequest = {
+      state,
+      language,
+    };
+
+    await MenuService.update(id, request);
+  };
 
   const { execute: onUpdateSubmit } = useRequest({
     requestFunction: updateSubmit,
@@ -45,12 +52,10 @@ export const useUpdateMenu = (args: UpdateMenuParams) => {
     onError,
   });
 
-  const openMenuUpdateDialog = (menu: Menu) =>
+  const openMenuUpdateDialog = (menu: MenuResponse) =>
     openDialog(({ closeDialog }) => {
       const formRef = useRef<FormRef<Partial<Menu>> | null>(null);
-      const defaultValues: Menu = {
-        ...menu,
-      };
+      const defaultValues: Menu = mapMenuContent(menu, language);
 
       return (
         <Dialog
@@ -98,7 +103,7 @@ export const useUpdateMenu = (args: UpdateMenuParams) => {
                 onChange={(val) => {
                   formRef.current?.setValue(
                     'state',
-                    val ? MenuState.ENABLED : MenuState.DISABLED
+                    val ? EntityState.ENABLED : EntityState.DISABLED
                   );
                 }}
               />
@@ -109,5 +114,6 @@ export const useUpdateMenu = (args: UpdateMenuParams) => {
     });
   return {
     openMenuUpdateDialog,
+    updateState,
   };
 };

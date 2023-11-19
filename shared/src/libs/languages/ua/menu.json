@@ -1,9 +1,18 @@
 {
-  "categories": "Категорії",
-  "addcategory": "Додати категорію",
-  "addmenu": "Додати меню",
+  "createMenu": "Створити меню",
+  "createCategory": "Створити категорію",
+  "addCategoryButton": "Додати категорію",
+  "addMenuButton": "Додати меню",
   "adddish": "Додати страву",
   "dishes": "Страви",
+  "actions": {
+    "edit": "Редагувати",
+    "delete": "Видалити",
+    "menuStatusEnabled": "Меню активне",
+    "menuStatusDisabled": "Меню неактивне",
+    "categoryStatusEnabled": "Категорія активна",
+    "categoryStatusDisabled": "Категорія неактивна"
+  },
   "createCategoryForm": {
     "title": "Додати категорію",
     "placeholder": "Введіть назву категорії",

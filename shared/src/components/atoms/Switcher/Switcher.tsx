@@ -1,5 +1,5 @@
-import { useState, ChangeEvent } from 'react';
-import { MenuState } from '@shared/services/MenuService';
+import { useState, useMemo, ChangeEvent } from 'react';
+import { EntityState } from '@shared/utils/types';
 import { Input, InputVariants } from '../Input';
 import { InputLabel } from '../InputLabel';
 import { ISwitcher } from './types';
@@ -16,22 +16,22 @@ export const Switcher = (props: ISwitcher) => {
     onChange,
   } = props;
 
-  const [isChecked, setChecked] = useState(value);
+  const [innerState, setInnerState] = useState(value);
 
   const innerOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.checked;
 
-    const newValue = value ? MenuState.ENABLED : MenuState.DISABLED;
-    setChecked(newValue);
+    const newValue = value ? EntityState.ENABLED : EntityState.DISABLED;
+    setInnerState(newValue);
     onChange?.(value);
   };
 
-  const finalText = () => {
+  const finalText = useMemo(() => {
     if (text) {
       return text;
     }
-    return isChecked ? textForChecked : textForUnchecked;
-  };
+    return innerState === EntityState.ENABLED ? textForChecked : textForUnchecked;
+  }, [innerState]);
 
   return (
     <div className={[isDisabled ? 'disabled' : '', 'switcher'].join(' ')}>
@@ -41,12 +41,12 @@ export const Switcher = (props: ISwitcher) => {
           name={name}
           type={InputVariants.CHECKBOX}
           isDisabled={isDisabled}
-          checked={isChecked === MenuState.ENABLED ? true : false}
+          checked={innerState === EntityState.ENABLED ? true : false}
         />
         <span className="slider round"></span>
       </InputLabel>
       <span className="switch-text">
-        {finalText()}
+        {finalText}
       </span>
     </div>
   );

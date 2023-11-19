@@ -1,10 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from '@libs/react-i18next';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
-import { Menu } from '@shared/services';
+import { MenuResponse } from '@shared/services';
 import { IAction } from '@shared/components/atoms/ActionMenu';
 import { useGetMenu } from './hooks/useGetMenu';
 import { useCreateMenu, useDeleteMenu, useUpdateMenu } from './hooks';
+import { Switcher } from '@shared/components/atoms/Switcher';
+import { IActionLabelRenderParams } from '@shared/components/atoms/ActionMenu/types';
+import { EntityState } from '@shared/utils/types';
+import { mapMenuContent } from './mappers/mapMenuContent';
+import { DeleteIcon, EditIcon } from '@admin/assets/icons';
 
 interface UseMenuProps {
   restaurant_id: string;
@@ -32,7 +37,7 @@ export const useMenu = (props: UseMenuProps) => {
     language,
   });
 
-  const { openMenuUpdateDialog } = useUpdateMenu({
+  const { openMenuUpdateDialog, updateState } = useUpdateMenu({
     onSuccess: async () => {
       await loadAllMenus();
       closeAll();
@@ -60,16 +65,57 @@ export const useMenu = (props: UseMenuProps) => {
     onFinally: () => {
       closeAll();
     },
+    language,
   });
 
-  const menuActions: IAction<Menu>[] = [
+  const menuActions: IAction<MenuResponse>[] = [
     {
-      label: t('common:buttons:edit'),
-      callback: (menu: Menu) => openMenuUpdateDialog(menu),
+      renderLabel: (params?: IActionLabelRenderParams) => {
+        const value =
+          params?.state === EntityState.ENABLED
+            ? EntityState.ENABLED
+            : EntityState.DISABLED;
+        return (
+          <>
+            <Switcher
+              textForChecked={t('menu:actions.menuStatusEnabled')}
+              textForUnchecked={t('menu:actions.menuStatusDisabled')}
+              name="state"
+              value={value}
+            />
+          </>
+        );
+      },
+      callback: async (menu: MenuResponse) => {
+        const menuContent = {
+          ...mapMenuContent(menu, language),
+          state:
+            menu.state === EntityState.ENABLED
+              ? EntityState.DISABLED
+              : EntityState.ENABLED,
+        };
+
+        await updateState(menuContent);
+        await loadAllMenus();
+      },
     },
     {
-      label: t('common:buttons:delete'),
-      callback: (menu: Menu) => openMenuDeleteDialog(menu),
+      label: (
+        <>
+          <EditIcon />
+          {t('menu:actions.edit')}
+        </>
+      ),
+      callback: (menu: MenuResponse) => openMenuUpdateDialog(menu),
+    },
+    {
+      label: (
+        <>
+          <DeleteIcon />
+          {t('menu:actions.delete')}
+        </>
+      ),
+      callback: (menu: MenuResponse) => openMenuDeleteDialog(menu),
     },
   ];
 

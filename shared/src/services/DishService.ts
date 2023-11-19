@@ -1,9 +1,5 @@
+import { EntityState } from '@shared/utils/types';
 import { API } from './ApiService';
-
-export enum DishState {
-  ENABLED = 'ENABLED',
-  DISABLED = 'DISABLED',
-}
 
 export enum DishInStock {
   ENABLED = 'ENABLED',
@@ -19,12 +15,12 @@ export interface DishResponse {
   dish_id: string;
   category_id: string;
   price: number;
+  state: EntityState;
   associated_id?: string;
   weight?: number;
   calories?: number;
   allergens?: string[];
   tags?: string[];
-  state?: DishState;
   in_stock?: DishInStock;
   language: string;
   content: Record<string, DishContent>;
@@ -42,7 +38,7 @@ export interface UpdateDishRequest {
   calories?: number;
   allergens?: string;
   tags?: string;
-  state?: DishState;
+  state?: EntityState;
   in_stock?: DishInStock;
   language: string;
 }
