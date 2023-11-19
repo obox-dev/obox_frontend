@@ -21,7 +21,7 @@
     "descriptionTextArea": "Введіть назву категорії" 
   },
   "updateCategoryForm": {
-    "title": "Введіть нову назву для категорії",
+    "title": "Редагування",
     "placeholder": "Введіть нову назву для категорії"
   },
   "deleteCategoryForm": {
