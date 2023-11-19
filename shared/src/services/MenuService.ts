@@ -1,30 +1,26 @@
+import { EntityState } from '@shared/utils/types';
 import { API } from './ApiService';
 import { CategoryResponse } from './CategoriesService';
-import { Menu } from './RestaurantsService';
-
-export enum MenuState {
-  ENABLED = 'ENABLED',
-  DISABLED = 'DISABLED',
-}
+import { MenuResponse } from './RestaurantsService';
 export interface CreateMenuRequest {
   name: string;
   language: string;
   restaurant_id: string;
-  state: MenuState;
+  state: EntityState;
 }
 export interface CreateMenuResponse {
   menu_id: string;
 }
 
 export interface UpdateMenuRequest {
-  name: string;
-  state: MenuState;
+  name?: string;
+  state?: EntityState;
   language: string;
 }
 
 export class MenuService {
-  static async getById(id: string): Promise<Menu> {
-    return API.get<void, Menu>(`/menus/${id}`);
+  static async getById(id: string): Promise<MenuResponse> {
+    return API.get<void, MenuResponse>(`/menus/${id}`);
   }
 
   static async create(params: CreateMenuRequest): Promise<CreateMenuResponse> {

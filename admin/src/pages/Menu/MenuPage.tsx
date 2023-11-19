@@ -1,32 +1,39 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router';
-import { MenuNavigation } from './components/MenuPage/MenuNavigation';
-import { Menu } from './components/MenuPage/Menu';
-import { useMenu } from './components/MenuPage/useMenu';
+import { useNavigate } from 'react-router';
+import { useTranslation } from '@libs/react-i18next';
 import { useMainProvider } from '@admin/providers/main';
+import { LayoutWithSearch } from '@admin/layout/LayoutWithSearch/LayoutWithSearch';
+import { useMenu } from './components/MenuPage/useMenu';
+import { TabsSection } from './components/TabsSection/TabsSection';
+import { useCategories } from './components/MenuCategories/useCategories';
 import './Menu.scss';
 
 const HARDCODED_RESTAURANT_ID = '793ecd10-c0c0-4b06-ac09-c7a3ecdc9f04';
 
 export const MenuPage = () => {
-  const { menuId } = useParams();
-  const { menuLanguage } = useMainProvider();
-  
+  const { t } = useTranslation();
+  const { menuLanguage, menuId, setMenuId } = useMainProvider();
+
   const restaurantId = HARDCODED_RESTAURANT_ID;
+  const { openMenuCreateDialog, loadAllMenus, menuList, menuActions } = useMenu(
+    {
+      restaurant_id: restaurantId,
+      language: menuLanguage,
+    }
+  );
+
+  const navigate = useNavigate();
+
   const {
-    openMenuCreateDialog,
-    loadSingleMenu,
-    loadAllMenus,
-    menuList,
-    menuActions,
-  } = useMenu({
-    restaurant_id: restaurantId,
-    language: menuLanguage,
-  });
+    openCategoryCreateDialog,
+    loadAllCategories,
+    categoriesList,
+    menuCategoriesActions,
+  } = useCategories(menuId!, menuLanguage);
 
   useEffect(() => {
     if (menuId) {
-      loadSingleMenu(menuId);
+      loadAllCategories();
     }
   }, [menuId]);
 
@@ -37,14 +44,45 @@ export const MenuPage = () => {
   }, [restaurantId]);
 
   return (
-    <div>
-      <MenuNavigation
-        items={menuList}
-        addMenu={openMenuCreateDialog}
-        actions={menuActions}
-        currentLanguage={menuLanguage}
-      />
-      {menuId && <Menu menuId={menuId} currentLanguage={menuLanguage} />}
+    <div className="menu-page">
+      <LayoutWithSearch>
+        <>
+          <TabsSection
+            items={menuList.map((menu) => {
+              return {
+                id: menu.menu_id,
+                ...menu,
+              };
+            })}
+            title={t('menu:createMenu')}
+            buttonText={t('menu:addMenuButton')}
+            currentLanguage={menuLanguage}
+            mainAction={openMenuCreateDialog}
+            onTabChange={(tabId) => {
+              setMenuId(tabId);
+            }}
+            actions={menuActions}
+          />
+          {menuId && (
+            <TabsSection
+              items={categoriesList.map((category) => {
+                return {
+                  id: category.category_id,
+                  ...category,
+                };
+              })}
+              title={t('menu:createCategory')}
+              buttonText={t('menu:addCategoryButton')}
+              currentLanguage={menuLanguage}
+              mainAction={openCategoryCreateDialog}
+              onTabChange={(tabId) => {
+                navigate(`/menu/${menuId}/category/${tabId}`);
+              }}
+              actions={menuCategoriesActions}
+            />
+          )}
+        </>
+      </LayoutWithSearch>
     </div>
   );
 };

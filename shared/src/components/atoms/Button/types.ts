@@ -17,10 +17,10 @@ export enum ButtonTypes {
   SUBMIT = 'submit'
 }
 export interface IButton {
-  text: string;
+  innerContent: JSX.Element | string;
   variant: ButtonVariants;
-  icon?: JSX.Element;
   onClick?: () => void;
   isDisabled?: boolean;
   type?: ButtonTypes;
+  className?: string;
 }

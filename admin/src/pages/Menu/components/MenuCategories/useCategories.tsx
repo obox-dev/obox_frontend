@@ -1,10 +1,15 @@
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
 import { useTranslation } from '@libs/react-i18next';
-import { Category, CreateCategoryResponse } from '@shared/services';
+import { CategoryResponse, CreateCategoryResponse } from '@shared/services';
 import { IAction } from '@shared/components/atoms/ActionMenu';
 import { useNavigate } from 'react-router-dom';
 import { useCreateCategory, useGetCategory, useUpdateCategory } from './hooks';
 import { useDeleteCategory } from './hooks/useDeleteCategory';
+import { IActionLabelRenderParams } from '@shared/components/atoms/ActionMenu/types';
+import { EntityState } from '@shared/utils/types';
+import { Switcher } from '@shared/components/atoms/Switcher';
+import { mapCategoryContent } from './mappers/mapCategoryContent';
+import { DeleteIcon, EditIcon } from '@admin/assets/icons';
 
 export const useCategories = (menuId: string, language: string) => {
   const { t } = useTranslation(['common', 'menu']);
@@ -26,7 +31,7 @@ export const useCategories = (menuId: string, language: string) => {
     language,
   });
 
-  const { openCategoryUpdateDialog } = useUpdateCategory({
+  const { openCategoryUpdateDialog, updateState } = useUpdateCategory({
     onSuccess: async () => {
       await loadAllCategories();
       closeAll();
@@ -51,17 +56,58 @@ export const useCategories = (menuId: string, language: string) => {
         await loadAllCategories();
         closeAll();
       }
-    }
+    },
+    language,
   });
 
-  const menuCategoriesActions: IAction<Category>[] = [
+  const menuCategoriesActions: IAction<CategoryResponse>[] = [
     {
-      label: t('common:buttons:edit'),
-      callback: (category: Category) => openCategoryUpdateDialog(category),
+      renderLabel: (params?: IActionLabelRenderParams) => {
+        const value =
+          params?.state === EntityState.ENABLED
+            ? EntityState.ENABLED
+            : EntityState.DISABLED;
+        return (
+          <>
+            <Switcher
+              textForChecked={t('menu:actions.categoryStatusEnabled')}
+              textForUnchecked={t('menu:actions.categoryStatusDisabled')}
+              name="state"
+              value={value}
+            />
+          </>
+        );
+      },
+      callback: async (category: CategoryResponse) => {
+        const categoryContent = {
+          ...mapCategoryContent(category, language),
+          state:
+            category.state === EntityState.ENABLED
+              ? EntityState.DISABLED
+              : EntityState.ENABLED,
+        };
+        
+        await updateState(categoryContent);
+        await loadAllCategories();
+      },
     },
     {
-      label: t('common:buttons:delete'),
-      callback: (category: Category) => openCategoryDeleteDialog(category),
+      label: (
+        <>
+          <EditIcon />
+          {t('menu:actions.edit')}
+        </>
+      ),
+      callback: (category: CategoryResponse) => openCategoryUpdateDialog(category),
+    },
+    {
+      label: (
+        <>
+          <DeleteIcon />
+          {t('menu:actions.delete')}
+        </>
+      ),
+      callback: (category: CategoryResponse) => openCategoryDeleteDialog(category),
     },
   ];
 

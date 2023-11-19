@@ -6,6 +6,7 @@ import { useDialog } from '@shared/providers/DialogProvider/useDialog';
 import {
   CategoriesService,
   Category,
+  CategoryResponse,
   UpdateCategoryRequest,
 } from '@shared/services';
 import { Form, FormRef } from '@shared/components/atoms/Form';
@@ -13,7 +14,8 @@ import { Dialog } from '@shared/components/molecules/Dialog';
 import { Input, InputVariants } from '@shared/components/atoms/Input';
 import { useCategoryFormValidation } from '../validation/useCategoryFormValidation';
 import { Switcher } from '@shared/components/atoms/Switcher';
-import { CategoryState } from '@shared/services/CategoriesService';
+import { EntityState, UpdateStateRequest } from '@shared/utils/types';
+import { mapCategoryContent } from '../mappers/mapCategoryContent';
 import { Textarea } from '@shared/components/atoms/Textarea';
 import { InputLabel } from '@shared/components/atoms/InputLabel';
 
@@ -39,19 +41,27 @@ export const useUpdateCategory = (args: UpdateCategoryParams) => {
     return CategoriesService.update(id, request);
   };
 
+  const updateState = async ({ category_id, state }: Category) => {
+    const id = category_id;
+    const request: UpdateStateRequest = {
+      state,
+      language,
+    };
+
+    await CategoriesService.update(id, request);
+  };
+
   const { execute: onUpdateSubmit } = useRequest({
     requestFunction: updateSubmit,
     onSuccess,
     onError,
   });
 
-  const openCategoryUpdateDialog = (category: Category) =>
+  const openCategoryUpdateDialog = (category: CategoryResponse) =>
     openDialog(({ closeDialog }) => {
       const formRef = useRef<FormRef<Partial<Category>> | null>(null);
 
-      const defaultValues: Category = {
-        ...category,
-      };
+      const defaultValues = mapCategoryContent(category, language);
 
       return (
         <Dialog
@@ -105,7 +115,7 @@ export const useUpdateCategory = (args: UpdateCategoryParams) => {
                 onChange={(val) => {
                   formRef.current?.setValue(
                     'state',
-                    val ? CategoryState.ENABLED : CategoryState.DISABLED
+                    val ? EntityState.ENABLED : EntityState.DISABLED
                   );
                 }}
               />
@@ -114,5 +124,5 @@ export const useUpdateCategory = (args: UpdateCategoryParams) => {
         </Dialog>
       );
     });
-  return { openCategoryUpdateDialog };
+  return { openCategoryUpdateDialog, updateState };
 };

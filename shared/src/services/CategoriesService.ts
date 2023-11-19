@@ -1,11 +1,6 @@
+import { EntityState } from '@shared/utils/types';
 import { API } from './ApiService';
 import { DishResponse } from './DishService';
-
-export enum CategoryState {
-  ENABLED = 'ENABLED',
-  DISABLED = 'DISABLED',
-}
-
 export interface CategoryContent {
   name: string;
   description?: string;
@@ -13,20 +8,20 @@ export interface CategoryContent {
 export interface CategoryResponse {
   menu_id: string;
   category_id: string;
-  state: CategoryState;
+  state: EntityState;
   content: Record<string, CategoryContent>;
 }
 export type Category = CategoryContent & Omit<CategoryResponse, 'content'>;
 export interface CreateCategoryRequest {
   menu_id: string;
   name: string;
-  state: CategoryState;
+  state: EntityState;
   language: string;
 }
 
 export interface UpdateCategoryRequest {
-  name: string;
-  state: CategoryState;
+  name?: string;
+  state?: EntityState;
   language: string;
 }
 

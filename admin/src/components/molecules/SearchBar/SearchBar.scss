@@ -1,0 +1,16 @@
+.input--with-icon {
+  margin-bottom: 48px;
+  position: relative;
+
+  input {
+    padding-right: 50px;
+  }
+
+  svg {
+    position: absolute;
+    right: 19px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+}

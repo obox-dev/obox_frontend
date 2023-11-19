@@ -1,0 +1,43 @@
+.action-button {
+  &__start {
+    &.btn {
+      border-radius: 16px 0 0 16px;
+      padding: 9px 9px 9px 18px;
+    }
+  }
+
+  &.active .btn {
+    background-color: $action-button-active;
+    color: $color-primary-text-contrast;
+    border-color: $color-primary-text-contrast;
+  }
+
+  &.disabled .btn {
+    background-color: $action-button-disabled;
+    color: $color-primary-text-contrast;
+    border-color: $color-primary-text-contrast;
+  }
+
+  &:hover {
+    .btn {
+      background-color: $color-border-focus-2px;
+      color: $color-primary-text-contrast;
+      border-color: $color-primary-text-contrast;
+    }
+  }
+
+  .btn {
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      filter: brightness(110%);
+    }
+  }
+
+  .dropdown-toggle {
+    height: 100%;
+    border-radius: 0 16px 16px 0;
+    display: flex;
+    align-items: center;
+    padding-right: 16px;
+  }
+}

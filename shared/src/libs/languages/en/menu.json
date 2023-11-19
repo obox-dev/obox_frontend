@@ -1,9 +1,18 @@
 {
-  "categories": "Categories",
-  "addcategory": "Add Category",
-  "addmenu": "Add Menu",
+  "createMenu": "Create menu",
+  "createCategory": "Create category",
+  "addCategoryButton": "Add category",
+  "addMenuButton": "Add menu",
   "adddish": "Add Dish",
   "dishes": "Dishes",
+  "actions": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "menuStatusEnabled": "Menu is enabled",
+    "menuStatusDisabled": "Menu is disabled",
+    "categoryStatusEnabled": "Category is enabled",
+    "categoryStatusDisabled": "Category is disabled"
+  },
   "createCategoryForm": {
     "title": "Enter your category name",
     "placeholder": "Enter the name of the category",

@@ -1,5 +1,5 @@
+import { EntityState } from '@shared/utils/types';
 import { API } from './ApiService';
-import { MenuState } from './MenuService';
 
 export interface MenuContent {
   name: string;
@@ -8,7 +8,7 @@ export interface MenuResponse {
   menu_id: string,
   restaurant_id: string,
   translation_id: string,
-  state: MenuState,
+  state: EntityState,
   content: Record<string, MenuContent>,
 }
 
