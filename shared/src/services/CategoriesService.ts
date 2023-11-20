@@ -17,12 +17,14 @@ export interface CreateCategoryRequest {
   name: string;
   state: EntityState;
   language: string;
+  description?: string;
 }
 
 export interface UpdateCategoryRequest {
   name?: string;
   state?: EntityState;
   language: string;
+  description?: string;
 }
 
 export interface CreateCategoryResponse {
