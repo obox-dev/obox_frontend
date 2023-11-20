@@ -44,6 +44,7 @@ export const useCreateCategory = (args: CreateCategoryParams) => {
         name: '',
         state: EntityState.ENABLED,
         language,
+        description: '',
       };
 
       return (
