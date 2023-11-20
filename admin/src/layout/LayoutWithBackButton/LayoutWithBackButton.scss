@@ -1,10 +1,6 @@
-
-@import '@shared/styles/variables.scss';
-
 .layout {
   &__header {
     border-radius: 16px;
-    // box-shadow: 0 0 0 1px $color-primary inset;
     background-color: $color-primary-text-contrast;
     margin-bottom: 48px;
 

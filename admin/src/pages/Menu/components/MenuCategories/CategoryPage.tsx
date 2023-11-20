@@ -13,6 +13,7 @@ import { useGetCategory } from './hooks';
 import { MenuDishList } from '../MenuDish/MenuDishList';
 import { useDish } from '../MenuDish/useDish';
 import './CategoryPage.scss';
+import { useMemo } from 'react';
 
 export const CategoryPage = () => {
   const { t } = useTranslation();
@@ -39,6 +40,10 @@ export const CategoryPage = () => {
     loadCategoryWithDishes();
   }, [categoryId]);
 
+  const dishListIsEmpty = useMemo(() => {
+    return dishList.length === 0;
+  }, [dishList.length]);
+
   return (
     <div className="category-page">
       <LayoutWithSearch>
@@ -51,9 +56,9 @@ export const CategoryPage = () => {
               description={category.description}
             >
               <div className="category-page__body">
-                <p className="filler">{t('menu:categoryPage.filler')}</p>
+                {dishListIsEmpty && <p className="filler">{t('menu:categoryPage.filler')}</p>}
                 <Button
-                  className="w-100 mb-4"
+                  className="w-100"
                   innerContent={
                     <>
                       <PlusIcon />

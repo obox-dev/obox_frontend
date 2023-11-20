@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { useTranslation } from '@libs/react-i18next';
 import { useMainProvider } from '@admin/providers/main';
@@ -7,7 +7,6 @@ import { useMenu } from './components/MenuPage/useMenu';
 import { TabsSection } from './components/TabsSection/TabsSection';
 import { useCategories } from './components/MenuCategories/useCategories';
 import './Menu.scss';
-import { useState } from 'react';
 
 const HARDCODED_RESTAURANT_ID = '793ecd10-c0c0-4b06-ac09-c7a3ecdc9f04';
 

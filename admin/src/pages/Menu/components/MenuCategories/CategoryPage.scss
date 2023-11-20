@@ -1,5 +1,3 @@
-@import '@shared/styles/variables.scss';
-
 .category-page {
   &__header {
     border-radius: 16px;
@@ -46,6 +44,7 @@
   &__body {
     button {
       border-radius: 16px;
+      margin-bottom: 32px;
     }
   }
 }
