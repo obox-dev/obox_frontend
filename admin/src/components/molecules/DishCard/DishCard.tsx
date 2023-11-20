@@ -11,7 +11,7 @@ export const DishCard = (props: IDishCard) => {
 
   const dish = mapDishContent(dishItem, language);
 
-  const updateStateAction = actions[DishActionTypes.UPDATE_STATE];
+  const updateInStockAction = actions[DishActionTypes.CHANGE_IN_STOCK];
   const editDishAction = actions[DishActionTypes.EDIT];
 
   return (
@@ -24,17 +24,16 @@ export const DishCard = (props: IDishCard) => {
         <div className="dish-item__title">{dish.name}</div>
         <Switcher
           onChange={() => {
-            updateStateAction(dishItem);
+            updateInStockAction(dishItem);
           }}
-          value={dish.state}
-          name="state"
+          value={dish.in_stock}
+          name="in_stock"
           textForChecked={t('common:inStock')}
           textForUnchecked={t('common:outStock')}
         />
-        <div>{dishItem.state}</div>
         <div className="dish-item__price">
           <div>{dishItem.price}</div>
-          <div className="dish-item__price-discount">{dishItem.price}</div>
+          <div className="dish-item__price-discount">{dishItem.spesial_price}</div>
         </div>
       </div>
     </div>

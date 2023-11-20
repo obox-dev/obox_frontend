@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
 import { useRequest } from '@admin/hooks';
 import { DishesService } from '@shared/services';
-import { Dish, UpdateDishRequest } from '@shared/services/DishService';
+import { Dish, UpdateDishRequest, UpdateInStockRequest } from '@shared/services/DishService';
 import { UpdateStateRequest } from '@shared/utils/types';
 
 interface UpdateDishParams {
@@ -22,8 +22,8 @@ export const useUpdateDish = (args: UpdateDishParams) => {
       associated_id,
       weight,
       calories,
-      allergens,
-      tags,
+      // allergens,
+      // marks,
       in_stock,
       language,
     }: UpdateDishRequest
@@ -36,8 +36,8 @@ export const useUpdateDish = (args: UpdateDishParams) => {
       associated_id,
       weight,
       calories,
-      allergens,
-      tags,
+      // allergens,
+      // marks,
       in_stock,
       language,
     };
@@ -54,6 +54,16 @@ export const useUpdateDish = (args: UpdateDishParams) => {
     await DishesService.update(id, request);
   };
 
+  const updateInStock = async ({ dish_id, in_stock }: Dish) => {
+    const id = dish_id;
+    const request: UpdateInStockRequest = {
+      in_stock,
+      language,
+    };
+
+    await DishesService.update(id, request);
+  };
+
   const { execute: onUpdateSubmit } = useRequest({
     requestFunction: editSubmit,
     onSuccess,
@@ -63,5 +73,6 @@ export const useUpdateDish = (args: UpdateDishParams) => {
   return {
     onUpdateSubmit,
     updateState,
+    updateInStock
   };
 };

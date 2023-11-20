@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
-import { DishResponse } from '@shared/services/DishService';
+import { DishInStock, DishResponse } from '@shared/services/DishService';
 import {
   useGetDish,
   useCreateDish,
@@ -18,7 +18,6 @@ interface UseDishProps {
 }
 
 export const useDish = (props: UseDishProps) => {
-  // const { t } = useTranslation();
   const { categoryId, language } = props;
   const { closeAll } = useDialog();
 
@@ -45,7 +44,7 @@ export const useDish = (props: UseDishProps) => {
     },
   });
 
-  const { onUpdateSubmit, updateState } = useUpdateDish({
+  const { onUpdateSubmit, updateState, updateInStock } = useUpdateDish({
     onSuccess: async () => {
       await loadAllDishes();
       navigateToCategory();
@@ -92,9 +91,18 @@ export const useDish = (props: UseDishProps) => {
     // toggle discount logic
   };
 
-  const changeInStock = () => {
-    // change InStock logic
-  };
+  const changeInStock = useCallback(async (dish: DishResponse) => {
+    const dishContent = {
+      ...mapDishContent(dish, language),
+      in_stock:
+        dish.in_stock === DishInStock.ENABLED
+          ? DishInStock.DISABLED
+          : DishInStock.ENABLED,
+    };
+
+    await updateInStock(dishContent);
+    await loadAllDishes();
+  }, []);
 
   const menuDishesActions: DishActions = {
     [DishActionTypes.UPDATE_STATE]: changeState,

@@ -11,6 +11,11 @@ export interface DishContent {
   description?: string;
 }
 
+export interface UpdateInStockRequest {
+  in_stock: DishInStock;
+  language: string;
+}
+
 export interface DishResponse {
   dish_id: string;
   category_id: string;
@@ -18,12 +23,13 @@ export interface DishResponse {
   state: EntityState;
   language: string;
   content: Record<string, DishContent>;
+  spesial_price?: number;
   associated_id?: string;
   weight?: number;
   calories?: number;
-  allergens?: string[];
-  tags?: string[];
-  in_stock?: DishInStock;
+  // allergens?: string[];
+  // marks?: string[];
+  in_stock: DishInStock;
 }
 export type Dish = Omit<DishResponse, 'content'> & DishContent;
 
@@ -32,12 +38,13 @@ export interface CreateDishRequest extends Omit<Dish, 'dish_id' | 'content'> {}
 export interface UpdateDishRequest {
   name?: string;
   price?: number;
+  spesial_price?: number;
   description?: string;
   associated_id?: string;
   weight?: number;
   calories?: number;
-  allergens?: string;
-  tags?: string;
+  // allergens?: string;
+  // marks?: string;
   state?: EntityState;
   in_stock?: DishInStock;
   language: string;
