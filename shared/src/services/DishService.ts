@@ -16,14 +16,14 @@ export interface DishResponse {
   category_id: string;
   price: number;
   state: EntityState;
+  language: string;
+  content: Record<string, DishContent>;
   associated_id?: string;
   weight?: number;
   calories?: number;
   allergens?: string[];
   tags?: string[];
   in_stock?: DishInStock;
-  language: string;
-  content: Record<string, DishContent>;
 }
 export type Dish = Omit<DishResponse, 'content'> & DishContent;
 

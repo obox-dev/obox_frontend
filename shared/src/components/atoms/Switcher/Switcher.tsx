@@ -30,11 +30,19 @@ export const Switcher = (props: ISwitcher) => {
     if (text) {
       return text;
     }
-    return innerState === EntityState.ENABLED ? textForChecked : textForUnchecked;
+    return innerState === EntityState.ENABLED
+      ? textForChecked
+      : textForUnchecked;
   }, [innerState]);
 
   return (
-    <div className={[isDisabled ? 'disabled' : '', 'switcher'].join(' ')}>
+    <div
+      className={[isDisabled ? 'disabled' : '', 'switcher'].join(' ')}
+      onClick={(e) => {
+        // to prevent click event trigger for dish card with redirect
+        e.stopPropagation();
+      }}
+    >
       <InputLabel wrapperClassName="switch">
         <Input
           onChange={innerOnChange}
@@ -45,9 +53,7 @@ export const Switcher = (props: ISwitcher) => {
         />
         <span className="slider round"></span>
       </InputLabel>
-      <span className="switch-text">
-        {finalText}
-      </span>
+      <span className="switch-text">{finalText}</span>
     </div>
   );
 };

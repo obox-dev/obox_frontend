@@ -1,0 +1,38 @@
+.dish-card {
+  border: 1px solid $color-primary;
+  border-radius: 16px;
+  padding: 18px 16px;
+  margin-bottom: 24px;
+  align-items: center;
+  cursor: pointer;
+
+  &__img {
+    width: 136px;
+    height: 136px;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  &__content {
+    .dish-item {
+      color: $color-secondary-text;
+      &__title {
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 1.5;
+      }
+
+      &__price {
+        display: flex;
+        gap: 12px;
+        font-size: 18px;
+        font-weight: 700;
+
+        &-discount {
+            color: $btn-disabled-color-text;
+            text-decoration: line-through;
+        }
+      }
+    }
+  }
+}
