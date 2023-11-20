@@ -22,8 +22,8 @@ export const useUpdateDish = (args: UpdateDishParams) => {
       associated_id,
       weight,
       calories,
-      // allergens,
-      // marks,
+      allergens,
+      marks,
       in_stock,
       language,
     }: UpdateDishRequest
@@ -36,8 +36,8 @@ export const useUpdateDish = (args: UpdateDishParams) => {
       associated_id,
       weight,
       calories,
-      // allergens,
-      // marks,
+      allergens,
+      marks,
       in_stock,
       language,
     };

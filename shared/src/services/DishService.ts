@@ -27,8 +27,8 @@ export interface DishResponse {
   associated_id?: string;
   weight?: number;
   calories?: number;
-  // allergens?: string[];
-  // marks?: string[];
+  allergens?: string[];
+  marks?: string[];
   in_stock: DishInStock;
 }
 export type Dish = Omit<DishResponse, 'content'> & DishContent;
@@ -43,8 +43,8 @@ export interface UpdateDishRequest {
   associated_id?: string;
   weight?: number;
   calories?: number;
-  // allergens?: string;
-  // marks?: string;
+  allergens?: string;
+  marks?: string;
   state?: EntityState;
   in_stock?: DishInStock;
   language: string;
