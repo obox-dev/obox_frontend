@@ -7,11 +7,11 @@ export function useFormInput(name: string, options?: RegisterOptions) {
     return {};
   }
 
-  const { register, formState: { errors } } = formContext;
+  const { register, watch, formState: { errors } } = formContext;
 
   const { ref, ...registerParams } = register(name, options);
 
   const error = errors[name];
 
-  return { ref, registerParams, error };
+  return { ref, watch, registerParams, error };
 }

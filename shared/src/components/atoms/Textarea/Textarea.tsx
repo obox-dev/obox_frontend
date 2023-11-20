@@ -1,16 +1,11 @@
-import { useFormContext } from 'react-hook-form';
+import { ChangeEvent, useMemo } from 'react';
+import { useFormInput } from '@shared/hooks/useFormInput';
 import { TextareaProps } from './types';
 import './Textarea.scss';
-import { ChangeEvent, useState } from 'react';
 
 export const Textarea = (
   props: Omit<TextareaProps<HTMLTextAreaElement>, 'type'>
 ) => {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext();
-
   const {
     id,
     name,
@@ -23,39 +18,40 @@ export const Textarea = (
     showCounter,
   } = props;
 
-  const [count, setCount] = useState(value ? value.length : 0);
-
+  const options = { ...(onChange ? { onChange } : {}) };
+  const { ref, watch, registerParams, error } = useFormInput(name, options);
   const handleTextareaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setCount(e.target.value.length);
-
     if (onChange) {
       onChange(e);
     }
   };
 
+  const watchedValue = watch?.(name);
+
+  const innerValue = useMemo(() => {
+    return value || watchedValue;
+  }, [value, watchedValue]);
+  
   return (
     <div className="textarea-wrapper">
       {showCounter && (
         <p className="textarea-count">
-          {count}/{maxLength}
+          {innerValue?.length}/{maxLength}
         </p>
       )}
       <textarea
-        {...register(name, {
-          onChange,
-        })}
         id={id}
-        value={value}
+        ref={ref}
+        value={innerValue}
         name={name}
         onChange={handleTextareaChange}
         className={className}
         placeholder={placeholder}
         disabled={isDisabled}
         maxLength={maxLength}
+        {...registerParams}
       />
-      {errors[name] && (
-        <span className="text-danger">{errors[name]?.message as string}</span>
-      )}
+      {error && <span className="text-danger">{error.message as string}</span>}
     </div>
   );
 };
