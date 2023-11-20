@@ -31,7 +31,7 @@ export const useUpdateCategory = (args: UpdateCategoryParams) => {
   const { openDialog } = useDialog();
   const { onSuccess, onError, language } = args;
 
-  const updateSubmit = async ({ category_id, name, state,description }: Category) => {
+  const updateSubmit = async ({ category_id, name, state, description }: Category) => {
     const id = category_id;
     const request: UpdateCategoryRequest = {
       name,
