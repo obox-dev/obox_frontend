@@ -5,6 +5,7 @@ export interface ITabItem<T> {
   label: string;
   entity: T,
   isSelected: boolean;
+  isDisabled: boolean;
   onClick: (id: string) => void;
 }
 

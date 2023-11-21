@@ -13,18 +13,23 @@ import { useDishForms } from './hooks/useDishForms';
 import type { DishDefaultValues } from './hooks/useDishForms';
 import { useDishImage } from './hooks/useDishImage';
 
-
 export const MenuDishPage = () => {
   const [defaultValues, setDefaultValues] = useState<DishDefaultValues | null>(
     null
   );
   const { menuLanguage } = useMainProvider();
-  
+
   const [loading, setLoading] = useState<boolean>(!!useParams().dishId);
   const { menuId, categoryId, dishId } = useParams();
 
-  const { onCreateSubmit, onUpdateSubmit } = useDish(categoryId!);
-  const { createDishSchema, getDefaultValues } = useDishForms(categoryId!, menuLanguage);
+  const { onCreateSubmit, onUpdateSubmit } = useDish({
+    categoryId: categoryId!,
+    language: menuLanguage,
+  });
+  const { createDishSchema, getDefaultValues } = useDishForms(
+    categoryId!,
+    menuLanguage
+  );
   const navigate = useNavigate();
 
   const navigateToCategory = useCallback(() => {
@@ -38,7 +43,7 @@ export const MenuDishPage = () => {
     uploadFiles,
     deleteMarkedAttachments,
     getDishAttachments,
-    setFilesToUpload
+    setFilesToUpload,
   } = useDishImage();
 
   useEffect(() => {

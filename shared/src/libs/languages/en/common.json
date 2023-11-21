@@ -35,5 +35,7 @@
     "isInteger": "{{field}} must be an intagre",
     "morethan": "{{field}} must be at least {{min}} character",
     "lessthan": "{{field}} must be no more than {{max}} characters"
-  }
+  },
+  "inStock": "In stock",
+  "outStock": "Out of stock"
 }

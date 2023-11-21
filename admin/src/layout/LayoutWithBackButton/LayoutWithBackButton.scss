@@ -1,0 +1,43 @@
+.layout {
+  &__header {
+    border-radius: 16px;
+    background-color: $color-primary-text-contrast;
+    margin-bottom: 48px;
+
+    &-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    &-title {
+      flex-grow: 1;
+      text-align: center;
+      color: $color-primary-text-contrast;
+      background-color: $color-primary;
+      border-radius: 16px;
+      font-size: 16px;
+      font-weight: 500;
+      padding-block: 28px;
+      margin-bottom: 0;
+    }
+
+    &-description {
+      margin-bottom: 0;
+      padding: 24px 33px;
+      font-size: 16px;
+      color: $color-secondary-text;
+      line-height: 1.2;
+    }
+
+    &-back-button.btn {
+      border-radius: 16px;
+      width: 112px;
+      height: 80px;
+
+      > svg {
+        margin-right: 0;
+      }
+    }
+  }
+}

@@ -3,7 +3,7 @@
   "createCategory": "Створити категорію",
   "addCategoryButton": "Додати категорію",
   "addMenuButton": "Додати меню",
-  "adddish": "Додати страву",
+  "addDishButton": "Додати страву",
   "dishes": "Страви",
   "actions": {
     "edit": "Редагувати",
@@ -45,5 +45,8 @@
   },
   "tagsPagePlaceholder": "Мітки та алергени будуть тут",
   "visibleMenu": "Меню видиме?",
-  "visibleCategory": "Котегорія видима?"
+  "visibleCategory": "Котегорія видима?",
+  "categoryPage": {
+    "filler": "Категорія ще не містить страв. Додайте першу натиснувши кнопку +"
+  }
 }

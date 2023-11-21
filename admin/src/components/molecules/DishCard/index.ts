@@ -1,0 +1,1 @@
+export {DishCard} from './DishCard';

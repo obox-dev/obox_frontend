@@ -1,5 +1,11 @@
 .btn {
+  min-height: 48px;
   border-radius: 16px;
+
+  >svg {
+    margin-right: 12px;
+  }
+
   &.btn-icon-link {
     --bs-btn-padding-x: 0;
     --bs-btn-padding-y: 0;
@@ -16,6 +22,7 @@
       margin-right: 12px;
     }
   }
+
   &.btn-primary {
     background-color: $color-primary;
     color: $color-primary-text-contrast;
@@ -61,6 +68,19 @@
     &:active {
       color: $btn-press-color-text-tertiary;
       border: none;
+    }
+  }
+
+  &[disabled], &[disabled]:disabled {
+    background-color: $action-button-disabled;
+    color: $color-primary-text-contrast;
+    border-color: $color-primary-text-contrast;
+
+    &:hover, &:focus, &:active {
+      background-color: $action-button-disabled;
+      color: $color-primary-text-contrast;
+      border-color: $color-primary-text-contrast;
+      filter: none;
     }
   }
 }

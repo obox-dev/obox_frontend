@@ -5,3 +5,4 @@ export { ToggleDots } from './ToggleDots';
 export { PlusIcon } from './PlusIcon';
 export { EditIcon } from './EditIcon';
 export { DeleteIcon } from './DeleteIcon';
+export { BackButton } from './BackButton';

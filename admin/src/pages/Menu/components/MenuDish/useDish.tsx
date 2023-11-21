@@ -1,17 +1,24 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useTranslation } from '@libs/react-i18next';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
-import { IAction } from '@shared/components/atoms/ActionMenu';
-import { Dish } from '@shared/services/DishService';
+import { DishInStock, DishResponse } from '@shared/services/DishService';
 import {
   useGetDish,
   useCreateDish,
   useUpdateDish,
   useDeleteDish,
 } from './hooks';
+import { mapDishContent } from '@shared/mappers/DishMapper';
+import { EntityState } from '@shared/utils/types';
+import { DishActions, DishActionTypes } from './types';
+import { useCallback } from 'react';
 
-export const useDish = (categoryId: string) => {
-  const { t } = useTranslation();
+interface UseDishProps {
+  categoryId: string;
+  language: string;
+}
+
+export const useDish = (props: UseDishProps) => {
+  const { categoryId, language } = props;
   const { closeAll } = useDialog();
 
   const { menuId } = useParams();
@@ -37,7 +44,7 @@ export const useDish = (categoryId: string) => {
     },
   });
 
-  const { onUpdateSubmit } = useUpdateDish({
+  const { onUpdateSubmit, updateState, updateInStock } = useUpdateDish({
     onSuccess: async () => {
       await loadAllDishes();
       navigateToCategory();
@@ -49,6 +56,7 @@ export const useDish = (categoryId: string) => {
         closeAll();
       }
     },
+    language,
   });
 
   const { openDishDeleteDialog } = useDeleteDish({
@@ -63,19 +71,48 @@ export const useDish = (categoryId: string) => {
         await loadAllDishes();
         closeAll();
       }
-    }
+    },
   });
 
-  const menuDishesActions: IAction<Dish>[] = [
-    {
-      label: t('common:buttons:edit'),
-      callback: (dish: Dish) => navigateToDish(dish.dish_id),
+  const changeState = useCallback(async (dish: DishResponse) => {
+    const dishContent = {
+      ...mapDishContent(dish, language),
+      state:
+        dish.state === EntityState.ENABLED
+          ? EntityState.DISABLED
+          : EntityState.ENABLED,
+    };
+
+    await updateState(dishContent);
+    await loadAllDishes();
+  }, []);
+
+  const toggleDiscount = () => {
+    // toggle discount logic
+  };
+
+  const changeInStock = useCallback(async (dish: DishResponse) => {
+    const dishContent = {
+      ...mapDishContent(dish, language),
+      in_stock:
+        dish.in_stock === DishInStock.ENABLED
+          ? DishInStock.DISABLED
+          : DishInStock.ENABLED,
+    };
+
+    await updateInStock(dishContent);
+    await loadAllDishes();
+  }, []);
+
+  const menuDishesActions: DishActions = {
+    [DishActionTypes.UPDATE_STATE]: changeState,
+    [DishActionTypes.EDIT]: (dish: DishResponse) => {
+      navigateToDish(dish.dish_id);
     },
-    {
-      label: t('common:buttons:delete'),
-      callback: (dish: Dish) => openDishDeleteDialog(dish),
-    },
-  ];
+    [DishActionTypes.DELETE]: openDishDeleteDialog,
+    [DishActionTypes.TOGGLE_DISCOUNT]: toggleDiscount,
+    [DishActionTypes.CHANGE_IN_STOCK]: changeInStock,
+  };
 
   return {
     onCreateSubmit,

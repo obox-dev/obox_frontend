@@ -12,6 +12,7 @@ export const ActionMenu = <T extends WithEntityState>(
     entity,
     toggleVariant = ButtonVariants.PRIMARY,
     toggleContent,
+    isDisabled
   } = props;
 
   return (
@@ -21,6 +22,7 @@ export const ActionMenu = <T extends WithEntityState>(
         innerContent={toggleContent}
         variant={toggleVariant}
         id="dropdown-basic"
+        isDisabled={isDisabled}
       ></Dropdown.Toggle>
       <Dropdown.Menu>
         {actions.map(({ label, callback, renderLabel }, index) => {

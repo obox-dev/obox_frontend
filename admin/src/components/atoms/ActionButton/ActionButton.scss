@@ -6,13 +6,13 @@
     }
   }
 
-  &.active .btn {
+  &.selected .btn {
     background-color: $action-button-active;
     color: $color-primary-text-contrast;
     border-color: $color-primary-text-contrast;
   }
 
-  &.disabled .btn {
+  &.is-inactive .btn {
     background-color: $action-button-disabled;
     color: $color-primary-text-contrast;
     border-color: $color-primary-text-contrast;
@@ -23,6 +23,11 @@
       background-color: $color-border-focus-2px;
       color: $color-primary-text-contrast;
       border-color: $color-primary-text-contrast;
+      &[disabled] {
+        background-color: $action-button-disabled;
+        color: $color-primary-text-contrast;
+        border-color: $color-primary-text-contrast;
+      }
     }
   }
 

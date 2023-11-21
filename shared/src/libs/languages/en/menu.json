@@ -3,7 +3,7 @@
   "createCategory": "Create category",
   "addCategoryButton": "Add category",
   "addMenuButton": "Add menu",
-  "adddish": "Add Dish",
+  "addDishButton": "Add Dish",
   "dishes": "Dishes",
   "actions": {
     "edit": "Edit",
@@ -45,5 +45,8 @@
   },
   "tagsPagePlaceholder": "Tags and allergenes will be here",
   "visibleMenu": "Is menu visible?",
-  "visibleCategory": "Is category visible?"
+  "visibleCategory": "Is category visible?",
+  "categoryPage": {
+    "filler": "Category does not have any dishes. Add a first dish bu clicking on +"
+  }
 }

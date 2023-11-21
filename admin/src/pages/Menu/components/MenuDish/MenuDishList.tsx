@@ -1,67 +1,27 @@
-import { useTranslation } from '@libs/react-i18next';
-import { Dish, DishResponse } from '@shared/services/DishService';
-import { IAction } from '@shared/components/atoms/ActionMenu';
-import { mapDishContent } from '@shared/mappers/DishMapper';
-import { MenuDishItem } from './MenuDishItem';
+import { DishResponse } from '@shared/services/DishService';
+import { DishCard } from '@admin/components/molecules/DishCard';
+import { DishActions } from './types';
 export interface MenuDishListProps {
   dishItems: DishResponse[];
-  actions: IAction<Dish>[];
+  actions: DishActions;
   currentLanguage: string;
-}
-
-interface HeaderItem {
-  label: string;
-  dataIndex: string;
 }
 
 export const MenuDishList = (props: MenuDishListProps) => {
   const { dishItems, actions, currentLanguage } = props;
-  const { t } = useTranslation();
-
-  const dishListHeader: HeaderItem[] = [
-    {
-      label: t('dishForm:dishesTable.state'),
-      dataIndex: 'state',
-    },
-    {
-      label: t('dishForm:dishesTable.name'),
-      dataIndex: 'name',
-    },
-    {
-      label: t('dishForm:dishesTable.price'),
-      dataIndex: 'price',
-    },
-    {
-      label: t('dishForm:dishesTable.actions'),
-      dataIndex: 'actions',
-    },
-  ];
 
   return (
-    <table className="menu-dish-list table table-striped p-0">
-      <thead>
-        <tr>
-          {dishListHeader.map((col: HeaderItem) => {
-            return (
-              <th scope="col" key={col.dataIndex}>
-                {col.label}
-              </th>
-            );
-          })}
-        </tr>
-      </thead>
-      <tbody>
-        {dishItems.map((item: DishResponse) => {
-          const dishItem = mapDishContent(item, currentLanguage);
-          return (
-            <MenuDishItem
-              actions={actions}
-              key={item.dish_id}
-              dishItem={dishItem}
-            />
-          );
-        })}
-      </tbody>
-    </table>
+    <div className="menu-dish-list">
+      {dishItems.map((item: DishResponse) => {
+        return (
+          <DishCard
+            actions={actions}
+            key={item.dish_id}
+            dishItem={item}
+            language={currentLanguage}
+          />
+        );
+      })}
+    </div>
   );
 };
