@@ -1,0 +1,77 @@
+.basic-single {
+  &:focus-visible {
+    outline: none;
+  }
+  .select {
+    &__control {
+      border: 1px solid $color-border-focus-1px;
+      border-radius: 8px;
+      box-shadow: none;
+      &:hover {
+        border: 1px solid $color-secondary-text;
+      }
+
+      &:focus-within {
+        box-shadow: 0 0 0 1px $color-border-focus-2px;
+      }
+
+      &::placeholder {
+        color: $color-placeholder-text;
+      }
+    }
+    &__value-container {
+      padding: 8px 12px;
+      &:focus-visible {
+        outline: none;
+      }
+    }
+    // &__indicator-separator {
+    //     display: none;
+    // }
+
+    &__placeholder {
+      &:focus-visible {
+        outline: none;
+      }
+    }
+    &__input-container {
+      &:focus-visible {
+        outline: none;
+      }
+    }
+    &__indicators {
+      &:focus-visible {
+        outline: none;
+      }
+    }
+    &__menu {
+      border-radius: 0;
+    }
+    &__menu-list {
+      padding: 0;
+    }
+    &__option {
+      padding: 10px 12px;
+      color: $color-primary-text;
+      &:not(:last-child) {
+        border-bottom: 1px solid $color-primary-text;
+      }
+      &--is-selected {
+        color: $color-global-white;
+        background-color: $color-border-focus-2px;
+
+        &.select__option--is-focused{
+            color: $color-global-white;
+            background-color: $color-border-focus-2px;
+        }
+      }
+      &--is-focused {
+        color: $color-primary-text;
+        background-color: $color-primary-text-contrast;
+      }
+      &:active {
+          background-color: transparent;
+      }
+    }
+  }
+}

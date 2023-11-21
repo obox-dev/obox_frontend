@@ -62,7 +62,7 @@ export const MenuPage = () => {
   }, [restaurantId]);
 
   return (
-    <div className="menu-page">
+    <div className="menu-page container">
       <LayoutWithSearch>
         <>
           <TabsSection
