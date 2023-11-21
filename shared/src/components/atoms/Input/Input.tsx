@@ -1,4 +1,3 @@
-// import { useMemo } from 'react';
 import { useFormInput } from '@shared/hooks/useFormInput';
 import { IInput, InputVariants } from './types';
 import './Input.scss';
