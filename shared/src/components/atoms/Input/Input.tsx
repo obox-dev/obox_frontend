@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { useFormInput } from '@shared/hooks/useFormInput';
 import { IInput, InputVariants } from './types';
 import './Input.scss';
@@ -26,14 +25,8 @@ export const Input = (props: IInput<HTMLInputElement>) => {
   };
 
   const options = { ...(onChange ? { onChange } : {}) };
-  const { ref, watch, registerParams, error } = useFormInput(name, options);
+  const { ref, registerParams, error } = useFormInput(name, options);
   const inputClassName = combineClasses(type, !!error);
-
-  const watchedValue = watch?.(name);
-
-  const innerValue = useMemo(() => {
-    return value || watchedValue;
-  }, [value, watchedValue]);
 
   return (
     <>
@@ -41,7 +34,7 @@ export const Input = (props: IInput<HTMLInputElement>) => {
         onChange={onChange}
         id={id}
         ref={ref}
-        value={innerValue}
+        value={value}
         name={name}
         type={type}
         className={inputClassName}
