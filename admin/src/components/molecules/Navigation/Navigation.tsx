@@ -137,7 +137,7 @@ const Navigation = () => {
   };
 
   return (
-    <Nav className="me-auto d-flex flex-column">
+    <Nav className="d-flex flex-column">
       <Accordion>
         {links.map((link, index) => renderNavItem(link, index))}
       </Accordion>

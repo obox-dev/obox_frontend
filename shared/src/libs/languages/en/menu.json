@@ -46,6 +46,6 @@
   "visibleMenu": "Is menu visible?",
   "visibleCategory": "Is category visible?",
   "categoryPage": {
-    "filler": "Category does not have any dishes. Add a first dish bu clicking on +"
+    "filler": "Category does not have any dishes. Add a first dish by clicking on +"
   }
 }

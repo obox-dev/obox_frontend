@@ -1,8 +1,9 @@
 .side-bar {
   flex: 0 0 328px;
-  background: rgb(205, 205, 205);
+  background: $color-global-white;
   padding: 24px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  border-right: 1px solid $action-button-disabled;
 }

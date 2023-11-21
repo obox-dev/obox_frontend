@@ -9,7 +9,7 @@ export const Tabs = <T extends WithEntityState>(props: ITabs<T>) => {
 
   return (
     <>
-      <ul className="tabs-section__tabs nav nav-pills">
+      <ul className="tabs-section__tabs nav-pills d-flex flex-wrap">
         {items.map((item) => {
           const { id, label, isSelected, onClick, entity, isDisabled } = item;
           return (
