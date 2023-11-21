@@ -4,7 +4,13 @@ import { NavLink } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
 import { useTranslation } from '@libs/react-i18next';
-import { CreateMenuIcon } from '@admin/assets/icons';
+import {
+  AnalyticsIcon,
+  CreateMenuIcon,
+  ReviewIcon,
+  SettingsIcon,
+  TutorialsIcon,
+} from '@admin/assets/icons';
 import './Navigation.scss';
 
 interface NavLinkItem {
@@ -26,6 +32,7 @@ const Navigation = () => {
   const { t } = useTranslation();
 
   const links: Array<NavLinkItem | NavAccordionItem> = [
+    { to: '/analytics', text: t('common:analytics'), icon: <AnalyticsIcon /> },
     {
       to: null,
       text: t('common:createmenu'),
@@ -36,8 +43,49 @@ const Navigation = () => {
           text: t('common:menu'),
         },
         {
+          to: '/customization',
+          text: t('common:customization'),
+        },
+        {
+          to: '/all-menus',
+          text: t('common:allMenus'),
+        },
+        {
           to: '/tags',
           text: t('common:tagsAllergens'),
+        },
+      ],
+    },
+    {
+      to: '/reviews',
+      text: t('common:reviews'),
+      icon: <ReviewIcon />,
+    },
+    {
+      to: '/tutorials',
+      text: t('common:tutorials'),
+      icon: <TutorialsIcon />,
+    },
+    {
+      to: null,
+      text: t('common:settings'),
+      icon: <SettingsIcon />,
+      children: [
+        {
+          to: '/privacy',
+          text: t('common:privacy'),
+        },
+        {
+          to: '/pricing',
+          text: t('common:pricing'),
+        },
+        {
+          to: '/restaurant-settings',
+          text: t('common:restaurantSettings'),
+        },
+        {
+          to: '/qr-settings',
+          text: t('common:qrSettings'),
         },
       ],
     },
@@ -89,7 +137,7 @@ const Navigation = () => {
   };
 
   return (
-    <Nav className="me-auto d-flex flex-column">
+    <Nav className="d-flex flex-column">
       <Accordion>
         {links.map((link, index) => renderNavItem(link, index))}
       </Accordion>

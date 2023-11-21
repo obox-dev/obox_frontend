@@ -9,6 +9,10 @@
         min-height: 0;
         margin-inline: 12px;
         margin-bottom: 0;
+
+        &:hover {
+            color: $color-primary;
+        }
         
         label {
             cursor: pointer;
@@ -21,12 +25,12 @@
             bottom: 0;
             right: -12px;
             width: 1.5px;
-            background: $color-global-black;
+            background: $color-secondary-text;
         }
     }
 
     .active {
-        color: $color-primary;
+        color: $action-button-active;
     }
 
     input {

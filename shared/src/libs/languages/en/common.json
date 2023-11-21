@@ -10,10 +10,6 @@
   "signin": "Sign In",
   "logout": "Log Out",
   "restaurants": "Restaurants",
-  "createmenu": "Create Menu",
-  "menu": "Menu",
-  "tagsAllergens": "Tags and Allergens",
-  "settings": "Settings",
   "name": "Name",
   "search": "Search",
   "poweredby": "Powered by",
@@ -37,5 +33,19 @@
     "lessthan": "{{field}} must be no more than {{max}} characters"
   },
   "inStock": "In stock",
-  "outStock": "Out of stock"
+  "outStock": "Out of stock",
+  "createmenu": "Create Menu",
+  "menu": "Menu",
+  "customization": "Customization",
+  "allMenus": "All Menu",
+  "tagsAllergens": "Tags and Allergens",
+  "settings": "Settings",
+  "privacy": "Privacy",
+  "pricing": "Pricing",
+  "restaurantSettings": "Name and description of restaurant",
+  "qrSettings": "QR-settings",
+  "reviews": "Reviews",
+  "analytics": "Analytics",
+  "tutorials": "Tutorials",
+  "pageUnderConstractions": "Page is under constractions"
 }
