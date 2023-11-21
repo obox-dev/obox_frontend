@@ -10,10 +10,6 @@
   "signin": "Зареєструватися",
   "logout": "Вийти",
   "restaurants": "Ресторани",
-  "createmenu": "Створити меню",
-  "menu": "Наповнення",
-  "tagsAllergens": "Мітки та алергени",
-  "settings": "Налаштування",
   "name": "Назва",
   "search": "Пошук",
   "poweredby": "Працює на основі",
@@ -37,5 +33,19 @@
     "lessthan": "Поле {{field}} не повинно мати більше {{max}} символів"
   },
   "inStock": "В наявності",
-  "outStock": "Немає в наявності"
+  "outStock": "Немає в наявності",
+  "createmenu": "Створити меню",
+  "menu": "Наповнення",
+  "customization": "Зовнішній вигляд",
+  "allMenus": "Усі меню",
+  "tagsAllergens": "Мітки та алергени",
+  "settings": "Налаштування",
+  "privacy": "Конфіденційність",
+  "pricing": "Тариф",
+  "restaurantSettings": "Назва та опис закладу",
+  "qrSettings": "Налаштування QR",
+  "reviews": "Відгуки",
+  "analytics": "Аналітика",
+  "tutorials": "Туторіали",
+  "pageUnderConstractions": "Сторінка на стадії розробки"
 }

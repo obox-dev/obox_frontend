@@ -1,0 +1,1 @@
+export { ReviewIcon } from './ReviewIcon';
