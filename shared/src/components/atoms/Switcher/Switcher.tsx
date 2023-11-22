@@ -13,6 +13,7 @@ export const Switcher = (props: ISwitcher) => {
     textForChecked,
     textForUnchecked,
     isDisabled,
+    stopClickPropagation = false,
     onChange,
   } = props;
 
@@ -40,7 +41,9 @@ export const Switcher = (props: ISwitcher) => {
       className={[isDisabled ? 'disabled' : '', 'switcher'].join(' ')}
       onClick={(e) => {
         // to prevent click event trigger for dish card with redirect
-        e.stopPropagation();
+        if (stopClickPropagation) {
+          e.stopPropagation();
+        }
       }}
     >
       <InputLabel wrapperClassName="switch">
