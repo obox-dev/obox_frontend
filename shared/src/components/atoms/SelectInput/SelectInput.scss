@@ -12,24 +12,26 @@
       }
 
       &:focus-within {
-        box-shadow: 0 0 0 1px $color-border-focus-2px;
+        border: 1px solid $btn-disabled-color-text;
       }
 
       &::placeholder {
         color: $color-placeholder-text;
       }
+
+      &--menu-is-open {
+        border-radius: 8px 8px 0 0;
+      }
     }
     &__value-container {
-      padding: 8px 12px;
+      padding: 7px 12px;
       &:focus-visible {
         outline: none;
       }
     }
-    // &__indicator-separator {
-    //     display: none;
-    // }
 
     &__placeholder {
+      color: $color-secondary-text;
       &:focus-visible {
         outline: none;
       }
@@ -45,24 +47,28 @@
       }
     }
     &__menu {
-      border-radius: 0;
+      border-radius: 0 0 8px 8px;
+      margin-top: 0;
     }
     &__menu-list {
       padding: 0;
+      border: 1px solid $btn-disabled-color-text;
+      border-top: none;
+      border-radius: 0 0 8px 8px;
     }
     &__option {
-      padding: 10px 12px;
-      color: $color-primary-text;
+      padding: 11.5px 22px;
+      color: $color-secondary-text;
       &:not(:last-child) {
-        border-bottom: 1px solid $color-primary-text;
+        border-bottom: 1px solid $btn-disabled-color-text;
       }
       &--is-selected {
         color: $color-global-white;
-        background-color: $color-border-focus-2px;
+        background-color: $color-primary;
 
         &.select__option--is-focused{
             color: $color-global-white;
-            background-color: $color-border-focus-2px;
+            background-color: $color-primary;
         }
       }
       &--is-focused {
