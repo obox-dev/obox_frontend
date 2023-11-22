@@ -1,6 +1,5 @@
 .form-control {
   padding: 18.5px 16px;
-  margin-bottom: 28px !important;
   height: 48px;
   border: 1px solid $color-border-focus-1px;
   border-radius: 8px;
@@ -28,8 +27,6 @@
 
 .modal-body .text-danger {
   color: $color-accent-mistake !important;
-
   position: relative;
-  bottom: 24px;
 }
 
