@@ -5,5 +5,6 @@ export interface ISwitcher extends Omit<IInput<HTMLInputElement>, 'type' | 'onCh
     textForChecked?: string;
     textForUnchecked?: string;
     isDisabled?: boolean;
+    stopClickPropagation?: boolean;
     onChange?: (value: boolean) => void;
 }

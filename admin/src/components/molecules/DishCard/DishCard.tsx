@@ -30,6 +30,7 @@ export const DishCard = (props: IDishCard) => {
           name="in_stock"
           textForChecked={t('common:inStock')}
           textForUnchecked={t('common:outStock')}
+          stopClickPropagation
         />
         <div className="dish-item__price">
           <div>{dishItem.price}</div>
