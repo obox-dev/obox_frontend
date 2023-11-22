@@ -18,7 +18,7 @@
     "placeholder": "Введіть назву категорії",
     "label": "Назва категорії *",
     "description": "Опис категорії",
-    "descriptionTextArea": "Введіть назву категорії" 
+    "descriptionTextArea": "Введіть ваш опис" 
   },
   "updateCategoryForm": {
     "title": "Редагування",

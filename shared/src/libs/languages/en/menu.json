@@ -18,7 +18,7 @@
     "placeholder": "Enter the name of the category",
     "label": "Category name *",
     "description": "Category description",
-    "descriptionTextArea": "Enter the name of the category" 
+    "descriptionTextArea": "Enter your description" 
   },
   "updateCategoryForm": {
     "title": "Editing",
