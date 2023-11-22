@@ -6,6 +6,11 @@ export enum DishInStock {
   DISABLED = 'DISABLED',
 }
 
+export enum WeightUnit {
+  GRAMMS = 'gr',
+  MILLILITERS = 'ml',
+}
+
 export interface DishContent {
   name: string;
   description?: string;
@@ -23,31 +28,36 @@ export interface DishResponse {
   state: EntityState;
   language: string;
   content: Record<string, DishContent>;
+  in_stock: DishInStock;
   spesial_price?: number;
   associated_id?: string;
   weight?: number;
+  weight_unit?: WeightUnit;
   calories?: number;
   allergens?: string[];
   marks?: string[];
-  in_stock: DishInStock;
+  cooking_time?: number;
 }
 export type Dish = Omit<DishResponse, 'content'> & DishContent;
 
 export interface CreateDishRequest extends Omit<Dish, 'dish_id' | 'content'> {}
 
 export interface UpdateDishRequest {
+  category_id?: string;
   name?: string;
   price?: number;
   spesial_price?: number;
   description?: string;
   associated_id?: string;
   weight?: number;
+  weight_unit?: WeightUnit;
   calories?: number;
   allergens?: string;
   marks?: string;
   state?: EntityState;
   in_stock?: DishInStock;
   language: string;
+  cooking_time?: number;
 }
 export interface CreateDishResponse {
   dish_id: string;

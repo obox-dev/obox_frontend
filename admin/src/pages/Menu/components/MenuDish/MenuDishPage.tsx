@@ -19,17 +19,20 @@ export const MenuDishPage = () => {
   );
   const { menuLanguage } = useMainProvider();
 
-  const [loading, setLoading] = useState<boolean>(!!useParams().dishId);
+  const [loading, setLoading] = useState<boolean>(true);
   const { menuId, categoryId, dishId } = useParams();
 
   const { onCreateSubmit, onUpdateSubmit } = useDish({
     categoryId: categoryId!,
     language: menuLanguage,
   });
-  const { createDishSchema, getDefaultValues } = useDishForms(
-    categoryId!,
-    menuLanguage
-  );
+
+  const { createDishSchema, getDefaultValues, weightUnitOptions } = useDishForms({
+    menuId: menuId!,
+    categoryId: categoryId!,
+    currentLanguage: menuLanguage,
+  });
+
   const navigate = useNavigate();
 
   const navigateToCategory = useCallback(() => {
@@ -48,6 +51,7 @@ export const MenuDishPage = () => {
 
   useEffect(() => {
     const loadDish = async (id: string) => {
+      setLoading(true);
       const response = await DishesService.getDishById(id);
       await getDishAttachments(id);
       setDefaultValues(getDefaultValues(response));
@@ -90,6 +94,7 @@ export const MenuDishPage = () => {
       uploadedImages={attachments}
       onDeleteImage={handleDeleteButtonClick}
       language={menuLanguage}
+      weightUnitOptions={weightUnitOptions}
     />
   );
 };

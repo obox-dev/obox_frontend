@@ -1,6 +1,9 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
-import { DishInStock, DishResponse } from '@shared/services/DishService';
+import {
+  DishInStock,
+  DishResponse,
+} from '@shared/services/DishService';
 import {
   useGetDish,
   useCreateDish,

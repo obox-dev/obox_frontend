@@ -3,11 +3,15 @@ import {
   Dish,
   DishInStock,
   DishResponse,
+  WeightUnit,
 } from '@shared/services/DishService';
 import { mapDishContent } from '@shared/mappers/DishMapper';
 import { EntityState } from '@shared/utils/types';
 import { useDishFormValidation } from '../validation/useDishFormValidation';
-
+import { useEffect } from 'react';
+import { useGetCategory } from '../../MenuCategories/hooks';
+import { useMemo } from 'react';
+import { mapCategoryContent } from '../../MenuCategories/mappers/mapCategoryContent';
 
 type ExcludeKeys = 'price' | 'weight' | 'calories';
 type ExcludedAsOptionalString = Record<ExcludeKeys, string | null>;
@@ -20,6 +24,7 @@ const mapDishToDefaultValues = (dish: Dish): DishDefaultValues => ({
   description: dish.description || '',
   price: dish.price.toString() || '',
   weight: dish.weight?.toString() || '',
+  weight_unit: dish.weight_unit,
   calories: dish.calories?.toString() || '',
   allergens: dish.allergens,
   marks: dish.marks,
@@ -28,7 +33,14 @@ const mapDishToDefaultValues = (dish: Dish): DishDefaultValues => ({
   language: dish.language,
 });
 
-export const useDishForms = (categoryId: string, currentLanguage: string) => {
+interface UseDishFormsProps {
+  menuId: string;
+  categoryId: string;
+  currentLanguage: string;
+}
+
+export const useDishForms = (props: UseDishFormsProps) => {
+  const { menuId, categoryId, currentLanguage} = props;
   const { createDishSchema } = useDishFormValidation();
 
   const createDishDefaultValues: DishDefaultValues = {
@@ -37,6 +49,7 @@ export const useDishForms = (categoryId: string, currentLanguage: string) => {
     description: '',
     price: '',
     weight: '',
+    weight_unit: undefined,
     calories: '',
     allergens: [],
     marks: [],
@@ -44,6 +57,10 @@ export const useDishForms = (categoryId: string, currentLanguage: string) => {
     in_stock: DishInStock.ENABLED,
     language: currentLanguage,
   };
+
+  const { loadAllCategories, categoriesList } = useGetCategory({
+    menuId,
+  });
 
   const getDefaultValues = (dish?: DishResponse): DishDefaultValues => {
     if (dish) {
@@ -53,9 +70,34 @@ export const useDishForms = (categoryId: string, currentLanguage: string) => {
     return createDishDefaultValues;
   };
 
+  useEffect(() => {
+    const load = async () => {
+      await loadAllCategories();
+    };
+    load();
+  }, []);
+
+  const categoryOptions = useMemo(() => {
+    return categoriesList.map((category) => {
+      const { category_id, name } = mapCategoryContent(category, currentLanguage);
+      return { value: category_id, label: name };
+    });
+  }, [categoriesList]);
+
+  const defaultCategory = useMemo(() => {
+    return categoryOptions.find((category) => category.value === categoryId);
+  }, [categoryOptions.length]);
+
+  const weightUnitOptions = [
+    { label: 'gramms', value: WeightUnit.GRAMMS },
+    { label: 'ml', value: WeightUnit.MILLILITERS },
+  ];
+
   return {
     getDefaultValues,
     createDishSchema,
     createDishDefaultValues,
+    defaultCategory,
+    weightUnitOptions,
   };
 };

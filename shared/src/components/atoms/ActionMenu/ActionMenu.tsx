@@ -29,7 +29,9 @@ export const ActionMenu = <T extends WithEntityState>(
           const labelContent =
             renderLabel?.({ state: entity.state }) || label || '-';
           return (
-            <Dropdown.Item key={Date.now() + index} onClick={() => callback(entity)}>
+            <Dropdown.Item key={Date.now() + index} onClick={() => {
+              callback(entity);
+            }}>
               {labelContent}
             </Dropdown.Item>
           );
