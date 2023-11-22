@@ -8,8 +8,8 @@
   "actions": {
     "edit": "Edit",
     "delete": "Delete",
-    "menuStatusEnabled": "Menu is visible",
-    "menuStatusDisabled": "Menu is not visible",
+    "menuStatusEnabled": "Menu is active",
+    "menuStatusDisabled": "Menu inactive",
     "categoryStatusEnabled": "Active category",
     "categoryStatusDisabled": "Inactive category"
   },

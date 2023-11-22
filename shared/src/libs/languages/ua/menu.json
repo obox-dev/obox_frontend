@@ -8,9 +8,9 @@
   "actions": {
     "edit": "Редагувати",
     "delete": "Видалити",
-    "menuStatusEnabled": "Меню видимe",
-    "menuStatusDisabled": "Меню не видимe",
-    "categoryStatusEnabled": "Активна категорія",
+    "menuStatusEnabled": "Меню активне",
+    "menuStatusDisabled": "Меню не активне",
+    "categoryStatusEnabled": "Активна категорія",..
     "categoryStatusDisabled": "Неактивна категорія"
   },
   "createCategoryForm": {
