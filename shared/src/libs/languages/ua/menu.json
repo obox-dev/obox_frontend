@@ -9,16 +9,16 @@
     "edit": "Редагувати",
     "delete": "Видалити",
     "menuStatusEnabled": "Меню активне",
-    "menuStatusDisabled": "Меню неактивне",
-    "categoryStatusEnabled": "Категорія активна",
-    "categoryStatusDisabled": "Категорія неактивна"
+    "menuStatusDisabled": "Меню не активне",
+    "categoryStatusEnabled": "Активна категорія",
+    "categoryStatusDisabled": "Неактивна категорія"
   },
   "createCategoryForm": {
     "title": "Додати категорію",
     "placeholder": "Введіть назву категорії",
     "label": "Назва категорії *",
     "description": "Опис категорії",
-    "descriptionTextArea": "Введіть назву категорії" 
+    "descriptionTextArea": "Введіть ваш опис" 
   },
   "updateCategoryForm": {
     "title": "Редагування",
@@ -43,8 +43,6 @@
    "deleteDishForm": {
     "title": "Ви впевнені, що хочете видалити страву?"
   },
-  "visibleMenu": "Меню видиме?",
-  "visibleCategory": "Котегорія видима?",
   "categoryPage": {
     "filler": "Категорія ще не містить страв. Додайте першу натиснувши кнопку +"
   }

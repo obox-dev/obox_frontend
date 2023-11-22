@@ -112,7 +112,8 @@ export const useUpdateCategory = (args: UpdateCategoryParams) => {
               <Switcher
                 value={defaultValues.state}
                 name="state"
-                text={t('menu:visibleCategory')}
+                textForChecked={t('menu:actions.categoryStatusEnabled')}
+                textForUnchecked={t('menu:actions.categoryStatusDisabled')}
                 onChange={(val) => {
                   formRef.current?.setValue(
                     'state',
