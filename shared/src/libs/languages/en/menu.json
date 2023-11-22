@@ -8,10 +8,10 @@
   "actions": {
     "edit": "Edit",
     "delete": "Delete",
-    "menuStatusEnabled": "Menu is enabled",
-    "menuStatusDisabled": "Menu is disabled",
-    "categoryStatusEnabled": "Category is enabled",
-    "categoryStatusDisabled": "Category is disabled"
+    "menuStatusEnabled": "Menu is visible",
+    "menuStatusDisabled": "Menu is not visible",
+    "categoryStatusEnabled": "Active category",
+    "categoryStatusDisabled": "Inactive category"
   },
   "createCategoryForm": {
     "title": "Enter your category name",
@@ -43,8 +43,6 @@
    "deleteDishForm": {
     "title": "Are you sure you want to delete this dish?"
   },
-  "visibleMenu": "Is menu visible?",
-  "visibleCategory": "Is category visible?",
   "categoryPage": {
     "filler": "Category does not have any dishes. Add a first dish by clicking on +"
   }
