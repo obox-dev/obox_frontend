@@ -1,8 +1,16 @@
+import { forwardRef } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { WithEntityState } from '@shared/utils/types';
 import { Button, ButtonVariants } from '../Button';
 import { IActionMenu } from './types';
 import './ActionMenu.scss';
+import { IButton } from '../Button/types';
+
+const ToggleAsButton = forwardRef<HTMLButtonElement, IButton>(
+  (props: IButton, ref) => {
+    return <Button {...props} ref={ref} />;
+  }
+);
 
 export const ActionMenu = <T extends WithEntityState>(
   props: IActionMenu<T>
@@ -12,13 +20,13 @@ export const ActionMenu = <T extends WithEntityState>(
     entity,
     toggleVariant = ButtonVariants.PRIMARY,
     toggleContent,
-    isDisabled
+    isDisabled,
   } = props;
 
   return (
     <Dropdown>
       <Dropdown.Toggle
-        as={Button}
+        as={ToggleAsButton}
         innerContent={toggleContent}
         variant={toggleVariant}
         id="dropdown-basic"
@@ -29,7 +37,10 @@ export const ActionMenu = <T extends WithEntityState>(
           const labelContent =
             renderLabel?.({ state: entity.state }) || label || '-';
           return (
-            <Dropdown.Item key={Date.now() + index} onClick={() => callback(entity)}>
+            <Dropdown.Item
+              key={Date.now() + index}
+              onClick={() => callback(entity)}
+            >
               {labelContent}
             </Dropdown.Item>
           );
