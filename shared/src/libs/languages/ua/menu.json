@@ -11,7 +11,7 @@
     "menuStatusEnabled": "Меню активне",
     "menuStatusDisabled": "Меню не активне",
     "categoryStatusEnabled": "Категорія активна",
-    "categoryStatusDisabled": "Категорія  не активна"
+    "categoryStatusDisabled": "Категорія не активна"
   },
   "createCategoryForm": {
     "title": "Додати категорію",
