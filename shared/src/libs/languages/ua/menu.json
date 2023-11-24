@@ -10,8 +10,8 @@
     "delete": "Видалити",
     "menuStatusEnabled": "Меню активне",
     "menuStatusDisabled": "Меню не активне",
-    "categoryStatusEnabled": "Активна категорія",
-    "categoryStatusDisabled": "Неактивна категорія"
+    "categoryStatusEnabled": "Категорія активна",
+    "categoryStatusDisabled": "Категорія  не активна"
   },
   "createCategoryForm": {
     "title": "Додати категорію",

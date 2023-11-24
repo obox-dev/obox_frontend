@@ -10,8 +10,8 @@
     "delete": "Delete",
     "menuStatusEnabled": "Menu is active",
     "menuStatusDisabled": "Menu inactive",
-    "categoryStatusEnabled": "Active category",
-    "categoryStatusDisabled": "Inactive category"
+    "categoryStatusEnabled": "Category is active",
+    "categoryStatusDisabled": "Category inactive"
   },
   "createCategoryForm": {
     "title": "Enter your category name",
