@@ -47,6 +47,7 @@ export const MenuDishPage = () => {
     deleteMarkedAttachments,
     getDishAttachments,
     setFilesToUpload,
+    setPrimaryImage,
   } = useDishImage();
 
   useEffect(() => {
@@ -72,11 +73,12 @@ export const MenuDishPage = () => {
       if (dishId) {
         await onUpdateSubmit(dishId, data as UpdateDishRequest);
         await uploadFiles(dishId, filesToUpload);
-        await getDishAttachments(dishId);
+        await setPrimaryImage(dishId);
       } else {
         const { dish_id } = await onCreateSubmit(data as CreateDishRequest);
         await uploadFiles(dish_id, filesToUpload);
         await getDishAttachments(dish_id);
+        await setPrimaryImage(dish_id);
       }
     },
     [dishId, onUpdateSubmit, onCreateSubmit, navigateToCategory]

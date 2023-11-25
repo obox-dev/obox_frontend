@@ -27,5 +27,15 @@
   "minprice": "{{field}} must be grater than {{min}}",
   "maxprice": "{{field}} must be no more than {{max}}",
   "isInRange": "{{field}} must be between {{min}} and {{max}}",
-  "caloriesbetween": "{{field}} must be between {{min}} and {{max}}"
+  "caloriesbetween": "{{field}} must be between {{min}} and {{max}}",
+  "fileUpload": {
+    "label": "Dish image",
+    "addButton": "Upload image",
+    "placeholder": "Or drop your file here",
+    "error": "Image must be less than 3 Mb",
+    "recomendedSize": "Recomnded size 800x800",
+    "maxSize": "Max size no more than 3 Mb",
+    "formats": "Formats: .jpeg, .png",
+    "deleteButton": "Delete image"
+  }
 }

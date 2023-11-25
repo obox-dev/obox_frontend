@@ -21,6 +21,10 @@ export interface UpdateInStockRequest {
   language: string;
 }
 
+export interface SetPrimaryImageRequest {
+  image: string;
+}
+
 export interface DishResponse {
   dish_id: string;
   category_id: string;
@@ -29,8 +33,8 @@ export interface DishResponse {
   language: string;
   content: Record<string, DishContent>;
   in_stock: DishInStock;
-  spesial_price?: number;
-  associated_id?: string;
+  image: string | null;
+  special_price?: number;
   weight?: number;
   weight_unit?: WeightUnit;
   calories?: number;
@@ -40,15 +44,14 @@ export interface DishResponse {
 }
 export type Dish = Omit<DishResponse, 'content'> & DishContent;
 
-export interface CreateDishRequest extends Omit<Dish, 'dish_id' | 'content'> {}
+export interface CreateDishRequest extends Omit<Dish, 'dish_id'> {}
 
 export interface UpdateDishRequest {
   category_id?: string;
   name?: string;
   price?: number;
-  spesial_price?: number;
+  special_price?: number;
   description?: string;
-  associated_id?: string;
   weight?: number;
   weight_unit?: WeightUnit;
   calories?: number;
@@ -78,5 +81,8 @@ export class DishesService {
   }
   static async getDishById(id: string): Promise<DishResponse> {
     return API.get<null, DishResponse>(`/dishes/${id}`);
+  }
+  static async setPrimaryImage(id: string, params: SetPrimaryImageRequest) {
+    return API.post<SetPrimaryImageRequest, void>(`/dishes/${id}/set-primary-image`, params);
   }
 }
