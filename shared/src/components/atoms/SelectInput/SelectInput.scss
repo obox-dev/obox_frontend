@@ -25,8 +25,46 @@
     }
     &__value-container {
       padding: 7px 12px;
+      min-height: 48px;
+
+      &--has-value {
+        padding-block: 6px;
+        min-height: 48px;
+      }
+
       &:focus-visible {
         outline: none;
+      }
+    }
+
+    &__multi-value {
+      border-radius: 12px;
+      margin: 0;
+      margin-right: 8px;
+      background-color: $color-secondary;
+
+      &__label {
+        font-size: 16px;
+        line-height: 1.2;
+        color: $color-secondary-text;
+        padding: 8px 12px;
+      }
+
+      &__remove {
+        border-radius: 0 12px 12px 0;
+        > svg {
+          width: 20px;
+          height: 20px;
+          color: $color-border-focus-1px;
+          transition: all 0.2s ease-in;
+        }
+
+        &:hover {
+          background-color: $color-secondary;
+          > svg {
+            color: $color-secondary-text;
+          }
+        }
       }
     }
 
@@ -41,9 +79,18 @@
         outline: none;
       }
     }
-    &__indicators {
+    &__indicators, &__indicator {
       &:focus-visible {
         outline: none;
+      }
+      > svg {
+        color: $color-border-focus-1px;
+        transition: all 0.2s ease-in;
+      }
+      &:hover {
+        > svg {
+          color: $color-secondary-text;
+        }
       }
     }
     &__menu {
@@ -66,17 +113,17 @@
         color: $color-global-white;
         background-color: $color-primary;
 
-        &.select__option--is-focused{
-            color: $color-global-white;
-            background-color: $color-primary;
+        &.select__option--is-focused {
+          color: $color-global-white;
+          background-color: $color-primary;
         }
       }
       &--is-focused {
         color: $color-primary-text;
-        background-color: $color-primary-text-contrast;
+        background-color: $color-secondary;
       }
       &:active {
-          background-color: transparent;
+        background-color: transparent;
       }
     }
   }

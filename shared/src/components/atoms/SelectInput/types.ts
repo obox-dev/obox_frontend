@@ -11,4 +11,6 @@ export interface ISelectInput<T> {
   name: string;
   options: Options<T>;
   className?: string;
+  isMulti?: boolean;
+  closeMenuOnSelect?: boolean;
 }

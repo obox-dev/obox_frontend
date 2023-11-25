@@ -4,7 +4,7 @@ import { ISelectInput } from './types';
 import './SelectInput.scss';
 
 export const SelectInput = <T,>(props: ISelectInput<T>) => {
-  const { defaultValue, name, options, isDisabled, className } = props;
+  const { defaultValue, name, options, isDisabled, className, isMulti = false, closeMenuOnSelect = true } = props;
 
   const customStyle: StylesConfig = {
     dropdownIndicator: (base, state) => ({
@@ -24,6 +24,8 @@ export const SelectInput = <T,>(props: ISelectInput<T>) => {
       isDisabled={isDisabled}
       components={{ IndicatorSeparator: () => null }}
       styles={customStyle}
+      isMulti={isMulti}
+      closeMenuOnSelect={closeMenuOnSelect}
     />
   );
 };
