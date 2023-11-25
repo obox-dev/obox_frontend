@@ -90,10 +90,6 @@ export const useDish = (props: UseDishProps) => {
     await loadAllDishes();
   }, []);
 
-  const toggleDiscount = () => {
-    // toggle discount logic
-  };
-
   const changeInStock = useCallback(async (dish: DishResponse) => {
     const dishContent = {
       ...mapDishContent(dish, language),
@@ -113,7 +109,6 @@ export const useDish = (props: UseDishProps) => {
       navigateToDish(dish.dish_id);
     },
     [DishActionTypes.DELETE]: openDishDeleteDialog,
-    [DishActionTypes.TOGGLE_DISCOUNT]: toggleDiscount,
     [DishActionTypes.CHANGE_IN_STOCK]: changeInStock,
   };
 

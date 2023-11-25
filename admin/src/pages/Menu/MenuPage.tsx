@@ -1,14 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { useTranslation } from '@libs/react-i18next';
+import { useRestaurant } from '@shared/hooks/useRestaurant';
 import { useMainProvider } from '@admin/providers/main';
 import { LayoutWithSearch } from '@admin/layout/LayoutWithSearch/LayoutWithSearch';
 import { useMenu } from './components/MenuPage/useMenu';
 import { TabsSection } from './components/TabsSection/TabsSection';
 import { useCategories } from './components/MenuCategories/useCategories';
 import './Menu.scss';
-
-const HARDCODED_RESTAURANT_ID = '793ecd10-c0c0-4b06-ac09-c7a3ecdc9f04';
 
 export const MenuPage = () => {
   const { t } = useTranslation();
@@ -22,7 +21,7 @@ export const MenuPage = () => {
     return selectedMenuId;
   }, [selectedMenuId]);
 
-  const restaurantId = HARDCODED_RESTAURANT_ID;
+  const {restaurantId} = useRestaurant();
   const { openMenuCreateDialog, loadAllMenus, menuList, menuActions } = useMenu(
     {
       restaurant_id: restaurantId,

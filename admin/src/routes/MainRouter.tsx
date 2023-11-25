@@ -1,5 +1,5 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
-import Tags from '@admin/pages/TagsAndAllergenes/Tags';
+import Tags from '@admin/pages/TagsAndAllergens/Tags';
 import Home from '@admin/pages/Home/Home';
 import { MenuPage } from '@admin/pages/Menu/MenuPage';
 import NotFound from '@admin/pages/Page_404/NotFound';

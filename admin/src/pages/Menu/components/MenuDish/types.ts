@@ -5,7 +5,6 @@ export enum DishActionTypes {
   CHANGE_IN_STOCK = 'changeInStock',
   EDIT = 'edit',
   DELETE = 'delete',
-  TOGGLE_DISCOUNT = 'toggleDiscount',
 }
 
 export type DishActions = Record<DishActionTypes, (dish: DishResponse) => Promise<void> | void>;

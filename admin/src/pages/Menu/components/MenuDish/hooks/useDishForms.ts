@@ -12,8 +12,14 @@ import { useEffect } from 'react';
 import { useGetCategory } from '../../MenuCategories/hooks';
 import { useMemo } from 'react';
 import { mapCategoryContent } from '../../MenuCategories/mappers/mapCategoryContent';
+import { useRequest } from '@admin/hooks';
+import { AllergensService } from '@shared/services';
+import { MarksService } from '@shared/services';
+import { useState } from 'react';
+import { AllergensResponse } from '@shared/services/AllergensService';
+import { MarksResponse } from '@shared/services/MarksService';
 
-type ExcludeKeys = 'price' | 'weight' | 'calories';
+type ExcludeKeys = 'price' | 'weight' | 'calories' | 'special_price' | 'cooking_time';
 type ExcludedAsOptionalString = Record<ExcludeKeys, string | null>;
 export type DishDefaultValues = Omit<CreateDishRequest, ExcludeKeys> &
   ExcludedAsOptionalString;
@@ -23,6 +29,8 @@ const mapDishToDefaultValues = (dish: Dish): DishDefaultValues => ({
   name: dish.name,
   description: dish.description || '',
   price: dish.price.toString() || '',
+  special_price: dish.special_price?.toString() || '',
+  cooking_time: dish.cooking_time?.toString() || '',
   weight: dish.weight?.toString() || '',
   weight_unit: dish.weight_unit,
   calories: dish.calories?.toString() || '',
@@ -49,6 +57,8 @@ export const useDishForms = (props: UseDishFormsProps) => {
     name: '',
     description: '',
     price: '',
+    special_price: '',
+    cooking_time: '',
     weight: '',
     weight_unit: undefined,
     calories: '',
@@ -95,11 +105,62 @@ export const useDishForms = (props: UseDishFormsProps) => {
     { label: 'ml', value: WeightUnit.MILLILITERS },
   ];
 
+  const [allAllergens, setAllAllergens] = useState<AllergensResponse[]>([]);
+
+  const loadAllAllergensByRestId = () => {
+    return AllergensService.getAllergensByRestaurantId();
+  };
+
+  const { execute: loadAllAllergens } = useRequest({
+    requestFunction: loadAllAllergensByRestId,
+    onSuccess: (result: AllergensResponse[]) => {
+      setAllAllergens(result);
+    },
+    onError: (error) => {
+      console.error('Error fetching categories:', error);
+    },
+  });
+
+  useEffect(() => {
+    const load = async () => {
+      await loadAllAllergens();
+    };
+    load();
+  }, []);
+
+
+  const [allMarks, setAllMarks] = useState<MarksResponse[]>([]);
+
+  const loadAllMarksByRestId = () => {
+    return MarksService.getMarksByRestaurantId();
+  };
+
+  const { execute: loadAllMarks } = useRequest({
+    requestFunction: loadAllMarksByRestId,
+    onSuccess: (result: MarksResponse[]) => {
+      setAllMarks(result);
+    },
+    onError: (error) => {
+      console.error('Error fetching categories:', error);
+    },
+  });
+
+  useEffect(() => {
+    const load = async () => {
+      await loadAllMarks();
+    };
+    load();
+  }, []);
+
   return {
     getDefaultValues,
     createDishSchema,
     createDishDefaultValues,
     defaultCategory,
     weightUnitOptions,
+    allAllergens,
+    loadAllAllergens,
+    allMarks,
+    loadAllMarks
   };
 };
