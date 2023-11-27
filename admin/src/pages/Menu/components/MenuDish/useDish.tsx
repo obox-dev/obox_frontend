@@ -27,6 +27,7 @@ export const useDish = (props: UseDishProps) => {
   const { menuId } = useParams();
 
   const navigate = useNavigate();
+
   const navigateToDish = (dishId: string) => {
     navigate(`/menu/${menuId}/category/${categoryId}/dish/${dishId}`);
   };
@@ -64,17 +65,9 @@ export const useDish = (props: UseDishProps) => {
 
   const { openDishDeleteDialog } = useDeleteDish({
     onSuccess: async () => {
-      await loadAllDishes();
+      navigateToCategory();
     },
-    onFinally: () => {
-      closeAll();
-    },
-    onError: async (error) => {
-      if (error.response?.status === 404) {
-        await loadAllDishes();
-        closeAll();
-      }
-    },
+    
   });
 
   const changeState = useCallback(async (dish: DishResponse) => {

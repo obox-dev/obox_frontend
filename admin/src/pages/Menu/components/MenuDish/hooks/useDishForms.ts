@@ -16,10 +16,18 @@ import { useRequest } from '@admin/hooks';
 import { AllergensService } from '@shared/services';
 import { MarksService } from '@shared/services';
 import { useState } from 'react';
-import { AllergensResponse } from '@shared/services/AllergensService';
-import { MarksResponse } from '@shared/services/MarksService';
+import {
+  Allergens,
+  AllergensResponse,
+} from '@shared/services/AllergensService';
+import { Marks, MarksResponse } from '@shared/services/MarksService';
 
-type ExcludeKeys = 'price' | 'weight' | 'calories' | 'special_price' | 'cooking_time';
+type ExcludeKeys =
+  | 'price'
+  | 'weight'
+  | 'calories'
+  | 'special_price'
+  | 'cooking_time';
 type ExcludedAsOptionalString = Record<ExcludeKeys, string | null>;
 export type DishDefaultValues = Omit<CreateDishRequest, ExcludeKeys> &
   ExcludedAsOptionalString;
@@ -49,7 +57,7 @@ interface UseDishFormsProps {
 }
 
 export const useDishForms = (props: UseDishFormsProps) => {
-  const { menuId, categoryId, currentLanguage} = props;
+  const { menuId, categoryId, currentLanguage } = props;
   const { createDishSchema } = useDishFormValidation();
 
   const createDishDefaultValues: DishDefaultValues = {
@@ -82,23 +90,19 @@ export const useDishForms = (props: UseDishFormsProps) => {
     return createDishDefaultValues;
   };
 
-  useEffect(() => {
-    const load = async () => {
-      await loadAllCategories();
-    };
-    load();
-  }, []);
-
   const categoryOptions = useMemo(() => {
     return categoriesList.map((category) => {
-      const { category_id, name } = mapCategoryContent(category, currentLanguage);
+      const { category_id, name } = mapCategoryContent(
+        category,
+        currentLanguage
+      );
       return { value: category_id, label: name };
     });
   }, [categoriesList]);
 
-  const defaultCategory = useMemo(() => {
-    return categoryOptions.find((category) => category.value === categoryId);
-  }, [categoryOptions.length]);
+  // const defaultCategory = useMemo(() => {
+  //   return categoryOptions.find((category) => category.value === categoryId);
+  // }, [categoryOptions.length]);
 
   const weightUnitOptions = [
     { label: 'gramms', value: WeightUnit.GRAMMS },
@@ -107,12 +111,12 @@ export const useDishForms = (props: UseDishFormsProps) => {
 
   const [allAllergens, setAllAllergens] = useState<AllergensResponse[]>([]);
 
-  const loadAllAllergensByRestId = () => {
+  const loadAllAllergensByRestaurantId = () => {
     return AllergensService.getAllergensByRestaurantId();
   };
 
   const { execute: loadAllAllergens } = useRequest({
-    requestFunction: loadAllAllergensByRestId,
+    requestFunction: loadAllAllergensByRestaurantId,
     onSuccess: (result: AllergensResponse[]) => {
       setAllAllergens(result);
     },
@@ -121,13 +125,27 @@ export const useDishForms = (props: UseDishFormsProps) => {
     },
   });
 
-  useEffect(() => {
-    const load = async () => {
-      await loadAllAllergens();
-    };
-    load();
-  }, []);
+  const mapAllergensContent = (
+    allergeneItem: AllergensResponse,
+    language: string
+  ): Allergens => {
+    const { content, ...allergen } = allergeneItem;
 
+    return {
+      ...content[language],
+      ...allergen,
+    };
+  };
+
+  const allergensOptions = useMemo(() => {
+    return allAllergens.map((allergen) => {
+      const { allergen_id, name } = mapAllergensContent(
+        allergen,
+        currentLanguage
+      );
+      return { value: allergen_id, label: name };
+    });
+  }, [allAllergens]);
 
   const [allMarks, setAllMarks] = useState<MarksResponse[]>([]);
 
@@ -148,19 +166,38 @@ export const useDishForms = (props: UseDishFormsProps) => {
   useEffect(() => {
     const load = async () => {
       await loadAllMarks();
+      await loadAllAllergens();
+      await loadAllCategories();
     };
     load();
   }, []);
+
+  const mapMarkContent = (
+    allergeneItem: MarksResponse,
+    language: string
+  ): Marks => {
+    const { content, ...allergen } = allergeneItem;
+
+    return {
+      ...content[language],
+      ...allergen,
+    };
+  };
+
+  const marksOptions = useMemo(() => {
+    return allMarks.map((mark) => {
+      const { mark_id, name } = mapMarkContent(mark, currentLanguage);
+      return { value: mark_id, label: name };
+    });
+  }, [allMarks]);
 
   return {
     getDefaultValues,
     createDishSchema,
     createDishDefaultValues,
-    defaultCategory,
     weightUnitOptions,
-    allAllergens,
-    loadAllAllergens,
-    allMarks,
-    loadAllMarks
+    allergensOptions,
+    marksOptions,
+    categoryOptions,
   };
 };

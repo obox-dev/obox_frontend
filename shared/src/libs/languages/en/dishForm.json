@@ -1,33 +1,54 @@
 {
+  "createDish": "Create dish",
+  "updateDish": "Update dish",
+
+  "statusActive": "Status: Active",
+  "statusInActive": "Status: In active",
+  "inStock": "In stock",
+  "outOfStock": "Out of stock",
+
   "category": "Category",
-  "name": "Name",
+  "dishName": "Dish name *",
   "description": "Description",
   "allergens": "Allergens",
-  "inactive": "Inactive",
-  "tags": "Tags",
-  "price": "Price",
-  "image": "Add image",
-  "createButton": "Create",
-  "backButton": "Back",
-  "status": "Status",
-  "active": "Active",
-  "weight": "Weight",
+  "marks": "Marks",
+  "price": "Price *",
+  "specialPrice": "Special price",
+  "weight": "Quantity",
+  "weightUnit": "Units",
   "calories": "Calories",
-  "namePlaceholder": "Enter name...",
-  "pricePlaceholder": "Enter price...",
-  "weightPlaceholder": "Enter weight...",
-  "caloriesPlaceholder": "Enter calories...",
-  "descriptionPlaceholder": "Enter description...",
+  "cookingTime": "Cooking time",
+  
+  "placeholder": {
+    "dishName": "Enter name",
+    "price": "UAH",
+    "specialPrice": "UAH",
+    "weight": "Enter quantity",
+    "weightUnit": "Select unit",
+    "calories": "Enter calories",
+    "description": "Enter description",
+    "allergens": "Select allergens",
+    "marks": "Select marks",
+    "cookingTime": "MIN"
+  },
+  
+  "createButton": "Create",
+  "deleteButton": "Delete",
+  "resetButton": "Reset",
+  "undateButton": "Safe changes",
+
   "dishesTable": {
     "state": "State",
     "name": "Name",
     "price": "Price",
     "actions": "Actions"
   },
+
   "minprice": "{{field}} must be grater than {{min}}",
   "maxprice": "{{field}} must be no more than {{max}}",
   "isInRange": "{{field}} must be between {{min}} and {{max}}",
   "caloriesbetween": "{{field}} must be between {{min}} and {{max}}",
+
   "fileUpload": {
     "label": "Dish image",
     "addButton": "Upload image",

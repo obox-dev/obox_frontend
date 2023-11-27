@@ -5,6 +5,7 @@ import {
   DishesService,
   CreateDishRequest,
   Dish,
+  DishResponse,
 } from '@shared/services/DishService';
 import { useMainProvider } from '@admin/providers/main';
 import { DishForm } from './MenuDishForm';
@@ -17,17 +18,27 @@ export const MenuDishPage = () => {
   const [defaultValues, setDefaultValues] = useState<DishDefaultValues | null>(
     null
   );
+
   const { menuLanguage } = useMainProvider();
 
   const [loading, setLoading] = useState<boolean>(true);
   const { menuId, categoryId, dishId } = useParams();
+
+  const [dish, setDish] = useState<DishResponse>();
 
   const { onCreateSubmit, onUpdateSubmit } = useDish({
     categoryId: categoryId!,
     language: menuLanguage,
   });
 
-  const { createDishSchema, getDefaultValues, weightUnitOptions } = useDishForms({
+  const {
+    createDishSchema,
+    getDefaultValues,
+    weightUnitOptions,
+    categoryOptions,
+    allergensOptions,
+    marksOptions,
+  } = useDishForms({
     menuId: menuId!,
     categoryId: categoryId!,
     currentLanguage: menuLanguage,
@@ -54,6 +65,7 @@ export const MenuDishPage = () => {
     const loadDish = async (id: string) => {
       setLoading(true);
       const response = await DishesService.getDishById(id);
+      setDish(response);
       await getDishAttachments(id);
       setDefaultValues(getDefaultValues(response));
       setLoading(false);
@@ -88,6 +100,7 @@ export const MenuDishPage = () => {
     <div>Loading...</div>
   ) : (
     <DishForm
+      dish={dish}
       onSubmit={handleOnSubmit}
       defaultValues={defaultValues}
       validationSchema={createDishSchema}
@@ -96,7 +109,10 @@ export const MenuDishPage = () => {
       uploadedImages={attachments}
       onDeleteImage={handleDeleteButtonClick}
       language={menuLanguage}
+      categoryOptions={categoryOptions}
       weightUnitOptions={weightUnitOptions}
+      allergensOptions={allergensOptions}
+      marksOptions={marksOptions}
     />
   );
 };

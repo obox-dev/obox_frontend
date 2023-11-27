@@ -1,8 +1,10 @@
 import { useRef } from 'react';
 import { ObjectSchema } from 'yup';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Form, FormRef } from '@shared/components/atoms/Form';
+import { useParams } from 'react-router-dom';
+import { FieldValues } from 'react-hook-form';
+import { Options } from 'react-select';
 import { useTranslation } from '@libs/react-i18next';
+import { Form, FormRef } from '@shared/components/atoms/Form';
 import { Button } from '@shared/components/atoms/Button/Button';
 import {
   ButtonTypes,
@@ -10,29 +12,25 @@ import {
 } from '@shared/components/atoms/Button/types';
 import { Input, InputVariants } from '@shared/components/atoms/Input';
 import { InputLabel } from '@shared/components/atoms/InputLabel/InputLabel';
-import { Dish, WeightUnit } from '@shared/services/DishService';
-import type { DishDefaultValues } from './hooks/useDishForms';
+import { Dish, DishResponse } from '@shared/services/DishService';
+import { OptionType } from '@shared/components/atoms/SelectInput/types';
 import { FileUpload } from '@shared/components/molecules/FileUpload/FileUpload';
 import { Textarea } from '@shared/components/atoms/Textarea';
 import './DishForm.scss';
-import { FieldValues } from 'react-hook-form';
 import {
   Attachment,
   FileToUpload,
   AttachmentOrFile,
 } from '@shared/services/AttachmentsService';
-import { LayoutWithBackButton } from '@admin/layout/LayoutWithBackButton/LayoutWithBackButton';
 import { SelectInput } from '@shared/components/atoms/SelectInput';
-import { useGetCategory } from '../MenuCategories/hooks';
-import { useEffect } from 'react';
-import { useMemo } from 'react';
-import { mapCategoryContent } from '../MenuCategories/mappers/mapCategoryContent';
-import { OptionType } from '@shared/components/atoms/SelectInput/types';
+import { LayoutWithBackButton } from '@admin/layout/LayoutWithBackButton/LayoutWithBackButton';
+import { DishDefaultValues } from './hooks/useDishForms';
 // import { Switcher } from '@shared/components/atoms/Switcher';
-// import {useDish} from './useDish';
-// import { DishActionTypes } from './types';
+import { useDish } from './useDish';
+import { DishActionTypes } from './types';
 
 interface DishFormProps<T extends FieldValues> {
+  dish?: DishResponse;
   onSubmit: (data: Partial<Dish>) => void;
   validationSchema: ObjectSchema<T>;
   defaultValues: DishDefaultValues;
@@ -45,14 +43,18 @@ interface DishFormProps<T extends FieldValues> {
     attachment: AttachmentOrFile
   ) => void;
   language: string;
-  weightUnitOptions: OptionType<WeightUnit>[];
+  categoryOptions: OptionType<string>[];
+  weightUnitOptions: OptionType<string>[];
+  allergensOptions: OptionType<string>[];
+  marksOptions: OptionType<string>[];
 }
 
 export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
   const { t } = useTranslation();
-  const { menuId, categoryId } = useParams();
+  const { menuId, categoryId, dishId } = useParams();
 
   const {
+    dish,
     onSubmit,
     validationSchema,
     defaultValues,
@@ -61,48 +63,43 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
     onUploadImage,
     onDeleteImage,
     language,
+    categoryOptions,
     weightUnitOptions,
+    allergensOptions,
+    marksOptions,
   } = props;
 
   const formRef = useRef<FormRef<Partial<Dish>> | null>(null);
 
-  const navigate = useNavigate();
-  const navigateToCategory = () => {
-    navigate(`/menu/${menuId}/category/${categoryId}`);
+  const setSingleValue = (field: keyof Dish, option: OptionType<string>) => {
+    formRef.current?.setValue(field, option.value);
   };
 
-  const { loadAllCategories, categoriesList } = useGetCategory({
-    menuId: menuId!,
-  });
+  const setMultipleValues = (
+    field: keyof Dish,
+    options: Options<OptionType<string>>
+  ) => {
+    formRef.current?.setValue(
+      field,
+      options.map((op) => op.value)
+    );
+  };
 
-  useEffect(() => {
-    const load = async () => {
-      await loadAllCategories();
-    };
-    load();
-  }, []);
-
-  const categoryOptions = useMemo(() => {
-    return categoriesList.map((category) => {
-      const { category_id, name } = mapCategoryContent(category, language);
-      return { value: category_id, label: name };
-    });
-  }, [categoriesList]);
-
-  const defaultCategory = useMemo(() => {
-    return categoryOptions.find((category) => category.value === categoryId);
-  }, [categoryOptions.length]);
-
-  // const { menuDishesActions } = useDish({categoryId: categoryId!, language});
+  const { menuDishesActions } = useDish({ categoryId: categoryId!, language });
+  const deleteAction = menuDishesActions[DishActionTypes.DELETE];
   // const updateInStockAction = menuDishesActions[DishActionTypes.CHANGE_IN_STOCK];
   // const updateStateAction = menuDishesActions[DishActionTypes.UPDATE_STATE];
+
+  const headerTitle = dishId
+    ? t('dishForm:updateDish')
+    : t('dishForm:createDish');
 
   return (
     <div className="dish-page container">
       <LayoutWithBackButton
         backTo={`/menu/${menuId}/category/${categoryId}`}
         backButtonVariant={ButtonVariants.SECONDARY}
-        title={'123'}
+        title={headerTitle}
       >
         <Form
           defaultValues={defaultValues}
@@ -111,10 +108,10 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
           ref={formRef}
         >
           <>
-            <div className="dish-form-actions">
-              {/* <Switcher
+            {/* <div className="dish-form-actions">
+              <Switcher
                 onChange={() => {
-                  updateStateAction(dish)}}
+                  updateStateAction(dishItem)}}
                 value={dish.in_stock}
                 name="in_stock"
                 textForChecked={t('common:inStock')}
@@ -122,35 +119,38 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
               />
               <Switcher
                 onChange={() => {
-                  updateInStockAction(dishItem);
+                  updateInStockAction(dish);
                 }}
                 value={dish.in_stock}
                 name="in_stock"
                 textForChecked={t('common:inStock')}
                 textForUnchecked={t('common:outStock')}
-              /> */}
-            </div>
-            <Input type={InputVariants.HIDDEN} name="category_id" />
-            <Input type={InputVariants.HIDDEN} name="status" />
+              />
+            </div> */}
             <Input
               type={InputVariants.HIDDEN}
               name="language"
               value={language}
             />
             <div className="form-group">
-              <InputLabel text="category" forInput="category" />
+              <InputLabel
+                text={t('dishForm:category')}
+                forInput="category_id"
+              />
               <SelectInput
-                name="category"
+                name="category_id"
                 options={categoryOptions}
-                defaultValue={defaultCategory!}
+                onChange={(e) => {
+                  setSingleValue('category_id', e as OptionType<string>);
+                }}
               />
             </div>
             <div className="form-group">
-              <InputLabel text={t('dishForm:name')} forInput="name" />
+              <InputLabel text={t('dishForm:dishName')} forInput="name" />
               <Input
                 type={InputVariants.TEXT}
                 name="name"
-                placeholder={t('dishForm:namePlaceholder')}
+                placeholder={t('dishForm:placeholder.dishName')}
               />
             </div>
 
@@ -163,7 +163,7 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
                 maxLength={255}
                 showCounter
                 name="description"
-                placeholder={t('dishForm:descriptionPlaceholder')}
+                placeholder={t('dishForm:placeholder.description')}
               />
             </div>
             <div className="form-group">
@@ -180,63 +180,110 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
                 <Input
                   type={InputVariants.TEXT}
                   name="weight"
-                  placeholder={t('dishForm:weightPlaceholder')}
+                  placeholder={t('dishForm:placeholder.weight')}
                 />
               </div>
               <div className="form-group">
-                <InputLabel text="weight_unit" forInput="weight_unit" />
+                <InputLabel
+                  text={t('dishForm:weightUnit')}
+                  forInput="weight_unit"
+                />
                 <SelectInput
                   name="weight_unit"
                   options={weightUnitOptions}
-                  defaultValue={null}
+                  onChange={(e) => {
+                    setSingleValue('weight_unit', e as OptionType<string>);
+                  }}
+                  placeholder={t('dishForm:placeholder.weightUnit')}
+                />
+              </div>
+            </div>
+            <div className="dish-page__form-row d-flex">
+              <div className="form-group">
+                <InputLabel text={t('dishForm:calories')} forInput="calories" />
+                <Input
+                  type={InputVariants.TEXT}
+                  name="calories"
+                  placeholder={t('dishForm:placeholder.calories')}
+                />
+              </div>
+              <div className="form-group">
+                <InputLabel
+                  text={t('dishForm:cookingTime')}
+                  forInput="cooking_time"
+                />
+                <Input
+                  type={InputVariants.TEXT}
+                  name="cooking_time"
+                  placeholder={t('dishForm:placeholder.cookingTime')}
                 />
               </div>
             </div>
             <div className="form-group">
-              <InputLabel text={t('dishForm:calories')} forInput="calories" />
-              <Input
-                type={InputVariants.TEXT}
-                name="calories"
-                placeholder={t('dishForm:caloriesPlaceholder')}
-              />
-            </div>
-            <div className="form-group">
-              <InputLabel text="marks" forInput="marks" />
+              <InputLabel text={t('dishForm:marks')} forInput="marks" />
               <SelectInput
                 name="marks"
-                options={weightUnitOptions}
-                defaultValue={null}
+                options={marksOptions}
+                isMulti
+                closeMenuOnSelect={false}
+                onChange={(e) => {
+                  setMultipleValues('marks', e as Options<OptionType<string>>);
+                }}
+                placeholder={t('dishForm:placeholder.marks')}
               />
             </div>
             <div className="form-group">
-              <InputLabel text="alergens" forInput="alergens" />
+              <InputLabel text={t('dishForm:allergens')} forInput="allergens" />
               <SelectInput
-                name="alergens"
-                options={weightUnitOptions}
-                defaultValue={null}
+                name="allergens"
+                options={allergensOptions}
+                isMulti
+                closeMenuOnSelect={false}
+                onChange={(e) => {
+                  setMultipleValues(
+                    'allergens',
+                    e as Options<OptionType<string>>
+                  );
+                }}
+                placeholder={t('dishForm:placeholder.allergens')}
               />
             </div>
-            <div className="form-group">
-              <InputLabel text={t('dishForm:price')} forInput="price" />
-              <Input
-                type={InputVariants.TEXT}
-                name="price"
-                placeholder={t('dishForm:pricePlaceholder')}
-              />
+            <div className="dish-page__form-row d-flex">
+              <div className="form-group">
+                <InputLabel text={t('dishForm:price')} forInput="price" />
+                <Input
+                  type={InputVariants.TEXT}
+                  name="price"
+                  placeholder={t('dishForm:placeholder.price')}
+                />
+              </div>
+              <div className="form-group">
+                <InputLabel
+                  text={t('dishForm:specialPrice')}
+                  forInput="special_price"
+                />
+                <Input
+                  type={InputVariants.TEXT}
+                  name="special_price"
+                  placeholder={t('dishForm:placeholder.specialPrice')}
+                />
+              </div>
             </div>
 
-            <div className='dish-page__form-row d-flex'>
+            <div className="dish-page__form-row d-flex">
               <Button
                 variant={ButtonVariants.PRIMARY}
                 innerContent={t('dishForm:createButton')}
                 type={ButtonTypes.SUBMIT}
               />
-              <Button
-                variant={ButtonVariants.SECONDARY}
-                innerContent={t('dishForm:backButton')}
-                type={ButtonTypes.BUTTON}
-                onClick={navigateToCategory}
-              />
+              {dish && (
+                <Button
+                  variant={ButtonVariants.SECONDARY}
+                  innerContent={t('dishForm:deleteButton')}
+                  type={ButtonTypes.BUTTON}
+                  onClick={() => deleteAction(dish)}
+                />
+              )}
             </div>
           </>
         </Form>

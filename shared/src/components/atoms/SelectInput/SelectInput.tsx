@@ -1,10 +1,21 @@
 import Select from 'react-select';
 import { StylesConfig } from 'react-select';
-import { ISelectInput } from './types';
+import { ISelectInput, OptionType } from './types';
 import './SelectInput.scss';
+import { useFormInput } from '@shared/hooks/useFormInput';
 
 export const SelectInput = <T,>(props: ISelectInput<T>) => {
-  const { defaultValue, name, options, isDisabled, className, isMulti = false, closeMenuOnSelect = true } = props;
+  const {
+    defaultValue,
+    name,
+    options,
+    isDisabled,
+    className,
+    isMulti = false,
+    closeMenuOnSelect = true,
+    onChange,
+    placeholder,
+  } = props;
 
   const customStyle: StylesConfig = {
     dropdownIndicator: (base, state) => ({
@@ -14,8 +25,19 @@ export const SelectInput = <T,>(props: ISelectInput<T>) => {
     }),
   };
 
+  const { ref } = useFormInput(name);
+
+  const innerOnChange = (e: OptionType<T> | OptionType<T>[]) => {
+    if (isMulti) {
+      onChange?.(e as OptionType<T>[]);
+    } else {
+      onChange?.(e as OptionType<T>);
+    }
+  };
+
   return (
     <Select
+      ref={ref}
       className={[className, 'basic-single'].join(' ')}
       classNamePrefix="select"
       defaultValue={defaultValue}
@@ -26,6 +48,10 @@ export const SelectInput = <T,>(props: ISelectInput<T>) => {
       styles={customStyle}
       isMulti={isMulti}
       closeMenuOnSelect={closeMenuOnSelect}
+      onChange={(e) => {
+        innerOnChange(e as OptionType<T>[] | OptionType<T>);
+      }}
+      placeholder={placeholder}
     />
   );
 };

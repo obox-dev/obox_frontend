@@ -1,33 +1,54 @@
 {
+  "createDish": "Нова страва",
+  "updateDish": "Редагування страви",
+
+  "statusActive": "Статус: Активний",
+  "statusInActive": "Статус: Не активний",
+  "inStock": "В наявності",
+  "outOfStock": "Не в наявності",
+  
   "category": "Категорія",
-  "name": "Назва",
+  "dishName": "Назва страви *",
   "description": "Опис",
   "allergens": "Алергени",
-  "inactive": "Неактивний",
-  "tags": "Теги",
-  "price": "Ціна",
-  "image": "Додати зображення",
-  "createButton": "Створити",
-  "backButton": "Назад",
-  "status": "Статус",
-  "active": "Активний",
-  "weight": "Вага",
-  "calories": "Калорії",
-  "namePlaceholder": "Введіть назву...",
-  "pricePlaceholder": "Введіть ціну...",
-  "weightPlaceholder": "Введіть вагу...",
-  "caloriesPlaceholder": "Введіть калорії...",
-  "descriptionPlaceholder": "Введіть опис...",
+  "marks": "Мітки",
+  "price": "Ціна *",
+  "specialPrice": "Акційна ціна",
+  "weight": "Кількість",
+  "weightUnit": "Одиниці виміру",
+  "calories": "Калорійність (Ккл)",
+  "cookingTime": "Час приготування",
+  
+  "placeholder": {
+    "dishName": "Введіть імʼя",
+    "price": "UAH",
+    "specialPrice": "UAH",
+    "weight": "Введіть кількість",
+    "weightUnit": "Виберіть одиниці виміру",
+    "calories": "Введіть калорійність",
+    "description": "Введіть опис страви",
+    "allergens": "Виберіть алергени",
+    "marks": "Виберіть мітки",
+    "cookingTime": "ХВ"
+  },
+
+  "createButton": "Додати",
+  "deleteButton": "Видалити",
+  "resetButton": "Очистити",
+  "undateButton": "Зберігти зміни",
+
   "dishesTable": {
     "state": "Стан",
     "name": "Назва",
     "price": "Ціна",
     "actions": "Дії"
   },
+
   "minprice": "Поле {{field}} повинно бути більше {{min}}",
   "maxprice": "Поле {{field}} повинно бути менше {{max}}",
   "isInRange": "Поле {{field}} повинно бути більше ніж {{min}} і менше ніж {{max}}",
   "caloriesbetween": "Поле {{field}} повинно бути більше ніж {{min}} і менше ніж {{max}}",
+
   "fileUpload": {
     "label": "Зображення страви",
     "addButton": "Завантажити зображення",
