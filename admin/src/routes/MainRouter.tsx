@@ -1,5 +1,4 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
-import Tags from '@admin/pages/TagsAndAllergenes/Tags';
 import Home from '@admin/pages/Home/Home';
 import { MenuPage } from '@admin/pages/Menu/MenuPage';
 import NotFound from '@admin/pages/Page_404/NotFound';
@@ -14,6 +13,10 @@ import Privacy from '@admin/pages/Privacy/Privacy';
 import Pricing from '@admin/pages/Pricing/Pricing';
 import RestaurantSettings from '@admin/pages/RestaurantSettings/RestaurantSettings';
 import QRSettings from '@admin/pages/QRSettings/QRSettings';
+import {TagsPage} from '@admin/pages/Tags/TagsPage';
+import {Marks} from '@admin/pages/Tags/pages/Marks/Marks';
+import {Allergens} from '@admin/pages/Tags/pages/Allergenes/Allergenes';
+
 
 export const MainRouter = () => {
   return (
@@ -30,7 +33,11 @@ export const MainRouter = () => {
         path="/menu/:menuId/category/:categoryId/dish/:dishId"
         element={<MenuDishPage />}
       />
-      <Route path="/tags" element={<Tags />} />
+      <Route path="/tags" element={<TagsPage />} >
+        <Route index element={<Navigate to="marks" />} />
+        <Route path="marks" element={<Marks />} />
+        <Route path="allergens" element={<Allergens />} />
+      </Route>
       <Route path="/reviews" element={<Review />} />
       <Route path="/analytics" element={<Analytics />} />
       <Route path="/tutorials" element={<Tutorials />} />
