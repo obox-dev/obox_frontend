@@ -6,6 +6,12 @@ export enum DishInStock {
   DISABLED = 'DISABLED',
 }
 
+export enum WeightUnit {
+  GRAMMS = 'GR',
+  MILLILITERS = 'ML',
+  PIECES = 'PC',
+}
+
 export interface DishContent {
   name: string;
   description?: string;
@@ -16,6 +22,10 @@ export interface UpdateInStockRequest {
   language: string;
 }
 
+export interface SetPrimaryImageRequest {
+  image: string;
+}
+
 export interface DishResponse {
   dish_id: string;
   category_id: string;
@@ -23,31 +33,35 @@ export interface DishResponse {
   state: EntityState;
   language: string;
   content: Record<string, DishContent>;
-  spesial_price?: number;
-  associated_id?: string;
+  in_stock: DishInStock;
+  image: string | null;
+  special_price?: number;
   weight?: number;
+  weight_unit?: WeightUnit;
   calories?: number;
   allergens?: string[];
   marks?: string[];
-  in_stock: DishInStock;
+  cooking_time?: number;
 }
 export type Dish = Omit<DishResponse, 'content'> & DishContent;
 
-export interface CreateDishRequest extends Omit<Dish, 'dish_id' | 'content'> {}
+export interface CreateDishRequest extends Omit<Dish, 'dish_id'> {}
 
 export interface UpdateDishRequest {
+  category_id?: string;
   name?: string;
   price?: number;
-  spesial_price?: number;
+  special_price?: number;
   description?: string;
-  associated_id?: string;
   weight?: number;
+  weight_unit?: WeightUnit;
   calories?: number;
   allergens?: string;
   marks?: string;
   state?: EntityState;
   in_stock?: DishInStock;
   language: string;
+  cooking_time?: number;
 }
 export interface CreateDishResponse {
   dish_id: string;
@@ -68,5 +82,8 @@ export class DishesService {
   }
   static async getDishById(id: string): Promise<DishResponse> {
     return API.get<null, DishResponse>(`/dishes/${id}`);
+  }
+  static async setPrimaryImage(id: string, params: SetPrimaryImageRequest) {
+    return API.post<SetPrimaryImageRequest, void>(`/dishes/${id}/set-primary-image`, params);
   }
 }

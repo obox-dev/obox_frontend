@@ -1,6 +1,9 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
-import { DishInStock, DishResponse } from '@shared/services/DishService';
+import {
+  DishInStock,
+  DishResponse,
+} from '@shared/services/DishService';
 import {
   useGetDish,
   useCreateDish,
@@ -24,6 +27,7 @@ export const useDish = (props: UseDishProps) => {
   const { menuId } = useParams();
 
   const navigate = useNavigate();
+
   const navigateToDish = (dishId: string) => {
     navigate(`/menu/${menuId}/category/${categoryId}/dish/${dishId}`);
   };
@@ -61,17 +65,9 @@ export const useDish = (props: UseDishProps) => {
 
   const { openDishDeleteDialog } = useDeleteDish({
     onSuccess: async () => {
-      await loadAllDishes();
+      navigateToCategory();
     },
-    onFinally: () => {
-      closeAll();
-    },
-    onError: async (error) => {
-      if (error.response?.status === 404) {
-        await loadAllDishes();
-        closeAll();
-      }
-    },
+    
   });
 
   const changeState = useCallback(async (dish: DishResponse) => {
@@ -86,10 +82,6 @@ export const useDish = (props: UseDishProps) => {
     await updateState(dishContent);
     await loadAllDishes();
   }, []);
-
-  const toggleDiscount = () => {
-    // toggle discount logic
-  };
 
   const changeInStock = useCallback(async (dish: DishResponse) => {
     const dishContent = {
@@ -110,7 +102,6 @@ export const useDish = (props: UseDishProps) => {
       navigateToDish(dish.dish_id);
     },
     [DishActionTypes.DELETE]: openDishDeleteDialog,
-    [DishActionTypes.TOGGLE_DISCOUNT]: toggleDiscount,
     [DishActionTypes.CHANGE_IN_STOCK]: changeInStock,
   };
 

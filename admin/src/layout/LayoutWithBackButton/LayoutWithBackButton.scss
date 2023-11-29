@@ -1,8 +1,7 @@
 .layout {
   &__header {
     border-radius: 16px;
-    background-color: $color-primary-text-contrast;
-    margin-bottom: 48px;
+    margin-block: 48px;
 
     &-top {
       display: flex;
@@ -23,11 +22,15 @@
     }
 
     &-description {
+      border: 1px solid $color-primary;
+      background-color: $color-primary-text-contrast;
+      border-radius: 16px;
       margin-bottom: 0;
       padding: 24px 33px;
       font-size: 16px;
       color: $color-secondary-text;
       line-height: 1.2;
+      margin-top: 12px;
     }
 
     &-back-button.btn {

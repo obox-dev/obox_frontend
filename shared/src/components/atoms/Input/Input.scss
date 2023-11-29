@@ -9,8 +9,8 @@
   }
 
   &:focus {
-    border: 2px solid $color-border-focus-2px;
-    box-shadow: none;
+    border-color: $color-border-focus-2px;
+    box-shadow: 0 0 0 1px $color-border-focus-2px;
   }
 
   &::placeholder {
@@ -27,6 +27,5 @@
 
 .modal-body .text-danger {
   color: $color-accent-mistake !important;
-  position: relative;
 }
 

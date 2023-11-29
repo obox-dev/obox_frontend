@@ -15,33 +15,48 @@ export const Input = (props: IInput<HTMLInputElement>) => {
     сlassName,
   } = props;
 
-  const combineClasses = (type: InputVariants, error: boolean, ): string => {
+  const combineClasses = (type: InputVariants, error: boolean): string => {
     const commonClasses = 'form-control mb-2';
     const classesByInputType: Partial<{ [key in InputVariants]: string }> = {
       [InputVariants.CHECKBOX]: 'form-check-input',
       [InputVariants.RADIO]: 'form-check-input',
     };
-    return `${commonClasses}${classesByInputType[type] || ''} ${error ? 'error-input' : ''} ${сlassName || ''}`;
+    return `${commonClasses}${classesByInputType[type] || ''} ${
+      error ? 'error-input' : ''
+    } ${сlassName || ''}`;
   };
 
   const options = { ...(onChange ? { onChange } : {}) };
-  const { ref, registerParams, error } = useFormInput(name, options);
+
+  const ignoreFormContext = type === InputVariants.FILE;
+
+  const { ref, registerParams, error } = useFormInput(name, options, ignoreFormContext);
   const inputClassName = combineClasses(type, !!error);
+
+  let resultingProps = {
+    id,
+    onChange,
+    ref,
+    value,
+    name,
+    type,
+    className: inputClassName,
+    placeholder,
+    checked,
+    disabled: isDisabled,
+  };
+
+  if (type !== InputVariants.FILE) {
+    resultingProps = {
+      ...resultingProps,
+      ...registerParams,
+    };
+  }
 
   return (
     <>
       <input
-        onChange={onChange}
-        id={id}
-        ref={ref}
-        value={value}
-        name={name}
-        type={type}
-        className={inputClassName}
-        placeholder={placeholder}
-        checked={checked}
-        disabled={isDisabled}
-        {...registerParams}
+        {...resultingProps}
       />
       {error && <span className="text-danger">{error.message as string}</span>}
     </>

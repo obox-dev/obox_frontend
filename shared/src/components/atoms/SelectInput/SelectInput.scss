@@ -1,0 +1,130 @@
+.basic-single {
+  &:focus-visible {
+    outline: none;
+  }
+  .select {
+    &__control {
+      border: 1px solid $color-border-focus-1px;
+      border-radius: 8px;
+      box-shadow: none;
+      &:hover {
+        border: 1px solid $color-secondary-text;
+      }
+
+      &:focus-within {
+        border: 1px solid $btn-disabled-color-text;
+      }
+
+      &::placeholder {
+        color: $color-placeholder-text;
+      }
+
+      &--menu-is-open {
+        border-radius: 8px 8px 0 0;
+      }
+    }
+    &__value-container {
+      padding: 7px 12px;
+      min-height: 48px;
+
+      &--has-value {
+        padding-block: 6px;
+        min-height: 48px;
+      }
+
+      &:focus-visible {
+        outline: none;
+      }
+    }
+
+    &__multi-value {
+      border-radius: 12px;
+      margin: 0;
+      margin-right: 8px;
+      background-color: $color-secondary;
+
+      &__label {
+        font-size: 16px;
+        line-height: 1.2;
+        color: $color-secondary-text;
+        padding: 8px 12px;
+      }
+
+      &__remove {
+        border-radius: 0 12px 12px 0;
+        > svg {
+          width: 20px;
+          height: 20px;
+          color: $color-border-focus-1px;
+          transition: all 0.2s ease-in;
+        }
+
+        &:hover {
+          background-color: $color-secondary;
+          > svg {
+            color: $color-secondary-text;
+          }
+        }
+      }
+    }
+
+    &__placeholder {
+      color: $color-secondary-text;
+      &:focus-visible {
+        outline: none;
+      }
+    }
+    &__input-container {
+      &:focus-visible {
+        outline: none;
+      }
+    }
+    &__indicators, &__indicator {
+      &:focus-visible {
+        outline: none;
+      }
+      > svg {
+        color: $color-border-focus-1px;
+        transition: all 0.2s ease-in;
+      }
+      &:hover {
+        > svg {
+          color: $color-secondary-text;
+        }
+      }
+    }
+    &__menu {
+      border-radius: 0 0 8px 8px;
+      margin-top: 0;
+    }
+    &__menu-list {
+      padding: 0;
+      border: 1px solid $btn-disabled-color-text;
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+    }
+    &__option {
+      padding: 11.5px 22px;
+      color: $color-secondary-text;
+      &:not(:last-child) {
+        border-bottom: 1px solid $btn-disabled-color-text;
+      }
+      &--is-selected {
+        color: $color-global-white;
+        background-color: $color-primary;
+
+        &.select__option--is-focused {
+          color: $color-global-white;
+          background-color: $color-primary;
+        }
+      }
+      &--is-focused {
+        color: $color-primary-text;
+        background-color: $color-secondary;
+      }
+      &:active {
+        background-color: transparent;
+      }
+    }
+  }
+}
