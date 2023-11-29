@@ -8,11 +8,11 @@
   "outOfStock": "Не в наявності",
   
   "category": "Категорія",
-  "dishName": "Назва страви *",
+  "dishName": "Назва страви",
   "description": "Опис",
   "allergens": "Алергени",
   "marks": "Мітки",
-  "price": "Ціна *",
+  "price": "Ціна",
   "specialPrice": "Акційна ціна",
   "weight": "Кількість",
   "weightUnit": "Одиниці виміру",

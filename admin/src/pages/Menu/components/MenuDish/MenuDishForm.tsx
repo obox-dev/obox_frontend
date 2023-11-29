@@ -86,6 +86,10 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
     );
   };
 
+  const formatAsRequired = (text: string) => {
+    return `${text} *`;
+  };
+
   const { menuDishesActions } = useDish({ categoryId: categoryId!, language });
   const deleteAction = menuDishesActions[DishActionTypes.DELETE];
   // const updateInStockAction = menuDishesActions[DishActionTypes.CHANGE_IN_STOCK];
@@ -148,7 +152,7 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
               />
             </div>
             <div className="form-group">
-              <InputLabel text={t('dishForm:dishName')} forInput="name" />
+              <InputLabel text={formatAsRequired(t('dishForm:dishName'))} forInput="name" />
               <Input
                 type={InputVariants.TEXT}
                 name="name"
@@ -256,7 +260,7 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
             </div>
             <div className="dish-page__form-row d-flex">
               <div className="form-group">
-                <InputLabel text={t('dishForm:price')} forInput="price" />
+                <InputLabel text={formatAsRequired(t('dishForm:price'))} forInput="price" />
                 <Input
                   type={InputVariants.TEXT}
                   name="price"

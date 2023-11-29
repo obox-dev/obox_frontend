@@ -18,16 +18,16 @@ export const useDishFormValidation = () => {
   
 
   const NAME_IS_REQUIRED_MESSAGE = t('common:validation:isRequired', {
-    field: t('dishForm:name'),
+    field: t('dishForm:dishName'),
   });
   
   const MIN_NAME_LENGTH_MESSAGE = t('common:validation:morethan', {
-    field: t('common:name'),
+    field: t('dishForm:dishName'),
     min: MIN_NAME_LENGTH,
   });
 
   const MAX_NAME_LENGTH_MESSAGE = t('common:validation:lessthan', {
-    field: t('common:name'),
+    field: t('dishForm:dishName'),
     max: MAX_NAME_LENGTH,
   });
 

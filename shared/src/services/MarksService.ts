@@ -1,7 +1,7 @@
 import { useRestaurant } from '@shared/hooks/useRestaurant';
 import { API } from './ApiService';
 
-const {restaurantId} = useRestaurant();
+const { restaurantId } = useRestaurant();
 
 export interface MarksContent {
   name: string;

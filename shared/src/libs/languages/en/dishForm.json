@@ -8,11 +8,11 @@
   "outOfStock": "Out of stock",
 
   "category": "Category",
-  "dishName": "Dish name *",
+  "dishName": "Dish name",
   "description": "Description",
   "allergens": "Allergens",
   "marks": "Marks",
-  "price": "Price *",
+  "price": "Price",
   "specialPrice": "Special price",
   "weight": "Quantity",
   "weightUnit": "Units",
