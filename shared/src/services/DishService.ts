@@ -7,8 +7,9 @@ export enum DishInStock {
 }
 
 export enum WeightUnit {
-  GRAMMS = 'gr',
-  MILLILITERS = 'ml',
+  GRAMMS = 'GR',
+  MILLILITERS = 'ML',
+  PIECES = 'PC',
 }
 
 export interface DishContent {

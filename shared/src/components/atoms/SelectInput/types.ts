@@ -13,6 +13,7 @@ export interface ISelectInput<T> {
   isDisabled?: boolean;
   closeMenuOnSelect?: boolean;
   onChange?: (data: Options<T> | OptionType<T>) => void;
-  defaultValue?: OptionType;
+  defaultValue?: OptionType<T> | OptionType<T>[];
   placeholder?: string;
+  isClearable?: boolean;
 }

@@ -11,18 +11,13 @@ import { useMainProvider } from '@admin/providers/main';
 import { DishForm } from './MenuDishForm';
 import { useDish } from './useDish';
 import { useDishForms } from './hooks/useDishForms';
-import type { DishDefaultValues } from './hooks/useDishForms';
 import { useDishImage } from './hooks/useDishImage';
 
 export const MenuDishPage = () => {
-  const [defaultValues, setDefaultValues] = useState<DishDefaultValues | null>(
-    null
-  );
-
   const { menuLanguage } = useMainProvider();
 
-  const [loading, setLoading] = useState<boolean>(true);
   const { menuId, categoryId, dishId } = useParams();
+  const [loading, setLoading] = useState<boolean>(!!dishId);
 
   const [dish, setDish] = useState<DishResponse>();
 
@@ -33,15 +28,16 @@ export const MenuDishPage = () => {
 
   const {
     createDishSchema,
-    getDefaultValues,
     weightUnitOptions,
     categoryOptions,
     allergensOptions,
     marksOptions,
+    defaultValues,
   } = useDishForms({
     menuId: menuId!,
     categoryId: categoryId!,
     currentLanguage: menuLanguage,
+    dish,
   });
 
   const navigate = useNavigate();
@@ -62,20 +58,16 @@ export const MenuDishPage = () => {
   } = useDishImage();
 
   useEffect(() => {
-    const loadDish = async (id: string) => {
+    const loadForUpdate = async (id: string) => {
       setLoading(true);
       const response = await DishesService.getDishById(id);
       setDish(response);
       await getDishAttachments(id);
-      setDefaultValues(getDefaultValues(response));
       setLoading(false);
     };
 
     if (dishId) {
-      loadDish(dishId);
-    } else {
-      setDefaultValues(getDefaultValues());
-      setLoading(false);
+      loadForUpdate(dishId);
     }
   }, [dishId]);
 

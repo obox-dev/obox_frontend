@@ -1,5 +1,5 @@
-import * as yup from 'yup';
-import { Ref, useImperativeHandle, forwardRef } from 'react';
+import { AxiosError } from 'axios';
+import { Ref, useImperativeHandle, forwardRef, useEffect } from 'react';
 import {
   useForm,
   FormProvider,
@@ -8,10 +8,9 @@ import {
   Path,
   PathValue,
 } from 'react-hook-form';
+import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormRef } from './types';
-import { AxiosError } from 'axios';
-import { useEffect } from 'react';
 import { useTranslation } from '@libs/react-i18next';
 
 interface FormProps<T extends FieldValues> {
@@ -45,10 +44,26 @@ const FormInner = <T extends FieldValues>(
     }
   };
 
+  const formatValues = (data: T): T => {
+    const resultingData = {} as T;
+    for (const [key, value] of Object.entries(data)) {
+      const accessor = key as keyof T;
+      
+      if (value?.value) {
+        resultingData[accessor] = value.value;
+      } else if (Array.isArray(value)) {
+        resultingData[accessor] = value.map((item) => item.value ?? item) as T[keyof T];
+      } else {
+        resultingData[accessor] = value;
+      }
+    }
+    return resultingData;
+  };
+
   const internalSubmit = async (data: T) => {
     try {
       methods.clearErrors();
-      await onSubmit(data);
+      await onSubmit(formatValues(data));
     } catch (e) {
       const error = e as AxiosError<T>;
       const errors =
@@ -82,6 +97,9 @@ const FormInner = <T extends FieldValues>(
     setValue: (key: Path<T>, value: PathValue<T, Path<T>>) => {
       methods.setValue(key, value);
     },
+    reset: () => {
+      methods.reset();
+    }
   }));
 
   return (

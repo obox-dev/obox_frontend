@@ -1,8 +1,8 @@
 import Select from 'react-select';
 import { StylesConfig } from 'react-select';
+import { useFormInput } from '@shared/hooks/useFormInput';
 import { ISelectInput, OptionType } from './types';
 import './SelectInput.scss';
-import { useFormInput } from '@shared/hooks/useFormInput';
 
 export const SelectInput = <T,>(props: ISelectInput<T>) => {
   const {
@@ -15,6 +15,7 @@ export const SelectInput = <T,>(props: ISelectInput<T>) => {
     closeMenuOnSelect = true,
     onChange,
     placeholder,
+    isClearable = false,
   } = props;
 
   const customStyle: StylesConfig = {
@@ -52,6 +53,7 @@ export const SelectInput = <T,>(props: ISelectInput<T>) => {
         innerOnChange(e as OptionType<T>[] | OptionType<T>);
       }}
       placeholder={placeholder}
+      isClearable={isClearable || isMulti}
     />
   );
 };

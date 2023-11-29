@@ -72,7 +72,8 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
   const formRef = useRef<FormRef<Partial<Dish>> | null>(null);
 
   const setSingleValue = (field: keyof Dish, option: OptionType<string>) => {
-    formRef.current?.setValue(field, option.value);
+    const value = option?.value;
+    formRef.current?.setValue(field, value);
   };
 
   const setMultipleValues = (
@@ -140,6 +141,7 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
               <SelectInput
                 name="category_id"
                 options={categoryOptions}
+                defaultValue={defaultValues.category_id}
                 onChange={(e) => {
                   setSingleValue('category_id', e as OptionType<string>);
                 }}
@@ -191,10 +193,12 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
                 <SelectInput
                   name="weight_unit"
                   options={weightUnitOptions}
+                  defaultValue={defaultValues.weight_unit}
                   onChange={(e) => {
                     setSingleValue('weight_unit', e as OptionType<string>);
                   }}
                   placeholder={t('dishForm:placeholder.weightUnit')}
+                  isClearable
                 />
               </div>
             </div>
@@ -225,6 +229,7 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
                 name="marks"
                 options={marksOptions}
                 isMulti
+                defaultValue={defaultValues.marks}
                 closeMenuOnSelect={false}
                 onChange={(e) => {
                   setMultipleValues('marks', e as Options<OptionType<string>>);
@@ -238,6 +243,7 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
                 name="allergens"
                 options={allergensOptions}
                 isMulti
+                defaultValue={defaultValues.allergens}
                 closeMenuOnSelect={false}
                 onChange={(e) => {
                   setMultipleValues(
@@ -276,12 +282,19 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
                 innerContent={t('dishForm:createButton')}
                 type={ButtonTypes.SUBMIT}
               />
-              {dish && (
+              {dish ? (
                 <Button
                   variant={ButtonVariants.SECONDARY}
                   innerContent={t('dishForm:deleteButton')}
                   type={ButtonTypes.BUTTON}
                   onClick={() => deleteAction(dish)}
+                />
+              ) : (
+                <Button
+                  variant={ButtonVariants.SECONDARY}
+                  innerContent={t('dishForm:resetButton')}
+                  type={ButtonTypes.BUTTON}
+                  onClick={() => formRef.current?.reset()}
                 />
               )}
             </div>

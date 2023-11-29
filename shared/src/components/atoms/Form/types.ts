@@ -9,5 +9,6 @@ export interface IForm<T> {
 }
 export interface FormRef<T> {
   submit: () => Promise<void>;
+  reset: () => void;
   setValue: (key: Path<T>, value: PathValue<T, Path<T>>) => void;
 }

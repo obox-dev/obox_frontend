@@ -1,8 +1,12 @@
 import { AxiosError } from 'axios';
-import { useRequest } from '@admin/hooks';
 import { DishesService } from '@shared/services';
-import { Dish, UpdateDishRequest, UpdateInStockRequest } from '@shared/services/DishService';
+import {
+  Dish,
+  UpdateDishRequest,
+  UpdateInStockRequest,
+} from '@shared/services/DishService';
 import { UpdateStateRequest } from '@shared/utils/types';
+import { useRequest } from '@admin/hooks';
 
 interface UpdateDishParams {
   onSuccess: () => Promise<void>;
@@ -15,31 +19,10 @@ export const useUpdateDish = (args: UpdateDishParams) => {
 
   const editSubmit = async (
     dish_id: string,
-    {
-      name,
-      description,
-      price,
-      weight,
-      calories,
-      allergens,
-      marks,
-      in_stock,
-      language,
-    }: UpdateDishRequest
+    params: UpdateDishRequest,
   ) => {
     const id = dish_id;
-    const request: UpdateDishRequest = {
-      name,
-      description,
-      price,
-      weight,
-      calories,
-      allergens,
-      marks,
-      in_stock,
-      language,
-    };
-    return DishesService.update(id, request);
+    return DishesService.update(id, params);
   };
 
   const updateState = async ({ dish_id, state }: Dish) => {
@@ -71,6 +54,6 @@ export const useUpdateDish = (args: UpdateDishParams) => {
   return {
     onUpdateSubmit,
     updateState,
-    updateInStock
+    updateInStock,
   };
 };
