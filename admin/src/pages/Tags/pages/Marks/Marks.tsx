@@ -1,4 +1,3 @@
-import { LayoutWithSearch } from '@admin/layout/LayoutWithSearch/LayoutWithSearch';
 // import { useMemo } from 'react';
 // import { useMainProvider } from '@admin/providers/main';
 // import { useState } from 'react';
@@ -16,10 +15,7 @@ export const Marks = () => {
   // const restaurantId = HARDCODED_RESTAURANT_ID;
   
   return (
-    <LayoutWithSearch>
-      <div> I`m tags and I`m here Marks </div>
-    </LayoutWithSearch>
-    
+    <div> I`m tags and I`m here Marks </div> 
   );
 };
 
