@@ -5,5 +5,8 @@
     "title": "Add a label",
     "placeholder": "Enter a label name",
     "label": "Name of the label *"
+  },
+   "deleteMarksForm": {
+    "title": "Are you sure you want to delete a label?"
   }
 }

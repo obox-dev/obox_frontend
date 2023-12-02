@@ -16,5 +16,5 @@ export type {
   CategoryResponse,
 } from './CategoriesService';
 export type { MenuResponse, Menu } from './RestaurantsService';
-export type { Marks } from './MarksService';
+export type { MarksResponse, Marks } from './MarksService';
 
