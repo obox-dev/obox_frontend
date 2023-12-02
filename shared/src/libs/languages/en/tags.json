@@ -1,4 +1,7 @@
 {
-  "linkMarks" : "Marks",
-  "linkAllergens" : "Allergens"
+  "createMark": "Create a label",
+  "marks": "Tags",
+  "allergen" : "Allergeni",
+  "addMarkButton" : "Add a tag",
+  "addAllergen" : "Add allergen"
 }

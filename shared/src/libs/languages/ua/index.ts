@@ -4,7 +4,6 @@ import menu from './menu.json';
 import dishForm from './dishForm.json';
 import tags from './tags.json';
 
-
 const ua = {
   common,
   home,

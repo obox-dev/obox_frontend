@@ -1,4 +1,7 @@
-{
-  "linkMarks" : "Мітки",
-  "linkAllergens" : "Аллергени"
+{ 
+  "createMark": "Створити мітку",
+  "dishes": "Страви",
+  "marks": "Мітки",
+  "addMarkButton" : "Додати мітку",
+  "addAllergen" : "Додати алерген"
 }

@@ -4,7 +4,7 @@
   "addCategoryButton": "Додати категорію",
   "addMenuButton": "Додати меню",
   "addDishButton": "Додати страву",
-  "dishes": "Страви",
+  "allergen" : "Алергени",
   "actions": {
     "edit": "Редагувати",
     "delete": "Видалити",
