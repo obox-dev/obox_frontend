@@ -7,13 +7,13 @@ export interface MarksContent {
   name: string;
 }
 
-export type Marks = MarksContent & Omit<MarksResponse, 'content'>;
-
 export interface MarksResponse {
   mark_id: string;
   translation_id: string;
   content: Record<string, MarksContent>;
 }
+
+export type Marks = MarksContent & Omit<MarksResponse, 'content'>;
 
 export interface CreateMarksRequest {
   name: string;

@@ -1,24 +1,27 @@
 import { useState } from 'react';
 import { useRequest } from '@admin/hooks';
-import { MarksResponse } from '@shared/services';
+import { MarksResponse , RestaurantsService } from '@shared/services';
 
-// const HARDCODED_RESTAURANT_ID = '793ecd10-c0c0-4b06-ac09-c7a3ecdc9f04';
+interface GetMarksParams {
+  restaurant_id: string;
+}
 
-// interface GetMarksParams {
-//   marksId: string;
-// }
+export const useGetMarks = (args: GetMarksParams) => {
+  const { restaurant_id } = args;
 
-export const useGetMarks = () => {
-  // const restaurantId = HARDCODED_RESTAURANT_ID;
-  // const { marksId } = args;
   const [marksList, setMarksList] = useState<MarksResponse[]>([]);
 
+  const loadMarks = () => {
+    return RestaurantsService.getMarksByRestaurantId(restaurant_id);
+  };
+
   const { execute: loadAllMarks } = useRequest({
+    requestFunction: loadMarks,
     onSuccess: (result: MarksResponse[]) => {
       setMarksList(result);
     },
     onError: (error) => {
-      console.error('Error fetching categories:', error);
+      console.error('Error fetching marks:', error);
     },
   });
 
