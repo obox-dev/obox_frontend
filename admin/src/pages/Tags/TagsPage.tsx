@@ -12,10 +12,10 @@ export const TagsPage = () => {
     <div className="marks-and-allergenes-page container--fluid">
       <LayoutWithSearch>
         <>
-          <ul  className="nav">
+          <ul className="nav">
             <li className="nav-item">
-              <NavLink to="/tags/marks">{t('tags:marks')}</NavLink>
-              <NavLink to="/tags/allergens">{t('tags:allergen')}</NavLink>
+              <NavLink className="nav-item-link" to="/tags/marks">{t('tags:marks')}</NavLink>
+              <NavLink className="nav-item-link" to="/tags/allergens">{t('tags:allergen')}</NavLink>
             </li>
           </ul>
           <Outlet />

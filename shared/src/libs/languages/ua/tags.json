@@ -1,7 +1,8 @@
 { 
-  "createMark": "Створити мітку",
-  "dishes": "Страви",
   "marks": "Мітки",
+  "allergen" : "Алергени",
+
+  "createMark": "Створити мітку",
   "addMarkButton" : "Додати мітку",
   "addAllergen" : "Додати алерген"
 }

@@ -14,8 +14,8 @@ import Pricing from '@admin/pages/Pricing/Pricing';
 import RestaurantSettings from '@admin/pages/RestaurantSettings/RestaurantSettings';
 import QRSettings from '@admin/pages/QRSettings/QRSettings';
 import {TagsPage} from '@admin/pages/Tags/TagsPage';
-import {Marks} from '@admin/pages/Tags/components/MarksPage/MarksPage';
-import {Allergens} from '@admin/pages/Tags/components/AllergenesPage/AllergenesPage';
+import { Marks } from '@admin/pages/Tags/pages/Marks/Marks';
+import { Allergens } from '@admin/pages/Tags/pages/Allergenes/Allergenes';
 
 
 export const MainRouter = () => {

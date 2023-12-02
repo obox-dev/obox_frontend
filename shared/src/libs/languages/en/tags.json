@@ -1,7 +1,8 @@
-{
-  "createMark": "Create a label",
+{  
   "marks": "Tags",
-  "allergen" : "Allergeni",
+  "allergen" : "Allergens",
+
+  "createMark": "Create a label",
   "addMarkButton" : "Add a tag",
   "addAllergen" : "Add allergen"
 }
