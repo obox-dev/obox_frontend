@@ -1,8 +1,9 @@
 {  
   "marks": "Tags",
   "allergen" : "Allergens",
-
-  "createMark": "Create a label",
-  "addMarkButton" : "Add a tag",
-  "addAllergen" : "Add allergen"
+  "createMarksForm": {
+    "title": "Add a label",
+    "placeholder": "Enter a label name",
+    "label": "Name of the label *"
+  }
 }

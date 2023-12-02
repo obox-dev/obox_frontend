@@ -1,8 +1,10 @@
 { 
+  "name": "Назва мітки",
   "marks": "Мітки",
   "allergen" : "Алергени",
-
-  "createMark": "Створити мітку",
-  "addMarkButton" : "Додати мітку",
-  "addAllergen" : "Додати алерген"
+  "createMarksForm": {
+    "title": "Додати мітку",
+    "placeholder": "Введіть назву мітки",
+    "label": "Назва мітки *"
+  }
 }

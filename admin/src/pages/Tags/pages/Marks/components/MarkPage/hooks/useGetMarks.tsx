@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useRequest } from '@admin/hooks';
-import { MarksResponse , RestaurantsService } from '@shared/services';
+import { MarksResponse , RestaurantsService , MarksService } from '@shared/services';
 
 interface GetMarksParams {
   restaurant_id: string;
@@ -25,7 +25,13 @@ export const useGetMarks = (args: GetMarksParams) => {
     },
   });
 
+  const { execute: loadSingleMarks } = useRequest({
+    requestFunction: MarksService.getById,
+    redirect404: true,
+  });
+
   return {
+    loadSingleMarks,
     loadAllMarks,
     marksList,
   };
