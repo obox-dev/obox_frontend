@@ -38,6 +38,7 @@ module.exports = {
       },
     ],
     'react/react-in-jsx-scope': 'off',
+    'react/display-name': 'off',
     indent: ['error', 2],
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],

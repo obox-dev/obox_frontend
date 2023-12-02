@@ -1,9 +1,9 @@
 import { RegisterOptions, useFormContext } from 'react-hook-form';
 
-export function useFormInput(name: string, options?: RegisterOptions) {
+export function useFormInput(name: string, options?: RegisterOptions, ignoreFormContext = false) {
   const formContext = useFormContext();
 
-  if (!formContext) {
+  if (!formContext || ignoreFormContext) {
     return {};
   }
 

@@ -5,31 +5,41 @@ import {
   DishesService,
   CreateDishRequest,
   Dish,
+  DishResponse,
 } from '@shared/services/DishService';
 import { useMainProvider } from '@admin/providers/main';
 import { DishForm } from './MenuDishForm';
 import { useDish } from './useDish';
 import { useDishForms } from './hooks/useDishForms';
-import type { DishDefaultValues } from './hooks/useDishForms';
 import { useDishImage } from './hooks/useDishImage';
 
 export const MenuDishPage = () => {
-  const [defaultValues, setDefaultValues] = useState<DishDefaultValues | null>(
-    null
-  );
   const { menuLanguage } = useMainProvider();
 
-  const [loading, setLoading] = useState<boolean>(!!useParams().dishId);
   const { menuId, categoryId, dishId } = useParams();
+  const [loading, setLoading] = useState<boolean>(!!dishId);
+
+  const [dish, setDish] = useState<DishResponse>();
 
   const { onCreateSubmit, onUpdateSubmit } = useDish({
     categoryId: categoryId!,
     language: menuLanguage,
   });
-  const { createDishSchema, getDefaultValues } = useDishForms(
-    categoryId!,
-    menuLanguage
-  );
+
+  const {
+    createDishSchema,
+    weightUnitOptions,
+    categoryOptions,
+    allergensOptions,
+    marksOptions,
+    defaultValues,
+  } = useDishForms({
+    menuId: menuId!,
+    categoryId: categoryId!,
+    currentLanguage: menuLanguage,
+    dish,
+  });
+
   const navigate = useNavigate();
 
   const navigateToCategory = useCallback(() => {
@@ -44,21 +54,20 @@ export const MenuDishPage = () => {
     deleteMarkedAttachments,
     getDishAttachments,
     setFilesToUpload,
+    setPrimaryImage,
   } = useDishImage();
 
   useEffect(() => {
-    const loadDish = async (id: string) => {
+    const loadForUpdate = async (id: string) => {
+      setLoading(true);
       const response = await DishesService.getDishById(id);
+      setDish(response);
       await getDishAttachments(id);
-      setDefaultValues(getDefaultValues(response));
       setLoading(false);
     };
 
     if (dishId) {
-      loadDish(dishId);
-    } else {
-      setDefaultValues(getDefaultValues());
-      setLoading(false);
+      loadForUpdate(dishId);
     }
   }, [dishId]);
 
@@ -68,11 +77,12 @@ export const MenuDishPage = () => {
       if (dishId) {
         await onUpdateSubmit(dishId, data as UpdateDishRequest);
         await uploadFiles(dishId, filesToUpload);
-        await getDishAttachments(dishId);
+        await setPrimaryImage(dishId);
       } else {
         const { dish_id } = await onCreateSubmit(data as CreateDishRequest);
         await uploadFiles(dish_id, filesToUpload);
         await getDishAttachments(dish_id);
+        await setPrimaryImage(dish_id);
       }
     },
     [dishId, onUpdateSubmit, onCreateSubmit, navigateToCategory]
@@ -82,6 +92,7 @@ export const MenuDishPage = () => {
     <div>Loading...</div>
   ) : (
     <DishForm
+      dish={dish}
       onSubmit={handleOnSubmit}
       defaultValues={defaultValues}
       validationSchema={createDishSchema}
@@ -90,6 +101,10 @@ export const MenuDishPage = () => {
       uploadedImages={attachments}
       onDeleteImage={handleDeleteButtonClick}
       language={menuLanguage}
+      categoryOptions={categoryOptions}
+      weightUnitOptions={weightUnitOptions}
+      allergensOptions={allergensOptions}
+      marksOptions={marksOptions}
     />
   );
 };

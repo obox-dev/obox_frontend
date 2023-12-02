@@ -4,6 +4,7 @@ import { mapDishContent } from '@shared/mappers/DishMapper';
 import { DishActionTypes } from '@admin/pages/Menu/components/MenuDish/types';
 import { IDishCard } from './types';
 import './DishCard.scss';
+import { ImagePlaceholder } from '@admin/assets/icons';
 
 export const DishCard = (props: IDishCard) => {
   const { dishItem, actions, language } = props;
@@ -14,12 +15,16 @@ export const DishCard = (props: IDishCard) => {
   const updateInStockAction = actions[DishActionTypes.CHANGE_IN_STOCK];
   const editDishAction = actions[DishActionTypes.EDIT];
 
+  const dishImage = dish.image;
+
   return (
     <div
       className="dish-card d-flex gap-3"
       onClick={() => editDishAction(dishItem)}
     >
-      <div className="dish-card__img"></div>
+      <div className="dish-card__img">
+        {dishImage ? <img src={dishImage} alt="" /> : <ImagePlaceholder />}
+      </div>
       <div className="dish-card__content">
         <div className="dish-item__title">{dish.name}</div>
         <Switcher
@@ -30,10 +35,13 @@ export const DishCard = (props: IDishCard) => {
           name="in_stock"
           textForChecked={t('common:inStock')}
           textForUnchecked={t('common:outStock')}
+          stopClickPropagation
         />
         <div className="dish-item__price">
           <div>{dishItem.price}</div>
-          <div className="dish-item__price-discount">{dishItem.spesial_price}</div>
+          <div className="dish-item__price-discount">
+            {dishItem.special_price}
+          </div>
         </div>
       </div>
     </div>

@@ -1,11 +1,17 @@
+import { useRestaurant } from '@shared/hooks/useRestaurant';
 import { API } from './ApiService';
+
+const { restaurantId } = useRestaurant();
 
 export interface MarksContent {
   name: string;
 }
 
+export type Marks = MarksContent & Omit<MarksResponse, 'content'>;
+
 export interface MarksResponse {
-  marks_id: string;
+  mark_id: string;
+  translation_id: string;
   content: Record<string, MarksContent>;
 }
 
@@ -24,6 +30,12 @@ export interface CreateMarksResponse {
 }
 
 export class MarksService {
+  static async getMarksByRestaurantId(): Promise<MarksResponse[]> {
+    return API.get<null, MarksResponse[]>(
+      `/marks/${restaurantId}/restaurant-marks`
+    );
+  }
+
   static async getById(id: string): Promise<MarksResponse> {
     return API.get<void, MarksResponse>(`marks/${id}`);
   }

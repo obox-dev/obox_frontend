@@ -1,6 +1,5 @@
 .form-control {
   padding: 18.5px 16px;
-  margin-bottom: 28px !important;
   height: 48px;
   border: 1px solid $color-border-focus-1px;
   border-radius: 8px;
@@ -10,8 +9,8 @@
   }
 
   &:focus {
-    border: 2px solid $color-border-focus-2px;
-    box-shadow: none;
+    border-color: $color-border-focus-2px;
+    box-shadow: 0 0 0 1px $color-border-focus-2px;
   }
 
   &::placeholder {
@@ -28,8 +27,5 @@
 
 .modal-body .text-danger {
   color: $color-accent-mistake !important;
-
-  position: relative;
-  bottom: 24px;
 }
 
