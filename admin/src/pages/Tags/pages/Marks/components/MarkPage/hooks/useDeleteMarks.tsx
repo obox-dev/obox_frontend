@@ -4,7 +4,7 @@ import { useRequest } from '@admin/hooks';
 import { ButtonVariants } from '@shared/components/atoms/Button';
 import { Dialog } from '@shared/components/molecules/Dialog';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
-import { MarksService , MarksResponse} from '@shared/services';
+import { MarksResponse ,MarksService  } from '@shared/services';
 
 interface DeleteMarksParams {
   onSuccess: () => Promise<void>;

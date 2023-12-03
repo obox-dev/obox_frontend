@@ -8,5 +8,10 @@
   },
    "deleteMarksForm": {
     "title": "Are you sure you want to delete a label?"
+  },
+  "updateMarksForm": {
+    "title": "Edit a label",
+    "placeholder": "Enter a label name",
+    "label": "Label name *"
   }
 }

@@ -16,6 +16,8 @@ export interface MarksResponse {
 export type Marks = MarksContent & Omit<MarksResponse, 'content'>;
 
 export interface CreateMarksRequest {
+  reference_type: string,
+  reference_id: string,
   name: string;
   language: string;
 }
