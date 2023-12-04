@@ -16,18 +16,19 @@ import { Dish, DishResponse } from '@shared/services/DishService';
 import { OptionType } from '@shared/components/atoms/SelectInput/types';
 import { FileUpload } from '@shared/components/molecules/FileUpload/FileUpload';
 import { Textarea } from '@shared/components/atoms/Textarea';
-import './DishForm.scss';
 import {
   Attachment,
   FileToUpload,
   AttachmentOrFile,
 } from '@shared/services/AttachmentsService';
 import { SelectInput } from '@shared/components/atoms/SelectInput';
+import { Switcher } from '@shared/components/atoms/Switcher';
+import { EntityState } from '@shared/utils/types';
 import { LayoutWithBackButton } from '@admin/layout/LayoutWithBackButton/LayoutWithBackButton';
 import { DishDefaultValues } from './hooks/useDishForms';
-// import { Switcher } from '@shared/components/atoms/Switcher';
 import { useDish } from './useDish';
 import { DishActionTypes } from './types';
+import './DishForm.scss';
 
 interface DishFormProps<T extends FieldValues> {
   dish?: DishResponse;
@@ -71,8 +72,12 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
 
   const formRef = useRef<FormRef<Partial<Dish>> | null>(null);
 
+  const setSwitcherValue = (field: keyof Dish, value: boolean) => {
+    formRef.current?.setValue(field, value ? EntityState.ENABLED : EntityState.DISABLED);
+  };
+
   const setSingleValue = (field: keyof Dish, option: OptionType<string>) => {
-    const value = option?.value;
+    const value = option?.value || '';
     formRef.current?.setValue(field, value);
   };
 
@@ -92,8 +97,6 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
 
   const { menuDishesActions } = useDish({ categoryId: categoryId!, language });
   const deleteAction = menuDishesActions[DishActionTypes.DELETE];
-  // const updateInStockAction = menuDishesActions[DishActionTypes.CHANGE_IN_STOCK];
-  // const updateStateAction = menuDishesActions[DishActionTypes.UPDATE_STATE];
 
   const headerTitle = dishId
     ? t('dishForm:updateDish')
@@ -113,25 +116,26 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
           ref={formRef}
         >
           <>
-            {/* <div className="dish-form-actions">
+            <div className="dish-page__actions dish-page__form-row d-flex">
               <Switcher
-                onChange={() => {
-                  updateStateAction(dishItem)}}
-                value={dish.in_stock}
-                name="in_stock"
-                textForChecked={t('common:inStock')}
-                textForUnchecked={t('common:outStock')}
-              />
-              <Switcher
-                onChange={() => {
-                  updateInStockAction(dish);
+                onChange={(e) => {
+                  setSwitcherValue('state', e);
                 }}
-                value={dish.in_stock}
-                name="in_stock"
-                textForChecked={t('common:inStock')}
-                textForUnchecked={t('common:outStock')}
+                value={defaultValues.state}
+                name="state"
+                textForChecked={t('dishForm:statusActive')}
+                textForUnchecked={t('dishForm:statusInActive')}
               />
-            </div> */}
+              <Switcher
+                onChange={(e) => {
+                  setSwitcherValue('in_stock', e);
+                }}
+                value={defaultValues.in_stock}
+                name="in_stock"
+                textForChecked={t('dishForm:inStock')}
+                textForUnchecked={t('dishForm:outOfStock')}
+              />
+            </div>
             <Input
               type={InputVariants.HIDDEN}
               name="language"
@@ -152,7 +156,10 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
               />
             </div>
             <div className="form-group">
-              <InputLabel text={formatAsRequired(t('dishForm:dishName'))} forInput="name" />
+              <InputLabel
+                text={formatAsRequired(t('dishForm:dishName'))}
+                forInput="name"
+              />
               <Input
                 type={InputVariants.TEXT}
                 name="name"
@@ -260,7 +267,10 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
             </div>
             <div className="dish-page__form-row d-flex">
               <div className="form-group">
-                <InputLabel text={formatAsRequired(t('dishForm:price'))} forInput="price" />
+                <InputLabel
+                  text={formatAsRequired(t('dishForm:price'))}
+                  forInput="price"
+                />
                 <Input
                   type={InputVariants.TEXT}
                   name="price"

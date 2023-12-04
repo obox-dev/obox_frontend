@@ -28,7 +28,7 @@ export const Input = (props: IInput<HTMLInputElement>) => {
 
   const options = { ...(onChange ? { onChange } : {}) };
 
-  const ignoreFormContext = type === InputVariants.FILE;
+  const ignoreFormContext = type === InputVariants.FILE || type === InputVariants.CHECKBOX;
 
   const { ref, registerParams, error } = useFormInput(name, options, ignoreFormContext);
   const inputClassName = combineClasses(type, !!error);

@@ -36,6 +36,10 @@ export const Switcher = (props: ISwitcher) => {
       : textForUnchecked;
   }, [innerState]);
 
+  const isChecked = useMemo(() => {
+    return innerState === EntityState.ENABLED ? true : false;
+  }, [innerState]);
+
   return (
     <div
       className={[isDisabled ? 'disabled' : '', 'switcher'].join(' ')}
@@ -52,7 +56,7 @@ export const Switcher = (props: ISwitcher) => {
           name={name}
           type={InputVariants.CHECKBOX}
           isDisabled={isDisabled}
-          checked={innerState === EntityState.ENABLED ? true : false}
+          checked={isChecked}
         />
         <span className="slider round"></span>
       </InputLabel>

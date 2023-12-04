@@ -12,4 +12,11 @@
       flex: 1;
     }
   }
+
+  &__actions {
+    margin-bottom: 48px;
+    .switcher {
+      min-width: 250px;
+    }
+  }
 }
