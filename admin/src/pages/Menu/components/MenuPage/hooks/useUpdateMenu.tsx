@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { AxiosError } from 'axios';
+import { Controller } from 'react-hook-form';
 import { useTranslation } from '@libs/react-i18next';
 import { useRequest } from '@admin/hooks';
 import { Form, FormRef } from '@shared/components/atoms/Form';
@@ -10,7 +11,7 @@ import { Input, InputVariants } from '@shared/components/atoms/Input';
 import { Switcher } from '@shared/components/atoms/Switcher';
 import { InputLabel } from '@shared/components/atoms/InputLabel';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
-import { EntityState, UpdateStateRequest } from '@shared/utils/types';
+import { UpdateStateRequest } from '@shared/utils/types';
 import { useMenuFormValidation } from '../validation/useMenuFormValidation';
 import { mapMenuContent } from '../mappers/mapMenuContent';
 
@@ -96,15 +97,16 @@ export const useUpdateMenu = (args: UpdateMenuParams) => {
                 type={InputVariants.TEXT}
                 name="name"
               />
-              <Switcher
-                value={defaultValues.state}
+              <Controller
                 name="state"
-                textForChecked={t('menu:actions.menuStatusEnabled')}
-                textForUnchecked={t('menu:actions.menuStatusDisabled')}
-                onChange={(val) => {
-                  formRef.current?.setValue(
-                    'state',
-                    val ? EntityState.ENABLED : EntityState.DISABLED
+                defaultValue={defaultValues.state}
+                render={({ field }) => {
+                  return (
+                    <Switcher
+                      {...field}
+                      textForChecked={t('menu:actions.menuStatusEnabled')}
+                      textForUnchecked={t('menu:actions.menuStatusDisabled')}
+                    />
                   );
                 }}
               />

@@ -1,10 +1,12 @@
-import Select from 'react-select';
-import { StylesConfig } from 'react-select';
-import { useFormInput } from '@shared/hooks/useFormInput';
-import { ISelectInput, OptionType } from './types';
+import { forwardRef, useImperativeHandle, ForwardedRef } from 'react';
+import Select, { StylesConfig } from 'react-select';
+import { ISelectInput } from './types';
 import './SelectInput.scss';
 
-export const SelectInput = <T,>(props: ISelectInput<T>) => {
+export const InnerSelectInput = <T,>(
+  props: ISelectInput<T>,
+  ref: ForwardedRef<unknown>
+) => {
   const {
     defaultValue,
     name,
@@ -16,6 +18,7 @@ export const SelectInput = <T,>(props: ISelectInput<T>) => {
     onChange,
     placeholder,
     isClearable = false,
+    value,
   } = props;
 
   const customStyle: StylesConfig = {
@@ -26,34 +29,28 @@ export const SelectInput = <T,>(props: ISelectInput<T>) => {
     }),
   };
 
-  const { ref } = useFormInput(name);
-
-  const innerOnChange = (e: OptionType<T> | OptionType<T>[]) => {
-    if (isMulti) {
-      onChange?.(e as OptionType<T>[]);
-    } else {
-      onChange?.(e as OptionType<T>);
-    }
-  };
+  useImperativeHandle(ref, () => ({
+    getValue: () => value,
+  }));
 
   return (
     <Select
-      ref={ref}
-      className={[className, 'basic-single'].join(' ')}
-      classNamePrefix="select"
-      defaultValue={defaultValue}
+      value={value}
       name={name}
       options={options}
-      isDisabled={isDisabled}
+      defaultValue={defaultValue}
+      onChange={onChange}
+      className={[className, 'basic-single'].join(' ')}
+      classNamePrefix="select"
       components={{ IndicatorSeparator: () => null }}
       styles={customStyle}
-      isMulti={isMulti}
       closeMenuOnSelect={closeMenuOnSelect}
-      onChange={(e) => {
-        innerOnChange(e as OptionType<T>[] | OptionType<T>);
-      }}
       placeholder={placeholder}
+      isDisabled={isDisabled}
+      isMulti={isMulti}
       isClearable={isClearable || isMulti}
     />
   );
 };
+
+export const SelectInput = forwardRef(InnerSelectInput);

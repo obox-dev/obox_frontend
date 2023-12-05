@@ -1,11 +1,14 @@
-import { useState, useMemo, ChangeEvent } from 'react';
+import { useMemo, ChangeEvent, ForwardedRef, forwardRef } from 'react';
 import { EntityState } from '@shared/utils/types';
 import { Input, InputVariants } from '../Input';
 import { InputLabel } from '../InputLabel';
 import { ISwitcher } from './types';
 import './Switcher.scss';
 
-export const Switcher = (props: ISwitcher) => {
+export const InnerSwitcher = (
+  props: ISwitcher,
+  ref: ForwardedRef<HTMLInputElement>
+) => {
   const {
     name,
     text,
@@ -17,28 +20,22 @@ export const Switcher = (props: ISwitcher) => {
     onChange,
   } = props;
 
-  const [innerState, setInnerState] = useState(value);
-
   const innerOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.checked;
-
     const newValue = value ? EntityState.ENABLED : EntityState.DISABLED;
-    setInnerState(newValue);
-    onChange?.(value);
+    onChange?.(newValue);
   };
 
   const finalText = useMemo(() => {
     if (text) {
       return text;
     }
-    return innerState === EntityState.ENABLED
-      ? textForChecked
-      : textForUnchecked;
-  }, [innerState]);
+    return value === EntityState.ENABLED ? textForChecked : textForUnchecked;
+  }, [value]);
 
   const isChecked = useMemo(() => {
-    return innerState === EntityState.ENABLED ? true : false;
-  }, [innerState]);
+    return value === EntityState.ENABLED ? true : false;
+  }, [value]);
 
   return (
     <div
@@ -57,6 +54,7 @@ export const Switcher = (props: ISwitcher) => {
           type={InputVariants.CHECKBOX}
           isDisabled={isDisabled}
           checked={isChecked}
+          ref={ref}
         />
         <span className="slider round"></span>
       </InputLabel>
@@ -64,3 +62,5 @@ export const Switcher = (props: ISwitcher) => {
     </div>
   );
 };
+
+export const Switcher = forwardRef(InnerSwitcher);

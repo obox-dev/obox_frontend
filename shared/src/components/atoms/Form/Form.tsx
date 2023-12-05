@@ -79,14 +79,6 @@ const FormInner = <T extends FieldValues>(
   };
 
   useEffect(() => {
-    for (const key in defaultValues) {
-      if (defaultValues[key]) {
-        methods.setValue(key as unknown as Path<T>, defaultValues[key]);
-      }
-    }
-  }, [defaultValues]);
-
-  useEffect(() => {
     methods.clearErrors();
   }, [t]);
 

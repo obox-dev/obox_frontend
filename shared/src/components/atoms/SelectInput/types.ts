@@ -12,8 +12,9 @@ export interface ISelectInput<T> {
   isMulti?: boolean;
   isDisabled?: boolean;
   closeMenuOnSelect?: boolean;
-  onChange?: (data: Options<T> | OptionType<T>) => void;
-  defaultValue?: OptionType<T> | OptionType<T>[];
+  onChange?: (data: unknown) => void;
+  value?: OptionType<T> | OptionType<T>[];
+  defaultValue?: OptionType<T> | OptionType<T>[] | null;
   placeholder?: string;
   isClearable?: boolean;
 }
