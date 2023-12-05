@@ -25,13 +25,13 @@ export const useDeleteMarks = (args: DeleteMarksParams) => {
     onError,
   });
 
-  const openMarksDeleteDialog = (marks: MarksResponse) =>
+  const openMarksDeleteDialog = (mark: MarksResponse) =>
     openDialog(({ closeDialog }) => {
 
       return (
         <Dialog
           okCallback={() => {
-            onDeleteSubmit(marks.mark_id);
+            onDeleteSubmit(mark.mark_id);
           }}
           cancelCallback={() => {
             closeDialog();
@@ -46,5 +46,7 @@ export const useDeleteMarks = (args: DeleteMarksParams) => {
         </Dialog>
       );
     });
-  return { openMarksDeleteDialog };
+  return {
+    openMarksDeleteDialog
+  };
 };

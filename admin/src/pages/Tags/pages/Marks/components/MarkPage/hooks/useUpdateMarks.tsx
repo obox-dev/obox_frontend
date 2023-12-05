@@ -17,14 +17,13 @@ interface UpdateMarksParams {
   onSuccess: () => Promise<void>;
   onError?: (error: AxiosError) => void;
   language: string;
-  name?: string;
 }
 
 export const useUpdateMarks = (args: UpdateMarksParams) => {
   const { t } = useTranslation();
   const { validationSchema } = useMarksFormValidation();
   const { openDialog } = useDialog();
-  const { onSuccess, onError, language } = args;
+  const { onSuccess, onError, language} = args;
   
   const updateSubmit = async ({ mark_id, name }: Marks) => {
     const id = mark_id;
@@ -41,7 +40,7 @@ export const useUpdateMarks = (args: UpdateMarksParams) => {
     onError,
   });
 
-  const openMenuUpdateDialog = (mark: MarksResponse) =>
+  const openMarksUpdateDialog = (mark: MarksResponse) =>
     openDialog(({ closeDialog }) => {
       const formRef = useRef<FormRef<Partial<Marks>> | null>(null);
       const defaultValues: Marks = mapMarksContent(mark, language);
@@ -73,14 +72,13 @@ export const useUpdateMarks = (args: UpdateMarksParams) => {
               <Input
                 type={InputVariants.HIDDEN}
                 name="language"
-                value={language}
               />
               <InputLabel
                 forInput="name"
-                text={t('menu:updateMarksForm.label')}
+                text={t('tags:updateMarksForm.label')}
               />
               <Input
-                placeholder={t('menu:updateMarksForm.placeholder')}
+                placeholder={t('tags:updateMarksForm.placeholder')}
                 type={InputVariants.TEXT}
                 name="name"
               />
@@ -90,6 +88,6 @@ export const useUpdateMarks = (args: UpdateMarksParams) => {
       );
     });
   return {
-    openMenuUpdateDialog,
+    openMarksUpdateDialog,
   };
 };

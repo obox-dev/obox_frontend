@@ -9,7 +9,6 @@ import { CreateMarksResponse, CreateMarksRequest  } from '@shared/services/Marks
 import { Input, InputVariants } from '@shared/components/atoms/Input';
 import { InputLabel } from '@shared/components/atoms/InputLabel';
 import { useMarksFormValidation } from '../validation/useMarksFormValidation';
-// import { useRestaurant } from '@shared/hooks/useRestaurant';
 
 interface CreateMarksParams {
   onSuccess: (result: CreateMarksResponse) => Promise<void>;
@@ -23,7 +22,6 @@ export const useCreateMarks = (args: CreateMarksParams) => {
   const { openDialog } = useDialog();
   const { t } = useTranslation();
   const { validationSchema } = useMarksFormValidation();
-  // const { restaurantId } = useRestaurant();
 
   const { execute: onCreateSubmit } = useRequest({
     requestFunction: MarksService.create,
@@ -33,13 +31,13 @@ export const useCreateMarks = (args: CreateMarksParams) => {
     },
   });
 
-  const openMenuCreateDialog = () => {
+  const openMarksCreateDialog = () => {
     openDialog(({ closeDialog }) => {
       const formRef = useRef<FormRef<Partial<Marks>> | null>(null);
 
       const defaultValues: CreateMarksRequest = {
-        reference_type: 'restaurant',
-        reference_id: '',
+        reference_type: referenceType,
+        reference_id: restaurantId,
         name: '',
         language,
       };
@@ -70,18 +68,15 @@ export const useCreateMarks = (args: CreateMarksParams) => {
             <>
               <Input
                 type={InputVariants.HIDDEN}
-                name="referenceType"
-                value={referenceType}
+                name="reference_type"
               />
               <Input
                 type={InputVariants.HIDDEN}
                 name="restaurant_id"
-                value={restaurantId}
               />
               <Input
                 type={InputVariants.HIDDEN}
                 name="language"
-                value={language}
               />
               <InputLabel
                 forInput="name"
@@ -99,6 +94,6 @@ export const useCreateMarks = (args: CreateMarksParams) => {
     });
   };
   return {
-    openMenuCreateDialog,
+    openMarksCreateDialog,
   };
 };

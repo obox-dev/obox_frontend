@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import { useRequest } from '@admin/hooks';
-import { MarksResponse , RestaurantsService , MarksService } from '@shared/services';
+import { MarksResponse , MarksService } from '@shared/services';
 
 interface GetMarksParams {
-  restaurant_id: string;
+  restaurantId: string;
 }
 
 export const useGetMarks = (args: GetMarksParams) => {
-  const { restaurant_id } = args;
+  const { restaurantId } = args;
 
   const [marksList, setMarksList] = useState<MarksResponse[]>([]);
 
   const loadMarks = () => {
-    return RestaurantsService.getMarksByRestaurantId(restaurant_id);
+    return MarksService.getMarksByRestaurantId(restaurantId);
   };
 
   const { execute: loadAllMarks } = useRequest({
@@ -25,13 +25,7 @@ export const useGetMarks = (args: GetMarksParams) => {
     },
   });
 
-  const { execute: loadSingleMarks } = useRequest({
-    requestFunction: MarksService.getById,
-    redirect404: true,
-  });
-
   return {
-    loadSingleMarks,
     loadAllMarks,
     marksList,
   };

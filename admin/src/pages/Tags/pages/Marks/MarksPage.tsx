@@ -6,7 +6,7 @@
 
 // const HARDCODED_RESTAURANT_ID = '793ecd10-c0c0-4b06-ac09-c7a3ecdc9f04';
 // const localLang = 'uk-UA';
-export const Marks = () => {
+export const MarksPage = () => {
   //  const { t } = useTranslation();
   // const { menuLanguage } = useMainProvider();
 

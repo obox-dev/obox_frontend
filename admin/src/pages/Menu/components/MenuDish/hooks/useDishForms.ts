@@ -20,6 +20,7 @@ import { mapDishContent } from '@shared/mappers/DishMapper';
 import { useRequest } from '@admin/hooks';
 import { useGetCategory } from '../../MenuCategories/hooks';
 import { useDishFormValidation } from '../validation/useDishFormValidation';
+import { useRestaurant } from '@shared/hooks/useRestaurant';
 
 type ExcludeNullableKeys =
   | 'price'
@@ -54,6 +55,7 @@ interface UseDishFormsProps {
 export const useDishForms = (props: UseDishFormsProps) => {
   const { menuId, categoryId, currentLanguage, dish } = props;
   const { createDishSchema } = useDishFormValidation();
+  const { restaurantId } = useRestaurant();
 
   const [defaultValues, setDefaultValues] = useState<DishDefaultValues>();
 
@@ -122,7 +124,7 @@ export const useDishForms = (props: UseDishFormsProps) => {
   const [allAllergens, setAllAllergens] = useState<AllergensResponse[]>([]);
 
   const loadAllAllergensByRestaurantId = () => {
-    return AllergensService.getAllergensByRestaurantId();
+    return AllergensService.getAllergensByRestaurantId(restaurantId);
   };
 
   const { execute: loadAllAllergens } = useRequest({
@@ -150,7 +152,7 @@ export const useDishForms = (props: UseDishFormsProps) => {
   const [allMarks, setAllMarks] = useState<MarksResponse[]>([]);
 
   const loadAllMarksByRestId = () => {
-    return MarksService.getMarksByRestaurantId();
+    return MarksService.getMarksByRestaurantId(restaurantId);
   };
 
   const { execute: loadAllMarks } = useRequest({
