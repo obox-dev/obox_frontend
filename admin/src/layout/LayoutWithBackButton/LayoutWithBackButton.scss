@@ -7,9 +7,14 @@
       display: flex;
       justify-content: space-between;
       gap: 24px;
+      align-items: stretch;
     }
 
     &-title {
+      max-width: calc(100% - 136px);
+      text-overflow: ellipsis;
+      overflow: hidden;
+      padding-inline: 15px;
       flex-grow: 1;
       text-align: center;
       color: $color-primary-text-contrast;
@@ -36,7 +41,7 @@
     &-back-button.btn {
       border-radius: 16px;
       width: 112px;
-      height: 80px;
+      min-height: 80px;
 
       > svg {
         margin-right: 0;
