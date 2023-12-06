@@ -1,6 +1,7 @@
 import { SidebarNavigation } from '../../components/organisms/SidebarNavigation';
 import { MainProvider } from '@admin/providers/main';
 import { MainRouter } from '@admin/routes/MainRouter';
+import './MainLayout.scss';
 
 export const MainLayout = () => {
   const userIsAuthenticated = true; // Replace this with your authentication logic
