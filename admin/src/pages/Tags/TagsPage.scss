@@ -4,6 +4,7 @@
 }
 
 .marks-and-allergenes-page {
+  position: relative;
   padding-top: 48px;
   display: flex;
   gap: 24px;
@@ -11,6 +12,7 @@
 
   .layout-with-search {
     padding: 0px;
+    flex-grow: 1;
 
     .input--with-icon {
       margin-bottom: 36px;
@@ -46,6 +48,13 @@
           background-color: $color-primary;
         }
       }
+    }
+
+    .tabs-section__action.btn {
+      position: absolute;
+      top: 131px;
+      right: 24px;
+      height: 51px;
     }
   }
 }

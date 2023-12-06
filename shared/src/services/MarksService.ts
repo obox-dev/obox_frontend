@@ -10,6 +10,7 @@ export interface MarksResponse {
   translation_id: string;
   content: Record<string, MarksContent>;
   state: EntityState,
+  // ask About it. I`m not sure about this code.
 }
 
 export type Marks = MarksContent & Omit<MarksResponse, 'content'>;

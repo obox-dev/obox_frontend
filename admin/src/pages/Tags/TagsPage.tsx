@@ -2,7 +2,7 @@ import { useTranslation } from '@libs/react-i18next';
 import { NavLink, Outlet } from   'react-router-dom';
 import { LayoutWithSearch } from '@admin/layout/LayoutWithSearch/LayoutWithSearch';
 import { LanguageSwitcher } from '@shared/components/molecules/LanguageSwitcher';
-import './Tags.scss';
+import './TagsPage.scss';
 
 
 export const TagsPage = () => {

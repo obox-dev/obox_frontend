@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useTranslation } from '@libs/react-i18next';
 import { useRestaurant } from '@shared/hooks/useRestaurant';
-import { useMarks } from './components/MarkPage/useMarks';
 import { TabsSection } from '@admin/pages/Menu/components/TabsSection/TabsSection';
 import { useNavigate } from 'react-router';
+import { useMarks } from './useMarks';
 
 export const MarksPage = () => {
   const{ t } = useTranslation();
