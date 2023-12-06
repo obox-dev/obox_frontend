@@ -30,7 +30,7 @@
     "floatFormat": "{{field}} must be an integer or floating-point number",
     "weightFormat": "{{field}} must only contain digits and / symbol",
     "symbolPosition": "{{field}} can not start or end with {{symbol}}",
-    "isInteger": "{{field}} must be an intagre",
+    "isInteger": "{{field}} must be an integer",
     "morethan": "{{field}} must be at least {{min}} character",
     "lessthan": "{{field}} must be no more than {{max}} characters"
   },
