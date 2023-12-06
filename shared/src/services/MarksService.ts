@@ -1,3 +1,4 @@
+import { EntityState } from '@shared/utils/types';
 import { API } from './ApiService';
 
 export interface MarksContent {
@@ -8,6 +9,7 @@ export interface MarksResponse {
   mark_id: string;
   translation_id: string;
   content: Record<string, MarksContent>;
+  state: EntityState,
 }
 
 export type Marks = MarksContent & Omit<MarksResponse, 'content'>;

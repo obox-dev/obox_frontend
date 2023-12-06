@@ -3,7 +3,7 @@ import { IAction } from '@shared/components/atoms/ActionMenu';
 export interface TabsSectionProps<T> {
   isLoading: boolean;
   items: T[];
-  title: string;
+  title?: string;
   buttonText: string;
   currentLanguage: string;
   actions: IAction<T>[];

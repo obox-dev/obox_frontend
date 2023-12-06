@@ -55,7 +55,7 @@ export const useUpdateMarks = (args: UpdateMarksParams) => {
           cancelCallback={() => {
             closeDialog();
           }}
-          title={t('menu:updateMarksForm.title')}
+          title={t('tags:updateMarksForm.title')}
           size="lg"
           okText={t('common:buttons:edit')}
           cancelText={t('common:buttons:cancel')}

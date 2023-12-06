@@ -1,17 +1,22 @@
 {  
+  "createMark": "Add a tag",
   "marks": "Tags",
   "allergen" : "Allergens",
   "createMarksForm": {
-    "title": "Add a label",
-    "placeholder": "Enter a label name",
-    "label": "Name of the label *"
+    "title": "Add a tag",
+    "placeholder": "Enter a tag name",
+    "label": "Name of the tag *"
+  },
+  "actions": {
+    "edit": "Edit",
+    "delete": "Delete"
   },
    "deleteMarksForm": {
-    "title": "Are you sure you want to delete a label?"
+    "title": "Are you sure you want to delete a tag?"
   },
   "updateMarksForm": {
-    "title": "Edit a label",
-    "placeholder": "Enter a label name",
-    "label": "Label name *"
+    "title": "Edit a tag",
+    "placeholder": "Enter a tag name",
+    "label": "Tag name *"
   }
 }
