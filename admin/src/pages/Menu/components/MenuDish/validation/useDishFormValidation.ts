@@ -99,14 +99,18 @@ export const useDishFormValidation = () => {
         }
       ),
     special_price: string()
-      .test('symbol', getSymbolPositionMessage(SPECIAL_PRICE_FIELD, '.'), (value) => {
-        if (value) {
-          const firstSymbol = value.charAt(0);
-          const lastSymbol = value.charAt(value.length - 1);
-          return firstSymbol !== '.' && lastSymbol !== '.';
+      .test(
+        'symbol',
+        getSymbolPositionMessage(SPECIAL_PRICE_FIELD, '.'),
+        (value) => {
+          if (value) {
+            const firstSymbol = value.charAt(0);
+            const lastSymbol = value.charAt(value.length - 1);
+            return firstSymbol !== '.' && lastSymbol !== '.';
+          }
+          return true;
         }
-        return true;
-      })
+      )
       .matches(REGEXP_FLOAT_NUMBER, {
         excludeEmptyString: true,
         message: getFloatFormatMessageFor(t('dishForm:specialPrice')),

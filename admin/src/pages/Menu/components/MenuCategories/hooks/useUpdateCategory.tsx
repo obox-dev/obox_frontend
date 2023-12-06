@@ -13,12 +13,12 @@ import {
 import { Form, FormRef } from '@shared/components/atoms/Form';
 import { Dialog } from '@shared/components/molecules/Dialog';
 import { Input, InputVariants } from '@shared/components/atoms/Input';
-import { useCategoryFormValidation } from '../validation/useCategoryFormValidation';
 import { Switcher } from '@shared/components/atoms/Switcher';
 import { UpdateStateRequest } from '@shared/utils/types';
-import { mapCategoryContent } from '../mappers/mapCategoryContent';
 import { Textarea } from '@shared/components/atoms/Textarea';
 import { InputLabel } from '@shared/components/atoms/InputLabel';
+import { useCategoryFormValidation } from '../validation/useCategoryFormValidation';
+import { mapCategoryContent } from '../mappers/mapCategoryContent';
 
 interface UpdateCategoryParams {
   onSuccess: () => Promise<void>;
