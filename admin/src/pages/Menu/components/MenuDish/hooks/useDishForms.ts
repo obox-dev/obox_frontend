@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from '@libs/react-i18next';
 import {
   CreateDishRequest,
   Dish,
@@ -53,6 +54,7 @@ interface UseDishFormsProps {
 }
 
 export const useDishForms = (props: UseDishFormsProps) => {
+  const { t } = useTranslation();
   const { menuId, categoryId, currentLanguage, dish } = props;
   const { createDishSchema } = useDishFormValidation();
 
@@ -116,9 +118,9 @@ export const useDishForms = (props: UseDishFormsProps) => {
   }), [dish]);
 
   const weightUnitOptions = [
-    { label: 'gramms', value: WeightUnit.GRAMMS },
-    { label: 'ml', value: WeightUnit.MILLILITERS },
-    { label: 'pieces', value: WeightUnit.PIECES },
+    { label: t('dishForm:weight_unit.gramms'), value: WeightUnit.GRAMMS },
+    { label: t('dishForm:weight_unit.ml'), value: WeightUnit.MILLILITERS },
+    { label: t('dishForm:weight_unit.pieces'), value: WeightUnit.PIECES },
   ];
 
   const [allAllergens, setAllAllergens] = useState<AllergensResponse[]>([]);

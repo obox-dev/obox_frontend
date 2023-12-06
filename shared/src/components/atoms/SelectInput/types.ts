@@ -1,3 +1,5 @@
+import { FieldError } from 'react-hook-form';
+
 export type OptionType<T = unknown> = {
   value: T;
   label: string;
@@ -17,4 +19,5 @@ export interface ISelectInput<T> {
   defaultValue?: OptionType<T> | OptionType<T>[] | null;
   placeholder?: string;
   isClearable?: boolean;
+  error?: FieldError;
 }

@@ -11,4 +11,5 @@ export interface FormRef<T> {
   submit: () => Promise<void>;
   reset: () => void;
   setValue: (key: Path<T>, value: PathValue<T, Path<T>>) => void;
+  clearFieldErrors: (key: Path<T>) => void;
 }

@@ -35,10 +35,10 @@ const FormInner = <T extends FieldValues>(
   const setTypedErrors = (errors: Partial<T>) => {
     for (const key in errors) {
       if (key in errors) {
-        const element = errors[key as keyof typeof errors];
+        const message = errors[key as keyof typeof errors];
         methods.setError(key as unknown as Path<T>, {
           type: 'response',
-          message: element as string,
+          message: message as string,
         });
       }
     }
@@ -91,6 +91,9 @@ const FormInner = <T extends FieldValues>(
     },
     reset: () => {
       methods.reset();
+    },
+    clearFieldErrors: (key: Path<T>) => {
+      methods.clearErrors(key);
     }
   }));
 

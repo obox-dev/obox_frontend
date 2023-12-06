@@ -16,8 +16,8 @@
   "specialPrice": "Special price",
   "weight": "Quantity",
   "weightUnit": "Units",
-  "calories": "Calories",
-  "cookingTime": "Cooking time",
+  "calories": "Calories (kcal)",
+  "cookingTime": "Cooking time (minutes)",
   
   "placeholder": {
     "dishName": "Enter name",
@@ -29,7 +29,7 @@
     "description": "Enter description",
     "allergens": "Select allergens",
     "marks": "Select marks",
-    "cookingTime": "MIN"
+    "cookingTime": "Enter time for cooking"
   },
   
   "createButton": "Create",
@@ -58,5 +58,11 @@
     "maxSize": "Max size no more than 3 Mb",
     "formats": "Formats: .jpeg, .png",
     "deleteButton": "Delete image"
+  },
+
+  "weight_unit": {
+    "gramms": "gr",
+    "ml": "ml",
+    "pieces": "pc"
   }
 }

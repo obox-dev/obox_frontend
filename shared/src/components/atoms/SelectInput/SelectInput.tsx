@@ -19,6 +19,7 @@ export const InnerSelectInput = <T,>(
     placeholder,
     isClearable = false,
     value,
+    error,
   } = props;
 
   const customStyle: StylesConfig = {
@@ -34,22 +35,25 @@ export const InnerSelectInput = <T,>(
   }));
 
   return (
-    <Select
-      value={value}
-      name={name}
-      options={options}
-      defaultValue={defaultValue}
-      onChange={onChange}
-      className={[className, 'basic-single'].join(' ')}
-      classNamePrefix="select"
-      components={{ IndicatorSeparator: () => null }}
-      styles={customStyle}
-      closeMenuOnSelect={closeMenuOnSelect}
-      placeholder={placeholder}
-      isDisabled={isDisabled}
-      isMulti={isMulti}
-      isClearable={isClearable || isMulti}
-    />
+    <>
+      <Select
+        value={value}
+        name={name}
+        options={options}
+        defaultValue={defaultValue}
+        onChange={onChange}
+        className={[className, 'basic-single', 'mb-2'].join(' ')}
+        classNamePrefix="select"
+        components={{ IndicatorSeparator: () => null }}
+        styles={customStyle}
+        closeMenuOnSelect={closeMenuOnSelect}
+        placeholder={placeholder}
+        isDisabled={isDisabled}
+        isMulti={isMulti}
+        isClearable={isClearable || isMulti}
+      />
+      {error && <span className="text-danger">{error.message as string}</span>}
+    </>
   );
 };
 

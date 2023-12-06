@@ -8,19 +8,21 @@ export const useDishFormValidation = () => {
   const MAX_NAME_LENGTH = 200;
   const MIN_PRICE = 0;
   const MAX_PRICE = 100000;
+  const MIN_COOKING_TIME = 0;
+  const MAX_COOKING_TIME = 600;
   const MIN_WEIGHT = 1;
   const MAX_WEIGHT = 100000;
   const MIN_CALORIES = 1;
   const MAX_CALORIES = 30000;
 
-  const REGEXP_FLOAT_NUMBER = /^(0(?!\d)(?:\.\d+)?|[1-9]\d*(?:\.\d+)?)$/;
+  const REGEXP_FLOAT_NUMBER = /^(0(?!\d)(?:\.\d+)?|[1-9]\d*(?:\.\d+)?|\.\d+)$/;
   const REGEXP_INTEGER = /^(0|[1-9]\d*)$/;
-  
+  const REGEXP_WEIGHT = /^(\d+\/?)*\d+$/;
 
   const NAME_IS_REQUIRED_MESSAGE = t('common:validation:isRequired', {
     field: t('dishForm:dishName'),
   });
-  
+
   const MIN_NAME_LENGTH_MESSAGE = t('common:validation:morethan', {
     field: t('dishForm:dishName'),
     min: MIN_NAME_LENGTH,
@@ -35,6 +37,10 @@ export const useDishFormValidation = () => {
     field: t('dishForm:price'),
   });
 
+  const PRICE_FIELD = t('dishForm:price');
+  const SPECIAL_PRICE_FIELD = t('dishForm:specialPrice');
+  const WEIGHT_FIELD = t('dishForm:weight');
+
   const getFloatFormatMessageFor = (field: string) => {
     return t('common:validation:floatFormat', { field });
   };
@@ -43,11 +49,22 @@ export const useDishFormValidation = () => {
     return t('common:validation:isInteger', { field });
   };
 
+  const getWeightMessageFor = (field: string) => {
+    return t('common:validation:weightFormat', { field });
+  };
+
   const getRangeMessageFor = (field: string, min: number, max: number) => {
     return t('dishForm:isInRange', {
       field,
       min,
       max,
+    });
+  };
+
+  const getSymbolPositionMessage = (field: string, symbol: string) => {
+    return t('common:validation.symbolPosition', {
+      field,
+      symbol,
     });
   };
 
@@ -59,6 +76,14 @@ export const useDishFormValidation = () => {
       .trim(),
     price: string()
       .required(PRICE_IS_REQUIRED_MESSAGE)
+      .test('symbol', getSymbolPositionMessage(PRICE_FIELD, '.'), (value) => {
+        if (value) {
+          const firstSymbol = value.charAt(0);
+          const lastSymbol = value.charAt(value.length - 1);
+          return firstSymbol !== '.' && lastSymbol !== '.';
+        }
+        return true;
+      })
       .matches(
         REGEXP_FLOAT_NUMBER,
         getFloatFormatMessageFor(t('dishForm:price'))
@@ -73,18 +98,72 @@ export const useDishFormValidation = () => {
           return true;
         }
       ),
-    description: string(),
-    weight: string()
+    special_price: string()
+      .test('symbol', getSymbolPositionMessage(SPECIAL_PRICE_FIELD, '.'), (value) => {
+        if (value) {
+          const firstSymbol = value.charAt(0);
+          const lastSymbol = value.charAt(value.length - 1);
+          return firstSymbol !== '.' && lastSymbol !== '.';
+        }
+        return true;
+      })
+      .matches(REGEXP_FLOAT_NUMBER, {
+        excludeEmptyString: true,
+        message: getFloatFormatMessageFor(t('dishForm:specialPrice')),
+      })
+      .test(
+        'min-max',
+        getRangeMessageFor(t('dishForm:specialPrice'), MIN_PRICE, MAX_PRICE),
+        (value) => {
+          if (value) {
+            return +value > MIN_PRICE && +value <= MAX_PRICE;
+          }
+          return true;
+        }
+      ),
+    cooking_time: string()
       .matches(REGEXP_INTEGER, {
         excludeEmptyString: true,
-        message: getIntegerMessageFor(t('dishForm:weight')),
+        message: getIntegerMessageFor(t('dishForm:cookingTime')),
+      })
+      .test(
+        'min-max',
+        getRangeMessageFor(
+          t('dishForm:cookingTime'),
+          MIN_COOKING_TIME,
+          MAX_COOKING_TIME
+        ),
+        (value) => {
+          if (value) {
+            return +value > MIN_COOKING_TIME && +value <= MAX_COOKING_TIME;
+          }
+          return true;
+        }
+      ),
+    description: string(),
+    weight: string()
+      .test('symbol', getSymbolPositionMessage(WEIGHT_FIELD, '/'), (value) => {
+        if (value) {
+          const firstSymbol = value.charAt(0);
+          const lastSymbol = value.charAt(value.length - 1);
+          return firstSymbol !== '/' && lastSymbol !== '/';
+        }
+        return true;
+      })
+      .matches(REGEXP_WEIGHT, {
+        excludeEmptyString: true,
+        message: getWeightMessageFor(t('dishForm:weight')),
       })
       .test(
         'min-max',
         getRangeMessageFor(t('dishForm:weight'), MIN_WEIGHT, MAX_WEIGHT),
         (value) => {
           if (value) {
-            return +value >= MIN_WEIGHT && +value <= MAX_WEIGHT;
+            const parts = value.split('/');
+            return parts.every((part) => {
+              const num = parseInt(part, 10);
+              return !isNaN(num) && num >= MIN_WEIGHT && num <= MAX_WEIGHT;
+            });
           }
           return true;
         }
@@ -104,7 +183,6 @@ export const useDishFormValidation = () => {
           return true;
         }
       ),
-    state: string(),
   });
-  return {createDishSchema};
+  return { createDishSchema };
 };

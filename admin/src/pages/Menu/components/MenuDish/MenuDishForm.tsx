@@ -211,6 +211,11 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
                   type={InputVariants.TEXT}
                   name="weight"
                   placeholder={t('dishForm:placeholder.weight')}
+                  onChange={(e) => {
+                    if (e.target.value === '') {
+                      formRef.current?.clearFieldErrors('weight_unit');
+                    }
+                  }}
                 />
               </div>
               <div className="form-group">
@@ -221,14 +226,15 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
                 <Controller
                   name="weight_unit"
                   defaultValue={defaultValues.weight_unit}
-                  render={({ field }) => {
+                  render={({ field, fieldState: { error } }) => {
                     return (
                       <SelectInput
                         {...field}
                         options={weightUnitOptions}
-                        defaultValue={null}
+                        defaultValue={defaultValues.weight_unit}
                         placeholder={t('dishForm:placeholder.weightUnit')}
                         isClearable
+                        error={error}
                       />
                     );
                   }}
