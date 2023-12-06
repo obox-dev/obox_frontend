@@ -55,6 +55,7 @@ export const MenuDishPage = () => {
     getDishAttachments,
     setFilesToUpload,
     setPrimaryImage,
+    resetImages,
   } = useDishImage();
 
   useEffect(() => {
@@ -88,6 +89,10 @@ export const MenuDishPage = () => {
     [dishId, onUpdateSubmit, onCreateSubmit, navigateToCategory]
   );
 
+  const onReset = () => {
+    resetImages();
+  };
+
   return loading || !defaultValues ? (
     <div>Loading...</div>
   ) : (
@@ -105,6 +110,7 @@ export const MenuDishPage = () => {
       weightUnitOptions={weightUnitOptions}
       allergensOptions={allergensOptions}
       marksOptions={marksOptions}
+      onReset={onReset}
     />
   );
 };

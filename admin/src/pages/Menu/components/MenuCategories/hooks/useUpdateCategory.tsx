@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { AxiosError } from 'axios';
+import { Controller } from 'react-hook-form';
 import { useTranslation } from '@libs/react-i18next';
 import { useRequest } from '@admin/hooks';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
@@ -12,12 +13,12 @@ import {
 import { Form, FormRef } from '@shared/components/atoms/Form';
 import { Dialog } from '@shared/components/molecules/Dialog';
 import { Input, InputVariants } from '@shared/components/atoms/Input';
-import { useCategoryFormValidation } from '../validation/useCategoryFormValidation';
 import { Switcher } from '@shared/components/atoms/Switcher';
-import { EntityState, UpdateStateRequest } from '@shared/utils/types';
-import { mapCategoryContent } from '../mappers/mapCategoryContent';
+import { UpdateStateRequest } from '@shared/utils/types';
 import { Textarea } from '@shared/components/atoms/Textarea';
 import { InputLabel } from '@shared/components/atoms/InputLabel';
+import { useCategoryFormValidation } from '../validation/useCategoryFormValidation';
+import { mapCategoryContent } from '../mappers/mapCategoryContent';
 
 interface UpdateCategoryParams {
   onSuccess: () => Promise<void>;
@@ -109,15 +110,16 @@ export const useUpdateCategory = (args: UpdateCategoryParams) => {
                 maxLength={255}
                 showCounter
               />
-              <Switcher
-                value={defaultValues.state}
+              <Controller
                 name="state"
-                textForChecked={t('menu:actions.categoryStatusEnabled')}
-                textForUnchecked={t('menu:actions.categoryStatusDisabled')}
-                onChange={(val) => {
-                  formRef.current?.setValue(
-                    'state',
-                    val ? EntityState.ENABLED : EntityState.DISABLED
+                defaultValue={defaultValues.state}
+                render={({ field }) => {
+                  return (
+                    <Switcher
+                      {...field}
+                      textForChecked={t('menu:actions.categoryStatusEnabled')}
+                      textForUnchecked={t('menu:actions.categoryStatusDisabled')}
+                    />
                   );
                 }}
               />

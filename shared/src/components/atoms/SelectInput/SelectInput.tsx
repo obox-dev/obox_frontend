@@ -1,10 +1,12 @@
-import Select from 'react-select';
-import { StylesConfig } from 'react-select';
-import { useFormInput } from '@shared/hooks/useFormInput';
-import { ISelectInput, OptionType } from './types';
+import { forwardRef, useImperativeHandle, ForwardedRef } from 'react';
+import Select, { StylesConfig } from 'react-select';
+import { ISelectInput } from './types';
 import './SelectInput.scss';
 
-export const SelectInput = <T,>(props: ISelectInput<T>) => {
+export const InnerSelectInput = <T,>(
+  props: ISelectInput<T>,
+  ref: ForwardedRef<unknown>
+) => {
   const {
     defaultValue,
     name,
@@ -16,6 +18,8 @@ export const SelectInput = <T,>(props: ISelectInput<T>) => {
     onChange,
     placeholder,
     isClearable = false,
+    value,
+    error,
   } = props;
 
   const customStyle: StylesConfig = {
@@ -26,34 +30,31 @@ export const SelectInput = <T,>(props: ISelectInput<T>) => {
     }),
   };
 
-  const { ref } = useFormInput(name);
-
-  const innerOnChange = (e: OptionType<T> | OptionType<T>[]) => {
-    if (isMulti) {
-      onChange?.(e as OptionType<T>[]);
-    } else {
-      onChange?.(e as OptionType<T>);
-    }
-  };
+  useImperativeHandle(ref, () => ({
+    getValue: () => value,
+  }));
 
   return (
-    <Select
-      ref={ref}
-      className={[className, 'basic-single'].join(' ')}
-      classNamePrefix="select"
-      defaultValue={defaultValue}
-      name={name}
-      options={options}
-      isDisabled={isDisabled}
-      components={{ IndicatorSeparator: () => null }}
-      styles={customStyle}
-      isMulti={isMulti}
-      closeMenuOnSelect={closeMenuOnSelect}
-      onChange={(e) => {
-        innerOnChange(e as OptionType<T>[] | OptionType<T>);
-      }}
-      placeholder={placeholder}
-      isClearable={isClearable || isMulti}
-    />
+    <>
+      <Select
+        value={value}
+        name={name}
+        options={options}
+        defaultValue={defaultValue}
+        onChange={onChange}
+        className={[className, 'basic-single', 'mb-2'].join(' ')}
+        classNamePrefix="select"
+        components={{ IndicatorSeparator: () => null }}
+        styles={customStyle}
+        closeMenuOnSelect={closeMenuOnSelect}
+        placeholder={placeholder}
+        isDisabled={isDisabled}
+        isMulti={isMulti}
+        isClearable={isClearable || isMulti}
+      />
+      {error && <span className="text-danger">{error.message as string}</span>}
+    </>
   );
 };
+
+export const SelectInput = forwardRef(InnerSelectInput);

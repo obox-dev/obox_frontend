@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from '@libs/react-i18next';
 import {
   CreateDishRequest,
   Dish,
@@ -33,10 +34,11 @@ type ExcludeSelectOptionsKeys =
   | 'weight_unit'
   | 'allergens'
   | 'marks';
+  
 type ExcludedAsNullableString = Record<ExcludeNullableKeys, string | null>;
 type ExcludedAsSelectOptions = Record<
   ExcludeSelectOptionsKeys,
-  OptionType<string>[] | OptionType<string> | undefined
+  OptionType<string>[] | OptionType<string> | null | undefined
 >;
 export type DishDefaultValues = Omit<
   CreateDishRequest,
@@ -52,10 +54,12 @@ interface UseDishFormsProps {
 }
 
 export const useDishForms = (props: UseDishFormsProps) => {
+  const { t } = useTranslation();
   const { menuId, categoryId, currentLanguage, dish } = props;
   const { createDishSchema } = useDishFormValidation();
 
   const [defaultValues, setDefaultValues] = useState<DishDefaultValues>();
+  const [optionsLoaded, setOptionsLoaded] = useState<boolean>();
 
   const { loadAllCategories, categoriesList } = useGetCategory({
     menuId,
@@ -69,7 +73,7 @@ export const useDishForms = (props: UseDishFormsProps) => {
     special_price: '',
     cooking_time: '',
     weight: '',
-    weight_unit: undefined,
+    weight_unit: null,
     calories: '',
     allergens: [],
     marks: [],
@@ -114,9 +118,9 @@ export const useDishForms = (props: UseDishFormsProps) => {
   }), [dish]);
 
   const weightUnitOptions = [
-    { label: 'gramms', value: WeightUnit.GRAMMS },
-    { label: 'ml', value: WeightUnit.MILLILITERS },
-    { label: 'pieces', value: WeightUnit.PIECES },
+    { label: t('dishForm:weight_unit.gramms'), value: WeightUnit.GRAMMS },
+    { label: t('dishForm:weight_unit.ml'), value: WeightUnit.MILLILITERS },
+    { label: t('dishForm:weight_unit.pieces'), value: WeightUnit.PIECES },
   ];
 
   const [allAllergens, setAllAllergens] = useState<AllergensResponse[]>([]);
@@ -167,6 +171,7 @@ export const useDishForms = (props: UseDishFormsProps) => {
     await loadAllCategories();
     await loadAllMarks();
     await loadAllAllergens();
+    setOptionsLoaded(true);
   }, []);
 
   useEffect(() => {
@@ -225,7 +230,7 @@ export const useDishForms = (props: UseDishFormsProps) => {
         setDefaultValues(defaults);
       }
     }
-  }, [categoriesList, allAllergens, allMarks, dish]);
+  }, [optionsLoaded]);
 
   const mapMarkContent = (
     allergeneItem: MarksResponse,

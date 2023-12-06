@@ -7,5 +7,5 @@ export interface ISwitcher
   textForUnchecked?: string;
   isDisabled?: boolean;
   stopClickPropagation?: boolean;
-  onChange?: (value: boolean) => void;
+  onChange?: (value: unknown) => void;
 }
