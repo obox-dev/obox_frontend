@@ -1,6 +1,7 @@
 { 
   "createMark": "Додати мітку",
-  "name": "Назва мітки",
+  "nameTag": "Назва мітки",
+  "nameAllergen": "Назва алергену",
   "marks": "Мітки",
   "allergen" : "Алергени",
   "createMarksForm": {

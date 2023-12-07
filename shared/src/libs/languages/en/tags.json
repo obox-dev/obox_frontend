@@ -1,5 +1,7 @@
 {  
   "createMark": "Add a tag",
+  "nameTag": "Label name",
+  "nameAllergen": "Name of the allergen",
   "marks": "Tags",
   "allergen" : "Allergens",
   "createMarksForm": {

@@ -1,13 +1,13 @@
 import * as yup from 'yup';
 import { useTranslation } from '@libs/react-i18next';
 
-export const useMarksFormValidation = () => {
+export const useAllergensFormValidation = () => {
   const { t } = useTranslation();
   const MIN_NAME_LENGTH = 1;
   const MAX_NAME_LENGTH = 200;
 
   const NAME_IS_REQUIRED_MESSAGE = t('common:validation:isRequired', {
-    field: t('tags:nameTag'),
+    field: t('tags:nameAllergen'),
   });
 
   const MIN_NAME_LENGTH_MESSAGE = t('common:validation:morethan', {
