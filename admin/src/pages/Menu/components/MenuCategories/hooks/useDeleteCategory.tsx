@@ -39,7 +39,7 @@ export const useDeleteCategory = (args: DeleteCategoryParams) => {
           title={t('menu:deleteCategoryForm.title')}
           size="xl"
           okText={t('common:buttons:delete')}
-          cancelText={t('common:buttons:cancelChanges')}
+          cancelText={t('common:buttons:cancel')}
           okButtonVariant={ButtonVariants.PRIMARY}
           cancelButtonVariant={ButtonVariants.TERTIARY}
         >

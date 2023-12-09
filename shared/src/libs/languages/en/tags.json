@@ -1,24 +1,38 @@
 {  
   "createMark": "Add a tag",
+  "createAllergen": "Add allergen",
   "nameTag": "Label name",
   "nameAllergen": "Name of the allergen",
   "marks": "Tags",
   "allergen" : "Allergens",
+  "actions": {
+    "edit": "Edit",
+    "delete": "Delete"
+  },
   "createMarksForm": {
     "title": "Add a tag",
     "placeholder": "Enter a tag name",
     "label": "Name of the tag *"
   },
-  "actions": {
-    "edit": "Edit",
-    "delete": "Delete"
+   "createAllergensForm": {
+    "title": "Add allergen",
+    "placeholder": "Enter the name of the allergen",
+    "label": "Name of the allergen *"
   },
    "deleteMarksForm": {
     "title": "Are you sure you want to delete a tag?"
+  },
+    "deleteAllergensForm": {
+    "title": "Are you sure you want to remove the allergen?"
   },
   "updateMarksForm": {
     "title": "Edit a tag",
     "placeholder": "Enter a tag name",
     "label": "Tag name *"
+  },
+    "updateAllergensForm": {
+    "title": "Edit allergen",
+    "placeholder": "Enter the name of the allergen",
+    "label": "Name of the allergen *"
   }
 }

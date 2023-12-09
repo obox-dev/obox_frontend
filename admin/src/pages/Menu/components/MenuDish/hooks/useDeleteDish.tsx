@@ -38,7 +38,7 @@ export const useDeleteDish = (args: DeleteDishParams) => {
           title={t('menu:deleteDishForm.title')}
           size="xl"
           okText={t('common:buttons:delete')}
-          cancelText={t('common:buttons:cancelChanges')}
+          cancelText={t('common:buttons:cancel')}
           okButtonVariant={ButtonVariants.PRIMARY}
           cancelButtonVariant={ButtonVariants.TERTIARY}
         ></Dialog>

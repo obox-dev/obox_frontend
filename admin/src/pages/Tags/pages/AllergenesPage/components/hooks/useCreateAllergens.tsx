@@ -18,7 +18,7 @@ interface CreateAllergensParams {
   restaurantId: string,
 }
 
-export const useCreateAllergensService = (args: CreateAllergensParams) => {
+export const useCreateAllergens = (args: CreateAllergensParams) => {
   const { onSuccess, referenceType, language, restaurantId} = args;
   const { openDialog } = useDialog();
   const { t } = useTranslation();
