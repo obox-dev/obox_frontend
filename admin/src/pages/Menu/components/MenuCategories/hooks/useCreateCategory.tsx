@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { Controller } from 'react-hook-form';
 import { useTranslation } from '@libs/react-i18next';
 import { useRequest } from '@admin/hooks';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
@@ -100,15 +101,16 @@ export const useCreateCategory = (args: CreateCategoryParams) => {
                 maxLength={255}
                 showCounter
               />
-              <Switcher
-                value={defaultValues.state}
+              <Controller
                 name="state"
-                textForChecked={t('menu:actions.categoryStatusEnabled')}
-                textForUnchecked={t('menu:actions.categoryStatusDisabled')}
-                onChange={(val) => {
-                  formRef.current?.setValue(
-                    'state',
-                    val ? EntityState.ENABLED : EntityState.DISABLED
+                defaultValue={defaultValues.state}
+                render={({ field }) => {
+                  return (
+                    <Switcher
+                      {...field}
+                      textForChecked={t('menu:actions.categoryStatusEnabled')}
+                      textForUnchecked={t('menu:actions.categoryStatusDisabled')}
+                    />
                   );
                 }}
               />

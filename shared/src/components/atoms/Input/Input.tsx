@@ -1,8 +1,12 @@
+import { ForwardedRef, forwardRef } from 'react';
 import { useFormInput } from '@shared/hooks/useFormInput';
 import { IInput, InputVariants } from './types';
 import './Input.scss';
 
-export const Input = (props: IInput<HTMLInputElement>) => {
+export const InnerInput = (
+  props: IInput<HTMLInputElement>,
+  ref: ForwardedRef<HTMLInputElement>
+) => {
   const {
     id,
     name,
@@ -28,15 +32,20 @@ export const Input = (props: IInput<HTMLInputElement>) => {
 
   const options = { ...(onChange ? { onChange } : {}) };
 
-  const ignoreFormContext = type === InputVariants.FILE;
+  const ignoreFormContext =
+    type === InputVariants.FILE || type === InputVariants.CHECKBOX;
 
-  const { ref, registerParams, error } = useFormInput(name, options, ignoreFormContext);
+  const {
+    ref: innerRef,
+    registerParams,
+    error,
+  } = useFormInput(name, options, ignoreFormContext);
   const inputClassName = combineClasses(type, !!error);
 
   let resultingProps = {
     id,
     onChange,
-    ref,
+    ref: innerRef || ref,
     value,
     name,
     type,
@@ -55,10 +64,10 @@ export const Input = (props: IInput<HTMLInputElement>) => {
 
   return (
     <>
-      <input
-        {...resultingProps}
-      />
+      <input {...resultingProps} />
       {error && <span className="text-danger">{error.message as string}</span>}
     </>
   );
 };
+
+export const Input = forwardRef(InnerInput);

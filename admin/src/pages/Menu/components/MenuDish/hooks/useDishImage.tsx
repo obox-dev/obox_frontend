@@ -89,6 +89,10 @@ export const useDishImage = () => {
     }
   }, [attachmentsToDelete]);
 
+  const resetImages = () => {
+    setFilesToUpload([]);
+  };
+
   return {
     attachments,
     filesToUpload,
@@ -99,5 +103,6 @@ export const useDishImage = () => {
     getDishAttachments,
     setFilesToUpload,
     setPrimaryImage,
+    resetImages,
   };
 };
