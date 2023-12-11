@@ -7,7 +7,6 @@ import {
   AttachmentService,
 } from '@shared/services/AttachmentsService';
 import { useRequest } from '@admin/hooks';
-import { DishesService } from '@shared/services';
 
 export const useDishImage = () => {
   const [attachments, setAttachments] = useState<Attachment[]>([]);
@@ -15,15 +14,6 @@ export const useDishImage = () => {
   const [attachmentsToDelete, setAttachmentsToDelete] = useState<Attachment[]>(
     []
   );
-
-  const { execute: setPrimaryImage } = useRequest({
-    requestFunction: async (id: string) => {
-      const attachmentsList = await AttachmentService.getAllAttachments(id);
-      await DishesService.setPrimaryImage(id, {
-        image: attachmentsList[0].attachment_id,
-      });
-    },
-  });
 
   const { execute: createAttachment } = useRequest({
     requestFunction: AttachmentService.create,
@@ -102,7 +92,6 @@ export const useDishImage = () => {
     deleteMarkedAttachments,
     getDishAttachments,
     setFilesToUpload,
-    setPrimaryImage,
     resetImages,
   };
 };

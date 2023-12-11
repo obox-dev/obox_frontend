@@ -12,10 +12,12 @@
     border-radius: 16px;
     overflow: hidden;
     flex-shrink: 0;
-    img, svg {
+    img,
+    svg {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      color: $color-secondary;
     }
   }
 
@@ -38,10 +40,17 @@
         font-weight: 700;
 
         &-discount {
-            color: $btn-disabled-color-text;
-            text-decoration: line-through;
+          color: $btn-disabled-color-text;
+          text-decoration: line-through;
         }
       }
+    }
+  }
+
+  &--out-of-stock {
+    img,
+    svg {
+      filter: grayscale(1);
     }
   }
 }

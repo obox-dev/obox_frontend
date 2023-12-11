@@ -72,7 +72,7 @@ export class DishesService {
     return API.post<CreateDishRequest, CreateDishResponse>('/dishes/', params);
   }
   static async update(id: string, params: UpdateDishRequest) {
-    return API.patch<UpdateDishRequest, CreateDishResponse>(
+    return API.patch<UpdateDishRequest, DishResponse>(
       `/dishes/${id}`,
       params
     );
