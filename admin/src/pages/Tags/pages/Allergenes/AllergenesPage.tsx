@@ -4,7 +4,7 @@ import { useTranslation } from '@libs/react-i18next';
 import { useRestaurant } from '@shared/hooks/useRestaurant';
 import { TabsSection } from '@admin/pages/Menu/components/TabsSection/TabsSection';
 import { useNavigate } from 'react-router';
-import { useAllergens } from './useAllergenes';
+import { useAllergens } from './components/AllergenesPage/useAllergenes';
 
 
 export const AllergensPage = () => {

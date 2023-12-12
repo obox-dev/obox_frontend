@@ -14,8 +14,8 @@ import Pricing from '@admin/pages/Pricing/Pricing';
 import RestaurantSettings from '@admin/pages/RestaurantSettings/RestaurantSettings';
 import QRSettings from '@admin/pages/QRSettings/QRSettings';
 import {TagsPage} from '@admin/pages/Tags/TagsPage';
-import { MarksPage } from '@admin/pages/Tags/pages/MarkPage/MarksPage';
-import { AllergensPage } from '@admin/pages/Tags/pages/AllergenesPage/AllergenesPage';
+import { MarksPage } from '@admin/pages/Tags/pages/Marks/MarksPage';
+import { AllergensPage } from '@admin/pages/Tags/pages/Allergenes/AllergenesPage';
 
 
 
@@ -38,6 +38,7 @@ export const MainRouter = () => {
         <Route index element={<Navigate to="marks" />} />
         <Route path="marks" element={<MarksPage/>} />
         <Route path="allergens" element={<AllergensPage />} />
+        <Route path="allergens/:allergenID" element={<AllergensPage />} />
       </Route>
       <Route path="/reviews" element={<Review />} />
       <Route path="/analytics" element={<Analytics />} />
