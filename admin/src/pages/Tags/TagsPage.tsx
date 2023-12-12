@@ -10,7 +10,7 @@ export const TagsPage = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="marks-and-allergenes-page container--fluid">
+    <div className="marks-and-allergens-page container--fluid">
       <LayoutWithSearch>
         <>
           <ul className="nav">

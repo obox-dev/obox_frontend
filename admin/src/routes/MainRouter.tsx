@@ -15,7 +15,7 @@ import RestaurantSettings from '@admin/pages/RestaurantSettings/RestaurantSettin
 import QRSettings from '@admin/pages/QRSettings/QRSettings';
 import {TagsPage} from '@admin/pages/Tags/TagsPage';
 import { MarksPage } from '@admin/pages/Tags/pages/Marks/MarksPage';
-import { AllergensPage } from '@admin/pages/Tags/pages/Allergenes/AllergenesPage';
+import { AllergensPage } from '@admin/pages/Tags/pages/Allergens/AllergensPage';
 
 
 
