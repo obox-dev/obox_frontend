@@ -1,0 +1,1 @@
+export { useGetDishesForAllergen } from './useGetDishesForAllergenes';

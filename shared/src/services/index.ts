@@ -6,8 +6,9 @@ export { RestaurantsService } from './RestaurantsService';
 export { AttachmentService } from './AttachmentsService';
 export { MarksService } from './MarksService';
 export { AllergensService } from './AllergensService';
-export type { FileToUpload, AttachmentOrFile } from './AttachmentsService';
+export { SearchService } from './SearchService';
 
+export type { FileToUpload, AttachmentOrFile } from './AttachmentsService';
 export type {
   Category,
   CreateCategoryRequest,
@@ -18,4 +19,5 @@ export type {
 export type { MenuResponse, Menu } from './RestaurantsService';
 export type { MarksResponse, Marks } from './MarksService';
 export type { AllergensResponse, Allergens } from './AllergensService';
+export type { EntitySearchResponse } from './SearchService';
 

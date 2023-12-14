@@ -38,7 +38,7 @@ export const MainRouter = () => {
         <Route index element={<Navigate to="marks" />} />
         <Route path="marks" element={<MarksPage/>} />
         <Route path="allergens" element={<AllergensPage />} />
-        <Route path="allergens/:allergenID" element={<AllergensPage />} />
+        <Route path="allergens/:allergenId" element={<AllergensPage />} />
       </Route>
       <Route path="/reviews" element={<Review />} />
       <Route path="/analytics" element={<Analytics />} />

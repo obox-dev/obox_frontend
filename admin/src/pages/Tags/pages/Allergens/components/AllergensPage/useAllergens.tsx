@@ -12,11 +12,11 @@ interface UseAllergensProps {
 }
 
 export const useAllergens = (props: UseAllergensProps) => {
-  
   const { t } = useTranslation();
   const { language } = props;
-  const referenceType = 'restaurant';
   const { restaurantId } = useRestaurant();
+
+  const referenceType = 'restaurant';
 
   const { closeAll } = useDialog();
   const { loadAllAllergens, allergensList, } = useGetAllergens({ restaurantId });
