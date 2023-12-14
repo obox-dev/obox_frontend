@@ -94,7 +94,7 @@ export const MenuDishList = (props: MenuDishListProps) => {
                         key={item.dish_id}
                         dishItem={item}
                         language={currentLanguage}
-                        isDragable
+                        isDraggable
                       />
                     </div>
                   )}

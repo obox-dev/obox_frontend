@@ -8,7 +8,7 @@ import { IDishCard } from './types';
 import './DishCard.scss';
 
 export const DishCard = (props: IDishCard) => {
-  const { dishItem, actions, language, isDragable = false } = props;
+  const { dishItem, actions, language, isDraggable = false } = props;
   const { t } = useTranslation();
 
   const dish = mapDishContent(dishItem, language);
@@ -54,7 +54,7 @@ export const DishCard = (props: IDishCard) => {
           <div>{dishItem.special_price}</div>
         </div>
       </div>
-      {isDragable ? (
+      {isDraggable ? (
         <div className="dish-card__drag-handle">
           <DndIcon />
         </div>
