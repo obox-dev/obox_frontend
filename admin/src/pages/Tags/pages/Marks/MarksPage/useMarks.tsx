@@ -1,10 +1,11 @@
 import { useTranslation } from '@libs/react-i18next';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
-import { useCreateMarks, useGetMarks,useUpdateMarks,useDeleteMarks } from './components/hooks';
+import { useCreateMarks, useDeleteMarks, useGetMarks, useUpdateMarks } from './hooks';
 import { useRestaurant } from '@shared/hooks/useRestaurant';
 import { DeleteIcon, EditIcon } from '@admin/assets/icons';
 import { MarksResponse } from '@shared/services';
 import { IAction } from '@shared/components/atoms/ActionMenu';
+
 
 
 interface UseMarksProps {

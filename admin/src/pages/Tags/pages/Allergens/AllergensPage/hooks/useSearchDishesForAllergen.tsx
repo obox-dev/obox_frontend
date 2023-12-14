@@ -6,7 +6,7 @@ interface GetDishesParams {
   allergenId: string;
 }
 
-export const useGetDishesForAllergen = (args: GetDishesParams) => {
+export const useSearchDishesForAllergen = (args: GetDishesParams) => {
   const { allergenId } = args;
 
   const [dishesList, setDishesList] = useState<EntitySearchResponse[]>([]);

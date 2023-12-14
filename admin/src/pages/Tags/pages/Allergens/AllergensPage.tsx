@@ -4,8 +4,8 @@ import { useTranslation } from '@libs/react-i18next';
 import { useRestaurant } from '@shared/hooks/useRestaurant';
 import { TabsSection } from '@admin/pages/Menu/components/TabsSection/TabsSection';
 import { useNavigate, useParams } from 'react-router';
-import { useAllergens } from './components/AllergensPage/useAllergens';
-import { useGetDishesForAllergen } from './components/AllergenDishes';
+import { useSearchDishesForAllergen } from './AllergensPage/hooks';
+import { useAllergens } from './AllergensPage/useAllergens';
 
 
 export const AllergensPage = () => {
@@ -16,7 +16,7 @@ export const AllergensPage = () => {
   const [loadingAllergens, setLoadingAllergens] = useState(false);
   const [loadingDishes, setLoadingDishes] = useState(false);
   const { restaurantId } = useRestaurant();
-  const { loadAllDishes, dishesList } = useGetDishesForAllergen({ allergenId: allergenId! });
+  const { loadAllDishes, dishesList } = useSearchDishesForAllergen({ allergenId: allergenId! });
   
   const navigate = useNavigate();
   
