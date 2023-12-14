@@ -1,4 +1,4 @@
-import Dropzone, { FileRejection } from 'react-dropzone';
+import Dropzone, { DropzoneInputProps, FileRejection } from 'react-dropzone';
 import { useTranslation } from '@libs/react-i18next';
 import {
   Attachment,
@@ -20,6 +20,17 @@ interface FileUploadProps {
   onFileUpload: (fileToUpload: FileToUpload[]) => void;
   onFileDelete?: (attachment: Attachment[]) => void;
 }
+
+const omitDropzoneInputPropsChildren = <T extends DropzoneInputProps>(
+  props: T
+) => {
+  const { children, ...inputProps } = props;
+
+  return {
+    children,
+    inputProps,
+  };
+};
 
 export const FileUpload = (props: FileUploadProps) => {
   const { imagesToUpload, uploadedImages, onFileUpload, onDeleteImage } = props;
@@ -106,50 +117,55 @@ export const FileUpload = (props: FileUploadProps) => {
         onDrop={(acceptedFiles) => onAddFile(acceptedFiles)}
         validator={largeFileValidator}
       >
-        {({ getRootProps, getInputProps, fileRejections }) => (
-          <div>
-            {!showPreview && (
-              <div className="file-upload" {...getRootProps()}>
-                <input {...getInputProps()} />
-                <Button
-                  className="file-upload__add-button"
-                  variant={ButtonVariants.PRIMARY}
-                  type={ButtonTypes.BUTTON}
-                  innerContent={t('dishForm:fileUpload.addButton')}
-                />
-                {renderError(fileRejections) || (
-                  <p className="file-upload__drop-placeholder">
-                    {t('dishForm:fileUpload.placeholder')}
-                  </p>
-                )}
-                <div className="file-upload__img-params">
-                  <p>{t('dishForm:fileUpload.recomendedSize')}</p>
-                  <p>{t('dishForm:fileUpload.maxSize')}</p>
-                  <p>{t('dishForm:fileUpload.formats')}</p>
-                </div>
-              </div>
-            )}
+        {({ getRootProps, getInputProps, fileRejections }) => {
+          const { inputProps } = omitDropzoneInputPropsChildren(
+            getInputProps()
+          );
+          return (
             <div>
-              {showPreview &&
-                images?.map((file, index) => (
-                  <div className="file-upload__preview-item" key={index}>
-                    <img
-                      className="file-upload__preview-image"
-                      src={getFileSrc(file)}
-                      alt={`Preview ${index + 1}`}
-                    />
-                    <Button
-                      className="file-upload__delete-button"
-                      variant={ButtonVariants.SECONDARY}
-                      type={ButtonTypes.BUTTON}
-                      innerContent={t('dishForm:fileUpload.deleteButton')}
-                      onClick={() => handleDelete(file)}
-                    />
+              {!showPreview && (
+                <div className="file-upload" {...getRootProps()}>
+                  <input {...inputProps} />
+                  <Button
+                    className="file-upload__add-button"
+                    variant={ButtonVariants.PRIMARY}
+                    type={ButtonTypes.BUTTON}
+                    innerContent={t('dishForm:fileUpload.addButton')}
+                  />
+                  {renderError(fileRejections) || (
+                    <p className="file-upload__drop-placeholder">
+                      {t('dishForm:fileUpload.placeholder')}
+                    </p>
+                  )}
+                  <div className="file-upload__img-params">
+                    <p>{t('dishForm:fileUpload.recomendedSize')}</p>
+                    <p>{t('dishForm:fileUpload.maxSize')}</p>
+                    <p>{t('dishForm:fileUpload.formats')}</p>
                   </div>
-                ))}
+                </div>
+              )}
+              <div>
+                {showPreview &&
+                  images?.map((file, index) => (
+                    <div className="file-upload__preview-item" key={index}>
+                      <img
+                        className="file-upload__preview-image"
+                        src={getFileSrc(file)}
+                        alt={`Preview ${index + 1}`}
+                      />
+                      <Button
+                        className="file-upload__delete-button"
+                        variant={ButtonVariants.SECONDARY}
+                        type={ButtonTypes.BUTTON}
+                        innerContent={t('dishForm:fileUpload.deleteButton')}
+                        onClick={() => handleDelete(file)}
+                      />
+                    </div>
+                  ))}
+              </div>
             </div>
-          </div>
-        )}
+          );
+        }}
       </Dropzone>
     </>
   );

@@ -1,13 +1,14 @@
 import { useTranslation } from '@libs/react-i18next';
 import { Switcher } from '@shared/components/atoms/Switcher';
 import { mapDishContent } from '@shared/mappers/DishMapper';
+import { DishInStock } from '@shared/services/DishService';
+import { DndIcon, ImagePlaceholder } from '@admin/assets/icons';
 import { DishActionTypes } from '@admin/pages/Menu/components/MenuDish/types';
 import { IDishCard } from './types';
 import './DishCard.scss';
-import { ImagePlaceholder } from '@admin/assets/icons';
 
 export const DishCard = (props: IDishCard) => {
-  const { dishItem, actions, language } = props;
+  const { dishItem, actions, language, isDraggable = false } = props;
   const { t } = useTranslation();
 
   const dish = mapDishContent(dishItem, language);
@@ -16,10 +17,15 @@ export const DishCard = (props: IDishCard) => {
   const editDishAction = actions[DishActionTypes.EDIT];
 
   const dishImage = dish.image;
+  const inStock = dish.in_stock === DishInStock.ENABLED;
+  const hasSpecialPrice = dish.special_price;
 
   return (
     <div
-      className="dish-card d-flex gap-3"
+      className={[
+        'dish-card d-flex gap-3',
+        inStock ? '' : 'dish-card--out-of-stock',
+      ].join(' ')}
       onClick={() => editDishAction(dishItem)}
     >
       <div className="dish-card__img">
@@ -38,12 +44,23 @@ export const DishCard = (props: IDishCard) => {
           stopClickPropagation
         />
         <div className="dish-item__price">
-          <div>{dishItem.price}</div>
-          <div className="dish-item__price-discount">
-            {dishItem.special_price}
+          <div
+            className={[
+              hasSpecialPrice ? 'dish-item__price-discount' : '',
+            ].join('')}
+          >
+            {dishItem.price}
           </div>
+          <div>{dishItem.special_price}</div>
         </div>
       </div>
+      {isDraggable ? (
+        <div className="dish-card__drag-handle">
+          <DndIcon />
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   );
 };

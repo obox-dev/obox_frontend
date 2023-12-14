@@ -5,4 +5,5 @@ export interface IDishCard {
   dishItem: DishResponse;
   actions: DishActions;
   language: string;
+  isDraggable?: boolean;
 }

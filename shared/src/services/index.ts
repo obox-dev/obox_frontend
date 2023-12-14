@@ -17,3 +17,4 @@ export type { MenuResponse, Menu } from './RestaurantsService';
 
 export { AllergensService } from './AllergensService';
 export { MarksService } from './MarksService';
+export { OrderService } from './OrderService';
