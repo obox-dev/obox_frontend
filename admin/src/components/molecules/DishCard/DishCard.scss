@@ -53,4 +53,9 @@
       filter: grayscale(1);
     }
   }
+
+  &__drag-handle {
+    align-self: flex-start;
+    padding: 6px;
+  }
 }

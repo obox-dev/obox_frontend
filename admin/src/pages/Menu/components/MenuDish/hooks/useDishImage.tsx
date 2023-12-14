@@ -3,9 +3,9 @@ import {
   Attachment,
   FileToUpload,
   AttachmentOrFile,
-  AttachmentReferenceType,
   AttachmentService,
 } from '@shared/services/AttachmentsService';
+import { ReferenceType } from '@shared/utils/types';
 import { useRequest } from '@admin/hooks';
 
 export const useDishImage = () => {
@@ -56,7 +56,7 @@ export const useDishImage = () => {
   const uploadFiles = async (dishId: string, files: FileToUpload[]) => {
     const images = files.map(({ base64image }) => {
       return createAttachment({
-        reference_type: AttachmentReferenceType.DISH,
+        reference_type: ReferenceType.DISH,
         reference_id: dishId,
         attachment: base64image,
       });
