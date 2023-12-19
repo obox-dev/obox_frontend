@@ -1,5 +1,5 @@
 export const useRestaurant = () => {
-  const HARDCODED_RESTAURANT_ID = '793ecd10-c0c0-4b06-ac09-c7a3ecdc9f04';
+  const HARDCODED_RESTAURANT_ID = '5c63f759-5f8e-4861-bc0a-dcf089abb323';
   return {
     restaurantId: HARDCODED_RESTAURANT_ID,
   };
