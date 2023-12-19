@@ -1,9 +1,8 @@
 .container--fluid {
   padding: 0px 24px;
-
 }
 
-.marks-and-allergens-page {
+.marks-allergens-page {
   padding-top: 48px;
 
   .layout-with-search {
@@ -13,35 +12,34 @@
       margin-bottom: 36px;
     }
 
-    .nav {
+    .marks-allergens-nav {
+      list-style-type: none;
       display: flex;
       gap: 16px;
       margin-left: 0px;
       margin-bottom: 36px;
       padding: 0px;
 
-      .nav-item {
+      .marks-allergens-link {
+        display: block;
         height: 48px;
-        
-        .nav-item-link {
-          text-decoration: none;
-          padding: 12px 20px;
-          color: $color-secondary-text;
-          font-size: 16px;
-          font-weight: 500;
-          line-height: 1.5;
-          position: relative;
-        }
+        text-decoration: none;
+        padding: 12px 20px;
+        color: $color-secondary-text;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.5;
+        position: relative;
+      }
 
-        .nav-item-link.active::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          height: 2px;
-          background-color: $color-primary;
-        }
+      .marks-allergens-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: $color-primary;
       }
     }
   }

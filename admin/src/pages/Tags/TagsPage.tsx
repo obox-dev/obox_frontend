@@ -9,15 +9,15 @@ export const TagsPage = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="marks-and-allergens-page container--fluid">
+    <div className="marks-allergens-page container--fluid">
       <LayoutWithSearch>
         <>
-          <ul className="nav">
-            <li className="nav-item">
-              <NavLink className="nav-item-link" to="/tags/marks">{t('tags:marks')}</NavLink>
+          <ul className="marks-allergens-nav">
+            <li>
+              <NavLink className="marks-allergens-link" to="/tags/marks">{t('tags:marks')}</NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink className="nav-item-link" to="/tags/allergens">{t('tags:allergen')}</NavLink>
+            <li>
+              <NavLink className="marks-allergens-link" to="/tags/allergens">{t('tags:allergen')}</NavLink>
             </li>
           </ul>
           <Outlet />
