@@ -1,9 +1,9 @@
 import { AxiosError } from 'axios';
 import { useTranslation } from '@libs/react-i18next';
 import { useRequest } from '@admin/hooks';
+import { useDialog } from '@shared/providers/DialogProvider/useDialog';
 import { ButtonVariants } from '@shared/components/atoms/Button';
 import { Dialog } from '@shared/components/molecules/Dialog';
-import { useDialog } from '@shared/providers/DialogProvider/useDialog';
 import { AllergensResponse ,AllergensService  } from '@shared/services';
 
 interface DeleteAllergensParams {

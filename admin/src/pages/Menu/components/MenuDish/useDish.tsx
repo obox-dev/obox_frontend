@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
 import {
   DishInStock,
@@ -16,15 +16,14 @@ import { DishActions, DishActionTypes } from './types';
 import { useCallback } from 'react';
 
 interface UseDishProps {
+  menuId: string;
   categoryId: string;
   language: string;
 }
 
 export const useDish = (props: UseDishProps) => {
-  const { categoryId, language } = props;
+  const { menuId,categoryId, language } = props;
   const { closeAll } = useDialog();
-
-  const { menuId } = useParams();
 
   const navigate = useNavigate();
 

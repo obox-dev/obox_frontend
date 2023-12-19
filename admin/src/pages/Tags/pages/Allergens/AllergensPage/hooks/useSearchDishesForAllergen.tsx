@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import { useRequest } from '@admin/hooks';
 import { EntitySearchResponse, SearchService } from '@shared/services';
-import { useState } from 'react';
+
 
 interface GetDishesParams {
   allergenId: string;
@@ -9,7 +10,7 @@ interface GetDishesParams {
 export const useSearchDishesForAllergen = (args: GetDishesParams) => {
   const { allergenId } = args;
 
-  const [dishesList, setDishesList] = useState<EntitySearchResponse[]>([]);
+  const [categoriesDishesList, setCategoriesDishesList] = useState<EntitySearchResponse[]>([]);
 
   const loadDishes = () => {
     return SearchService.searchByAllergenId(allergenId);
@@ -18,7 +19,7 @@ export const useSearchDishesForAllergen = (args: GetDishesParams) => {
   const { execute: loadAllDishes } = useRequest({
     requestFunction: loadDishes,
     onSuccess: (result: EntitySearchResponse[]) => {
-      setDishesList(result);
+      setCategoriesDishesList(result);
     },
     onError: (error) => {
       console.error('Error fetching categories:', error);
@@ -27,6 +28,6 @@ export const useSearchDishesForAllergen = (args: GetDishesParams) => {
 
   return {
     loadAllDishes,
-    dishesList,
+    categoriesDishesList,
   };
 };

@@ -1,12 +1,11 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router';
 import { useTranslation } from '@libs/react-i18next';
 import { useRestaurant } from '@shared/hooks/useRestaurant';
-import { TabsSection } from '@admin/pages/Menu/components/TabsSection/TabsSection';
-import { useNavigate, useParams } from 'react-router';
 import { useSearchDishesForAllergen } from './AllergensPage/hooks';
 import { useAllergens } from './AllergensPage/useAllergens';
-
+import { TabsSection } from '@admin/pages/Menu/components/TabsSection/TabsSection';
+import { CategoryWithDishes } from '@admin/components/molecules/CategoryWithDishes/CategoryWithDishes';
 
 export const AllergensPage = () => {
   const { t } = useTranslation();
@@ -16,7 +15,7 @@ export const AllergensPage = () => {
   const [loadingAllergens, setLoadingAllergens] = useState(false);
   const [loadingDishes, setLoadingDishes] = useState(false);
   const { restaurantId } = useRestaurant();
-  const { loadAllDishes, dishesList } = useSearchDishesForAllergen({ allergenId: allergenId! });
+  const { loadAllDishes, categoriesDishesList } = useSearchDishesForAllergen({ allergenId: allergenId! });
   
   const navigate = useNavigate();
   
@@ -70,14 +69,20 @@ export const AllergensPage = () => {
         actions={allergensActions}
         selected={allergenId}
       />
-      {allergenId && !loadingDishes && dishesList.length && (
-        <div>
-          {/* {dishesList.map(dish => DishCard(передать парамерты))} */}
+      {allergenId && !loadingDishes && categoriesDishesList.length && (
+        <div className="allergens-categories-list">
+          {categoriesDishesList.map(category => {
+            return (
+              <CategoryWithDishes
+                key={category.category_id}
+                category={category}
+                language={localLang}
+              />
+            );
+          })}
         </div>
-        // при клике на блюдо делать навигацию.
       )}
     </>
-    
   );
 };
 

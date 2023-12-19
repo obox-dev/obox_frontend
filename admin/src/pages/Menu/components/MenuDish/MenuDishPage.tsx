@@ -22,6 +22,7 @@ export const MenuDishPage = () => {
   const [dish, setDish] = useState<DishResponse>();
 
   const { onCreateSubmit, onUpdateSubmit } = useDish({
+    menuId: menuId!,
     categoryId: categoryId!,
     language: menuLanguage,
   });

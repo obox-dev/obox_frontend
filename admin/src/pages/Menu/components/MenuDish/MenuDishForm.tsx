@@ -76,7 +76,7 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
     return `${text} *`;
   };
 
-  const { menuDishesActions } = useDish({ categoryId: categoryId!, language });
+  const { menuDishesActions } = useDish({ categoryId: categoryId!, language, menuId: menuId! });
   const deleteAction = menuDishesActions[DishActionTypes.DELETE];
 
   const headerTitle = dishId
