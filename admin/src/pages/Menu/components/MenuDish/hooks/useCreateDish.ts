@@ -1,8 +1,9 @@
 import { useRequest } from '@admin/hooks';
 import { DishesService } from '@shared/services';
+import { CreateDishResponse } from '@shared/services/DishService';
 
 interface CreateDishParams {
-  onSuccess: () => Promise<void>;
+  onSuccess: (dish: CreateDishResponse) => Promise<void>;
 }
 
 export const useCreateDish = (args: CreateDishParams) => {

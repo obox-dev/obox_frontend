@@ -1,12 +1,9 @@
+import { ReferenceType } from '@shared/utils/types';
 import { API } from './ApiService';
-
-export enum AttachmentReferenceType {
-  DISH = 'DISH',
-}
 
 export interface CreateAttachmentRequest {
   attachment: string;
-  reference_type: AttachmentReferenceType;
+  reference_type: ReferenceType.DISH;
   reference_id: string;
 }
 
@@ -17,7 +14,7 @@ export interface CreateAttachmentResponse {
 export interface Attachment {
   attachment_id: string;
   attachment_url: string;
-  reference_type: AttachmentReferenceType;
+  reference_type: ReferenceType.DISH;
   reference_id: string;
 }
 

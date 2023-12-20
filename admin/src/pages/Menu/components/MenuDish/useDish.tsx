@@ -1,28 +1,32 @@
+import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
 import {
+  CreateDishResponse,
   DishInStock,
   DishResponse,
 } from '@shared/services/DishService';
+import { mapDishContent } from '@shared/mappers/DishMapper';
+import { EntityState } from '@shared/utils/types';
 import {
   useGetDish,
   useCreateDish,
   useUpdateDish,
   useDeleteDish,
 } from './hooks';
-import { mapDishContent } from '@shared/mappers/DishMapper';
-import { EntityState } from '@shared/utils/types';
 import { DishActions, DishActionTypes } from './types';
-import { useCallback } from 'react';
 
 interface UseDishProps {
   menuId: string;
+  dishId?: string;
   categoryId: string;
   language: string;
+  onCreateSuccess?: (dishId: string) => unknown | Promise<unknown>;
+  onUpdateSuccess?: (dishId: string) => unknown | Promise<unknown>;
 }
 
 export const useDish = (props: UseDishProps) => {
-  const { menuId,categoryId, language } = props;
+  const { menuId,dishId, categoryId, language, onCreateSuccess, onUpdateSuccess } = props;
   const { closeAll } = useDialog();
 
   const navigate = useNavigate();
@@ -40,18 +44,14 @@ export const useDish = (props: UseDishProps) => {
   });
 
   const { onCreateSubmit } = useCreateDish({
-    onSuccess: async () => {
-      await loadAllDishes();
-      navigateToCategory();
-      closeAll();
+    onSuccess: async (dish: CreateDishResponse) => {
+      await onCreateSuccess?.(dish.dish_id);
     },
   });
 
   const { onUpdateSubmit, updateState, updateInStock } = useUpdateDish({
     onSuccess: async () => {
-      await loadAllDishes();
-      navigateToCategory();
-      closeAll();
+      await onUpdateSuccess?.(dishId!);
     },
     onError: async (error) => {
       if (error.response?.status === 404) {

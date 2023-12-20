@@ -11,3 +11,4 @@ export { AnalyticsIcon } from './AnalyticsIcon';
 export { TutorialsIcon } from './TutorialsIcon';
 export { SettingsIcon } from './SettingsIcon';
 export { ImagePlaceholder } from './ImagePlaceholder';
+export { DndIcon } from './DndIcon';

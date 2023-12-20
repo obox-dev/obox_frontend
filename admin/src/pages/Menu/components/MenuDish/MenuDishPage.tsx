@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   UpdateDishRequest,
   DishesService,
@@ -20,12 +20,6 @@ export const MenuDishPage = () => {
   const [loading, setLoading] = useState<boolean>(!!dishId);
 
   const [dish, setDish] = useState<DishResponse>();
-
-  const { onCreateSubmit, onUpdateSubmit } = useDish({
-    menuId: menuId!,
-    categoryId: categoryId!,
-    language: menuLanguage,
-  });
 
   const {
     createDishSchema,
@@ -55,9 +49,27 @@ export const MenuDishPage = () => {
     deleteMarkedAttachments,
     getDishAttachments,
     setFilesToUpload,
-    setPrimaryImage,
     resetImages,
   } = useDishImage();
+
+  const onDishCreateSuccess = useCallback(async (dishId: string) => {
+    await uploadFiles(dishId, filesToUpload);
+    navigateToCategory();
+  }, [dishId, filesToUpload]);
+
+  const onDishUpdateSuccess = useCallback(async (dishId: string) => {
+    await uploadFiles(dishId, filesToUpload);
+    navigateToCategory();
+  }, [dishId, filesToUpload]);
+
+  const { onCreateSubmit, onUpdateSubmit } = useDish({
+    menuId: menuId!,
+    dishId,
+    categoryId: categoryId!,
+    language: menuLanguage,
+    onCreateSuccess: onDishCreateSuccess,
+    onUpdateSuccess: onDishUpdateSuccess,
+  });
 
   useEffect(() => {
     const loadForUpdate = async (id: string) => {
@@ -78,16 +90,11 @@ export const MenuDishPage = () => {
       await deleteMarkedAttachments();
       if (dishId) {
         await onUpdateSubmit(dishId, data as UpdateDishRequest);
-        await uploadFiles(dishId, filesToUpload);
-        await setPrimaryImage(dishId);
       } else {
-        const { dish_id } = await onCreateSubmit(data as CreateDishRequest);
-        await uploadFiles(dish_id, filesToUpload);
-        await getDishAttachments(dish_id);
-        await setPrimaryImage(dish_id);
+        await onCreateSubmit(data as CreateDishRequest);
       }
     },
-    [dishId, onUpdateSubmit, onCreateSubmit, navigateToCategory]
+    [dishId, onUpdateSubmit, onCreateSubmit]
   );
 
   const onReset = () => {
