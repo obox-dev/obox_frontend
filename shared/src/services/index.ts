@@ -4,8 +4,12 @@ export { MenuService } from './MenuService';
 export { DishesService } from './DishService';
 export { RestaurantsService } from './RestaurantsService';
 export { AttachmentService } from './AttachmentsService';
-export type { FileToUpload, AttachmentOrFile } from './AttachmentsService';
+export { MarksService } from './MarksService';
+export { AllergensService } from './AllergensService';
+export { SearchService } from './SearchService';
+export { OrderService } from './OrderService';
 
+export type { FileToUpload, AttachmentOrFile } from './AttachmentsService';
 export type {
   Category,
   CreateCategoryRequest,
@@ -14,7 +18,6 @@ export type {
   CategoryResponse,
 } from './CategoriesService';
 export type { MenuResponse, Menu } from './RestaurantsService';
-
-export { AllergensService } from './AllergensService';
-export { MarksService } from './MarksService';
-export { OrderService } from './OrderService';
+export type { MarksResponse, Marks } from './MarksService';
+export type { AllergensResponse, Allergens } from './AllergensService';
+export type { EntitySearchResponse } from './SearchService';

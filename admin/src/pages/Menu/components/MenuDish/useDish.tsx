@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
 import {
   CreateDishResponse,
@@ -17,6 +17,7 @@ import {
 import { DishActions, DishActionTypes } from './types';
 
 interface UseDishProps {
+  menuId: string;
   dishId?: string;
   categoryId: string;
   language: string;
@@ -25,10 +26,8 @@ interface UseDishProps {
 }
 
 export const useDish = (props: UseDishProps) => {
-  const { dishId, categoryId, language, onCreateSuccess, onUpdateSuccess } = props;
+  const { menuId,dishId, categoryId, language, onCreateSuccess, onUpdateSuccess } = props;
   const { closeAll } = useDialog();
-
-  const { menuId } = useParams();
 
   const navigate = useNavigate();
 

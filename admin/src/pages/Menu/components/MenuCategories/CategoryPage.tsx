@@ -23,6 +23,7 @@ export const CategoryPage = () => {
   const { loadSingleCategory } = useGetCategory({ menuId: menuId! });
   const [category, setCategory] = useState<Category>();
   const { menuDishesActions, loadAllDishes, dishList } = useDish({
+    menuId: menuId!,
     categoryId: categoryId!,
     language: menuLanguage,
   });

@@ -63,6 +63,7 @@ export const MenuDishPage = () => {
   }, [dishId, filesToUpload]);
 
   const { onCreateSubmit, onUpdateSubmit } = useDish({
+    menuId: menuId!,
     dishId,
     categoryId: categoryId!,
     language: menuLanguage,

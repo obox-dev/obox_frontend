@@ -1,0 +1,1 @@
+export {CategoryWithDishes} from './CategoryWithDishes';

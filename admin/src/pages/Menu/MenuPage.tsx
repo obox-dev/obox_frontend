@@ -12,6 +12,7 @@ import './Menu.scss';
 export const MenuPage = () => {
   const { t } = useTranslation();
   const { menuId: selectedMenuId = '' } = useParams();
+  
   const { menuLanguage } = useMainProvider();
 
   const [loadingMenus, setLoadingMenus] = useState(false);
