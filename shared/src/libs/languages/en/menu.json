@@ -1,6 +1,8 @@
 {
   "createMenu": "Create menu",
   "createCategory": "Create category",
+  "nameMenu": "Menu name",
+  "nameCategory": "Category name",
   "addCategoryButton": "Add category",
   "addMenuButton": "Add menu",
   "addDishButton": "Add Dish",

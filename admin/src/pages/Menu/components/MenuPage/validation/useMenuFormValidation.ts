@@ -7,7 +7,7 @@ export const useMenuFormValidation = () => {
   const MAX_NAME_LENGTH = 200;
 
   const NAME_IS_REQUIRED_MESSAGE = t('common:validation:isRequired', {
-    field: t('dishForm:name'),
+    field: t('menu:nameMenu'),
   });
 
   const MIN_NAME_LENGTH_MESSAGE = t('common:validation:morethan', {
