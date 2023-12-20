@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useRequest } from '@admin/hooks';
 import { AllergensResponse , AllergensService } from '@shared/services';
+import { useRequest } from '@admin/hooks';
 
 interface GetAllergensParams {
   restaurantId: string;

@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 import { AxiosError } from 'axios';
 import { useTranslation } from '@libs/react-i18next';
-import { useRequest } from '@admin/hooks';
 import { Form, FormRef } from '@shared/components/atoms/Form';
 import { Dialog } from '@shared/components/molecules/Dialog';
 import { Allergens ,AllergensResponse } from '@shared/services';
@@ -9,6 +8,7 @@ import { AllergensService, UpdateAllergensRequest } from '@shared/services/Aller
 import { Input, InputVariants } from '@shared/components/atoms/Input';
 import { InputLabel } from '@shared/components/atoms/InputLabel';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
+import { useRequest } from '@admin/hooks';
 import { mapAllergensContent } from '../mappers/mapAllergensContent';
 import { useAllergensFormValidation } from '../validation/useAllergensFormValidation';
 

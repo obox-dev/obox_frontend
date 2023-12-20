@@ -1,11 +1,11 @@
 import { useTranslation } from '@libs/react-i18next';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
-import { useCreateAllergens, useDeleteAllergens, useGetAllergens, useUpdateAllergens } from './hooks';
-import { useRestaurant } from '@shared/hooks/useRestaurant';
-import { DeleteIcon, EditIcon } from '@admin/assets/icons';
 import { AllergensResponse } from '@shared/services';
 import { IAction } from '@shared/components/atoms/ActionMenu';
+import { useRestaurant } from '@shared/hooks/useRestaurant';
+import { DeleteIcon, EditIcon } from '@admin/assets/icons';
 
+import { useCreateAllergens, useDeleteAllergens, useGetAllergens, useUpdateAllergens } from './hooks';
 
 interface UseAllergensProps {
   language: string;

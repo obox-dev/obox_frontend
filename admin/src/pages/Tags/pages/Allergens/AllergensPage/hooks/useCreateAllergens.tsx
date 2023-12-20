@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 import { useTranslation } from '@libs/react-i18next';
-import { useRequest } from '@admin/hooks';
 import { Form, FormRef } from '@shared/components/atoms/Form';
 import { Dialog } from '@shared/components/molecules/Dialog';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
@@ -8,8 +7,8 @@ import { Allergens, AllergensService } from '@shared/services';
 import { CreateAllergensResponse, CreateAllergenRequest  } from '@shared/services/AllergensService';
 import { Input, InputVariants } from '@shared/components/atoms/Input';
 import { InputLabel } from '@shared/components/atoms/InputLabel';
+import { useRequest } from '@admin/hooks';
 import { useAllergensFormValidation } from '../validation/useAllergensFormValidation';
-
 
 interface CreateAllergensParams {
   onSuccess: (result: CreateAllergensResponse) => Promise<void>;

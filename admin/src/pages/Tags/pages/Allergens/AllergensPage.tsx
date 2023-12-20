@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { useTranslation } from '@libs/react-i18next';
 import { useRestaurant } from '@shared/hooks/useRestaurant';
-import { useSearchDishesForAllergen } from './AllergensPage/hooks';
-import { useAllergens } from './AllergensPage/useAllergens';
 import { TabsSection } from '@admin/pages/Menu/components/TabsSection/TabsSection';
 import { CategoryWithDishes } from '@admin/components/molecules/CategoryWithDishes/CategoryWithDishes';
+import { useSearchDishesForAllergen } from './AllergensPage/hooks';
+import { useAllergens } from './AllergensPage/useAllergens';
+
 
 export const AllergensPage = () => {
   const { t } = useTranslation();

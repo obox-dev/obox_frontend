@@ -1,8 +1,8 @@
 import { DishResponse } from '@shared/services/DishService';
-import { ICategoryItem } from './types';
-import { mapCategoryContent } from '@admin/pages/Menu/components/MenuCategories/mappers/mapCategoryContent';
-import { DishCard } from '../DishCard';
 import { useDish } from '@admin/pages/Menu/components/MenuDish/useDish';
+import { mapCategoryContent } from '@admin/pages/Menu/components/MenuCategories/mappers/mapCategoryContent';
+import { ICategoryItem } from './types';
+import { DishCard } from '../DishCard';
 import './CategoryWithDishes.scss';
 
 export const CategoryWithDishes = (props: ICategoryItem) => {

@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { useRequest } from '@admin/hooks';
 import { EntitySearchResponse, SearchService } from '@shared/services';
-
+import { useRequest } from '@admin/hooks';
 
 interface GetDishesParams {
   allergenId: string;
