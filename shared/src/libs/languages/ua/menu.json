@@ -1,6 +1,8 @@
 {
   "createMenu": "Створити меню",
   "createCategory": "Створити категорію",
+  "nameMenu": "Назва меню",
+  "nameCategory": "Назва категорії",
   "addCategoryButton": "Додати категорію",
   "addMenuButton": "Додати меню",
   "addDishButton": "Додати страву",
