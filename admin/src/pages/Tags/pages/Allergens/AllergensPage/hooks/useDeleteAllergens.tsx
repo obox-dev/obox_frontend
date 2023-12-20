@@ -27,7 +27,6 @@ export const useDeleteAllergens = (args: DeleteAllergensParams) => {
 
   const openAllergensDeleteDialog = (allergen: AllergensResponse) =>
     openDialog(({ closeDialog }) => {
-
       return (
         <Dialog
           okCallback={() => {

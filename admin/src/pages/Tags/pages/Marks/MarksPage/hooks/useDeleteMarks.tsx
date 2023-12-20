@@ -27,7 +27,6 @@ export const useDeleteMarks = (args: DeleteMarksParams) => {
 
   const openMarksDeleteDialog = (mark: MarksResponse) =>
     openDialog(({ closeDialog }) => {
-
       return (
         <Dialog
           okCallback={() => {

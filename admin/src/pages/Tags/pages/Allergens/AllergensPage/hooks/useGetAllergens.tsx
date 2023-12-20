@@ -8,9 +8,8 @@ interface GetAllergensParams {
 
 export const useGetAllergens = (args: GetAllergensParams) => {
   const { restaurantId } = args;
-
   const [allergensList, setAllergensList] = useState<AllergensResponse[]>([]);
-
+  
   const loadAllergens = () => {
     return AllergensService.getAllergensByRestaurantId(restaurantId);
   };

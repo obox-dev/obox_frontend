@@ -12,8 +12,6 @@ import { useDialog } from '@shared/providers/DialogProvider/useDialog';
 import { mapMarksContent } from '../mappers/mapMarksContent';
 import { useMarksFormValidation } from '../validation/useMarksFormValidation';
 
-
-
 interface UpdateMarksParams {
   onSuccess: () => Promise<void>;
   onError?: (error: AxiosError) => void;

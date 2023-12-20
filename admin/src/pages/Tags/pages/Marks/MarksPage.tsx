@@ -48,7 +48,6 @@ export const MarksPage = () => {
         }}
         actions={marksActions}
       />
-
     </>
   );
 };

@@ -1,19 +1,16 @@
 import { useTranslation } from '@libs/react-i18next';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
-import { useCreateMarks, useDeleteMarks, useGetMarks, useUpdateMarks } from './hooks';
 import { useRestaurant } from '@shared/hooks/useRestaurant';
-import { DeleteIcon, EditIcon } from '@admin/assets/icons';
 import { MarksResponse } from '@shared/services';
 import { IAction } from '@shared/components/atoms/ActionMenu';
-
-
+import { DeleteIcon, EditIcon } from '@admin/assets/icons';
+import { useCreateMarks, useDeleteMarks, useGetMarks, useUpdateMarks } from './hooks';
 
 interface UseMarksProps {
   language: string;
 }
 
 export const useMarks = (props: UseMarksProps) => {
-  
   const { t } = useTranslation();
   const { language } = props;
   const referenceType = 'restaurant';
