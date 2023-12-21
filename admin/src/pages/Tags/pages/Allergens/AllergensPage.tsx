@@ -70,7 +70,7 @@ export const AllergensPage = () => {
         actions={allergensActions}
         selected={allergenId}
       />
-      {allergenId && !loadingDishes && categoriesDishesList.length && (
+      {allergenId && !loadingDishes && categoriesDishesList.length > 0  && (
         <div className="allergens-categories-list">
           {categoriesDishesList.map(category => {
             return (
