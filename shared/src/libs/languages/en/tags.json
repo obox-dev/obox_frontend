@@ -12,12 +12,12 @@
   "createMarksForm": {
     "title": "Add a tag",
     "placeholder": "Enter a tag name",
-    "label": "Name of the tag *"
+    "label": "Name of the tag"
   },
    "createAllergensForm": {
     "title": "Add allergen",
     "placeholder": "Enter the name of the allergen",
-    "label": "Name of the allergen *"
+    "label": "Name of the allergen"
   },
    "deleteMarksForm": {
     "title": "Are you sure you want to delete a tag?"
@@ -28,11 +28,11 @@
   "updateMarksForm": {
     "title": "Edit a tag",
     "placeholder": "Enter a tag name",
-    "label": "Tag name *"
+    "label": "Tag name"
   },
     "updateAllergensForm": {
     "title": "Edit allergen",
     "placeholder": "Enter the name of the allergen",
-    "label": "Name of the allergen *"
+    "label": "Name of the allergen"
   }
 }

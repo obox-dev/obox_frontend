@@ -12,12 +12,12 @@
   "createMarksForm": {
     "title": "Додати мітку",
     "placeholder": "Введіть назву мітки",
-    "label": "Назва мітки *"
+    "label": "Назва мітки"
   },
    "createAllergensForm": {
     "title": "Додати алерген",
     "placeholder": "Введіть назву алергену",
-    "label": "Назва алергену *"
+    "label": "Назва алергену"
   },
    "deleteMarksForm": {
     "title": "Ви впевнені, що хочете видалити мітку?"
@@ -28,11 +28,11 @@
   "updateMarksForm": {
     "title": "Редагувати мітку",
     "placeholder": "Введіть назву мітки",
-    "label": "Назва  мітки *"
+    "label": "Назва  мітки"
   },
   "updateAllergensForm": {
     "title": "Редагувати алерген",
     "placeholder": "Введіть назву алергену",
-    "label": "Назва  алергену *"
+    "label": "Назва  алергену"
   }
 }

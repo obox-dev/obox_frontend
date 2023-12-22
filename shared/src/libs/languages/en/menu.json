@@ -18,7 +18,7 @@
   "createCategoryForm": {
     "title": "Enter your category name",
     "placeholder": "Enter the name of the category",
-    "label": "Category name *",
+    "label": "Category name",
     "description": "Category description",
     "descriptionTextArea": "Enter the name of the category" 
   },
@@ -32,12 +32,12 @@
   "createMenuForm": {
     "title": "Add Menu",
     "placeholder": "Enter your menu name",
-    "label": "Menu name *"
+    "label": "Menu name"
   },
   "updateMenuForm": {
     "title": "Editing",
     "placeholder": "Main menu",
-    "label": "Menu name *"
+    "label": "Menu name"
   },
   "deleteMenuForm": {
     "title": "Are you sure you want to delete this menu?"
