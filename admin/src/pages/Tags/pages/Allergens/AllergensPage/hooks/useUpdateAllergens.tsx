@@ -8,6 +8,7 @@ import { AllergensService, UpdateAllergensRequest } from '@shared/services/Aller
 import { Input, InputVariants } from '@shared/components/atoms/Input';
 import { InputLabel } from '@shared/components/atoms/InputLabel';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
+import { formatAsRequired } from '@shared/helpers/formatAsRequired';
 import { useRequest } from '@admin/hooks';
 import { mapAllergensContent } from '../mappers/mapAllergensContent';
 import { useAllergensFormValidation } from '../validation/useAllergensFormValidation';
@@ -74,7 +75,7 @@ export const useUpdateAllergens = (args: UpdateAllergensParams) => {
               />
               <InputLabel
                 forInput="name"
-                text={t('tags:updateAllergensForm.label')}
+                text={formatAsRequired(t('tags:updateAllergensForm.label'))}
               />
               <Input
                 placeholder={t('tags:updateAllergensForm.placeholder')}

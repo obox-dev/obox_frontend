@@ -22,6 +22,7 @@ import {
 } from '@shared/services/AttachmentsService';
 import { SelectInput } from '@shared/components/atoms/SelectInput';
 import { Switcher } from '@shared/components/atoms/Switcher';
+import { formatAsRequired } from '@shared/helpers/formatAsRequired';
 import { LayoutWithBackButton } from '@admin/layout/LayoutWithBackButton/LayoutWithBackButton';
 import { DishDefaultValues } from './hooks/useDishForms';
 import { useDish } from './useDish';
@@ -71,10 +72,6 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
   } = props;
 
   const formRef = useRef<FormRef<Partial<Dish>> | null>(null);
-
-  const formatAsRequired = (text: string) => {
-    return `${text} *`;
-  };
 
   const { menuDishesActions } = useDish({ categoryId: categoryId!, language, menuId: menuId! });
   const deleteAction = menuDishesActions[DishActionTypes.DELETE];

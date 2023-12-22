@@ -18,7 +18,7 @@
   "createCategoryForm": {
     "title": "Додати категорію",
     "placeholder": "Введіть назву категорії",
-    "label": "Назва категорії *",
+    "label": "Назва категорії",
     "description": "Опис категорії",
     "descriptionTextArea": "Введіть ваш опис" 
   },
@@ -32,12 +32,12 @@
   "createMenuForm": {
     "title": "Додати меню",
     "placeholder": "Введіть назву меню",
-    "label": "Назва меню *"
+    "label": "Назва меню"
   },
   "updateMenuForm": {
     "title": "Редагування",
     "placeholder": "Основне меню",
-    "label": "Назва меню *"
+    "label": "Назва меню"
   },
   "deleteMenuForm": {
     "title": "Ви впевнені, що хочете видалити меню?"

@@ -12,6 +12,7 @@ import { Switcher } from '@shared/components/atoms/Switcher';
 import { InputLabel } from '@shared/components/atoms/InputLabel';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
 import { UpdateStateRequest } from '@shared/utils/types';
+import { formatAsRequired } from '@shared/helpers/formatAsRequired';
 import { useMenuFormValidation } from '../validation/useMenuFormValidation';
 import { mapMenuContent } from '../mappers/mapMenuContent';
 
@@ -90,7 +91,7 @@ export const useUpdateMenu = (args: UpdateMenuParams) => {
               />
               <InputLabel
                 forInput="name"
-                text={t('menu:createMenuForm.label')}
+                text={formatAsRequired(t('menu:createMenuForm.label'))}
               />
               <Input
                 placeholder={t('menu:createMenuForm.placeholder')}

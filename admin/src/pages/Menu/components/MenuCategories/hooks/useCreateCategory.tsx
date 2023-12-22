@@ -17,6 +17,7 @@ import { Switcher } from '@shared/components/atoms/Switcher';
 import { InputLabel } from '@shared/components/atoms/InputLabel';
 import { Textarea } from '@shared/components/atoms/Textarea';
 import { EntityState } from '@shared/utils/types';
+import { formatAsRequired } from '@shared/helpers/formatAsRequired';
 
 interface CreateCategoryParams {
   onSuccess: (result: CreateCategoryResponse) => Promise<void>;
@@ -84,7 +85,7 @@ export const useCreateCategory = (args: CreateCategoryParams) => {
               />
               <InputLabel
                 forInput="name"
-                text={t('menu:createCategoryForm.label')}
+                text={formatAsRequired(t('menu:createCategoryForm.label'))}
               />
               <Input
                 placeholder={t('menu:createCategoryForm.placeholder')}

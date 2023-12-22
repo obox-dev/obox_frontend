@@ -7,6 +7,7 @@ import { Allergens, AllergensService } from '@shared/services';
 import { CreateAllergensResponse, CreateAllergenRequest  } from '@shared/services/AllergensService';
 import { Input, InputVariants } from '@shared/components/atoms/Input';
 import { InputLabel } from '@shared/components/atoms/InputLabel';
+import { formatAsRequired } from '@shared/helpers/formatAsRequired';
 import { useRequest } from '@admin/hooks';
 import { useAllergensFormValidation } from '../validation/useAllergensFormValidation';
 
@@ -80,7 +81,7 @@ export const useCreateAllergens = (args: CreateAllergensParams) => {
               />
               <InputLabel
                 forInput="name"
-                text={t('tags:createAllergensForm.label')}
+                text={formatAsRequired(t('tags:createAllergensForm.label'))}
               />
               <Input
                 placeholder={t('tags:createAllergensForm.placeholder')}
