@@ -17,11 +17,11 @@ import {
 } from '@shared/services/AllergensService';
 import { Marks, MarksResponse } from '@shared/services/MarksService';
 import { OptionType } from '@shared/components/atoms/SelectInput/types';
-import { mapDishContent } from '@shared/mappers/DishMapper';
 import { useRequest } from '@admin/hooks';
 import { useGetCategory } from '../../MenuCategories/hooks';
 import { useDishFormValidation } from '../validation/useDishFormValidation';
 import { useRestaurant } from '@shared/hooks/useRestaurant';
+import { mapDishContent } from '../mappers/mapDishContent';
 
 type ExcludeNullableKeys =
   | 'price'

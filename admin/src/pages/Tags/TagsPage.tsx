@@ -14,10 +14,10 @@ export const TagsPage = () => {
         <>
           <ul className="marks-allergens-nav">
             <li>
-              <NavLink className="marks-allergens-link" to="/tags/marks">{t('tags:marks')}</NavLink>
+              <NavLink className="marks-allergens-link" to="/tags/marks">{t('tags:marksPage')}</NavLink>
             </li>
             <li>
-              <NavLink className="marks-allergens-link" to="/tags/allergens">{t('tags:allergen')}</NavLink>
+              <NavLink className="marks-allergens-link" to="/tags/allergens">{t('tags:allergenPage')}</NavLink>
             </li>
           </ul>
           <Outlet />

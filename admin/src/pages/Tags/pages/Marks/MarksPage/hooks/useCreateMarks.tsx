@@ -8,8 +8,8 @@ import { Marks, MarksService } from '@shared/services';
 import { CreateMarksResponse, CreateMarksRequest  } from '@shared/services/MarksService';
 import { Input, InputVariants } from '@shared/components/atoms/Input';
 import { InputLabel } from '@shared/components/atoms/InputLabel';
+import { formatAsRequired } from '@shared/helpers/formatAsRequired';
 import { useMarksFormValidation } from '../validation/useMarksFormValidation';
-
 
 interface CreateMarksParams {
   onSuccess: (result: CreateMarksResponse) => Promise<void>;
@@ -81,7 +81,7 @@ export const useCreateMarks = (args: CreateMarksParams) => {
               />
               <InputLabel
                 forInput="name"
-                text={t('tags:createMarksForm.label')}
+                text={formatAsRequired(t('tags:createMarksForm.label'))}
               />
               <Input
                 placeholder={t('tags:createMarksForm.placeholder')}

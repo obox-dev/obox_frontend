@@ -32,11 +32,6 @@
     "cookingTime": "Введіть час приготування"
   },
 
-  "createButton": "Додати",
-  "deleteButton": "Видалити",
-  "resetButton": "Очистити",
-  "undateButton": "Зберігти зміни",
-
   "dishesTable": {
     "state": "Стан",
     "name": "Назва",

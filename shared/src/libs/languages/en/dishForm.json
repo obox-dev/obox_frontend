@@ -31,11 +31,6 @@
     "marks": "Select marks",
     "cookingTime": "Enter time for cooking"
   },
-  
-  "createButton": "Create",
-  "deleteButton": "Delete",
-  "resetButton": "Reset",
-  "undateButton": "Safe changes",
 
   "dishesTable": {
     "state": "State",

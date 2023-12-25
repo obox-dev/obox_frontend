@@ -10,6 +10,7 @@ import { Input, InputVariants } from '@shared/components/atoms/Input';
 import { InputLabel } from '@shared/components/atoms/InputLabel';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
 import { mapMarksContent } from '../mappers/mapMarksContent';
+import { formatAsRequired } from '@shared/helpers/formatAsRequired';
 import { useMarksFormValidation } from '../validation/useMarksFormValidation';
 
 interface UpdateMarksParams {
@@ -54,7 +55,7 @@ export const useUpdateMarks = (args: UpdateMarksParams) => {
           cancelCallback={() => {
             closeDialog();
           }}
-          title={t('tags:updateMarksForm.title')}
+          title={t('common:update')}
           size="lg"
           okText={t('common:buttons:edit')}
           cancelText={t('common:buttons:cancel')}
@@ -74,10 +75,10 @@ export const useUpdateMarks = (args: UpdateMarksParams) => {
               />
               <InputLabel
                 forInput="name"
-                text={t('tags:updateMarksForm.label')}
+                text={formatAsRequired(t('tags:nameTag'))}
               />
               <Input
-                placeholder={t('tags:updateMarksForm.placeholder')}
+                placeholder={t('tags:nameTag')}
                 type={InputVariants.TEXT}
                 name="name"
               />

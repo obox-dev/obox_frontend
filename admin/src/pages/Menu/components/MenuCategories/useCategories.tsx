@@ -95,7 +95,7 @@ export const useCategories = (menuId: string, language: string) => {
       label: (
         <>
           <EditIcon />
-          {t('menu:actions.edit')}
+          {t('common:actions.edit')}
         </>
       ),
       callback: (category: CategoryResponse) => openCategoryUpdateDialog(category),
@@ -104,7 +104,7 @@ export const useCategories = (menuId: string, language: string) => {
       label: (
         <>
           <DeleteIcon />
-          {t('menu:actions.delete')}
+          {t('common:actions.delete')}
         </>
       ),
       callback: (category: CategoryResponse) => openCategoryDeleteDialog(category),

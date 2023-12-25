@@ -65,7 +65,7 @@ export const useAllergens = (props: UseAllergensProps) => {
       label: (
         <>
           <EditIcon />
-          {t('tags:actions.edit')}
+          {t('common:actions.edit')}
         </>
       ),
       callback: (allergen: AllergensResponse) => openAllergensUpdateDialog(allergen),
@@ -74,7 +74,7 @@ export const useAllergens = (props: UseAllergensProps) => {
       label: (
         <>
           <DeleteIcon />
-          {t('tags:actions.delete')}
+          {t('common:actions.delete')}
         </>
       ),
       callback: (allergen: AllergensResponse) => openAllergensDeleteDialog(allergen),

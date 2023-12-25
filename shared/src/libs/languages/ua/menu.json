@@ -6,10 +6,7 @@
   "addCategoryButton": "Додати категорію",
   "addMenuButton": "Додати меню",
   "addDishButton": "Додати страву",
-  "dishes" : "Cтрава",
   "actions": {
-    "edit": "Редагувати",
-    "delete": "Видалити",
     "menuStatusEnabled": "Меню активне",
     "menuStatusDisabled": "Меню не активне",
     "categoryStatusEnabled": "Категорія активна",
@@ -18,12 +15,11 @@
   "createCategoryForm": {
     "title": "Додати категорію",
     "placeholder": "Введіть назву категорії",
-    "label": "Назва категорії *",
+    "label": "Назва категорії",
     "description": "Опис категорії",
     "descriptionTextArea": "Введіть ваш опис" 
   },
   "updateCategoryForm": {
-    "title": "Редагування",
     "placeholder": "Введіть нову назву для категорії"
   },
   "deleteCategoryForm": {
@@ -32,17 +28,15 @@
   "createMenuForm": {
     "title": "Додати меню",
     "placeholder": "Введіть назву меню",
-    "label": "Назва меню *"
+    "label": "Назва меню"
   },
   "updateMenuForm": {
-    "title": "Редагування",
-    "placeholder": "Основне меню",
-    "label": "Назва меню *"
+    "placeholder": "Введіть нову назву для меню"
   },
   "deleteMenuForm": {
     "title": "Ви впевнені, що хочете видалити меню?"
   },
-   "deleteDishForm": {
+  "deleteDishForm": {
     "title": "Ви впевнені, що хочете видалити страву?"
   },
   "categoryPage": {

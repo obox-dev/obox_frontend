@@ -14,6 +14,7 @@ import {
 import { Input, InputVariants } from '@shared/components/atoms/Input';
 import { InputLabel } from '@shared/components/atoms/InputLabel';
 import { EntityState } from '@shared/utils/types';
+import { formatAsRequired } from '@shared/helpers/formatAsRequired';
 import { useMenuFormValidation } from '../validation/useMenuFormValidation';
 
 interface CreateMenuParams {
@@ -83,7 +84,7 @@ export const useCreateMenu = (args: CreateMenuParams) => {
               />
               <InputLabel
                 forInput="name"
-                text={t('menu:createMenuForm.label')}
+                text={formatAsRequired(t('menu:createMenuForm.label'))}
               />
               <Input
                 placeholder={t('menu:createMenuForm.placeholder')}

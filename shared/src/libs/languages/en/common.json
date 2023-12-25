@@ -13,6 +13,11 @@
   "name": "Name",
   "search": "Search",
   "poweredby": "Powered by",
+  "update": "Editing",
+  "actions": {
+    "edit": "Edit",
+    "delete": "Delete"
+  },
   "buttons": {
     "cancel": "Cancel",
     "edit": "Save changes",

@@ -1,38 +1,30 @@
 { 
-  "createMark": "Додати мітку",
-  "createAllergen": "Додати алерген",
   "nameTag": "Назва мітки",
   "nameAllergen": "Назва алергену",
-  "marks": "Мітки",
-  "allergen" : "Алергени",
-  "actions": {
-    "edit": "Редагувати",
-    "delete": "Видалити"
+  "addMarkButton": "Додати мітку",
+  "addAllergenButton": "Додати алерген",
+  "marksPage": "Мітки",
+  "allergenPage" : "Алергени",
+  "createAllergensForm": {
+    "title": "Додати алерген",
+    "placeholder": "Введіть назву алергену",
+    "label": "Назва алергену"
+  },
+  "updateAllergensForm": {
+    "placeholder": "Введіть назву алергену"
+  },
+  "deleteAllergensForm": {
+    "title": "Ви впевнені, що хочете видалити алерген?"
   },
   "createMarksForm": {
     "title": "Додати мітку",
     "placeholder": "Введіть назву мітки",
-    "label": "Назва мітки *"
-  },
-   "createAllergensForm": {
-    "title": "Додати алерген",
-    "placeholder": "Введіть назву алергену",
-    "label": "Назва алергену *"
-  },
-   "deleteMarksForm": {
-    "title": "Ви впевнені, що хочете видалити мітку?"
-  },
-   "deleteAllergensForm": {
-    "title": "Ви впевнені, що хочете видалити алерген?"
+    "label": "Назва мітки"
   },
   "updateMarksForm": {
-    "title": "Редагувати мітку",
-    "placeholder": "Введіть назву мітки",
-    "label": "Назва  мітки *"
+    "placeholder": "Введіть назву мітки"
   },
-  "updateAllergensForm": {
-    "title": "Редагувати алерген",
-    "placeholder": "Введіть назву алергену",
-    "label": "Назва  алергену *"
+  "deleteMarksForm": {
+    "title": "Ви впевнені, що хочете видалити мітку?"
   }
 }

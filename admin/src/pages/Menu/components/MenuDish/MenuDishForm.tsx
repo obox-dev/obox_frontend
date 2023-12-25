@@ -22,6 +22,7 @@ import {
 } from '@shared/services/AttachmentsService';
 import { SelectInput } from '@shared/components/atoms/SelectInput';
 import { Switcher } from '@shared/components/atoms/Switcher';
+import { formatAsRequired } from '@shared/helpers/formatAsRequired';
 import { LayoutWithBackButton } from '@admin/layout/LayoutWithBackButton/LayoutWithBackButton';
 import { DishDefaultValues } from './hooks/useDishForms';
 import { useDish } from './useDish';
@@ -72,10 +73,6 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
 
   const formRef = useRef<FormRef<Partial<Dish>> | null>(null);
 
-  const formatAsRequired = (text: string) => {
-    return `${text} *`;
-  };
-
   const { menuDishesActions } = useDish({ categoryId: categoryId!, language, menuId: menuId! });
   const deleteAction = menuDishesActions[DishActionTypes.DELETE];
 
@@ -97,8 +94,8 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
       };
 
     const innerContent = dish
-      ? t('dishForm:deleteButton')
-      : t('dishForm:resetButton');
+      ? t('common:buttons:delete')
+      : t('common:buttons:cancel');
 
     return (
       <Button {...buttonProps} onClick={onClick} innerContent={innerContent} />
@@ -329,7 +326,7 @@ export const DishForm = <T extends FieldValues>(props: DishFormProps<T>) => {
             <div className="dish-page__form-row d-flex">
               <Button
                 variant={ButtonVariants.PRIMARY}
-                innerContent={t('dishForm:createButton')}
+                innerContent={dishId ? t('common:buttons:edit') : t('common:buttons:add') }
                 type={ButtonTypes.SUBMIT}
               />
               {renderSecondaryButton()}

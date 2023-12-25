@@ -103,7 +103,7 @@ export const useMenu = (props: UseMenuProps) => {
       label: (
         <>
           <EditIcon />
-          {t('menu:actions.edit')}
+          {t('common:actions.edit')}
         </>
       ),
       callback: (menu: MenuResponse) => openMenuUpdateDialog(menu),
@@ -112,7 +112,7 @@ export const useMenu = (props: UseMenuProps) => {
       label: (
         <>
           <DeleteIcon />
-          {t('menu:actions.delete')}
+          {t('common:actions.delete')}
         </>
       ),
       callback: (menu: MenuResponse) => openMenuDeleteDialog(menu),

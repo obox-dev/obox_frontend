@@ -64,7 +64,7 @@ export const useMarks = (props: UseMarksProps) => {
       label: (
         <>
           <EditIcon />
-          {t('tags:actions.edit')}
+          {t('common:actions.edit')}
         </>
       ),
       callback: (mark: MarksResponse) => openMarksUpdateDialog(mark),
@@ -73,7 +73,7 @@ export const useMarks = (props: UseMarksProps) => {
       label: (
         <>
           <DeleteIcon />
-          {t('tags:actions.delete')}
+          {t('common:actions.delete')}
         </>
       ),
       callback: (mark: MarksResponse) => openMarksDeleteDialog(mark),

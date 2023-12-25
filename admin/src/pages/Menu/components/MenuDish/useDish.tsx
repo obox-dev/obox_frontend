@@ -6,7 +6,7 @@ import {
   DishInStock,
   DishResponse,
 } from '@shared/services/DishService';
-import { mapDishContent } from '@shared/mappers/DishMapper';
+import { mapDishContent } from './mappers/mapDishContent';
 import { EntityState } from '@shared/utils/types';
 import {
   useGetDish,

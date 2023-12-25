@@ -17,6 +17,7 @@ import { Switcher } from '@shared/components/atoms/Switcher';
 import { UpdateStateRequest } from '@shared/utils/types';
 import { Textarea } from '@shared/components/atoms/Textarea';
 import { InputLabel } from '@shared/components/atoms/InputLabel';
+import { formatAsRequired } from '@shared/helpers/formatAsRequired';
 import { useCategoryFormValidation } from '../validation/useCategoryFormValidation';
 import { mapCategoryContent } from '../mappers/mapCategoryContent';
 
@@ -75,7 +76,7 @@ export const useUpdateCategory = (args: UpdateCategoryParams) => {
           cancelCallback={() => {
             closeDialog();
           }}
-          title={t('menu:updateCategoryForm.title')}
+          title={t('common:update')}
           size="lg"
           okText={t('common:buttons:edit')}
           cancelText={t('common:buttons:cancel')}
@@ -94,6 +95,10 @@ export const useUpdateCategory = (args: UpdateCategoryParams) => {
                 type={InputVariants.HIDDEN}
                 name="language"
                 value={language}
+              />
+              <InputLabel
+                forInput="name"
+                text={formatAsRequired(t('menu:createCategoryForm.label'))}
               />
               <Input
                 placeholder={t('menu:updateCategoryForm.placeholder')}

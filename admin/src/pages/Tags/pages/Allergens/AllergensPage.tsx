@@ -61,7 +61,7 @@ export const AllergensPage = () => {
             ...allergen,
           };
         })}
-        buttonText={t('tags:createAllergen')}
+        buttonText={t('tags:addAllergenButton')}
         currentLanguage={localLang}
         mainAction={openAllergensCreateDialog}
         onTabChange={(allergenId) => {
