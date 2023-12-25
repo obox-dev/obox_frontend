@@ -40,7 +40,7 @@ export const MarksPage = () => {
             ...mark,
           };
         })}
-        buttonText={t('tags:createMark')}
+        buttonText={t('tags:addMarkButton')}
         currentLanguage={localLang}
         mainAction={openMarksCreateDialog}
         onTabChange={(tabId) => {

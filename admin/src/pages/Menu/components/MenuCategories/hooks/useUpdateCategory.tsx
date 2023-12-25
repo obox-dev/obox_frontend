@@ -76,7 +76,7 @@ export const useUpdateCategory = (args: UpdateCategoryParams) => {
           cancelCallback={() => {
             closeDialog();
           }}
-          title={t('menu:updateCategoryForm.title')}
+          title={t('common:update')}
           size="lg"
           okText={t('common:buttons:edit')}
           cancelText={t('common:buttons:cancel')}

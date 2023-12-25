@@ -1,38 +1,30 @@
 {  
-  "createMark": "Add a tag",
-  "createAllergen": "Add allergen",
-  "nameTag": "Name of the tag",
+  "nameTag": "Label name",
   "nameAllergen": "Name of the allergen",
-  "marks": "Tags",
-  "allergen" : "Allergens",
-  "actions": {
-    "edit": "Edit",
-    "delete": "Delete"
+  "addMarkButton": "Add a tag",
+  "addAllergenButton": "Add allergen",
+  "marksPage": "Tags",
+  "allergenPage" : "Allergens",
+  "createAllergensForm": {
+    "title": "Add allergen",
+    "placeholder": "Enter the name of the allergen",
+    "label": "Name of the allergen"
+  },
+  "updateAllergensForm": {
+    "placeholder": "Enter the name of the allergen"
+  },
+  "deleteAllergensForm": {
+    "title": "Are you sure you want to remove the allergen?"
   },
   "createMarksForm": {
     "title": "Add a tag",
     "placeholder": "Enter a tag name",
     "label": "Name of the tag"
   },
-   "createAllergensForm": {
-    "title": "Add allergen",
-    "placeholder": "Enter the name of the allergen",
-    "label": "Name of the allergen"
-  },
-   "deleteMarksForm": {
-    "title": "Are you sure you want to delete a tag?"
-  },
-    "deleteAllergensForm": {
-    "title": "Are you sure you want to remove the allergen?"
-  },
   "updateMarksForm": {
-    "title": "Edit a tag",
-    "placeholder": "Enter a tag name",
-    "label": "Tag name"
+    "placeholder": "Enter a tag name"
   },
-    "updateAllergensForm": {
-    "title": "Edit allergen",
-    "placeholder": "Enter the name of the allergen",
-    "label": "Name of the allergen"
+  "deleteMarksForm": {
+    "title": "Are you sure you want to delete a tag?"
   }
 }

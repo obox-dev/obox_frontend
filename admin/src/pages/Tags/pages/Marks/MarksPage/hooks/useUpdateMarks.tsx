@@ -55,7 +55,7 @@ export const useUpdateMarks = (args: UpdateMarksParams) => {
           cancelCallback={() => {
             closeDialog();
           }}
-          title={t('tags:updateMarksForm.title')}
+          title={t('common:update')}
           size="lg"
           okText={t('common:buttons:edit')}
           cancelText={t('common:buttons:cancel')}
@@ -75,10 +75,10 @@ export const useUpdateMarks = (args: UpdateMarksParams) => {
               />
               <InputLabel
                 forInput="name"
-                text={formatAsRequired(t('tags:updateMarksForm.label'))}
+                text={formatAsRequired(t('tags:nameTag'))}
               />
               <Input
-                placeholder={t('tags:updateMarksForm.placeholder')}
+                placeholder={t('tags:nameTag')}
                 type={InputVariants.TEXT}
                 name="name"
               />

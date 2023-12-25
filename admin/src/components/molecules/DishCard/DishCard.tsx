@@ -1,11 +1,12 @@
 import { useTranslation } from '@libs/react-i18next';
 import { Switcher } from '@shared/components/atoms/Switcher';
-import { mapDishContent } from '@shared/mappers/DishMapper';
 import { DishInStock } from '@shared/services/DishService';
 import { DndIcon, ImagePlaceholder } from '@admin/assets/icons';
 import { DishActionTypes } from '@admin/pages/Menu/components/MenuDish/types';
+import { mapDishContent } from '@admin/pages/Menu/components/MenuDish/mappers/mapDishContent';
 import { IDishCard } from './types';
 import './DishCard.scss';
+
 
 export const DishCard = (props: IDishCard) => {
   const { dishItem, actions, language, isDraggable = false } = props;

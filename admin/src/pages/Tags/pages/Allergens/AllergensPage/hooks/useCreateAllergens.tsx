@@ -81,7 +81,7 @@ export const useCreateAllergens = (args: CreateAllergensParams) => {
               />
               <InputLabel
                 forInput="name"
-                text={formatAsRequired(t('tags:createAllergensForm.label'))}
+                text={formatAsRequired(t('tags:nameAllergen'))}
               />
               <Input
                 placeholder={t('tags:createAllergensForm.placeholder')}

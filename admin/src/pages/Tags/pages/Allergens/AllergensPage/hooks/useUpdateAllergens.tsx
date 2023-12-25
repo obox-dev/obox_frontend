@@ -55,7 +55,7 @@ export const useUpdateAllergens = (args: UpdateAllergensParams) => {
           cancelCallback={() => {
             closeDialog();
           }}
-          title={t('tags:updateAllergensForm.title')}
+          title={t('common:update')}
           size="lg"
           okText={t('common:buttons:edit')}
           cancelText={t('common:buttons:cancel')}
@@ -75,7 +75,7 @@ export const useUpdateAllergens = (args: UpdateAllergensParams) => {
               />
               <InputLabel
                 forInput="name"
-                text={formatAsRequired(t('tags:updateAllergensForm.label'))}
+                text={formatAsRequired(t('tags:nameAllergen'))}
               />
               <Input
                 placeholder={t('tags:updateAllergensForm.placeholder')}

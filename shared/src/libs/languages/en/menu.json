@@ -6,10 +6,7 @@
   "addCategoryButton": "Add category",
   "addMenuButton": "Add menu",
   "addDishButton": "Add Dish",
-  "dishes": "Dishes",
   "actions": {
-    "edit": "Edit",
-    "delete": "Delete",
     "menuStatusEnabled": "Active menu",
     "menuStatusDisabled": "Inactive menu",
     "categoryStatusEnabled": "Active category",
@@ -23,7 +20,6 @@
     "descriptionTextArea": "Enter the name of the category" 
   },
   "updateCategoryForm": {
-    "title": "Editing",
     "placeholder": "Enter new name for the category"
   },
   "deleteCategoryForm": {
@@ -35,18 +31,14 @@
     "label": "Menu name"
   },
   "updateMenuForm": {
-    "title": "Editing",
-    "placeholder": "Main menu",
-    "label": "Menu name"
+    "placeholder": "Enter a new name for the menu"
   },
   "deleteMenuForm": {
     "title": "Are you sure you want to delete this menu?"
   },
-   "deleteDishForm": {
+  "deleteDishForm": {
     "title": "Are you sure you want to delete this dish?"
   },
-  "visibleMenu": "Is menu visible?",
-  "visibleCategory": "Is category visible?",
   "categoryPage": {
     "filler": "Category does not have any dishes. Add a first dish by clicking on +"
   }

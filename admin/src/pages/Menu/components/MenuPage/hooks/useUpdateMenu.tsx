@@ -69,7 +69,7 @@ export const useUpdateMenu = (args: UpdateMenuParams) => {
           cancelCallback={() => {
             closeDialog();
           }}
-          title={t('menu:updateMenuForm.title')}
+          title={t('common:update')}
           size="lg"
           okText={t('common:buttons:edit')}
           cancelText={t('common:buttons:cancel')}
@@ -94,7 +94,7 @@ export const useUpdateMenu = (args: UpdateMenuParams) => {
                 text={formatAsRequired(t('menu:createMenuForm.label'))}
               />
               <Input
-                placeholder={t('menu:createMenuForm.placeholder')}
+                placeholder={t('menu:updateMenuForm.placeholder')}
                 type={InputVariants.TEXT}
                 name="name"
               />
