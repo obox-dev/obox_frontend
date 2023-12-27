@@ -8,6 +8,7 @@ import { Marks, MarksService } from '@shared/services';
 import { CreateMarksResponse, CreateMarksRequest  } from '@shared/services/MarksService';
 import { Input, InputVariants } from '@shared/components/atoms/Input';
 import { InputLabel } from '@shared/components/atoms/InputLabel';
+import { TitleForInput } from '@shared/components/atoms/TitleForInput';
 import { formatAsRequired } from '@shared/helpers/formatAsRequired';
 import { useMarksFormValidation } from '../validation/useMarksFormValidation';
 
@@ -88,6 +89,15 @@ export const useCreateMarks = (args: CreateMarksParams) => {
                 type={InputVariants.TEXT}
                 name="name"
               />
+              <TitleForInput
+                title={t('tags:createMarksForm.colorsTitle')}
+                text={t('tags:createMarksForm.colorsText')}
+              />
+              <TitleForInput
+                title={t('tags:createMarksForm.emojiTitle')}
+                text={t('tags:createMarksForm.emojiText')}
+              />
+              {/* Посмотри как дише сделан селект. Контролер в реакт хук форм, для передачи цвета в форму */}
             </>
           </Form>
         </Dialog>

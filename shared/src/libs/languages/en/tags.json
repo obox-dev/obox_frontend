@@ -19,7 +19,11 @@
   "createMarksForm": {
     "title": "Add a tag",
     "placeholder": "Enter a tag name",
-    "label": "Name of the tag"
+    "label": "Name of the tag",
+    "colorsTitle": "Colors",
+    "colorsText": "Click on the palette to select a colour or enter a colour code",
+    "emojiTitle": "Emoji",
+    "emojiText": "Click on the emoji you like to add it to the tag"
   },
   "updateMarksForm": {
     "placeholder": "Enter a tag name"
