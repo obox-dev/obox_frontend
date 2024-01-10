@@ -1,4 +1,5 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import { ColorResult, ColorChangeHandler, ChromePicker} from 'react-color';
 import { useTranslation } from '@libs/react-i18next';
 import { useRequest } from '@admin/hooks';
 import { Form, FormRef } from '@shared/components/atoms/Form';
@@ -11,6 +12,7 @@ import { InputLabel } from '@shared/components/atoms/InputLabel';
 import { TitleForInput } from '@shared/components/atoms/TitleForInput';
 import { formatAsRequired } from '@shared/helpers/formatAsRequired';
 import { useMarksFormValidation } from '../validation/useMarksFormValidation';
+import './ColorPicker.scss';
 
 interface CreateMarksParams {
   onSuccess: (result: CreateMarksResponse) => Promise<void>;
@@ -24,6 +26,11 @@ export const useCreateMarks = (args: CreateMarksParams) => {
   const { openDialog } = useDialog();
   const { t } = useTranslation();
   const { validationSchema } = useMarksFormValidation();
+
+  const [currentColor, setCurrentColor]   = useState<string>('#792424');
+  const handleOnChange: ColorChangeHandler = (color: ColorResult) => {
+    setCurrentColor(color.hex);
+  };
 
   const { execute: onCreateSubmit } = useRequest({
     requestFunction: MarksService.create,
@@ -93,6 +100,14 @@ export const useCreateMarks = (args: CreateMarksParams) => {
                 title={t('tags:createMarksForm.colorsTitle')}
                 text={t('tags:createMarksForm.colorsText')}
               />
+              <div>
+                <ChromePicker  className="chrome-color-picker"
+                  color={ currentColor  }
+                  onChangeComplete={handleOnChange}
+                  disableAlpha={true}
+                  
+                /> 
+              </div>
               <TitleForInput
                 title={t('tags:createMarksForm.emojiTitle')}
                 text={t('tags:createMarksForm.emojiText')}
