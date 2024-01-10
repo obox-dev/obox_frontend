@@ -7,23 +7,29 @@ export interface MarksContent {
 
 export interface MarksResponse {
   mark_id: string;
+  original_language: string;
   translation_id: string;
+  color_hex: string;
+  emoji: string;
   content: Record<string, MarksContent>;
   state: EntityState,
-  // ask About it. I`m not sure about this code.
 }
 
 export type Marks = MarksContent & Omit<MarksResponse, 'content'>;
 
 export interface CreateMarksRequest {
-  reference_type: string,
-  reference_id: string,
+  reference_type: string;
+  reference_id: string;
   name: string;
+  emoji: string;
+  color_hex: string;
   language: string;
 }
 
 export interface UpdateMarksRequest {
   name: string;
+  emoji: string;
+  color_hex: string;
   language: string;
 }
 

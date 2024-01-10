@@ -30,6 +30,8 @@ export const useUpdateMarks = (args: UpdateMarksParams) => {
     const request: UpdateMarksRequest = {
       name,
       language,
+      emoji: '',
+      color_hex: '#ffffff'
     };
     return MarksService.update(id, request);
   };
