@@ -9,7 +9,8 @@ export interface MarksResponse {
   mark_id: string;
   original_language: string;
   translation_id: string;
-  color_hex: string;
+  color_background: string;
+  color_text: string;
   emoji: string;
   content: Record<string, MarksContent>;
   state: EntityState,
@@ -22,14 +23,16 @@ export interface CreateMarksRequest {
   reference_id: string;
   name: string;
   emoji: string;
-  color_hex: string;
+  color_background: string;
+  color_text: string;
   language: string;
 }
 
 export interface UpdateMarksRequest {
   name: string;
   emoji: string;
-  color_hex: string;
+  color_background: string;
+  color_text: string;
   language: string;
 }
 

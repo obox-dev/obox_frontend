@@ -8,9 +8,9 @@ export interface AllergensContent {
 export interface AllergensResponse {
   allergen_id: string;
   translation_id: string;
+  original_language: string;
   content: Record<string, AllergensContent>;
-   state: EntityState,
-  // ask About it. I`m not sure about this code.
+  state: EntityState,
 }
 
 export type Allergens = AllergensContent & Omit<AllergensResponse, 'content'>;

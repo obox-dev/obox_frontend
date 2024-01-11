@@ -40,9 +40,10 @@ export const useCreateMarks = (args: CreateMarksParams) => {
         reference_type: referenceType,
         reference_id: restaurantId,
         name: '',
-        language,
+        color_background: '',
+        color_text: '',
         emoji: '',
-        color_hex: '#ffffff',
+        language,
       };
 
       return (
