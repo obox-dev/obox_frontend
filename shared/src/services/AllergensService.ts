@@ -9,7 +9,7 @@ export interface AllergensResponse {
   allergen_id: string;
   translation_id: string;
   content: Record<string, AllergensContent>;
-   state: EntityState,
+  state: EntityState,
   // ask About it. I`m not sure about this code.
 }
 

@@ -21,6 +21,8 @@ export const ActionMenu = <T extends WithEntityState>(
     toggleVariant = ButtonVariants.PRIMARY,
     toggleContent,
     isDisabled,
+    colorBackground,
+    colorText,
   } = props;
 
   return (
@@ -31,6 +33,7 @@ export const ActionMenu = <T extends WithEntityState>(
         variant={toggleVariant}
         id="dropdown-basic"
         isDisabled={isDisabled}
+        style = {{backgroundColor: colorBackground, color: colorText}}
       ></Dropdown.Toggle>
       <Dropdown.Menu>
         {actions.map(({ label, callback, renderLabel }, index) => {

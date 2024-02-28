@@ -16,4 +16,6 @@ export interface IActionMenu<T extends WithEntityState> {
   toggleContent: JSX.Element | string;
   toggleVariant?: ButtonVariants;
   isDisabled?: boolean;
+  colorBackground?: string;
+  colorText?: string;
 }

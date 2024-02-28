@@ -3,5 +3,6 @@ export interface IConfig {
 }
 
 export const Config: IConfig = {
-  baseUrl: 'https://api.obox.pp.ua',
+  baseUrl: 'https://api.obox.com.ua',
 };
+

@@ -1,0 +1,11 @@
+.colors-main-title {
+  margin-top: 32px;
+  color: $color-secondary-text;
+  font-size: $heading-sm-font-size;
+  line-height: 1.4;
+}
+
+.colors-wrapper {
+  display: flex;
+  gap: 24px
+}

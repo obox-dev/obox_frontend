@@ -1,0 +1,81 @@
+.color-picker-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 248px;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: $color-global-white;
+  box-shadow: 1px 1px 12px 0px rgba(37, 44, 39, 0.25);
+}
+
+.sketch-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 216px !important;
+  padding: 0px !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+.sketch-picker div:nth-child(1)>div>div>div:nth-child(2)>div {
+  width: 10px !important;
+  height: 10px !important;
+  background: none !important;
+  box-shadow: rgb(255, 255, 255) 0px 0px 0px 1.5px,
+    rgba(0, 0, 0, 0) 0px 0px 1px 1px,
+    rgba(0, 0, 0, 0.4) 0px 0px 1px 2px !important;
+}
+
+.sketch-picker div:nth-child(n+3) {
+  display: none !important;
+}
+
+.sketch-picker div:nth-child(2)>div:nth-child(1)>div:nth-child(1) {
+  border-radius: 8px;
+  height: 13px !important;
+}
+
+.sketch-picker div:nth-child(2)>div:nth-child(1)>div:nth-child(1)>div>div>div>div {
+  margin-top: 1.5px !important;
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 8px !important;
+  background: none !important;
+}
+
+.sketch-picker>div:nth-child(2)>div:nth-child(2) {
+  display: none;
+}
+
+.sketch-picker>div:nth-child(1) {
+  box-shadow: 0px 0px 1px 0 #252C27;
+}
+
+.sketch-picker div:nth-child(2)>div:nth-child(1) {
+  background: none !important;
+}
+
+.color-picker-form-inputs {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 16px;
+  border: 1px solid $color-border-focus-1px;
+  border-radius: 8px;
+}
+
+.color-picker-input-color {
+  margin: 0px;
+  width: 18px;
+  height: 18px;
+}
+
+.color-picker-input-text {
+  width: 148px;
+  border: none;
+  outline: none;
+  padding: 0px !important;
+  font-size: 16px;
+}

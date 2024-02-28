@@ -10,6 +10,7 @@ export const ActionButton = <T extends WithEntityState>(
   props: ActionButtonProps<T>
 ) => {
   const { id, label, isSelected, onClick, entity, actions, variant, isDisabled } = props;
+  const { color_background: colorBackground, color_text: colorText } = entity;
   const isInavtive = useMemo(() => {
     return entity.state === EntityState.DISABLED;
   }, [entity]);
@@ -29,6 +30,7 @@ export const ActionButton = <T extends WithEntityState>(
           onClick(id);
         }}
         isDisabled={isDisabled}
+        style={{backgroundColor: colorBackground, color: colorText}}
       />
       <ActionMenu
         toggleContent={<ToggleDots />}
@@ -36,6 +38,8 @@ export const ActionButton = <T extends WithEntityState>(
         entity={entity}
         actions={actions}
         isDisabled={isDisabled}
+        colorBackground={colorBackground}
+        colorText = {colorText}
       />
     </div>
   );

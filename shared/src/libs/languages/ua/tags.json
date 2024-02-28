@@ -21,9 +21,10 @@
     "placeholder": "Введіть назву мітки",
     "label": "Назва мітки",
     "colorsTitle": "Кольори",
-    "colorsText": "Клікніть на палітрі щоб обрати колір або введіть код кольору",
-    "emojiTitle": "Емоджі",
-    "emojiText": "Клікніть по вподобаному емоджі щоб додати його до до мітки"
+    "colorBackground": "Kолір мітки",
+    "colorText": "Kолір тексту",
+    "colorsTextPlaceholder": "Текст",
+    "emojiTitle": "Емоджі"
   },
   "updateMarksForm": {
     "placeholder": "Введіть назву мітки"

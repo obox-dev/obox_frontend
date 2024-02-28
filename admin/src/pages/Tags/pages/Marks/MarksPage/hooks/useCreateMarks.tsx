@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react';
-import { ColorResult, ColorChangeHandler, ChromePicker} from 'react-color';
+import { useRef } from 'react';
+import { Controller } from 'react-hook-form';
 import { useTranslation } from '@libs/react-i18next';
 import { useRequest } from '@admin/hooks';
 import { Form, FormRef } from '@shared/components/atoms/Form';
@@ -8,13 +8,14 @@ import { useDialog } from '@shared/providers/DialogProvider/useDialog';
 import { Marks, MarksService } from '@shared/services';
 import { CreateMarksResponse, CreateMarksRequest  } from '@shared/services/MarksService';
 import { Input, InputVariants } from '@shared/components/atoms/Input';
+import { ColorPickerDropdown } from '@shared/components/atoms/ColorPickerDropdown';
 import { InputLabel } from '@shared/components/atoms/InputLabel';
-import { TitleForInput } from '@shared/components/atoms/TitleForInput';
 import { formatAsRequired } from '@shared/helpers/formatAsRequired';
 import { useMarksFormValidation } from '../validation/useMarksFormValidation';
-import './ColorPicker.scss';
+import { ColorsMarksWrapper  } from '../components/ColorsMarksWrapper';
+import './ColorsPickerMarksTitle.scss';
 
-interface CreateMarksParams {
+interface CreateMarksParams  {
   onSuccess: (result: CreateMarksResponse) => Promise<void>;
   referenceType: string,
   language: string;
@@ -26,12 +27,6 @@ export const useCreateMarks = (args: CreateMarksParams) => {
   const { openDialog } = useDialog();
   const { t } = useTranslation();
   const { validationSchema } = useMarksFormValidation();
-
-  const [currentColor, setCurrentColor]   = useState<string>('#792424');
-  const handleOnChange: ColorChangeHandler = (color: ColorResult) => {
-    setCurrentColor(color.hex);
-  };
-
   const { execute: onCreateSubmit } = useRequest({
     requestFunction: MarksService.create,
     onSuccess,
@@ -43,8 +38,11 @@ export const useCreateMarks = (args: CreateMarksParams) => {
   const openMarksCreateDialog = () => {
     openDialog(({ closeDialog }) => {
       const formRef = useRef<FormRef<Partial<Marks>> | null>(null);
-
+      const defaultColorBackground = getComputedStyle(document.documentElement).getPropertyValue('--action-button-active');
+      const defaultColorText = getComputedStyle(document.documentElement).getPropertyValue('--color-border-focus-1px');
       const defaultValues: CreateMarksRequest = {
+        color_background: defaultColorBackground,
+        color_text: defaultColorText,
         reference_type: referenceType,
         reference_id: restaurantId,
         name: '',
@@ -96,23 +94,42 @@ export const useCreateMarks = (args: CreateMarksParams) => {
                 type={InputVariants.TEXT}
                 name="name"
               />
-              <TitleForInput
-                title={t('tags:createMarksForm.colorsTitle')}
-                text={t('tags:createMarksForm.colorsText')}
-              />
-              <div>
-                <ChromePicker  className="chrome-color-picker"
-                  color={ currentColor  }
-                  onChangeComplete={handleOnChange}
-                  disableAlpha={true}
-                  
-                /> 
-              </div>
-              <TitleForInput
-                title={t('tags:createMarksForm.emojiTitle')}
-                text={t('tags:createMarksForm.emojiText')}
-              />
-              {/* Посмотри как дише сделан селект. Контролер в реакт хук форм, для передачи цвета в форму */}
+              <>
+                <ColorsMarksWrapper 
+                  title={t('tags:createMarksForm.colorsTitle')}
+                >
+                  <div>
+                    <p className='colors-title'>{t('tags:createMarksForm.colorBackground')}</p>
+                    <Controller
+                      name='color_background'
+                      defaultValue={defaultValues.color_background}
+                      render={({ field }) => {
+                        return (
+                          <ColorPickerDropdown
+                            {...field}
+                            initialColor={defaultColorBackground}
+                          />
+                        );
+                      }}
+                    /> 
+                  </div>
+                  <div>
+                    <p className='colors-title'>{t('tags:createMarksForm.colorText')}</p>
+                    <Controller
+                      name='color_text'
+                      defaultValue={defaultValues.color_text}
+                      render={({ field }) => {
+                        return (
+                          <ColorPickerDropdown
+                            {...field}
+                            initialColor={defaultColorText}
+                          />
+                        );
+                      }}
+                    />
+                  </div>
+                </ColorsMarksWrapper>
+              </>
             </>
           </Form>
         </Dialog>

@@ -8,9 +8,11 @@ export interface MarksContent {
 export interface MarksResponse {
   mark_id: string;
   translation_id: string;
+  color_background: string;
+  color_text: string;
+  emoji: string;
   content: Record<string, MarksContent>;
   state: EntityState,
-  // ask About it. I`m not sure about this code.
 }
 
 export type Marks = MarksContent & Omit<MarksResponse, 'content'>;
@@ -20,10 +22,16 @@ export interface CreateMarksRequest {
   reference_id: string,
   name: string;
   language: string;
+  color_background: string;
+  color_text: string;
+  // emoji: string;
 }
 
 export interface UpdateMarksRequest {
   name: string;
+  // emoji: string;
+  color_background: string;
+  color_text: string;
   language: string;
 }
 

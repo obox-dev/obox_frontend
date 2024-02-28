@@ -1,3 +1,5 @@
+import { CSSProperties } from 'react';
+
 export enum ButtonVariants {
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
@@ -23,4 +25,5 @@ export interface IButton {
   isDisabled?: boolean;
   type?: ButtonTypes;
   className?: string;
+  style?: CSSProperties;
 }

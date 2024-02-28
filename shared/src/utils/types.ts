@@ -15,4 +15,6 @@ export interface UpdateStateRequest {
 
 export interface WithEntityState {
   state: EntityState;
+  color_background?: string;
+  color_text?: string;
 }
