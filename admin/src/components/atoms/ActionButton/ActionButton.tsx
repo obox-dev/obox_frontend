@@ -14,6 +14,12 @@ export const ActionButton = <T extends WithEntityState>(
   const isInavtive = useMemo(() => {
     return entity.state === EntityState.DISABLED;
   }, [entity]);
+  let innerContentLabel = '';
+  if (typeof emoji !== 'undefined') {
+    innerContentLabel = label + ' ' + emoji;
+  } else {
+    innerContentLabel = label;
+  }
   return (
     <div
       className={[
@@ -23,7 +29,7 @@ export const ActionButton = <T extends WithEntityState>(
       ].join(' ')}
     >
       <Button
-        innerContent={label + ' ' + emoji }
+        innerContent={innerContentLabel}
         variant={variant}
         className="action-button__start"
         onClick={() => {
