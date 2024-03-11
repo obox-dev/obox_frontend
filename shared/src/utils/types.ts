@@ -17,4 +17,5 @@ export interface WithEntityState {
   state: EntityState;
   color_background?: string;
   color_text?: string;
+  emoji?: string;
 }

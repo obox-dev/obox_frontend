@@ -24,7 +24,8 @@
     "colorBackground": "Kолір мітки",
     "colorText": "Kолір тексту",
     "colorsTextPlaceholder": "Текст",
-    "emojiTitle": "Емоджі"
+    "emojiTitle": "Емоджі",
+    "emojiDescriptionAction": "Клікніть по вподобаному емоджі щоб додати його до до мітки"
   },
   "updateMarksForm": {
     "placeholder": "Введіть назву мітки"

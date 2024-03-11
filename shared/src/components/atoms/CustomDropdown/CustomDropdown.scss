@@ -1,6 +1,9 @@
 .dropdown-wrapper {
   display: flex;
   flex-direction: column;
+}
+
+.dropdown-wrapper.open {
   gap: 10px;
 }
 

@@ -23,8 +23,7 @@ export const ColorPickerDropdown = (props: IColorPickerDropdown) => {
     onChange(newColor);
     setTempColor(newColor);
   };
-
-  // Заменить на одну переменную.
+  
   return (
     <CustomDropdown
       initialColor= {buttonColor}

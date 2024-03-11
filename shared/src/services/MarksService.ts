@@ -24,12 +24,12 @@ export interface CreateMarksRequest {
   language: string;
   color_background: string;
   color_text: string;
-  // emoji: string;
+  emoji: string;
 }
 
 export interface UpdateMarksRequest {
   name: string;
-  // emoji: string;
+  emoji: string;
   color_background: string;
   color_text: string;
   language: string;

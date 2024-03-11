@@ -9,12 +9,14 @@ import { Marks ,MarksResponse } from '@shared/services';
 import { MarksService, UpdateMarksRequest } from '@shared/services/MarksService';
 import { Input, InputVariants } from '@shared/components/atoms/Input';
 import { ColorPickerDropdown } from '@shared/components/atoms/ColorPickerDropdown';
+import { CustomEmojiPicker } from '@shared/components/atoms/EmojiPicker';
 import { InputLabel } from '@shared/components/atoms/InputLabel';
 import { useDialog } from '@shared/providers/DialogProvider/useDialog';
 import { mapMarksContent } from '../mappers/mapMarksContent';
 import { formatAsRequired } from '@shared/helpers/formatAsRequired';
 import { useMarksFormValidation } from '../validation/useMarksFormValidation';
 import { ColorsMarksWrapper  } from '../components/ColorsMarksWrapper';
+import { EmojiWrapper } from '../components/EmojiWrapper';
 
 interface UpdateMarksParams {
   onSuccess: () => Promise<void>;
@@ -27,10 +29,11 @@ export const useUpdateMarks = (args: UpdateMarksParams) => {
   const { validationSchema } = useMarksFormValidation();
   const { openDialog } = useDialog();
   const { onSuccess, onError, language} = args;
-  const updateSubmit = async ({ mark_id, name, color_background, color_text}: Marks) => {
+  const updateSubmit = async ({ mark_id, name, emoji, color_background, color_text}: Marks) => {
     const id = mark_id;
     const request: UpdateMarksRequest = {
       name,
+      emoji,
       color_background,
       color_text,
       language,
@@ -121,6 +124,23 @@ export const useUpdateMarks = (args: UpdateMarksParams) => {
                     />
                   </div>
                 </ColorsMarksWrapper>
+                <EmojiWrapper
+                  title={t('tags:createMarksForm.emojiTitle')}
+                  descriptionAction={t('tags:createMarksForm.emojiDescriptionAction')}
+                >
+                  <Controller
+                    name='emoji'
+                    defaultValue={defaultValues.emoji}
+                    render={({ field }) => {
+                      return (
+                        <CustomEmojiPicker
+                          {...field}
+                          initialEmoji={' '}
+                        />
+                      );
+                    }}
+                  /> 
+                </EmojiWrapper>
               </>
             </>
           </Form>

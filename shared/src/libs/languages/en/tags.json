@@ -24,7 +24,8 @@
     "colorBackground": "Background color",
     "colorText": "Label color",
     "textPlaceholder": "Text",
-    "emojiTitle": "Emoji"
+    "emojiTitle": "Emoji",
+    "emojiDescriptionAction": "Click on the emoji you like to add it to the label"
   },
   "updateMarksForm": {
     "placeholder": "Enter a tag name"

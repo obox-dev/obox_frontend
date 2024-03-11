@@ -18,4 +18,5 @@ export interface IActionMenu<T extends WithEntityState> {
   isDisabled?: boolean;
   colorBackground?: string;
   colorText?: string;
+  emoji?: string;
 }

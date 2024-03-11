@@ -25,7 +25,7 @@ export const CustomDropdown = (props: ICustomDropdown) => {
   const {onClick,buttonText, body,isOpenColorPicker,initialColor } = props;
 
   return (
-    <div className='dropdown-wrapper'>
+    <div className={`dropdown-wrapper ${isOpenColorPicker ? 'open' : 'close'}`}>
       <Dropdown.Toggle
         as={ToggleAsButton}
         onClick={onClick}

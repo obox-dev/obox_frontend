@@ -9,10 +9,12 @@ import { Marks, MarksService } from '@shared/services';
 import { CreateMarksResponse, CreateMarksRequest  } from '@shared/services/MarksService';
 import { Input, InputVariants } from '@shared/components/atoms/Input';
 import { ColorPickerDropdown } from '@shared/components/atoms/ColorPickerDropdown';
+import { CustomEmojiPicker } from '@shared/components/atoms/EmojiPicker';
 import { InputLabel } from '@shared/components/atoms/InputLabel';
 import { formatAsRequired } from '@shared/helpers/formatAsRequired';
 import { useMarksFormValidation } from '../validation/useMarksFormValidation';
-import { ColorsMarksWrapper  } from '../components/ColorsMarksWrapper';
+import { ColorsMarksWrapper } from '../components/ColorsMarksWrapper';
+import { EmojiWrapper } from '../components/EmojiWrapper';
 import './ColorsPickerMarksTitle.scss';
 
 interface CreateMarksParams  {
@@ -43,6 +45,7 @@ export const useCreateMarks = (args: CreateMarksParams) => {
       const defaultValues: CreateMarksRequest = {
         color_background: defaultColorBackground,
         color_text: defaultColorText,
+        emoji: '',
         reference_type: referenceType,
         reference_id: restaurantId,
         name: '',
@@ -129,6 +132,23 @@ export const useCreateMarks = (args: CreateMarksParams) => {
                     />
                   </div>
                 </ColorsMarksWrapper>
+                <EmojiWrapper
+                  title={t('tags:createMarksForm.emojiTitle')}
+                  descriptionAction={t('tags:createMarksForm.emojiDescriptionAction')}
+                >
+                  <Controller
+                    name='emoji'
+                    defaultValue={defaultValues.emoji}
+                    render={({ field }) => {
+                      return (
+                        <CustomEmojiPicker
+                          {...field}
+                          initialEmoji={''}
+                        />
+                      );
+                    }}
+                  /> 
+                </EmojiWrapper>
               </>
             </>
           </Form>
@@ -140,3 +160,4 @@ export const useCreateMarks = (args: CreateMarksParams) => {
     openMarksCreateDialog,
   };
 };
+
