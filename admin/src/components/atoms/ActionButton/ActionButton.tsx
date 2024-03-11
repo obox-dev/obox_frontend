@@ -10,7 +10,7 @@ export const ActionButton = <T extends WithEntityState>(
   props: ActionButtonProps<T>
 ) => {
   const { id, label, isSelected, onClick, entity, actions, variant, isDisabled } = props;
-  const { color_background: colorBackground, color_text: colorText,emoji } = entity;
+  const { color_background: colorBackground, color_text: colorText, emoji } = entity;
   const isInavtive = useMemo(() => {
     return entity.state === EntityState.DISABLED;
   }, [entity]);
@@ -23,7 +23,7 @@ export const ActionButton = <T extends WithEntityState>(
       ].join(' ')}
     >
       <Button
-        innerContent={label + emoji }
+        innerContent={label + ' ' + emoji }
         variant={variant}
         className="action-button__start"
         onClick={() => {
