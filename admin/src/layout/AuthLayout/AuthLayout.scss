@@ -1,0 +1,20 @@
+.auth-layout {
+  padding: 60px;
+  background-color: $color-primary-text-contrast;
+
+  &__start,
+  &__end {
+    display: flex;
+    flex: 1 0 50%;
+    max-width: 50%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__start {
+    svg {
+      position: relative;
+      transform: scale(4.2);
+    }
+  }
+}

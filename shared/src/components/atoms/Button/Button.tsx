@@ -7,6 +7,7 @@ export const InnerButton = (
   ref: ForwardedRef<HTMLButtonElement>
 ) => {
   const { innerContent, onClick, variant, isDisabled, type, className } = props;
+
   return (
     <button
       ref={ref}

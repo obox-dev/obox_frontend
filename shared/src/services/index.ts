@@ -1,23 +1,41 @@
-export { API } from './ApiService';
-export { CategoriesService } from './CategoriesService';
-export { MenuService } from './MenuService';
-export { DishesService } from './DishService';
-export { RestaurantsService } from './RestaurantsService';
-export { AttachmentService } from './AttachmentsService';
-export { MarksService } from './MarksService';
-export { AllergensService } from './AllergensService';
-export { SearchService } from './SearchService';
-export { OrderService } from './OrderService';
+import { API } from './ApiService';
+// import { CategoriesService } from './CategoriesService';
+// import { MenuService } from './MenuService';
+// import { DishesService } from './DishService';
+// import { RestaurantsService } from './RestaurantsService';
+// import { AttachmentService } from './AttachmentsService';
+// import { MarksService } from './MarksService';
+// import { AllergensService } from './AllergensService';
+// import { SearchService } from './SearchService';
+// import { OrderService } from './OrderService';
+// import { AuthService } from './AuthService';
+import axios from 'axios';
 
-export type { FileToUpload, AttachmentOrFile } from './AttachmentsService';
-export type {
-  Category,
-  CreateCategoryRequest,
-  CreateCategoryResponse,
-  UpdateCategoryRequest,
-  CategoryResponse,
-} from './CategoriesService';
-export type { MenuResponse, Menu } from './RestaurantsService';
-export type { MarksResponse, Marks } from './MarksService';
-export type { AllergensResponse, Allergens } from './AllergensService';
-export type { EntitySearchResponse } from './SearchService';
+export * from './ApiService';
+export * from './CategoriesService';
+export * from './MenuService';
+export * from './DishService';
+export * from './RestaurantsService';
+export * from './AttachmentsService';
+export * from './MarksService';
+export * from './AllergensService';
+export * from './SearchService';
+export * from './OrderService';
+export * from './AuthService';
+
+// const services = [
+//   CategoriesService,
+//   MenuService,
+//   DishesService,
+//   RestaurantsService,
+//   AttachmentService,
+//   MarksService,
+//   AllergensService,
+//   OrderService,
+//   AuthService,
+//   SearchService,
+// ]
+
+export const confiureServices = (provider: typeof axios) => {
+  API.setFetchProvider(provider);
+};

@@ -1,9 +1,11 @@
-export const LogoIcon = () => {
+export const LogoIcon = (props: { width?: number; height?: number }) => {
+  const { width = 135, height = 72 } = props;
+  const viewBox = `0 0 ${width} ${height}`;
   return (
     <svg
-      width="135"
-      height="72"
-      viewBox="0 0 135 72"
+      width={width}
+      height={height}
+      viewBox={viewBox}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >

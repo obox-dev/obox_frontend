@@ -2,6 +2,7 @@ import axios, {
   AxiosRequestConfig,
   AxiosResponse,
   AxiosError,
+  // Axios,
 } from '@libs/axios';
 import { toast} from 'react-toastify';
 import i18n from '@libs/i18next';
@@ -12,6 +13,7 @@ type ParamsType = Record<string, unknown>;
 type HeadersType = Record<string, unknown>;
 class API {
   static base_url: string;
+  static fetchProvider: typeof axios;
 
   private static async request<T, K>(
     method: string,
@@ -20,7 +22,12 @@ class API {
     params?: ParamsType,
     headers?: HeadersType
   ): Promise<K> {
+    // console.log('HEADERS', headers);
+    
     const url = API.base_url + path;
+    // console.log(this.fetchProvider);
+    
+    // const localHeaders = this.fetchProvider.getDefaultConfig().headers;
     const config: AxiosRequestConfig = {
       method,
       url,
@@ -29,6 +36,7 @@ class API {
       headers: {
         ...headers,
         'Accept-Language': supportedLanguages[i18n.language as keyof typeof supportedLanguages],
+        // 'Origin': window.location.origin,
       },
     };
 
@@ -61,6 +69,10 @@ class API {
     return API.request<T, K>('delete', path, undefined, undefined, headers);
   }
 
+  static setFetchProvider(provider: typeof axios) {
+    API.fetchProvider = provider;
+  }
+
   private static handleRequestError<T>(error: AxiosError<T>): AxiosError<T, unknown> {
     if (error.response) {
       console.error(
@@ -80,5 +92,6 @@ class API {
 }
 
 API.base_url = Config.baseUrl;
+// API.setFetchProvider(axios);
 
 export { API };

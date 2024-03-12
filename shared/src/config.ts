@@ -3,5 +3,5 @@ export interface IConfig {
 }
 
 export const Config: IConfig = {
-  baseUrl: 'https://api.obox.pp.ua',
+  baseUrl: 'http://91.203.6.45:8080',
 };

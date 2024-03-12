@@ -1,0 +1,12 @@
+.auth {
+    width: 100%;
+    min-height: 542px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 88px;
+    border-radius: 26px;
+    background-color: $color-global-white;
+    box-shadow: 2px 4px 4px 0 rgba(#000, .25);
+}

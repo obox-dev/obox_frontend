@@ -13,19 +13,26 @@ import Privacy from '@admin/pages/Privacy/Privacy';
 import Pricing from '@admin/pages/Pricing/Pricing';
 import RestaurantSettings from '@admin/pages/RestaurantSettings/RestaurantSettings';
 import QRSettings from '@admin/pages/QRSettings/QRSettings';
-import {TagsPage} from '@admin/pages/Tags/TagsPage';
+import { TagsPage } from '@admin/pages/Tags/TagsPage';
 import { MarksPage } from '@admin/pages/Tags/pages/Marks/MarksPage';
 import { AllergensPage } from '@admin/pages/Tags/pages/Allergens/AllergensPage';
-
-
+import Confirm from '@admin/pages/Auth/components/Confirm/Confirm';
+import Auth from '@admin/pages/Auth/Auth';
 
 export const MainRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/account" element={<Auth />}>
+        <Route path="confirm" element={<Confirm />} />
+      </Route>
+      <Route path="/menu" element={<MenuPage />} />
       <Route path="/menu" element={<MenuPage />} />
       <Route path="/menu/:menuId" element={<MenuPage />} />
-      <Route path="/menu/:menuId/category/:categoryId" element={<CategoryPage />} />
+      <Route
+        path="/menu/:menuId/category/:categoryId"
+        element={<CategoryPage />}
+      />
       <Route
         path="/menu/:menuId/category/:categoryId/create-dish"
         element={<MenuDishPage />}
@@ -34,9 +41,9 @@ export const MainRouter = () => {
         path="/menu/:menuId/category/:categoryId/dish/:dishId"
         element={<MenuDishPage />}
       />
-      <Route path="/tags" element={<TagsPage />} >
+      <Route path="/tags" element={<TagsPage />}>
         <Route index element={<Navigate to="marks" />} />
-        <Route path="marks" element={<MarksPage/>} />
+        <Route path="marks" element={<MarksPage />} />
         <Route path="allergens" element={<AllergensPage />} />
         <Route path="allergens/:allergenId" element={<AllergensPage />} />
       </Route>
