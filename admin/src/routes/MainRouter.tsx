@@ -36,7 +36,8 @@ export const MainRouter = () => {
       />
       <Route path="/tags" element={<TagsPage />} >
         <Route index element={<Navigate to="marks" />} />
-        <Route path="marks" element={<MarksPage/>} />
+        <Route path="marks" element={<MarksPage />} />
+        <Route path="marks/:markId" element={<MarksPage />} />
         <Route path="allergens" element={<AllergensPage />} />
         <Route path="allergens/:allergenId" element={<AllergensPage />} />
       </Route>

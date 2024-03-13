@@ -31,7 +31,8 @@ export const AllergensPage = () => {
     }
   }, [allergenId]);
 
-  const { openAllergensCreateDialog,
+  const { 
+    openAllergensCreateDialog,
     allergensList,
     loadAllAllergens,
     allergensActions, } = useAllergens(
